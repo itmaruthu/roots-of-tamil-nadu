@@ -18,7 +18,7 @@ const now = nowInMadurai();
 let liveWait = { update() {} };
 const state = {
   places: [], moments: [],
-  day: now.day, hour: 21, filter: 'all', view: 'old',
+  day: now.day, hour: 21, filter: 'all', view: 'region',
   tab: 'open', showAll: false, tilt: store.get('roots-3d', true),
   selected: 'meenakshi-amman-temple', plan: store.get('roots-plan', []), me: null, timer: null
 };
