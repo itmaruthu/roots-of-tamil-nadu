@@ -56,10 +56,10 @@
           <p class="note">{{fromTemple}}<span id="from-you"></span></p>
           <p class="note">Coordinates: <span class="mono">{{lat}}, {{lng}}</span> · <a href="{{osm}}" target="_blank" rel="noopener noreferrer">OpenStreetMap</a></p>
           <button class="chip" id="near-me" type="button"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#locate"/></svg>How far is it from me?</button>
-          <div class="bus" id="bus">
-            <h3><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#bus"/></svg>By bus</h3>
+          <div class="bus{{busClass}}" id="bus">
+            <h3><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#bus"/></svg>{{busTitle}}</h3>
             <p>{{busStop}}</p>
-            <p class="bus-sub">From the three main bus stands</p>
+            {{busSub}}
             <div class="bus-plan" id="bus-plan" aria-live="polite">{{busPlan}}</div>
             <div class="chips">
               <button class="btn btn--sm" id="bus-me" type="button"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#locate"/></svg>Buses from my location</button>

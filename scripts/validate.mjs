@@ -6,8 +6,8 @@ import { TYPES } from '../src/assets/js/modules/catalog.js';
 
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const REQUIRED = ['id', 'name', 'type', 'lat', 'lng', 'area', 'address', 'h', 'hours', 'story'];
-// Madurai district and surroundings — catches swapped or mistyped coordinates.
-const BOUNDS = { lat: [9.6, 10.4], lng: [77.8, 78.5] };
+// Madurai and day trips within ~100 km — catches swapped or mistyped coordinates.
+const BOUNDS = { lat: [9.0, 10.9], lng: [77.2, 79.1] };
 
 export function validate(data) {
   const errors = [];

@@ -17,7 +17,7 @@
 :root {
   --bg: #FBF6EC; --surface: #FFFDF8; --surface-2: #F3E9D6; --ink: #2A1416; --muted: #6B5A52; --line: #E6D8C3;
   --accent: #B3261E; --on-accent: #FFF8EC; --gold: #A86E00; --marigold: #E8A317; --leaf: #1F6B4A;
-  --eat: #C2410C; --temple: #A86E00; --heritage: #4C3F91; --stay: #1F6B4A; --market: #B83280;
+  --eat: #C2410C; --temple: #A86E00; --heritage: #4C3F91; --stay: #1F6B4A; --market: #B83280; --trips: #0F766E;
   --night: #1B1020; --shadow: 0 1px 2px rgb(42 20 22 / 6%), 0 8px 24px rgb(42 20 22 / 8%);
   --font-text: 'Hind Madurai', 'Noto Sans Tamil', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
@@ -30,7 +30,7 @@
   :root:not([data-theme="light"]) {
     --bg: #160D0F; --surface: #211518; --surface-2: #2D1E21; --ink: #F6ECDD; --muted: #BFAE9F; --line: #3E2C2C;
     --accent: #FF7A5C; --on-accent: #1A0E08; --gold: #F2B33D; --marigold: #F2B33D; --leaf: #6FCB97;
-    --eat: #FF8A50; --temple: #F6B93B; --heritage: #A79BFF; --stay: #6FCB97; --market: #F58BC6;
+    --eat: #FF8A50; --temple: #F6B93B; --heritage: #A79BFF; --stay: #6FCB97; --market: #F58BC6; --trips: #4FD1C5;
     --shadow: 0 1px 2px rgb(0 0 0 / 30%), 0 8px 24px rgb(0 0 0 / 30%);
     color-scheme: dark;
   }
@@ -38,7 +38,7 @@
 :root[data-theme="dark"] {
   --bg: #160D0F; --surface: #211518; --surface-2: #2D1E21; --ink: #F6ECDD; --muted: #BFAE9F; --line: #3E2C2C;
   --accent: #FF7A5C; --on-accent: #1A0E08; --gold: #F2B33D; --marigold: #F2B33D; --leaf: #6FCB97;
-  --eat: #FF8A50; --temple: #F6B93B; --heritage: #A79BFF; --stay: #6FCB97; --market: #F58BC6;
+  --eat: #FF8A50; --temple: #F6B93B; --heritage: #A79BFF; --stay: #6FCB97; --market: #F58BC6; --trips: #4FD1C5;
   --shadow: 0 1px 2px rgb(0 0 0 / 30%), 0 8px 24px rgb(0 0 0 / 30%);
   color-scheme: dark;
 }
@@ -47,6 +47,7 @@
 [data-group="heritage"] { --cat: var(--heritage); }
 [data-group="stay"] { --cat: var(--stay); }
 [data-group="market"] { --cat: var(--market); }
+[data-group="trips"] { --cat: var(--trips); }
 
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -166,7 +167,7 @@ input[type="range"] { width: 100%; accent-color: var(--accent); margin: 0; heigh
 .marker.is-open .marker-dot { fill: var(--cat); stroke: var(--surface); }
 .marker.is-open .marker-icon { color: var(--surface); }
 .marker.is-selected .marker-dot, .marker:focus-visible .marker-dot { stroke: var(--ink); stroke-width: 3; }
-.marker--eat { --cat: var(--eat); } .marker--temple { --cat: var(--temple); } .marker--heritage { --cat: var(--heritage); } .marker--stay { --cat: var(--stay); } .marker--market { --cat: var(--market); }
+.marker--trips { --cat: var(--trips); } .marker--eat { --cat: var(--eat); } .marker--temple { --cat: var(--temple); } .marker--heritage { --cat: var(--heritage); } .marker--stay { --cat: var(--stay); } .marker--market { --cat: var(--market); }
 .marker-pulse { fill: var(--cat); transform-box: fill-box; transform-origin: center; animation: pulse 2.4s ease-out infinite; }
 @keyframes pulse { 0% { transform: scale(1); opacity: .5; } 100% { transform: scale(2.3); opacity: 0; } }
 .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--muted); }
@@ -596,3 +597,26 @@ section[id] { scroll-margin-top: 84px; }
 .v-when { font: 600 11px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--marigold); }
 .v-name { font-weight: 700; font-size: 16px; }
 .v-meta { font-size: 13px; opacity: .75; }
+
+/* ---------- Day trips ---------- */
+.circuits { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 16px; }
+.circuit { background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--trips); border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 8px; }
+.circuit h3 { margin: 0; font-size: 22px; }
+.circuit-note { margin: 0; color: var(--muted); font-size: 15px; }
+.circuit ul { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.circuit a { display: flex; flex-direction: column; text-decoration: none; padding: 9px 12px; border-radius: 12px; background: var(--bg); border: 1px solid var(--line); }
+.circuit a:hover { border-color: var(--trips); }
+.c-name { font-weight: 700; }
+.c-meta { font-size: 13px; color: var(--muted); }
+
+/* ---------- Pongal ---------- */
+.pongal { background: color-mix(in srgb, var(--marigold) 12%, var(--bg)); }
+.pongal-days { list-style: none; margin: 0 0 20px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 14px; counter-reset: pd; }
+.pongal-days li { counter-increment: pd; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 6px; }
+.pongal-days li::before { content: "Day " counter(pd); font: 600 12px var(--font-mono); color: var(--accent); letter-spacing: .08em; text-transform: uppercase; }
+.pongal-days p { margin: 0; }
+.pd-name { font: 700 22px var(--font-display); }
+.pd-ta { color: var(--muted); }
+.pongal-cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 18px; }
+.pongal-cta p { margin: 0; flex: 1 1 360px; }
+.bus--trip #bus-me, .bus--trip .bus-plan, .bus--trip > .note { display: none; }

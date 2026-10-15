@@ -6,7 +6,8 @@ export const MEENAKSHI = { lat: 9.9195045, lng: 78.1193418 };
 export const VIEWS = {
   old:    { label: 'Old city', halfKm: 1.4 },
   city:   { label: 'City',     halfKm: 5.5 },
-  region: { label: 'Region',   halfKm: 15, center: { lat: 9.975, lng: 78.135 } }
+  region: { label: 'Region',   halfKm: 15, center: { lat: 9.975, lng: 78.135 } },
+  trips:  { label: '100 km',   halfKm: 48, center: { lat: 9.92, lng: 78.2 } }
 };
 
 // Half-widths (km) of the concentric street squares around the temple. Approximate.

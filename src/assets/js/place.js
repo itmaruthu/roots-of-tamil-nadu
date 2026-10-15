@@ -64,6 +64,7 @@ async function init() {
       const data = await loadBus();
       if (!data) { box.replaceChildren(el('p', { class: 'note' }, 'Bus data could not be loaded.')); return; }
       const me = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      if (!data.places[id]) { box.replaceChildren(el('p', { class: 'note' }, 'City buses do not run here. See Getting there above, or use Google Maps transit.')); return; }
       const hub = nearestHub(data, me);
       if (hub.km > 15) { box.replaceChildren(el('p', { class: 'note' }, `You seem to be outside Madurai (${formatKm(hub.km)} from the nearest city stop). The plan works once you're in the city.`)); return; }
       renderPlan(box, planFor(data, id, hub.name), hub, place, me);

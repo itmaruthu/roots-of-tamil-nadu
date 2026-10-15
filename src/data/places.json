@@ -1316,6 +1316,397 @@
       ],
       "hours": "Night market: from 8 pm through the next afternoon; busiest after 10 pm",
       "story": "One of south Tamil Nadu's biggest vegetable markets. It comes alive overnight as lorries unload, with small eateries serving the night traders."
+    },
+    {
+      "id": "arittapatti-biodiversity-site",
+      "name": "Arittapatti Biodiversity Heritage Site",
+      "short": "Arittapatti",
+      "type": "nature",
+      "trip": true,
+      "lat": 10.0336672,
+      "lng": 78.268053,
+      "area": "Arittapatti, 21 km northeast",
+      "address": "Arittapatti, Melur taluk, Madurai district 625106",
+      "h": [
+        [
+          6,
+          18
+        ]
+      ],
+      "hours": "Daylight; best at dawn",
+      "story": "Tamil Nadu's first biodiversity heritage site: bare granite hills full of birds, a lake, and Jain caves with Tamil-Brahmi inscriptions."
+    },
+    {
+      "id": "kutladampatti-falls",
+      "name": "Kutladampatti Falls",
+      "short": "Kutladampatti Falls",
+      "type": "nature",
+      "trip": true,
+      "lat": 10.133806,
+      "lng": 78.0173982,
+      "area": "Kutladampatti, Sirumalai foothills, 26 km northwest",
+      "address": "Waterfalls Road, Kutladampatti 625218",
+      "h": [
+        [
+          8,
+          17
+        ]
+      ],
+      "hours": "Daytime; flows after the rains",
+      "story": "A waterfall in the Sirumalai foothills, nicknamed Madurai's Kutralam, at its best after the monsoon."
+    },
+    {
+      "id": "thiruvathavur-thirumarainathar-temple",
+      "name": "Thiruvathavur Thirumarainathar Temple",
+      "short": "Thiruvathavur",
+      "type": "temple",
+      "trip": true,
+      "lat": 9.9602691,
+      "lng": 78.3163207,
+      "area": "Thiruvathavur, 22 km east",
+      "address": "Thiruvathavur, Melur taluk 625110",
+      "h": [
+        [
+          6,
+          12.5
+        ],
+        [
+          16,
+          20
+        ]
+      ],
+      "hours": "6 am–12:30 pm, 4–8 pm",
+      "story": "The birthplace of the saint-poet Manikkavasagar, with a pure Pandya-style Shiva temple and many sacred tanks."
+    },
+    {
+      "id": "dindigul-rock-fort",
+      "name": "Dindigul Rock Fort",
+      "short": "Dindigul Fort",
+      "type": "heritage",
+      "trip": true,
+      "lat": 10.3618829,
+      "lng": 77.9643656,
+      "area": "Dindigul, 52 km north",
+      "address": "Fort Road, Dindigul 624002",
+      "h": [
+        [
+          9,
+          17
+        ]
+      ],
+      "hours": "9 am–5 pm",
+      "story": "A 17th-century fort of the Madurai Nayaks on a single giant rock, later held by Hyder Ali, Tipu Sultan and the British."
+    },
+    {
+      "id": "sirumalai-hills",
+      "name": "Sirumalai Hills",
+      "short": "Sirumalai",
+      "type": "nature",
+      "trip": true,
+      "lat": 10.2578771,
+      "lng": 77.9978583,
+      "area": "Sirumalai, near Dindigul, 40 km north",
+      "address": "Sirumalai Road, Dindigul district 624003",
+      "h": [
+        [
+          6,
+          18
+        ]
+      ],
+      "hours": "Daylight; forest check post",
+      "story": "A quiet hill station of 18 hairpin bends, forests, mist and a viewpoint over Dindigul, the nearest hills to Madurai."
+    },
+    {
+      "id": "srivilliputhur-andal-temple",
+      "name": "Srivilliputhur Andal Temple",
+      "short": "Srivilliputhur",
+      "type": "temple",
+      "trip": true,
+      "lat": 9.5083318,
+      "lng": 77.6305754,
+      "area": "Srivilliputhur, 70 km southwest",
+      "address": "Mada Street, Srivilliputhur 626125",
+      "h": [
+        [
+          6.5,
+          13
+        ],
+        [
+          16,
+          21
+        ]
+      ],
+      "hours": "6:30 am–1 pm, 4–9 pm",
+      "story": "Birthplace of Andal, the only woman among the Alvar saints. Its rajagopuram is the emblem of Tamil Nadu."
+    },
+    {
+      "id": "pillayarpatti-karpaga-vinayagar-temple",
+      "name": "Pillayarpatti Karpaga Vinayagar Temple",
+      "short": "Pillayarpatti",
+      "type": "temple",
+      "trip": true,
+      "lat": 10.1189702,
+      "lng": 78.6681386,
+      "area": "Pillayarpatti, Chettinad, 64 km east",
+      "address": "Koil Road, Pillayarpatti 630207",
+      "h": [
+        [
+          6,
+          13
+        ],
+        [
+          16,
+          20.5
+        ]
+      ],
+      "hours": "6 am–1 pm, 4–8:30 pm",
+      "story": "One of the oldest rock-cut Ganesha shrines in India, cut into a hillock in Chettinad and loved by the Nagarathar community."
+    },
+    {
+      "id": "kundrakudi-murugan-temple",
+      "name": "Kundrakudi Shanmuganathar Temple",
+      "short": "Kundrakudi",
+      "type": "temple",
+      "trip": true,
+      "lat": 10.115062,
+      "lng": 78.6986746,
+      "area": "Kundrakudi, Chettinad, 67 km east",
+      "address": "Kundrakudi, near Karaikudi 630206",
+      "h": [
+        [
+          5,
+          12.5
+        ],
+        [
+          16,
+          20
+        ]
+      ],
+      "hours": "5 am–12:30 pm, 4–8 pm",
+      "story": "A hillock temple of six-faced Murugan on his peacock, about 150 rock-cut steps up, a few minutes from Pillayarpatti."
+    },
+    {
+      "id": "kanadukathan-chettinad-palace",
+      "name": "Chettinad Palace, Kanadukathan",
+      "short": "Chettinad mansions",
+      "type": "heritage",
+      "trip": true,
+      "lat": 10.1745506,
+      "lng": 78.7793528,
+      "area": "Kanadukathan, Chettinad, 78 km east",
+      "address": "Kanadukathan 630103",
+      "h": [
+        [
+          10,
+          18
+        ]
+      ],
+      "hours": "10 am–6 pm (view from outside; some mansions open for a fee)",
+      "story": "The grand mansions of the Nagarathar merchants: Burma teak, Italian marble, Belgian glass and Athangudi tiles, in streets of palaces."
+    },
+    {
+      "id": "athangudi-tiles",
+      "name": "Athangudi Tile Workshops",
+      "short": "Athangudi tiles",
+      "type": "heritage",
+      "trip": true,
+      "lat": 10.151727,
+      "lng": 78.740328,
+      "area": "Athangudi, Chettinad, 73 km east",
+      "address": "Athangudi Main Road, Karaikudi taluk 630101",
+      "h": [
+        [
+          10,
+          18
+        ]
+      ],
+      "hours": "10 am–6 pm (Sun 10:30 am–5 pm)",
+      "story": "Watch Chettinad's famous handmade cement tiles being poured, patterned and sun-dried by hand, the way they have been for generations.",
+      "days": {
+        "0": [
+          [
+            10.5,
+            17
+          ]
+        ]
+      }
+    },
+    {
+      "id": "thirumayam-fort",
+      "name": "Thirumayam Fort",
+      "short": "Thirumayam Fort",
+      "type": "heritage",
+      "trip": true,
+      "lat": 10.2475984,
+      "lng": 78.7506749,
+      "area": "Thirumayam, Pudukkottai, 78 km northeast",
+      "address": "Thirumayam 622507",
+      "h": [
+        [
+          9,
+          17
+        ]
+      ],
+      "hours": "9 am–5 pm",
+      "story": "A 17th-century hill fort of great boulders, with cannons, a rock-cut Shiva shrine and views over Chettinad."
+    },
+    {
+      "id": "vaigai-dam",
+      "name": "Vaigai Dam",
+      "short": "Vaigai Dam",
+      "type": "nature",
+      "trip": true,
+      "lat": 10.0530559,
+      "lng": 77.5914486,
+      "area": "Andipatti, Theni, 60 km west",
+      "address": "Vaigai Dam, Theni district 625562",
+      "h": [
+        [
+          8,
+          18
+        ]
+      ],
+      "hours": "8 am–6 pm (Sat–Sun to 8 pm)",
+      "story": "The dam that holds back the Vaigai, Madurai's river, with gardens, a children's park and breezy walks below the hills.",
+      "days": {
+        "0": [
+          [
+            8,
+            20
+          ]
+        ],
+        "6": [
+          [
+            8,
+            20
+          ]
+        ]
+      }
+    },
+    {
+      "id": "kumbakkarai-falls",
+      "name": "Kumbakkarai Falls",
+      "short": "Kumbakkarai",
+      "type": "nature",
+      "trip": true,
+      "lat": 10.1803695,
+      "lng": 77.5307187,
+      "area": "Periyakulam, Theni, 71 km northwest",
+      "address": "Kumbakkarai Road, Theni district 625605",
+      "h": [
+        [
+          8,
+          16
+        ]
+      ],
+      "hours": "8 am–4 pm",
+      "story": "A forest waterfall at the foot of the Kodaikanal hills with natural rock pools for a cool bath."
+    },
+    {
+      "id": "sathuragiri-hills",
+      "name": "Sathuragiri Sundara Mahalingam Temple",
+      "short": "Sathuragiri",
+      "type": "temple",
+      "trip": true,
+      "lat": 9.7345707,
+      "lng": 77.6521618,
+      "area": "Sathuragiri, Western Ghats, 55 km west",
+      "address": "Saptur Reserve Forest 625579",
+      "h": [
+        [
+          6,
+          16
+        ]
+      ],
+      "hours": "Pilgrim trek on set days only (around new and full moon)",
+      "story": "A forest pilgrimage to Shiva, the abode of the 18 Siddhars, reached by a steep 8 km trek in the Western Ghats."
+    },
+    {
+      "id": "vettangudi-bird-sanctuary",
+      "name": "Vettangudi Bird Sanctuary",
+      "short": "Vettangudi",
+      "type": "nature",
+      "trip": true,
+      "lat": 10.1120679,
+      "lng": 78.511047,
+      "area": "Vettangudi, near Tiruppattur, 48 km northeast",
+      "address": "Kollukudipatti, Tiruppattur taluk 630211",
+      "h": [
+        [
+          6,
+          18
+        ]
+      ],
+      "hours": "Daylight; birds Nov–Feb",
+      "story": "Village tanks where painted storks, herons and migrant birds nest in winter, watched from towers on the bund."
+    },
+    {
+      "id": "thiruchuli-thirumeninathar-temple",
+      "name": "Thiruchuli Thirumeninathar Temple",
+      "short": "Thiruchuli",
+      "type": "temple",
+      "trip": true,
+      "lat": 9.5318125,
+      "lng": 78.1989219,
+      "area": "Thiruchuli, Virudhunagar, 44 km south",
+      "address": "Thiruchuli 626129",
+      "h": [
+        [
+          5.5,
+          12
+        ],
+        [
+          16,
+          20.5
+        ]
+      ],
+      "hours": "5:30 am–noon, 4–8:30 pm",
+      "story": "An ancient Shiva temple sung in the Devaram, and the birthplace of Ramana Maharshi, whose childhood home is preserved nearby."
+    },
+    {
+      "id": "kalayarkoil-temple",
+      "name": "Kalayarkoil Sornakaleeswarar Temple",
+      "short": "Kalayarkoil",
+      "type": "temple",
+      "trip": true,
+      "lat": 9.8456602,
+      "lng": 78.6368939,
+      "area": "Kalayarkoil, Sivaganga, 57 km east",
+      "address": "Kalayarkoil 630551",
+      "h": [
+        [
+          6,
+          12
+        ],
+        [
+          16,
+          19.75
+        ]
+      ],
+      "hours": "6 am–noon, 4–7:45 pm",
+      "story": "A temple of three Shiva shrines with a towering gopuram, linked to the Marudhu brothers who fought the British."
+    },
+    {
+      "id": "sivaganga-palace",
+      "name": "Sivaganga Palace (Gowri Vilasam)",
+      "short": "Sivaganga Palace",
+      "type": "heritage",
+      "trip": true,
+      "lat": 9.8485857,
+      "lng": 78.487281,
+      "area": "Sivaganga, 41 km east",
+      "address": "Aranmanai Vaasal, Sivaganga 630561",
+      "h": [
+        [
+          10,
+          17
+        ]
+      ],
+      "hours": "10 am–5 pm, closed Sunday",
+      "story": "The palace of the Sivaganga kingdom, tied to Queen Velu Nachiyar and the Marudhu brothers, India's early fighters against the British.",
+      "days": {
+        "0": []
+      }
     }
   ]
 }

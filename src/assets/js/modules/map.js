@@ -116,7 +116,7 @@ export function drawMap(root, { places, view, selected, isOpen, onSelect, me, ti
 
     let top = 0;
     if (tilt) {
-      const k = s * ({ old: 1.25, city: 1.4, region: 1.55 }[view] || 1);
+      const k = s * ({ old: 1.25, city: 1.4, region: 1.55, trips: 1.5 }[view] || 1);
       g.append(svg('ellipse', { rx: 9 * k, ry: 3.2 * k, class: 'pin-shadow' }));
       if (p.type === 'temple') {
         // A gopuram: stacked tapering tiers with a kalasam on top.
@@ -149,7 +149,7 @@ export function drawMap(root, { places, view, selected, isOpen, onSelect, me, ti
       top = -r;
     }
     root.append(g);
-    const name = LANDMARKS[p.id];
+    const name = view === 'trips' ? (p.trip ? p.short || p.name : p.id === 'meenakshi-amman-temple' ? 'Madurai' : null) : LANDMARKS[p.id];
     if (name && (view !== 'old' || BIG.has(p.id) || p.id === 'pathu-thoon-ten-pillars') || isSel) labels.push({ x, y: y + top - 6, text: name || p.name, sel: isSel });
   }
 

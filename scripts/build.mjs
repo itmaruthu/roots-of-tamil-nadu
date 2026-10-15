@@ -39,7 +39,7 @@ const fill = (tpl, vars) => tpl.replace(/\{\{(\w+)\}\}/g, (_, k) => {
   return vars[k];
 });
 const iconSvg = (base, id, cls = 'i') => `<svg class="${cls}" aria-hidden="true"><use href="${base}assets/img/icons.svg#${id}"/></svg>`;
-const groupOf = (p) => TYPES[p.type].group;
+const groupOf = (p) => (p.trip ? 'trips' : TYPES[p.type].group);
 const hhmm = (x) => { x = ((x % 24) + 24) % 24; const h = Math.floor(x); const m = Math.round((x - h) * 60); return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`; };
 const placeUrl = (p) => `${SITE}/places/${p.id}.html`;
 const absImage = (p) => p.image.local ? `${SITE}/${p.image.local}` : commonsImage(p.image.file, 1600);
@@ -312,6 +312,21 @@ function highlightsHtml(base) {
   }).join('\n');
 }
 
+const CIRCUITS = [
+  { name: 'Close to Madurai', note: 'Under an hour: birds, rock hills and a poet-saint\u2019s temple', ids: ['arittapatti-biodiversity-site', 'thiruvathavur-thirumarainathar-temple', 'kutladampatti-falls', 'vettangudi-bird-sanctuary'] },
+  { name: 'Chettinad', note: 'Merchant palaces, handmade tiles, rock-cut Ganesha and a hill fort', ids: ['pillayarpatti-karpaga-vinayagar-temple', 'kundrakudi-murugan-temple', 'kanadukathan-chettinad-palace', 'athangudi-tiles', 'thirumayam-fort'] },
+  { name: 'Dindigul hills', note: 'A rock fort, a forest hill station and a monsoon waterfall', ids: ['dindigul-rock-fort', 'sirumalai-hills'] },
+  { name: 'Western Ghats', note: 'Dam, forest falls, Andal\u2019s tower and a pilgrim trek', ids: ['srivilliputhur-andal-temple', 'sathuragiri-hills', 'vaigai-dam', 'kumbakkarai-falls'] },
+  { name: 'Sivaganga & Thiruchuli', note: 'Rebel queens, the Marudhu brothers and Ramana\u2019s birthplace', ids: ['sivaganga-palace', 'kalayarkoil-temple', 'thiruchuli-thirumeninathar-temple'] }
+];
+
+function tripsHtml(base) {
+  return CIRCUITS.map((c) => `<article class="circuit">
+      <h3>${esc(c.name)}</h3><p class="circuit-note">${esc(c.note)}</p>
+      <ul>${c.ids.map((id) => places.find((x) => x.id === id)).filter(Boolean).map((p) => `<li><a href="${base}places/${esc(p.id)}.html"><span class="c-name">${esc(p.name)}</span><span class="c-meta">${esc(p.area)} · ${esc(guide[p.id]?.hook || '')}</span></a></li>`).join('')}</ul>
+    </article>`).join('\n');
+}
+
 function festivalsHtml(base) {
   return festivals.seasons.map((s) => `<article class="season" data-months="${s.months.join(',')}">
       <header><p class="season-range">${esc(s.range)}</p><h3>${esc(s.name)} <span lang="ta">${esc(s.ta)}</span></h3><p class="season-weather">${esc(s.weather)}</p><span class="season-now" hidden>Now</span></header>
@@ -340,6 +355,7 @@ async function renderHome(base, path) {
     postcards: postcards(base),
     featured: featured(base),
     highlights: highlightsHtml(base),
+    trips: tripsHtml(base),
     festivals: festivalsHtml(base),
     directory: directory(base)
   });
@@ -414,9 +430,12 @@ async function renderPlace(p) {
     lat: String(p.lat), lng: String(p.lng),
     directions: esc(directionsUrl(p)),
     bus: esc(busUrl(p)),
+    busClass: bus.places[p.id] ? '' : ' bus--trip',
+    busTitle: bus.places[p.id] ? 'By bus' : 'Getting there',
+    busSub: bus.places[p.id] ? '<p class="bus-sub">From the three main bus stands</p>' : '',
     busStop: (() => {
       const stop = bus.places[p.id];
-      if (!stop) return '';
+      if (!stop) return guide[p.id]?.getting ? esc(guide[p.id].getting) : 'Use Google Maps transit below for buses from where you are.';
       const hub = bus.hubs[stop] || bus.stopCoords?.[stop];
       const walk = hub ? distanceKm(p, hub) : null;
       return `Get off at <b>${esc(niceStop(stop))}</b> <span lang="ta">(${esc(bus.ta[stop] || '')})</span>${walk === null || walk <= 0.15 ? '' : walk > 1.5 ? `, then about ${esc(formatKm(walk))} by auto or on foot` : `, about ${esc(formatKm(walk))} on foot from here`}.`;

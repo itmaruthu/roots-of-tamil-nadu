@@ -649,5 +649,279 @@
       "alanganallur-jallikattu-vadivasal",
       "avaniyapuram-jallikattu"
     ]
+  },
+  "arittapatti-biodiversity-site": {
+    "hook": "Raptors, rock hills and 2,200-year-old caves",
+    "why": "In 2022 Arittapatti became Tamil Nadu's first notified biodiversity heritage site, and it is easy to see why. Bare granite hills shelter more than 250 kinds of birds, including birds of prey that nest on the cliffs, along with the Anaikondan lake and Jain cave beds carved over two thousand years ago with Tamil-Brahmi inscriptions. It is wild, quiet and only half an hour from the city.",
+    "see": [
+      "Birds of prey over the granite cliffs",
+      "Jain cave beds and Tamil-Brahmi inscriptions",
+      "The Anaikondan lake at sunrise"
+    ],
+    "best": "Dawn, November to January for birds",
+    "spend": "Half a day",
+    "know": "No shops on the hills; carry water and go with a local guide if you can.",
+    "getting": "By car or auto from Madurai, about 25 km by road, around an hour by car.",
+    "pair": [
+      "thiruvathavur-thirumarainathar-temple",
+      "yoga-narasimha-temple-yanaimalai"
+    ]
+  },
+  "kutladampatti-falls": {
+    "hook": "Madurai's own little Kutralam",
+    "why": "Locals call it Madurai's Kutralam: a waterfall in the Sirumalai foothills where families come to stand under the cascade after the rains. Through dry summers it can be a trickle, so time it right and it is a refreshing escape close to the city.",
+    "see": [
+      "The falls after the monsoon",
+      "Forest walk to the pool"
+    ],
+    "best": "October to January, after rain",
+    "spend": "2–3 hours",
+    "know": "Visitors report it has been closed at times; check that it is open before you go.",
+    "getting": "About 35 km by road, around an hour by car, via Vadipatti.",
+    "pair": []
+  },
+  "thiruvathavur-thirumarainathar-temple": {
+    "hook": "Birthplace of the poet who sang Thiruvasagam",
+    "why": "Manikkavasagar, whose Thiruvasagam is among the most loved Tamil devotional poems, was born here. The Shiva temple is a calm, pure example of Pandya stone architecture with many holy tanks, and a short, easy trip from Madurai into the countryside.",
+    "see": [
+      "The Pandya-style stone shrines",
+      "Holy tanks around the temple",
+      "Village life in Thiruvathavur"
+    ],
+    "best": "Morning",
+    "spend": "1 hour",
+    "getting": "City buses 66 and 66J from Periyar and Arappalayam via Mattuthavani, or by car, about 30 km by road, around an hour by car.",
+    "pair": [
+      "arittapatti-biodiversity-site"
+    ]
+  },
+  "dindigul-rock-fort": {
+    "hook": "A fort on one giant rock",
+    "why": "The Madurai Nayaks built this fort on a single massive rock in the 17th century. Hyder Ali and Tipu Sultan later held it, and then the British. Climb the steps cut into the rock to a breezy top with views over Dindigul and the Sirumalai hills, then reward yourself with Dindigul's famous biryani.",
+    "see": [
+      "Steps cut into the rock",
+      "The fort walls and cannon points",
+      "Panoramic views from the top"
+    ],
+    "best": "Early morning or late afternoon; the rock gets hot",
+    "spend": "2 hours",
+    "getting": "Buses to Dindigul leave from Arappalayam bus stand; trains run from Madurai Junction. About 65 km by road, around 1.5 hours by car.",
+    "pair": [
+      "sirumalai-hills"
+    ]
+  },
+  "sirumalai-hills": {
+    "hook": "The nearest hills to Madurai",
+    "why": "Eighteen hairpin bends lift you out of the heat into forest, mist and fresh air. Sirumalai is a quiet, uncommercial hill range with a viewpoint tower over Dindigul and the plains, small temples, and the famous Sirumalai hill banana.",
+    "see": [
+      "The viewpoint after the 17th bend",
+      "Forest drive and mist",
+      "Sirumalai hill bananas"
+    ],
+    "best": "Evening, or the cool months",
+    "spend": "Half a day",
+    "know": "Pay the vehicle entry fee at the forest check post; drive carefully on the bends.",
+    "getting": "Via Dindigul, about 50 km by road, around an hour by car.",
+    "pair": [
+      "dindigul-rock-fort",
+      "kutladampatti-falls"
+    ]
+  },
+  "srivilliputhur-andal-temple": {
+    "hook": "The tower on Tamil Nadu's emblem",
+    "why": "This is the birthplace of Andal, the only woman among the twelve Alvar saints, who wrote the Thiruppavai and is worshipped here as the bride of Vishnu. Its towering rajagopuram is the emblem of the Government of Tamil Nadu. Finish with Srivilliputhur's famous palkova, a sweet made from slow-cooked milk.",
+    "see": [
+      "The rajagopuram on the state emblem",
+      "Andal's shrine and the Vadapathrasayi temple",
+      "Srivilliputhur palkova"
+    ],
+    "best": "Morning; Margazhi (Dec–Jan) for Thiruppavai",
+    "spend": "2 hours",
+    "know": "Phones are kept in lockers outside.",
+    "getting": "About 90 km by road, around 2 hours by car.",
+    "pair": [
+      "sathuragiri-hills"
+    ]
+  },
+  "pillayarpatti-karpaga-vinayagar-temple": {
+    "hook": "Ganesha carved into rock in Chettinad",
+    "why": "One of the oldest rock-cut Ganesha shrines in India, carved into a hillock and cared for by Chettinad's Nagarathar community. Devotees come from around the world to pray to Karpaga Vinayagar, the wish-granting Ganesha, before any new beginning.",
+    "see": [
+      "The rock-cut Karpaga Vinayagar",
+      "The temple tank",
+      "Kundrakudi Murugan temple, 4 km away"
+    ],
+    "best": "Weekday mornings",
+    "spend": "1 hour",
+    "know": "No phones inside the temple.",
+    "getting": "About 85 km by road, around 2 hours by car; combine with Chettinad.",
+    "pair": [
+      "kundrakudi-murugan-temple",
+      "kanadukathan-chettinad-palace",
+      "athangudi-tiles"
+    ]
+  },
+  "kundrakudi-murugan-temple": {
+    "hook": "Six-faced Murugan on a hillock",
+    "why": "About 150 rock-cut steps lead up to Murugan with six faces, seated on his peacock with Valli and Deivanai. The view from the top over Chettinad's countryside is a bonus, and Pillayarpatti is just down the road.",
+    "see": [
+      "Six-faced Murugan on the peacock",
+      "The rock-cut steps",
+      "Views over Chettinad"
+    ],
+    "best": "Morning or evening abhishekam",
+    "spend": "1 hour",
+    "getting": "About 85 km by road, around 2 hours by car; near Pillayarpatti.",
+    "pair": [
+      "pillayarpatti-karpaga-vinayagar-temple",
+      "kanadukathan-chettinad-palace"
+    ]
+  },
+  "kanadukathan-chettinad-palace": {
+    "hook": "Streets of merchant palaces",
+    "why": "A century ago the Nagarathar merchants of Chettinad traded across Southeast Asia and came home to build palaces: Burma teak pillars, Italian marble, Belgian glass and handmade Athangudi tiles. Kanadukathan's streets are lined with these mansions. Walk them, step into the ones open to visitors, and end with a Chettinad meal.",
+    "see": [
+      "The Chettinad Palace facade",
+      "Mansions open for a fee, such as A R House",
+      "A Chettinad lunch"
+    ],
+    "best": "Morning to mid-afternoon",
+    "spend": "Half a day with Athangudi",
+    "know": "Many mansions are private homes; some open for a small fee. Be respectful.",
+    "getting": "About 100 km by road, around 2 hours by car.",
+    "pair": [
+      "athangudi-tiles",
+      "pillayarpatti-karpaga-vinayagar-temple",
+      "thirumayam-fort"
+    ]
+  },
+  "athangudi-tiles": {
+    "hook": "Tiles made by hand, one at a time",
+    "why": "Chettinad's colourful Athangudi tiles are made with no kiln: patterns are poured into moulds by hand on glass and left to cure. At the workshops you can watch every step and take home a tile or two.",
+    "see": [
+      "Tile-making demonstration",
+      "Pattern and colour samples"
+    ],
+    "best": "Weekday daytime, when the workers are busy",
+    "spend": "45 minutes",
+    "getting": "About 95 km by road, around 2 hours by car; near Karaikudi.",
+    "pair": [
+      "kanadukathan-chettinad-palace",
+      "pillayarpatti-karpaga-vinayagar-temple"
+    ]
+  },
+  "thirumayam-fort": {
+    "hook": "Boulders, cannons and a hilltop view",
+    "why": "Built in 1687, this fort climbs a hill of giant boulders, with cannons still on the ramparts, a Shiva shrine cut into the rock and a sweeping view over the plains toward Chettinad. A good stop on the road through Chettinad.",
+    "see": [
+      "The cannon on the summit",
+      "Rock-cut Shiva shrine",
+      "Views from the top"
+    ],
+    "best": "Morning",
+    "spend": "1.5 hours",
+    "know": "Little shade; carry water and a hat.",
+    "getting": "About 100 km by road, around 2.5 hours by car; on the Karaikudi–Pudukkottai road.",
+    "pair": [
+      "kanadukathan-chettinad-palace"
+    ]
+  },
+  "vaigai-dam": {
+    "hook": "Where Madurai's river is held back",
+    "why": "The Vaigai, Madurai's river, is stored here in the shadow of the Western Ghats. The gardens below the dam make a breezy family picnic, with a children's park and walks along the bund.",
+    "see": [
+      "The dam and its spillway",
+      "Gardens and children's park"
+    ],
+    "best": "Evening, October to February",
+    "spend": "2–3 hours",
+    "getting": "Buses to Theni and Andipatti leave from Arappalayam bus stand. About 80 km by road, around 1.5 hours by car.",
+    "pair": [
+      "kumbakkarai-falls"
+    ]
+  },
+  "kumbakkarai-falls": {
+    "hook": "A forest bath at the foot of Kodaikanal",
+    "why": "Water from the Kodaikanal hills tumbles over rocks into natural pools here. It is a favourite place to bathe and cool off, among forest, butterflies and a few cheeky monkeys.",
+    "see": [
+      "The rock pools",
+      "Forest walk from the parking"
+    ],
+    "best": "After the rains, mornings",
+    "spend": "2–3 hours",
+    "know": "Carry cash for entry and parking; keep food away from monkeys.",
+    "getting": "Buses to Theni and Periyakulam leave from Arappalayam bus stand. About 90 km by road, around 2 hours by car.",
+    "pair": [
+      "vaigai-dam"
+    ]
+  },
+  "sathuragiri-hills": {
+    "hook": "A pilgrim's trek to the Siddhars' mountain",
+    "why": "Deep in the Western Ghats, Sathuragiri is believed to be the home of the 18 Siddhars. Pilgrims climb an 8 km forest path from Thaniparai to the Sundara Mahalingam temple, sharing food and stories on the way.",
+    "see": [
+      "The forest trek from Thaniparai",
+      "Sundara Mahalingam and Santhana Mahalingam shrines",
+      "Annadhanam (free meals) at the top"
+    ],
+    "best": "The permitted days around new moon and full moon",
+    "spend": "Full day",
+    "know": "Access is allowed only on set days; check with the forest department. Wear good shoes and carry water.",
+    "getting": "To Thaniparai, about 70 km by road, around 1.5 hours by car.",
+    "pair": []
+  },
+  "vettangudi-bird-sanctuary": {
+    "hook": "Winter home of painted storks",
+    "why": "Every winter, village tanks at Vettangudi fill with nesting painted storks, herons, egrets and migrants from far away. Watch them from the towers and the bund path.",
+    "see": [
+      "Nesting colonies in winter",
+      "The watchtowers"
+    ],
+    "best": "November to February, early morning",
+    "spend": "1.5 hours",
+    "know": "Bring binoculars; there are few facilities.",
+    "getting": "About 60 km by road, around 1.5 hours by car; near Tiruppattur.",
+    "pair": []
+  },
+  "thiruchuli-thirumeninathar-temple": {
+    "hook": "Where Ramana Maharshi was born",
+    "why": "A great old Shiva temple praised in the Devaram hymns, beside the Gundar river. A few steps away is the house where Ramana Maharshi was born, now a quiet meditation hall.",
+    "see": [
+      "The Thirumeninathar temple",
+      "Ramana Maharshi's birthplace house"
+    ],
+    "best": "Morning",
+    "spend": "1.5 hours",
+    "getting": "About 55 km by road, around 1.5 hours by car; via Aruppukottai.",
+    "pair": []
+  },
+  "kalayarkoil-temple": {
+    "hook": "The temple of the Marudhu brothers",
+    "why": "Three Shiva shrines stand within one temple here, under a towering gopuram. It is bound up with the Marudhu brothers of Sivaganga, who fought the British at the turn of the 19th century and rebuilt the temple.",
+    "see": [
+      "The great rajagopuram",
+      "Three Shiva shrines",
+      "The temple tank"
+    ],
+    "best": "Morning",
+    "spend": "1 hour",
+    "getting": "About 75 km by road, around 1.5 hours by car; via Sivaganga.",
+    "pair": [
+      "sivaganga-palace"
+    ]
+  },
+  "sivaganga-palace": {
+    "hook": "The palace of Queen Velu Nachiyar's kingdom",
+    "why": "Gowri Vilasam palace was the seat of the Sivaganga kingdom, the land of Queen Velu Nachiyar, who fought the East India Company in the 1780s, and of the Marudhu brothers. The descendants of the royal family still live here.",
+    "see": [
+      "The palace frontage and courtyard",
+      "Navaratri, when it opens in the evenings"
+    ],
+    "best": "Navaratri (Sep–Oct)",
+    "spend": "45 minutes",
+    "know": "Closed on Sundays; parts are a private residence.",
+    "getting": "About 55 km by road, around an hour by car.",
+    "pair": [
+      "kalayarkoil-temple"
+    ]
   }
 }

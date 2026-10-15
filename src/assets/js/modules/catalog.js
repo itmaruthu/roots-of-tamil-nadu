@@ -13,7 +13,8 @@ export const TYPES = {
   meal:     { label: 'Meals',           group: 'eat',      schema: 'Restaurant' },
   sweet:    { label: 'Sweets & snacks', group: 'eat',      schema: 'FoodEstablishment' },
   drink:    { label: 'Drinks',          group: 'eat',      schema: 'FoodEstablishment' },
-  stay:     { label: 'Stay',            group: 'stay',     schema: 'Hotel' }
+  stay:     { label: 'Stay',            group: 'stay',     schema: 'Hotel' },
+  nature:   { label: 'Nature & falls',  group: 'trips',    schema: 'TouristAttraction' }
 };
 
 export const GROUPS = {
@@ -21,10 +22,11 @@ export const GROUPS = {
   temple:   { label: 'Temples',     icon: 'temple' },
   heritage: { label: 'Heritage',    icon: 'heritage' },
   stay:     { label: 'Stays',       icon: 'stay' },
-  market:   { label: 'Markets & shopping', icon: 'bag' }
+  market:   { label: 'Markets & shopping', icon: 'bag' },
+  trips:    { label: 'Day trips (100 km)', icon: 'route' }
 };
 
-export const groupOf = (place) => TYPES[place.type].group;
+export const groupOf = (place) => (place.trip ? 'trips' : TYPES[place.type].group);
 
 /** Hot-linkable Wikimedia Commons thumbnail (redirects to upload.wikimedia.org). */
 export function commonsImage(file, width = 960) {

@@ -172,7 +172,7 @@ function render() {
   // Temples lead the list: the five featured temples first, then the other temples, then everything else.
   const FEATURED = ['meenakshi-amman-temple', 'thiruparankundram-murugan-temple', 'pazhamudircholai-murugan-temple', 'kallazhagar-temple-alagar-kovil', 'pandi-muneeswarar-temple'];
   const HIGHLIGHT = ['keeladi-museum', 'alanganallur-jallikattu-vadivasal', 'avaniyapuram-jallikattu', 'palamedu-jallikattu-vadivasal', 'pathu-thoon-ten-pillars', 'jallikattu-arena-alanganallur'];
-  const rank = (p) => { const f = FEATURED.indexOf(p.id); if (f >= 0) return f; const h = HIGHLIGHT.indexOf(p.id); return h >= 0 ? 5 + h : p.type === 'temple' ? 10 : 20; };
+  const rank = (p) => { const f = FEATURED.indexOf(p.id); if (f >= 0) return f; const h = HIGHLIGHT.indexOf(p.id); return h >= 0 ? 5 + h : p.trip ? 15 : p.type === 'temple' ? 10 : 20; };
   if (!state.me) for (const l of [on, off]) l.sort((a, b) => rank(a) - rank(b));
   if (state.me) { const d = (p) => distanceKm(state.me, p); on.sort((a, b) => d(a) - d(b)); off.sort((a, b) => d(a) - d(b)); }
 
