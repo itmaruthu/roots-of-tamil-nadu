@@ -13,6 +13,7 @@ import { fileURLToPath } from 'node:url';
 import { validate } from './validate.mjs';
 import { TYPES, GROUPS, commonsImage, commonsPage, directionsUrl, busUrl, osmUrl, imageSrc } from '../src/assets/js/modules/catalog.js';
 import { DAYS, hoursFor, is24h, formatHour } from '../src/assets/js/modules/hours.js';
+import { planFor, defaultHub, niceStop } from '../src/assets/js/modules/bus.js';
 import { MEENAKSHI, distanceKm, formatKm, nearest, nearestStand, projector, RINGS, VAIGAI } from '../src/assets/js/modules/geo.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -21,6 +22,7 @@ const DIST = join(ROOT, 'dist');
 const config = JSON.parse(await readFile(join(ROOT, 'site.config.json'), 'utf8'));
 const SITE = (process.env.SITE_URL || config.siteUrl).replace(/\/$/, '');
 const data = JSON.parse(await readFile(join(SRC, 'data/places.json'), 'utf8'));
+const bus = JSON.parse(await readFile(join(SRC, 'data/bus.json'), 'utf8'));
 const credits = existsSync(join(SRC, 'data/credits.json')) ? JSON.parse(await readFile(join(SRC, 'data/credits.json'), 'utf8')) : {};
 const places = data.places;
 const BUILD_DATE = new Date().toISOString().slice(0, 10);
@@ -137,6 +139,12 @@ function footer(base) {
 }
 
 const BOARDS = ['maroon', 'teal', 'indigo', 'ochre'];
+function busPlanHtml(plan) {
+  if (!plan) return '';
+  const legs = plan.legs.map((l, i) => `<li>${i ? 'Change at' : 'From'} <b>${esc(niceStop(l.from))}</b>: bus ${l.buses.map((b) => `<span class="busno">${esc(b)}</span>`).join(' ')} to ${esc(niceStop(l.to))} · ${l.stops} stops</li>`).join('');
+  return `<p class="bus-head">${plan.direct ? 'Direct bus' : 'One change'} from ${esc(niceStop(plan.from))}${plan.fare ? ` · ₹${plan.fare}` : ''}</p><ol class="bus-legs">${legs}</ol><a class="bus-more" href="${esc(plan.url)}" target="_blank" rel="noopener noreferrer">Full route and live buses on MaduraiOne</a>`;
+}
+
 function boardColour(p) {
   if (p.board) return p.board;
   if (p.type === 'stay') return 'green';
@@ -302,13 +310,15 @@ async function renderPlace(p) {
     lat: String(p.lat), lng: String(p.lng),
     directions: esc(directionsUrl(p)),
     bus: esc(busUrl(p)),
-    busLine: (() => {
-      const s = nearestStand(p);
-      const stand = `<b>${esc(s.name)}</b> <span lang="ta">(${esc(s.ta)})</span>`;
-      return s.km > 5
-        ? `Outside the city: ${esc(formatKm(s.km))} from ${stand}, the nearest main bus stand. Check which bus runs here with the button below.`
-        : `Nearest bus stand: ${stand}, ${s.km < 0.15 ? 'right here' : esc(formatKm(s.km)) + ' away'}. It has ${esc(s.serves)}.`;
+    busStop: (() => {
+      const stop = bus.places[p.id];
+      if (!stop) return '';
+      const hub = bus.hubs[stop];
+      const walk = hub ? distanceKm(p, hub) : null;
+      return `Get off at <b>${esc(niceStop(stop))}</b> <span lang="ta">(${esc(bus.ta[stop] || '')})</span>${walk !== null && walk > 0.15 ? `, about ${esc(formatKm(walk))} on foot from here` : ''}.`;
     })(),
+    busPlan: busPlanHtml(planFor(bus, p.id, defaultHub(bus, p.id))),
+    busFetched: esc(new Date(bus.fetched).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })),
     osm: esc(osmUrl(p)),
     fromTemple: p.id === 'meenakshi-amman-temple' ? 'The centre of the old city' : `${formatKm(distanceKm(p, MEENAKSHI))} from Meenakshi Amman Temple`,
     locator: locator(p),

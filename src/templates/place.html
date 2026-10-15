@@ -48,10 +48,13 @@
           <button class="chip" id="near-me" type="button"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#locate"/></svg>How far is it from me?</button>
           <div class="bus">
             <h3><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#bus"/></svg>By bus</h3>
-            <p>{{busLine}}</p>
-            <p id="bus-you" class="note" aria-live="polite"></p>
-            <a class="btn btn--sm" href="{{bus}}" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#bus"/></svg>Bus route from my location</a>
-            <p class="note">Opens Google Maps public-transport directions from where you are. Route boards on Madurai buses are mostly in Tamil, so show the stand's Tamil name to the conductor.</p>
+            <p>{{busStop}}</p>
+            <div class="bus-plan" id="bus-plan" aria-live="polite">{{busPlan}}</div>
+            <div class="chips">
+              <button class="btn btn--sm" id="bus-me" type="button"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#locate"/></svg>Buses from my location</button>
+              <a class="btn btn--sm btn--ghost" href="{{bus}}" target="_blank" rel="noopener noreferrer">Google Maps transit</a>
+            </div>
+            <p class="note">Bus numbers, stops and fares: <a href="https://maduraione.in" target="_blank" rel="noopener noreferrer">MaduraiOne</a> community transit map, fetched {{busFetched}}; fares from the TNSTC stage chart (ordinary bus). Show the Tamil stop name to the conductor and check the board before you board.</p>
           </div>
         </div>
         {{tips}}

@@ -102,6 +102,10 @@ The darshan wait figures and the token queue are simulated in this prototype and
 
 "List your place" lets home kitchens, messes, restaurants, hotels, guides and artisans register. On Netlify the form is captured by **Netlify Forms** (free tier, no server code); submissions appear under Site → Forms, and you can turn on email notifications there. On other hosts the page shows the details so they can be copied or sent on WhatsApp. Set your team's WhatsApp number in `site.config.json` (`joinWhatsApp`, digits with country code, e.g. `919876543210`) to switch on the "Send a voice note" button. A hidden honeypot field filters spam; the consent box is required.
 
+## Bus routes (src/data/bus.json)
+
+City bus numbers, stops and fares come from the MaduraiOne community transit map (maduraione.in; fares from the TNSTC stage chart). The file holds the best route from 20 main stops to each place's nearest stop. Place pages show the route from the main bus stand, and "Buses from my location" picks the visitor's nearest main stop in the browser (location never leaves the device). Refresh the file from MaduraiOne's API before launch and every few months; it is community data, so spot-check a few routes.
+
 ## Updating places
 
 Edit `src/data/places.json`. Hours are decimal IST hours (`21.5` = 9:30 pm); a range may run past 24 for after-midnight closing (`[8, 25]` = 8 am–1 am). `days` overrides a weekday (`"0"` = Sunday) and `[]` means closed. Run `npm run validate`.
