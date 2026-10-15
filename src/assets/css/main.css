@@ -364,6 +364,16 @@ address { font-style: normal; }
 .cc-form input { flex: 1; min-width: 0; font: inherit; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
 
 
+
+/* ---------- Getting around ---------- */
+.cab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.cab h3 { display: flex; align-items: center; gap: 10px; }
+.cab h3 .i { width: 26px; height: 26px; color: var(--accent); flex: none; }
+.cab p { margin: 0; color: var(--muted); }
+.cab .btn { align-self: flex-start; margin-top: auto; }
+.cab-tel b { color: var(--ink); white-space: nowrap; }
+.cab-check { margin-top: 16px; }
+
 /* ---------- Join page ---------- */
 .join-hero { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 32px; align-items: center; padding-block: 24px 36px; }
 @media (max-width: 860px) { .join-hero { grid-template-columns: minmax(0, 1fr); } }
@@ -415,3 +425,5 @@ address { font-style: normal; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+section[id] { scroll-margin-top: 84px; }

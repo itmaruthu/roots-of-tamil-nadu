@@ -6,7 +6,7 @@ import { isOpen, status, formatHour, hoursFor, is24h } from './hours.js';
 import { darshanWait } from './livewait.js';
 import { distanceKm, formatKm, MEENAKSHI } from './geo.js';
 
-const SUGGESTIONS = ['What is open now?', 'Where to buy sarees?', 'Veg food near the temple', 'Which temples are open?', 'How long is the darshan wait?', 'Late-night food', 'இப்போ என்ன திறந்திருக்கு?'];
+const SUGGESTIONS = ['What is open now?', 'How do I get a safe cab?', 'Where to buy sarees?', 'Veg food near the temple', 'Which temples are open?', 'How long is the darshan wait?', 'Late-night food', 'இப்போ என்ன திறந்திருக்கு?'];
 
 const GENERIC = new Set(['hotel', 'temple', 'shop', 'mess', 'kadai', 'stall', 'stalls', 'madurai', 'market', 'original', 'famous', 'board', 'butter', 'the', 'sri', 'tea']);
 function keywords(p) {
@@ -69,6 +69,10 @@ export function initConcierge(ctx) {
       return [w === null
         ? `Meenakshi temple is closed at ${formatHour(hour)}. It opens 5 am–12:30 pm and 4–10 pm.`
         : `Darshan wait at Meenakshi temple around ${formatHour(hour)}: about ${w} minutes (estimate). Early morning, 5–7 am, is usually shortest.`];
+    }
+    if (has('cab', 'taxi', 'rental', 'rent a car', 'self drive', 'auto', 'bus', 'transport', 'airport', 'டாக்ஸி', 'வாடகை')) {
+      return ['Use government-approved rides: the prepaid taxi counter in the airport arrivals hall (fixed fare, receipt names the driver), TTDC tours and coaches (toll-free 1800 425 31111), or TNSTC city buses. For self-drive, rent only a car with a black plate and yellow letters; never a white-plate private car.',
+        el('p', {}, el('a', { href: '#cabs' }, 'How to check a cab is legal →'))];
     }
     const SHOP = [['saree', 'dress'], ['dress', 'dress'], ['cloth', 'dress'], ['sungudi', 'dress'], ['jewel', 'jewel'], ['gold', 'jewel'], ['bangle', 'jewel'], ['grocer', 'grocery'], ['spice', 'grocery'], ['vegetable', 'vegetable'], ['veggies', 'vegetable'], ['vessel', 'homeware'], ['brass', 'homeware'], ['steel', 'homeware'], ['craft', 'homeware'], ['flower', 'market'], ['malli', 'market'], ['jasmine', 'market']];
     const shopType = SHOP.find(([w]) => q.includes(w))?.[1];

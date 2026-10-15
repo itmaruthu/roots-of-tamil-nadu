@@ -104,6 +104,7 @@ const header = (base) => `<header class="site-header">
       <a href="${base}index.html#clock">24 hours</a>
       <a href="${base}index.html#explore">Map</a>
       <a href="${base}index.html#live">Live wait</a>
+      <a href="${base}index.html#cabs">Cabs</a>
       <a href="${base}join.html">List your place</a>
       <a class="nav-cta" href="${base}index.html#explore">What's open now</a>
     </nav>
