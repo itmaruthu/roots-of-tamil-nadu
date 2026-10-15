@@ -53,6 +53,9 @@ form?.addEventListener('submit', async (e) => {
     note.textContent = 'We have your details. A Roots team member will call you within two working days.';
   } else if (waNumber) {
     note.replaceChildren('This preview cannot send forms. ', el('a', { href: waLink(text), target: '_blank', rel: 'noopener noreferrer' }, 'Send these details on WhatsApp'), ' instead.');
+  } else if (script?.dataset.email) {
+    const mail = `mailto:${script.dataset.email}?subject=${encodeURIComponent('Roots listing request')}&body=${encodeURIComponent(text)}`;
+    note.replaceChildren('One last step: ', el('a', { href: mail }, `email these details to ${script.dataset.email}`), ' and a Roots team member will call you within two working days.');
   } else {
     note.textContent = 'Demo mode: this preview does not send forms. On the live site your details go straight to the Roots team.';
   }

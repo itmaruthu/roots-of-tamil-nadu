@@ -22,6 +22,9 @@ const SRC = join(ROOT, 'src');
 const DIST = join(ROOT, 'dist');
 const config = JSON.parse(await readFile(join(ROOT, 'site.config.json'), 'utf8'));
 const SITE = (process.env.SITE_URL || config.siteUrl).replace(/\/$/, '');
+// Hosts that serve the site from a sub-folder (GitHub Pages) set BASE_PATH, e.g. /roots-of-tamil-nadu
+const BASE_PATH = (process.env.BASE_PATH || '').replace(/\/$/, '');
+const FORMS = process.env.FORMS_BACKEND ?? config.formsBackend ?? '';
 const data = JSON.parse(await readFile(join(SRC, 'data/places.json'), 'utf8'));
 const bus = JSON.parse(await readFile(join(SRC, 'data/bus.json'), 'utf8'));
 const festivals = JSON.parse(await readFile(join(SRC, 'data/festivals.json'), 'utf8'));
@@ -464,6 +467,11 @@ async function build() {
   await cp(join(SRC, 'assets'), join(DIST, 'assets'), { recursive: true });
   await cp(join(SRC, 'data'), join(DIST, 'data'), { recursive: true });
   await cp(join(ROOT, 'public'), DIST, { recursive: true });
+  if (BASE_PATH) {
+    // The 404 page is served at any depth, so it uses root-absolute links; point them at the sub-folder.
+    const nf = join(DIST, '404.html');
+    await writeFile(nf, (await readFile(nf, 'utf8')).replace(/(href|src)="\/(?!\/)/g, `$1="${BASE_PATH}/`));
+  }
 
   await writeFile(join(DIST, 'index.html'), await renderHome('', '/'));
   const joinTpl = await readFile(join(SRC, 'templates/join.html'), 'utf8');
@@ -471,7 +479,7 @@ async function build() {
     base: '',
     head: head({ title: 'List your place on Roots — free for Madurai hosts | Roots of Tamil Nadu', description: 'Home kitchens, messes, restaurants, sweet shops, hotels, guides and artisans in Madurai: join Roots free, get verified and appear on the live map with free Live wait tokens.', path: '/join.html', base: '' }),
     header: header(''), footer: footer(''),
-    whatsapp: esc(config.joinWhatsApp || ''), email: esc(config.contactEmail), phone: esc(config.contactPhone), tel: esc(config.contactPhone.replace(/\s/g, '')), forms: esc(config.formsBackend || '')
+    whatsapp: esc(config.joinWhatsApp || ''), email: esc(config.contactEmail), phone: esc(config.contactPhone), tel: esc(config.contactPhone.replace(/\s/g, '')), forms: esc(FORMS)
   }));
   for (const p of places) await writeFile(join(DIST, 'places', `${p.id}.html`), await renderPlace(p));
 
