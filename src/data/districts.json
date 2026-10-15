@@ -9,6 +9,12 @@
    "known": [
     "Gangaikonda Cholapuram, the Chola capital temple (UNESCO)",
     "Fossil-rich limestone country"
+   ],
+   "food": [
+    "Village meals on a banana leaf"
+   ],
+   "shop": [
+    "Temple-town stalls near Gangaikonda Cholapuram"
    ]
   },
   {
@@ -20,6 +26,12 @@
    "known": [
     "Mamallapuram shore temple and rock carvings (UNESCO)",
     "Vedanthangal bird sanctuary"
+   ],
+   "food": [
+    "Fresh seafood by the shore at Mamallapuram"
+   ],
+   "shop": [
+    "Mamallapuram stone carvings"
    ]
   },
   {
@@ -31,6 +43,14 @@
    "known": [
     "Kapaleeshwarar Temple, Mylapore",
     "Marina Beach and the Government Museum"
+   ],
+   "food": [
+    "Filter coffee and a tiffin of idli, dosa and vada",
+    "Sundal on Marina Beach"
+   ],
+   "shop": [
+    "Silk sarees in T. Nagar",
+    "Brass and bronze lamps in Mylapore"
    ]
   },
   {
@@ -42,6 +62,12 @@
    "known": [
     "Marudhamalai Murugan temple",
     "Perur Pateeswarar temple"
+   ],
+   "food": [
+    "Kongu-style meals"
+   ],
+   "shop": [
+    "Kovai cotton sarees"
    ]
   },
   {
@@ -53,6 +79,12 @@
    "known": [
     "Chidambaram Nataraja temple",
     "Pichavaram mangrove forest"
+   ],
+   "food": [
+    "Panruti jackfruit and cashews in season"
+   ],
+   "shop": [
+    "Panruti cashews to take home"
    ]
   },
   {
@@ -64,6 +96,12 @@
    "known": [
     "Hogenakkal Falls on the Kaveri",
     "Coracle rides in the gorge"
+   ],
+   "food": [
+    "Fried river fish at Hogenakkal"
+   ],
+   "shop": [
+    "Local honey and millets"
    ]
   },
   {
@@ -75,6 +113,13 @@
    "known": [
     "Dindigul Rock Fort",
     "Palani hill temple, a Murugan abode"
+   ],
+   "food": [
+    "Dindigul biryani"
+   ],
+   "shop": [
+    "Dindigul locks",
+    "Palani panchamirtham"
    ]
   },
   {
@@ -86,6 +131,13 @@
    "known": [
     "Bhavani Sangameswarar temple at the river confluence",
     "Turmeric and handloom markets"
+   ],
+   "food": [
+    "Kongu-style meals"
+   ],
+   "shop": [
+    "Erode turmeric",
+    "Bhavani jamakkalam carpets"
    ]
   },
   {
@@ -96,6 +148,12 @@
    "lng": 78.96,
    "known": [
     "Kalvarayan Hills and their waterfalls"
+   ],
+   "food": [
+    "Village meals on a banana leaf"
+   ],
+   "shop": [
+    "Kalvarayan hill honey and millets"
    ]
   },
   {
@@ -107,6 +165,12 @@
    "known": [
     "Kailasanathar and Ekambareswarar temples",
     "Kanchipuram silk weaving streets"
+   ],
+   "food": [
+    "Kanchipuram idli"
+   ],
+   "shop": [
+    "Kanchipuram silk sarees"
    ]
   },
   {
@@ -118,6 +182,13 @@
    "known": [
     "Vivekananda Rock and the Thiruvalluvar statue",
     "Sunrise and sunset at India's southern tip"
+   ],
+   "food": [
+    "Seafood and banana chips"
+   ],
+   "shop": [
+    "Nagercoil temple jewellery",
+    "Seashell and palm-leaf crafts"
    ]
   },
   {
@@ -129,6 +200,12 @@
    "known": [
     "Kalyana Pasupatheeswarar temple",
     "Home-textile weaving town"
+   ],
+   "food": [
+    "Village meals on a banana leaf"
+   ],
+   "shop": [
+    "Karur home textiles: bedsheets and towels"
    ]
   },
   {
@@ -140,6 +217,12 @@
    "known": [
     "Krishnagiri dam",
     "Mango orchards"
+   ],
+   "food": [
+    "Krishnagiri mangoes in season"
+   ],
+   "shop": [
+    "Mangoes and mango pickles"
    ]
   },
   {
@@ -151,6 +234,13 @@
    "known": [
     "Meenakshi Amman Temple",
     "Keeladi, a Sangam-era city nearby"
+   ],
+   "food": [
+    "Jigarthanda, kari dosai and bun parotta"
+   ],
+   "shop": [
+    "Sungudi sarees",
+    "Temple jewellery and bangles"
    ]
   },
   {
@@ -162,6 +252,12 @@
    "known": [
     "Tharangambadi (Tranquebar) Danish fort",
     "Poompuhar, the ancient Chola port"
+   ],
+   "food": [
+    "Seafood at Poompuhar and Tharangambadi"
+   ],
+   "shop": [
+    "Temple-town stalls"
    ]
   },
   {
@@ -173,6 +269,12 @@
    "known": [
     "Velankanni basilica",
     "Nagore dargah"
+   ],
+   "food": [
+    "Seafood by the coast"
+   ],
+   "shop": [
+    "Velankanni and Nagore pilgrim bazaars"
    ]
   },
   {
@@ -184,6 +286,12 @@
    "known": [
     "Namakkal Anjaneyar temple and rock fort",
     "Kolli Hills and its 70 hairpin bends"
+   ],
+   "food": [
+    "Kolli Hills pepper and honey"
+   ],
+   "shop": [
+    "Kolli Hills pepper, honey and jackfruit"
    ]
   },
   {
@@ -195,6 +303,13 @@
    "known": [
     "Nilgiri Mountain Railway (UNESCO)",
     "Ooty and the tea estates"
+   ],
+   "food": [
+    "Homemade chocolates and fresh tea"
+   ],
+   "shop": [
+    "Nilgiri tea",
+    "Toda embroidery"
    ]
   },
   {
@@ -205,6 +320,12 @@
    "lng": 78.88,
    "known": [
     "Ranjankudi Fort"
+   ],
+   "food": [
+    "Village meals on a banana leaf"
+   ],
+   "shop": [
+    "Local handloom"
    ]
   },
   {
@@ -216,6 +337,12 @@
    "known": [
     "Sittanavasal cave paintings",
     "Thirumayam Fort"
+   ],
+   "food": [
+    "Chettinad-style meals"
+   ],
+   "shop": [
+    "Local handloom"
    ]
   },
   {
@@ -227,6 +354,12 @@
    "known": [
     "Rameswaram Ramanathaswamy temple",
     "Dhanushkodi and the Pamban bridge"
+   ],
+   "food": [
+    "Seafood by the coast"
+   ],
+   "shop": [
+    "Seashell crafts at Rameswaram"
    ]
   },
   {
@@ -237,6 +370,12 @@
    "lng": 79.33,
    "known": [
     "Sholinghur Narasimha hill temple"
+   ],
+   "food": [
+    "Village meals on a banana leaf"
+   ],
+   "shop": [
+    "Temple-town stalls at Sholinghur"
    ]
   },
   {
@@ -248,6 +387,12 @@
    "known": [
     "Yercaud hills",
     "Salem mango and steel country"
+   ],
+   "food": [
+    "Salem mangoes in season and thattu vadai set"
+   ],
+   "shop": [
+    "Salem silk"
    ]
   },
   {
@@ -259,6 +404,14 @@
    "known": [
     "Keeladi excavations and museum",
     "Chettinad mansions at Karaikudi"
+   ],
+   "food": [
+    "A Chettinad feast in Karaikudi"
+   ],
+   "shop": [
+    "Athangudi tiles",
+    "Kandangi cotton sarees",
+    "Karaikudi antiques"
    ]
   },
   {
@@ -270,6 +423,12 @@
    "known": [
     "Courtallam falls",
     "Kasi Viswanathar temple"
+   ],
+   "food": [
+    "Courtallam's seasonal fruits"
+   ],
+   "shop": [
+    "Spices and fruits at Courtallam"
    ]
   },
   {
@@ -281,6 +440,13 @@
    "known": [
     "Brihadeeswarar temple, the Big Temple (UNESCO)",
     "Swamimalai, a Murugan abode, and Kumbakonam"
+   ],
+   "food": [
+    "Thanjavur meals and Kumbakonam degree coffee"
+   ],
+   "shop": [
+    "Thanjavur art plates and paintings",
+    "Thalaiyatti bommai (bobble-head dolls)"
    ]
   },
   {
@@ -292,6 +458,12 @@
    "known": [
     "Meghamalai tea hills",
     "Vaigai dam and Suruli falls"
+   ],
+   "food": [
+    "Cumbum grapes and hill-country meals"
+   ],
+   "shop": [
+    "Bodinayakanur cardamom and spices"
    ]
   },
   {
@@ -303,6 +475,12 @@
    "known": [
     "Tiruchendur, Murugan's seaside abode",
     "Adichanallur and Korkai, ancient Tamil sites"
+   ],
+   "food": [
+    "Thoothukudi macaroons and seafood"
+   ],
+   "shop": [
+    "Kovilpatti kadalai mittai"
    ]
   },
   {
@@ -314,6 +492,12 @@
    "known": [
     "Srirangam Ranganathaswamy temple",
     "Rock Fort Ucchi Pillayar temple"
+   ],
+   "food": [
+    "Temple-town vegetarian meals near Srirangam"
+   ],
+   "shop": [
+    "Bazaars around the Rock Fort"
    ]
   },
   {
@@ -325,6 +509,12 @@
    "known": [
     "Nellaiappar temple",
     "Tirunelveli halwa by the Thamirabarani"
+   ],
+   "food": [
+    "Tirunelveli halwa"
+   ],
+   "shop": [
+    "Halwa and palm-sugar sweets to take home"
    ]
   },
   {
@@ -335,6 +525,12 @@
    "lng": 78.57,
    "known": [
     "Yelagiri hills"
+   ],
+   "food": [
+    "Ambur and Vaniyambadi biryani"
+   ],
+   "shop": [
+    "Leather goods from Ambur"
    ]
   },
   {
@@ -346,6 +542,12 @@
    "known": [
     "Avinashi Lingeswarar temple",
     "Knitwear town"
+   ],
+   "food": [
+    "Kongu-style meals"
+   ],
+   "shop": [
+    "Knitwear outlets"
    ]
   },
   {
@@ -357,6 +559,12 @@
    "known": [
     "Tiruttani, a Murugan abode",
     "Pulicat lake and its flamingos"
+   ],
+   "food": [
+    "Fresh seafood at Pulicat"
+   ],
+   "shop": [
+    "Temple-town stalls at Tiruttani"
    ]
   },
   {
@@ -368,6 +576,12 @@
    "known": [
     "Arunachaleswarar temple",
     "Girivalam walk around the hill"
+   ],
+   "food": [
+    "Temple-town vegetarian meals"
+   ],
+   "shop": [
+    "Arani silk sarees"
    ]
   },
   {
@@ -378,6 +592,12 @@
    "lng": 79.64,
    "known": [
     "Thyagarajar temple and its giant chariot"
+   ],
+   "food": [
+    "Delta-style village meals"
+   ],
+   "shop": [
+    "Temple-town stalls"
    ]
   },
   {
@@ -389,6 +609,12 @@
    "known": [
     "Vellore Fort",
     "Jalakandeswarar temple inside the fort"
+   ],
+   "food": [
+    "Ambur biryani nearby"
+   ],
+   "shop": [
+    "Bazaars around the fort"
    ]
   },
   {
@@ -399,6 +625,12 @@
    "lng": 79.49,
    "known": [
     "Gingee Fort"
+   ],
+   "food": [
+    "Village meals on a banana leaf"
+   ],
+   "shop": [
+    "Local handloom"
    ]
   },
   {
@@ -410,6 +642,13 @@
    "known": [
     "Srivilliputhur Andal temple",
     "Sathuragiri hills"
+   ],
+   "food": [
+    "Virudhunagar fried parotta",
+    "Srivilliputhur palkova"
+   ],
+   "shop": [
+    "Srivilliputhur palkova to take home"
    ]
   }
  ],

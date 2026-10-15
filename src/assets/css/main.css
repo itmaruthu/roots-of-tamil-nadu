@@ -653,3 +653,8 @@ section[id] { scroll-margin-top: 84px; }
 .roots-day h3 { font-size: 20px; margin: 0; }
 .roots-day ul { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 4px; font-size: 15px; }
 .roots-links a { font-weight: 600; }
+.roots-part { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 8px; align-items: start; border-top: 1px dashed var(--line); padding-top: 8px; }
+.roots-part-l { margin: 0; font: 700 11px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+.roots-part ul { list-style: none; padding: 0; }
+.roots-part--stay .roots-part-l { color: var(--leaf); }
+.roots-go { margin: 0; font-weight: 600; font-size: 15px; color: var(--accent); border-top: 1px dashed var(--line); padding-top: 8px; }
