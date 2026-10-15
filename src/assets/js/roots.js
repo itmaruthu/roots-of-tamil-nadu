@@ -68,6 +68,7 @@ function plan(form) {
   const abode = abodes[0];
   const abode2 = nearMaduraiCheck(d) ? abodes[0] : abodes[1];
   const nearMadurai = km(d, MADURAI) < 200;
+  const local = (types) => near.filter((p) => types.includes(p.type) && p.d < 40).length;
   const asLinks = (arr, note) => arr.map((p) => ({ p, x: note ? note(p) : '' }));
   const orText = (arr, text) => (arr.length ? arr : text);
   const stayTown = stays.length
@@ -88,14 +89,14 @@ function plan(form) {
     shop: ['Flowers, coconuts and a new veshti or saree for the temple offering'],
     stay: stayVillage });
   out.push({ t: `Heritage of ${d.name}`,
-    see: orText(asLinks(see(3), dist), d.known),
+    see: local(['temple', 'heritage', 'nature']) >= 2 ? asLinks(see(3), dist) : [...d.known, ...asLinks(see(1).filter((p) => p.d < 60), dist)],
     eat: orText(asLinks(eat(2), (p) => p.area), d.food),
     shop: orText(asLinks(shop(2), (p) => p.area), d.shop),
     stay: stayTown });
   if (days >= 4) out.push({ t: `Taste and shop ${d.name}`,
-    see: ['A morning market walk with your Ooru Nanbar', ...asLinks(see(1), dist)],
-    eat: orText(asLinks(eat(3), (p) => p.area), d.food),
-    shop: orText(asLinks(shop(3), (p) => p.area), d.shop),
+    see: ['A morning market walk with your Ooru Nanbar', ...asLinks(see(1).filter((p) => p.d < 60), dist)],
+    eat: orText(asLinks(eat(3), (p) => p.area), [d.food[1] || 'Street snacks and the sweet shop your Ooru Nanbar swears by', 'A home-cooked dinner with a local family']),
+    shop: orText(asLinks(shop(3), (p) => p.area), [d.shop[1] || 'Handloom, brass and spices at the town bazaar', 'Bangles and flowers for the women of the family']),
     stay: stayTown });
   if (days >= 5) out.push(nearMadurai ? { t: 'Keeladi and Madurai by night',
     see: ['Keeladi: a 2,600-year-old Tamil city by the Vaigai, with pots inscribed in Tamil-Brahmi.', ...asLinks([places.find((p) => p.id === KEELADI.id), places.find((p) => p.id === 'meenakshi-amman-temple')].filter((p) => p && !used.has(p.id)))],
