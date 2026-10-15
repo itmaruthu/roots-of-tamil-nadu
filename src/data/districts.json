@@ -1,0 +1,453 @@
+{
+ "districts": [
+  {
+   "id": "ariyalur",
+   "name": "Ariyalur",
+   "ta": "அரியலூர்",
+   "lat": 11.14,
+   "lng": 79.08,
+   "known": [
+    "Gangaikonda Cholapuram, the Chola capital temple (UNESCO)",
+    "Fossil-rich limestone country"
+   ]
+  },
+  {
+   "id": "chengalpattu",
+   "name": "Chengalpattu",
+   "ta": "செங்கல்பட்டு",
+   "lat": 12.69,
+   "lng": 79.98,
+   "known": [
+    "Mamallapuram shore temple and rock carvings (UNESCO)",
+    "Vedanthangal bird sanctuary"
+   ]
+  },
+  {
+   "id": "chennai",
+   "name": "Chennai",
+   "ta": "சென்னை",
+   "lat": 13.08,
+   "lng": 80.27,
+   "known": [
+    "Kapaleeshwarar Temple, Mylapore",
+    "Marina Beach and the Government Museum"
+   ]
+  },
+  {
+   "id": "coimbatore",
+   "name": "Coimbatore",
+   "ta": "கோயம்புத்தூர்",
+   "lat": 11.02,
+   "lng": 76.96,
+   "known": [
+    "Marudhamalai Murugan temple",
+    "Perur Pateeswarar temple"
+   ]
+  },
+  {
+   "id": "cuddalore",
+   "name": "Cuddalore",
+   "ta": "கடலூர்",
+   "lat": 11.75,
+   "lng": 79.75,
+   "known": [
+    "Chidambaram Nataraja temple",
+    "Pichavaram mangrove forest"
+   ]
+  },
+  {
+   "id": "dharmapuri",
+   "name": "Dharmapuri",
+   "ta": "தர்மபுரி",
+   "lat": 12.13,
+   "lng": 78.16,
+   "known": [
+    "Hogenakkal Falls on the Kaveri",
+    "Coracle rides in the gorge"
+   ]
+  },
+  {
+   "id": "dindigul",
+   "name": "Dindigul",
+   "ta": "திண்டுக்கல்",
+   "lat": 10.36,
+   "lng": 77.98,
+   "known": [
+    "Dindigul Rock Fort",
+    "Palani hill temple, a Murugan abode"
+   ]
+  },
+  {
+   "id": "erode",
+   "name": "Erode",
+   "ta": "ஈரோடு",
+   "lat": 11.34,
+   "lng": 77.72,
+   "known": [
+    "Bhavani Sangameswarar temple at the river confluence",
+    "Turmeric and handloom markets"
+   ]
+  },
+  {
+   "id": "kallakurichi",
+   "name": "Kallakurichi",
+   "ta": "கள்ளக்குறிச்சி",
+   "lat": 11.74,
+   "lng": 78.96,
+   "known": [
+    "Kalvarayan Hills and their waterfalls"
+   ]
+  },
+  {
+   "id": "kancheepuram",
+   "name": "Kancheepuram",
+   "ta": "காஞ்சிபுரம்",
+   "lat": 12.83,
+   "lng": 79.7,
+   "known": [
+    "Kailasanathar and Ekambareswarar temples",
+    "Kanchipuram silk weaving streets"
+   ]
+  },
+  {
+   "id": "kanniyakumari",
+   "name": "Kanniyakumari",
+   "ta": "கன்னியாகுமரி",
+   "lat": 8.18,
+   "lng": 77.41,
+   "known": [
+    "Vivekananda Rock and the Thiruvalluvar statue",
+    "Sunrise and sunset at India's southern tip"
+   ]
+  },
+  {
+   "id": "karur",
+   "name": "Karur",
+   "ta": "கரூர்",
+   "lat": 10.96,
+   "lng": 78.08,
+   "known": [
+    "Kalyana Pasupatheeswarar temple",
+    "Home-textile weaving town"
+   ]
+  },
+  {
+   "id": "krishnagiri",
+   "name": "Krishnagiri",
+   "ta": "கிருஷ்ணகிரி",
+   "lat": 12.52,
+   "lng": 78.21,
+   "known": [
+    "Krishnagiri dam",
+    "Mango orchards"
+   ]
+  },
+  {
+   "id": "madurai",
+   "name": "Madurai",
+   "ta": "மதுரை",
+   "lat": 9.93,
+   "lng": 78.12,
+   "known": [
+    "Meenakshi Amman Temple",
+    "Keeladi, a Sangam-era city nearby"
+   ]
+  },
+  {
+   "id": "mayiladuthurai",
+   "name": "Mayiladuthurai",
+   "ta": "மயிலாடுதுறை",
+   "lat": 11.1,
+   "lng": 79.65,
+   "known": [
+    "Tharangambadi (Tranquebar) Danish fort",
+    "Poompuhar, the ancient Chola port"
+   ]
+  },
+  {
+   "id": "nagapattinam",
+   "name": "Nagapattinam",
+   "ta": "நாகப்பட்டினம்",
+   "lat": 10.77,
+   "lng": 79.84,
+   "known": [
+    "Velankanni basilica",
+    "Nagore dargah"
+   ]
+  },
+  {
+   "id": "namakkal",
+   "name": "Namakkal",
+   "ta": "நாமக்கல்",
+   "lat": 11.22,
+   "lng": 78.17,
+   "known": [
+    "Namakkal Anjaneyar temple and rock fort",
+    "Kolli Hills and its 70 hairpin bends"
+   ]
+  },
+  {
+   "id": "nilgiris",
+   "name": "The Nilgiris",
+   "ta": "நீலகிரி",
+   "lat": 11.41,
+   "lng": 76.7,
+   "known": [
+    "Nilgiri Mountain Railway (UNESCO)",
+    "Ooty and the tea estates"
+   ]
+  },
+  {
+   "id": "perambalur",
+   "name": "Perambalur",
+   "ta": "பெரம்பலூர்",
+   "lat": 11.23,
+   "lng": 78.88,
+   "known": [
+    "Ranjankudi Fort"
+   ]
+  },
+  {
+   "id": "pudukkottai",
+   "name": "Pudukkottai",
+   "ta": "புதுக்கோட்டை",
+   "lat": 10.38,
+   "lng": 78.82,
+   "known": [
+    "Sittanavasal cave paintings",
+    "Thirumayam Fort"
+   ]
+  },
+  {
+   "id": "ramanathapuram",
+   "name": "Ramanathapuram",
+   "ta": "இராமநாதபுரம்",
+   "lat": 9.37,
+   "lng": 78.83,
+   "known": [
+    "Rameswaram Ramanathaswamy temple",
+    "Dhanushkodi and the Pamban bridge"
+   ]
+  },
+  {
+   "id": "ranipet",
+   "name": "Ranipet",
+   "ta": "இராணிப்பேட்டை",
+   "lat": 12.93,
+   "lng": 79.33,
+   "known": [
+    "Sholinghur Narasimha hill temple"
+   ]
+  },
+  {
+   "id": "salem",
+   "name": "Salem",
+   "ta": "சேலம்",
+   "lat": 11.66,
+   "lng": 78.15,
+   "known": [
+    "Yercaud hills",
+    "Salem mango and steel country"
+   ]
+  },
+  {
+   "id": "sivaganga",
+   "name": "Sivaganga",
+   "ta": "சிவகங்கை",
+   "lat": 9.85,
+   "lng": 78.48,
+   "known": [
+    "Keeladi excavations and museum",
+    "Chettinad mansions at Karaikudi"
+   ]
+  },
+  {
+   "id": "tenkasi",
+   "name": "Tenkasi",
+   "ta": "தென்காசி",
+   "lat": 8.96,
+   "lng": 77.3,
+   "known": [
+    "Courtallam falls",
+    "Kasi Viswanathar temple"
+   ]
+  },
+  {
+   "id": "thanjavur",
+   "name": "Thanjavur",
+   "ta": "தஞ்சாவூர்",
+   "lat": 10.79,
+   "lng": 79.14,
+   "known": [
+    "Brihadeeswarar temple, the Big Temple (UNESCO)",
+    "Swamimalai, a Murugan abode, and Kumbakonam"
+   ]
+  },
+  {
+   "id": "theni",
+   "name": "Theni",
+   "ta": "தேனி",
+   "lat": 10.01,
+   "lng": 77.48,
+   "known": [
+    "Meghamalai tea hills",
+    "Vaigai dam and Suruli falls"
+   ]
+  },
+  {
+   "id": "thoothukudi",
+   "name": "Thoothukudi",
+   "ta": "தூத்துக்குடி",
+   "lat": 8.76,
+   "lng": 78.13,
+   "known": [
+    "Tiruchendur, Murugan's seaside abode",
+    "Adichanallur and Korkai, ancient Tamil sites"
+   ]
+  },
+  {
+   "id": "tiruchirappalli",
+   "name": "Tiruchirappalli",
+   "ta": "திருச்சிராப்பள்ளி",
+   "lat": 10.79,
+   "lng": 78.7,
+   "known": [
+    "Srirangam Ranganathaswamy temple",
+    "Rock Fort Ucchi Pillayar temple"
+   ]
+  },
+  {
+   "id": "tirunelveli",
+   "name": "Tirunelveli",
+   "ta": "திருநெல்வேலி",
+   "lat": 8.71,
+   "lng": 77.76,
+   "known": [
+    "Nellaiappar temple",
+    "Tirunelveli halwa by the Thamirabarani"
+   ]
+  },
+  {
+   "id": "tirupathur",
+   "name": "Tirupathur",
+   "ta": "திருப்பத்தூர்",
+   "lat": 12.5,
+   "lng": 78.57,
+   "known": [
+    "Yelagiri hills"
+   ]
+  },
+  {
+   "id": "tiruppur",
+   "name": "Tiruppur",
+   "ta": "திருப்பூர்",
+   "lat": 11.11,
+   "lng": 77.34,
+   "known": [
+    "Avinashi Lingeswarar temple",
+    "Knitwear town"
+   ]
+  },
+  {
+   "id": "tiruvallur",
+   "name": "Tiruvallur",
+   "ta": "திருவள்ளூர்",
+   "lat": 13.14,
+   "lng": 79.91,
+   "known": [
+    "Tiruttani, a Murugan abode",
+    "Pulicat lake and its flamingos"
+   ]
+  },
+  {
+   "id": "tiruvannamalai",
+   "name": "Tiruvannamalai",
+   "ta": "திருவண்ணாமலை",
+   "lat": 12.23,
+   "lng": 79.07,
+   "known": [
+    "Arunachaleswarar temple",
+    "Girivalam walk around the hill"
+   ]
+  },
+  {
+   "id": "tiruvarur",
+   "name": "Tiruvarur",
+   "ta": "திருவாரூர்",
+   "lat": 10.77,
+   "lng": 79.64,
+   "known": [
+    "Thyagarajar temple and its giant chariot"
+   ]
+  },
+  {
+   "id": "vellore",
+   "name": "Vellore",
+   "ta": "வேலூர்",
+   "lat": 12.92,
+   "lng": 79.13,
+   "known": [
+    "Vellore Fort",
+    "Jalakandeswarar temple inside the fort"
+   ]
+  },
+  {
+   "id": "viluppuram",
+   "name": "Viluppuram",
+   "ta": "விழுப்புரம்",
+   "lat": 11.94,
+   "lng": 79.49,
+   "known": [
+    "Gingee Fort"
+   ]
+  },
+  {
+   "id": "virudhunagar",
+   "name": "Virudhunagar",
+   "ta": "விருதுநகர்",
+   "lat": 9.58,
+   "lng": 77.96,
+   "known": [
+    "Srivilliputhur Andal temple",
+    "Sathuragiri hills"
+   ]
+  }
+ ],
+ "airports": [
+  {
+   "name": "Chennai",
+   "lat": 12.99,
+   "lng": 80.17
+  },
+  {
+   "name": "Madurai",
+   "lat": 9.83,
+   "lng": 78.09
+  },
+  {
+   "name": "Tiruchirappalli",
+   "lat": 10.77,
+   "lng": 78.71
+  },
+  {
+   "name": "Coimbatore",
+   "lat": 11.03,
+   "lng": 77.04
+  },
+  {
+   "name": "Thoothukudi",
+   "lat": 8.72,
+   "lng": 78.03
+  },
+  {
+   "name": "Thiruvananthapuram (Kerala)",
+   "lat": 8.48,
+   "lng": 76.92
+  },
+  {
+   "name": "Bengaluru (Karnataka)",
+   "lat": 13.2,
+   "lng": 77.71
+  }
+ ]
+}

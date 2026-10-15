@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en-IN" data-sprite="{{base}}assets/img/icons.svg">
+<head>
+{{head}}
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+{{header}}
+
+<main id="main" class="roots-page">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="{{base}}index.html">Roots of Tamil Nadu</a> › <span aria-current="page">Find your roots</span></nav>
+
+    <header class="join-hero">
+      <div>
+        <p class="eyebrow">Homecoming · <span lang="ta">வேர்களைத் தேடி</span></p>
+        <h1>Find your roots</h1>
+        <p class="lead">Your grandparents' village, your family temple, the food you grew up hearing about. Tell us where your family comes from and we will plan the trip home, with a local friend waiting in the village.</p>
+        <p class="lead" lang="ta">உங்கள் சொந்த ஊருக்கு, உங்கள் குலதெய்வக் கோயிலுக்கு, உங்கள் குழந்தைகளுடன்.</p>
+      </div>
+      <ol class="join-steps">
+        <li><b>Tell us your roots</b><span>District, village and kuladeivam temple.</span></li>
+        <li><b>Meet your Ooru Nanbar</b><span>A verified local friend who knows the village, the temple and the elders.</span></li>
+        <li><b>Come home</b><span>A day-by-day trip: village, temple, heritage and the food of your district.</span></li>
+      </ol>
+    </header>
+
+    <div class="join-grid">
+      <form class="panel join-form" id="roots-form" autocomplete="on">
+        <div class="join-fields">
+          <label class="field">Native district<select id="r-district" name="district" required><option value="">Choose a district</option>{{districtOptions}}</select><small>All 38 districts of Tamil Nadu</small></label>
+          <label class="field">Native village or town<input id="r-village" name="village" maxlength="80" placeholder="e.g. Vadipatti"></label>
+          <label class="field">Kuladeivam (family temple)<input id="r-temple" name="temple" maxlength="80" placeholder="e.g. Ayyanar, Karuppasamy, Mariamman"></label>
+          <label class="field">Days in Tamil Nadu<select id="r-days" name="days"><option>3</option><option selected>5</option><option>7</option></select></label>
+          <label class="field">Travelling from<input id="r-from" name="from" maxlength="60" placeholder="e.g. Singapore, Dubai, Toronto"></label>
+          <label class="field">Family name (optional)<input id="r-family" name="family" maxlength="60" autocomplete="family-name"></label>
+        </div>
+        <div class="join-checks">
+          <label><input type="checkbox" name="kids" id="r-kids" checked> Children are coming, so add things for them</label>
+          <label><input type="checkbox" name="tamil" id="r-tamil"> We would like a Tamil-English speaking guide</label>
+        </div>
+        <button class="btn" type="submit">Plan my homecoming</button>
+      </form>
+
+      <aside class="join-side">
+        <div class="panel">
+          <h3>Why families come home</h3>
+          <ul class="tips">
+            <li>To show children the village, the house and the temple</li>
+            <li>To offer pongal or an abhishekam at the kuladeivam</li>
+            <li>To meet elders who still remember the family</li>
+            <li>To see 2,600-year-old Tamil history at Keeladi</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Live in your village?</h3>
+          <p>Become an Ooru Nanbar: welcome families coming home, show them the village and earn from every visit.</p>
+          <a class="btn btn--ghost" href="{{base}}join.html?type=ooru-nanbar">Become an Ooru Nanbar</a>
+        </div>
+      </aside>
+    </div>
+
+    <section class="roots-plan" id="roots-plan" hidden aria-live="polite"></section>
+  </div>
+</main>
+
+{{footer}}
+<script type="module" src="{{base}}assets/js/roots.js" data-email="{{email}}"></script>
+</body>
+</html>
