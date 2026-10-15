@@ -495,7 +495,13 @@
       "tips": [
         "Watch the intro film first",
         "Combine with the dig site"
-      ]
+      ],
+      "image": {
+        "file": "Keezhadi-Museum-Madurai-TamilNadu-India.jpg",
+        "alt": "The Keeladi museum buildings in Chettinad style",
+        "local": "assets/img/places/keeladi-museum.webp",
+        "thumb": "assets/img/places/keeladi-museum-480.webp"
+      }
     },
     {
       "id": "pathu-thoon-ten-pillars",
@@ -516,7 +522,13 @@
       "tips": [
         "Pair with the Nayakkar Mahal",
         "Look up between the shops"
-      ]
+      ],
+      "image": {
+        "file": "Ten Pillars 05.jpg",
+        "alt": "The granite Ten Pillars rising above the shops of Pathu Thoon Street",
+        "local": "assets/img/places/pathu-thoon-ten-pillars.webp",
+        "thumb": "assets/img/places/pathu-thoon-ten-pillars-480.webp"
+      }
     },
     {
       "id": "alanganallur-jallikattu-vadivasal",
@@ -537,7 +549,13 @@
       "tips": [
         "January: arrive before dawn",
         "Watch from the galleries only"
-      ]
+      ],
+      "image": {
+        "file": "Madurai-alanganallur-jallikattu.jpg",
+        "alt": "A tamer holds on to a bull at Alanganallur jallikattu",
+        "local": "assets/img/places/alanganallur-jallikattu-vadivasal.webp",
+        "thumb": "assets/img/places/alanganallur-jallikattu-vadivasal-480.webp"
+      }
     },
     {
       "id": "jallikattu-arena-alanganallur",
@@ -557,7 +575,13 @@
       "story": "A 67-acre arena the state opened in 2024 for jallikattu, with galleries under the hills. Outside the season visitors can walk the ground and see where the bulls run.",
       "tips": [
         "Combine with Alanganallur vadivasal"
-      ]
+      ],
+      "image": {
+        "file": "Madurai Jallikattu.jpg",
+        "alt": "Jallikattu in Madurai (representative photo)",
+        "local": "assets/img/places/jallikattu-arena-alanganallur.webp",
+        "thumb": "assets/img/places/jallikattu-arena-alanganallur-480.webp"
+      }
     },
     {
       "id": "mattuthavani-flower-market",

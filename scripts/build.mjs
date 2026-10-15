@@ -293,6 +293,7 @@ function highlightsHtml(base) {
     const busLine = plan ? `Bus ${plan.legs.map((l) => l.buses.slice(0, 3).join(', ')).join(' then ')} from Periyar to ${niceStop(plan.to)}` : '';
     const also = h.also && places.find((x) => x.id === h.also);
     return `<article class="highlight">
+      <a class="highlight-media" href="${base}places/${esc(h.id)}.html" tabindex="-1" aria-hidden="true">${picture(p, base, 480, '(max-width: 700px) 100vw, 33vw')}</a>
       <p class="highlight-stat"><b>${esc(h.stat)}</b> <span>${esc(h.unit)}</span></p>
       <p class="eyebrow">${esc(h.tag)}</p>
       <h3><a href="${base}places/${esc(h.id)}.html">${esc(h.title)}</a></h3>

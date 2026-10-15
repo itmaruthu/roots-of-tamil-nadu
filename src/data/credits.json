@@ -150,5 +150,37 @@
     "local": "assets/img/places/thiruparankundram-gopuram.webp",
     "thumb": "assets/img/places/thiruparankundram-gopuram-480.webp",
     "alt": "The colourful gopuram of Thiruparankundram Murugan Temple against the hill"
+  },
+  "Keezhadi-Museum-Madurai-TamilNadu-India.jpg": {
+    "artist": "N. Vivekananthamoorthy",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Keezhadi-Museum-Madurai-TamilNadu-India.jpg",
+    "local": "assets/img/places/keeladi-museum.webp",
+    "thumb": "assets/img/places/keeladi-museum-480.webp",
+    "alt": "The Keeladi museum buildings in Chettinad style"
+  },
+  "Ten Pillars 05.jpg": {
+    "artist": "எஸ். பி. கிருஷ்ணமூர்த்தி",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ten_Pillars_05.jpg",
+    "local": "assets/img/places/pathu-thoon-ten-pillars.webp",
+    "thumb": "assets/img/places/pathu-thoon-ten-pillars-480.webp",
+    "alt": "The granite Ten Pillars rising above the shops of Pathu Thoon Street"
+  },
+  "Madurai-alanganallur-jallikattu.jpg": {
+    "artist": "Iamkarna'",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Madurai-alanganallur-jallikattu.jpg",
+    "local": "assets/img/places/alanganallur-jallikattu-vadivasal.webp",
+    "thumb": "assets/img/places/alanganallur-jallikattu-vadivasal-480.webp",
+    "alt": "A tamer holds on to a bull at Alanganallur jallikattu"
+  },
+  "Madurai Jallikattu.jpg": {
+    "artist": "Sundaram Perumal",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Madurai_Jallikattu.jpg",
+    "local": "assets/img/places/jallikattu-arena-alanganallur.webp",
+    "thumb": "assets/img/places/jallikattu-arena-alanganallur-480.webp",
+    "alt": "Jallikattu in Madurai (representative photo)"
   }
 }

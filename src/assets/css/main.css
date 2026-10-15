@@ -566,3 +566,6 @@ section[id] { scroll-margin-top: 84px; }
 .highlight .btn--ghost { color: var(--bg); border-color: color-mix(in srgb, var(--bg) 40%, transparent); }
 .marker.is-star .marker-dot { stroke: var(--marigold); stroke-width: 3; }
 .marker.is-star .pin-stem { stroke: var(--gold); stroke-width: 3; }
+.highlight-media { display: block; margin: -22px -22px 6px; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 20px 20px 0 0; max-width: calc(100% + 44px); }
+.highlight-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.highlight { overflow: hidden; }
