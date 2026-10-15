@@ -142,7 +142,7 @@ const BOARDS = ['maroon', 'teal', 'indigo', 'ochre'];
 function busPlanHtml(plan) {
   if (!plan) return '';
   const legs = plan.legs.map((l, i) => `<li>${i ? `Change at <b>${esc(niceStop(l.from))}</b>:` : 'Take'} bus ${l.buses.map((b) => `<span class="busno">${esc(b)}</span>`).join(' ')} to ${esc(niceStop(l.to))} · ${l.stops} stops</li>`).join('');
-  return `<div class="bus-from"><p class="bus-head">From ${esc(niceStop(plan.from))} <span lang="ta">(${esc(bus.ta[plan.from] || '')})</span></p><p class="bus-meta">${plan.direct ? 'Direct bus' : 'One change'}${plan.fare ? ` · ₹${plan.fare} ordinary fare` : ''}</p><ol class="bus-legs">${legs}</ol><a class="bus-more" href="${esc(plan.url)}" target="_blank" rel="noopener noreferrer">Full route and live buses on MaduraiOne</a></div>`;
+  return `<div class="bus-from"><p class="bus-head">From ${esc(niceStop(plan.from))} <span lang="ta">(${esc(bus.ta[plan.from] || '')})</span></p><p class="bus-meta">${plan.direct ? 'Direct bus' : 'One change'}</p><ol class="bus-legs">${legs}</ol><a class="bus-more" href="${esc(plan.url)}" target="_blank" rel="noopener noreferrer">Full route and live buses on MaduraiOne</a></div>`;
 }
 
 function boardColour(p) {

@@ -104,7 +104,7 @@ The darshan wait figures and the token queue are simulated in this prototype and
 
 ## Bus routes (src/data/bus.json)
 
-City bus numbers, stops and fares come from the MaduraiOne community transit map (maduraione.in; fares from the TNSTC stage chart). The file holds the best route from 20 main stops to each place's nearest stop. Place pages show the route from the main bus stand, and "Buses from my location" picks the visitor's nearest main stop in the browser (location never leaves the device). Refresh the file from MaduraiOne's API before launch and every few months; it is community data, so spot-check a few routes.
+City bus numbers and stops come from the MaduraiOne community transit map (maduraione.in). Fares are not shown. The file holds the best route from 20 main stops to each place's nearest stop. Place pages show the route from the main bus stand, and "Buses from my location" picks the visitor's nearest main stop in the browser (location never leaves the device). Refresh the file from MaduraiOne's API before launch and every few months; it is community data, so spot-check a few routes.
 
 ## Updating places
 

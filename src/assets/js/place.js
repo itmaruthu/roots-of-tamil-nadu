@@ -19,7 +19,7 @@ function renderPlan(box, plan, hub, place, me) {
   if (toPlace < 0.8) { box.replaceChildren(el('p', { class: 'bus-head' }, `You're ${formatKm(toPlace)} away. It's a short walk.`)); return; }
   parts.push(el('p', { class: 'bus-head' }, hub.km < 0.15 ? `You're at ${niceStop(hub.name)}${ta(hub.name)}.` : `Walk ${formatKm(hub.km)} to ${niceStop(hub.name)}${ta(hub.name)}, your nearest main stop.`));
   if (!plan) { parts.push(el('p', {}, 'Your nearest stop is this place\'s own stop, so walking is quickest.')); box.replaceChildren(...parts); return; }
-  parts.push(el('p', { class: 'bus-head' }, `${plan.direct ? 'Direct bus' : 'One change'}${plan.fare ? ` · ₹${plan.fare}` : ''}`));
+  parts.push(el('p', { class: 'bus-head' }, plan.direct ? 'Direct bus' : 'One change'));
   parts.push(el('ol', { class: 'bus-legs' }, ...plan.legs.map((l, i) => el('li', {},
     `${i ? 'Change at' : 'From'} `, el('b', {}, niceStop(l.from)), ': bus ',
     ...l.buses.flatMap((b) => [el('span', { class: 'busno' }, b), ' ']),
