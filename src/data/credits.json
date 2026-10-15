@@ -79,14 +79,6 @@
     "thumb": "assets/img/places/yoga-narasimha-temple-yanaimalai-480.webp",
     "alt": "Yoga Narasimha temple at the foot of Yanaimalai"
   },
-  "Thiruparankundram Murugan temple and rock hill.jpg": {
-    "artist": "Mani chiral",
-    "license": "CC BY 2.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Thiruparankundram_Murugan_temple_and_rock_hill.jpg",
-    "local": "assets/img/places/thiruparankundram-murugan-temple.webp",
-    "thumb": "assets/img/places/thiruparankundram-murugan-temple-480.webp",
-    "alt": "Thiruparankundram Murugan temple below its rock hill"
-  },
   "Sunset view from Samanar hills.jpg": {
     "artist": "Kaartic",
     "license": "CC BY-SA 4.0",
@@ -150,5 +142,13 @@
     "local": "assets/img/places/central-vegetable-market.webp",
     "thumb": "assets/img/places/central-vegetable-market-480.webp",
     "alt": "A vendor weighing tomatoes in Madurai (representative photo)"
+  },
+  "Thiruparankundram temple Arun Jayan.jpg": {
+    "artist": "Arunjayantvm",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Thiruparankundram_temple_Arun_Jayan.jpg",
+    "local": "assets/img/places/thiruparankundram-gopuram.webp",
+    "thumb": "assets/img/places/thiruparankundram-gopuram-480.webp",
+    "alt": "The colourful gopuram of Thiruparankundram Murugan Temple against the hill"
   }
 }
