@@ -280,8 +280,8 @@ const HIGHLIGHTS = [
   { id: 'keeladi-museum', stat: '2,000+', unit: 'years', tag: 'Keeladi · Sangam-age town', title: 'Keeladi: where Tamil history was dug up',
     text: 'A brick-built town on the Vaigai with ring wells, drains and pottery scratched with Tamil-Brahmi letters. The museum tells the story; the open-air dig site is a kilometre away.' },
   { id: 'alanganallur-jallikattu-vadivasal', stat: '3', unit: 'villages, 3 days', tag: 'Jallikattu · every Pongal', title: 'Jallikattu: Madurai’s bull-taming festival',
-    text: 'In mid-January Avaniyapuram, Palamedu and Alanganallur hold jallikattu on consecutive days. Any time of year you can stand at the Alanganallur vadivasal or walk the new 67-acre arena.',
-    also: 'jallikattu-arena-alanganallur' },
+    text: 'Every Pongal in mid-January, three villages hold jallikattu on consecutive days: Avaniyapuram first, Palamedu on Mattu Pongal, then the most famous of all at Alanganallur. Any time of year you can stand at the vadivasals or walk the new 67-acre arena.',
+    villages: [['avaniyapuram-jallikattu', 'Day 1 · Thai Pongal', 'Avaniyapuram'], ['palamedu-jallikattu-vadivasal', 'Day 2 · Mattu Pongal', 'Palamedu'], ['alanganallur-jallikattu-vadivasal', 'Day 3', 'Alanganallur'], ['jallikattu-arena-alanganallur', 'Open all year', 'Kalaignar Centenary Jallikattu Arena']] },
   { id: 'pathu-thoon-ten-pillars', stat: '12 m', unit: 'granite pillars', tag: 'Pathu Thoon · Nayak palace', title: 'Pathu Thoon: the Ten Pillars',
     text: 'Ten giant pillars of Thirumalai Nayak’s lost Rangavilasam palace, standing in a lane of textile shops behind the Mahal. Most visitors walk past without knowing.' }
 ];
@@ -292,19 +292,22 @@ function highlightsHtml(base) {
     if (!p) return '';
     const plan = planFor(bus, h.id, 'PERIYAR BUS STAND');
     const busLine = plan ? `Bus ${plan.legs.map((l) => l.buses.slice(0, 3).join(', ')).join(' then ')} from Periyar to ${niceStop(plan.to)}` : '';
-    const also = h.also && places.find((x) => x.id === h.also);
     return `<article class="highlight">
       <a class="highlight-media" href="${base}places/${esc(h.id)}.html" tabindex="-1" aria-hidden="true">${picture(p, base, 480, '(max-width: 700px) 100vw, 33vw')}</a>
       <p class="highlight-stat"><b>${esc(h.stat)}</b> <span>${esc(h.unit)}</span></p>
       <p class="eyebrow">${esc(h.tag)}</p>
       <h3><a href="${base}places/${esc(h.id)}.html">${esc(h.title)}</a></h3>
       <p>${esc(h.text)}</p>
-      <dl class="feature-facts">
+      ${h.villages ? `<ul class="villages">${h.villages.map(([id, when, label]) => {
+        const v = places.find((x) => x.id === id); if (!v) return '';
+        const vp = planFor(bus, id, 'PERIYAR BUS STAND');
+        return `<li><a href="${base}places/${esc(id)}.html"><span class="v-when">${esc(when)}</span><span class="v-name">${esc(label)}</span><span class="v-meta">${esc(v.area)}${vp ? ` · bus ${esc(vp.legs[0].buses.slice(0, 2).join(', '))} from Periyar` : ''}</span></a></li>`;
+      }).join('')}</ul>` : `<dl class="feature-facts">
         <dt>Where</dt><dd>${esc(p.area)}</dd>
         <dt>Hours</dt><dd>${esc(p.hours)}</dd>
         ${busLine ? `<dt>Bus</dt><dd>${esc(busLine)}</dd>` : ''}
       </dl>
-      <div class="chips"><a class="btn btn--sm" href="${base}places/${esc(h.id)}.html">Plan a visit</a>${also ? `<a class="btn btn--sm btn--ghost" href="${base}places/${esc(also.id)}.html">${esc(also.name)}</a>` : ''}</div>
+      <div class="chips"><a class="btn btn--sm" href="${base}places/${esc(h.id)}.html">Plan a visit</a></div>`}
     </article>`;
   }).join('\n');
 }

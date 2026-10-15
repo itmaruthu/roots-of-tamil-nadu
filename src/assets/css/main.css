@@ -590,3 +590,9 @@ section[id] { scroll-margin-top: 84px; }
 .why-pairs a:hover { border-color: var(--accent); }
 .why-pair-name { font-weight: 700; }
 .why-pair-meta { font-size: 13px; color: var(--muted); }
+.villages { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.villages a { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1px; padding: 10px 12px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--bg) 18%, transparent); text-decoration: none; color: var(--bg); }
+.villages a:hover { border-color: var(--marigold); }
+.v-when { font: 600 11px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--marigold); }
+.v-name { font-weight: 700; font-size: 16px; }
+.v-meta { font-size: 13px; opacity: .75; }

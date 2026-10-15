@@ -531,6 +531,29 @@
       }
     },
     {
+      "id": "avaniyapuram-jallikattu",
+      "name": "Avaniyapuram Jallikattu",
+      "type": "heritage",
+      "lat": 9.8831624,
+      "lng": 78.1111022,
+      "area": "Avaniyapuram, 4 km south",
+      "address": "Jallikattu street, Avaniyapuram, Madurai 625012",
+      "h": [
+        [
+          6,
+          18
+        ]
+      ],
+      "hours": "Village lanes, daylight. Jallikattu: mid-January, during Pongal",
+      "story": "Madurai's first jallikattu of every Pongal, run through the village's own barricaded street with spectators packed on the terraces.",
+      "image": {
+        "file": "Avaniyapuram jallikattu.jpg",
+        "alt": "A tamer clings to a bull at Avaniyapuram jallikattu",
+        "local": "assets/img/places/avaniyapuram-jallikattu.webp",
+        "thumb": "assets/img/places/avaniyapuram-jallikattu-480.webp"
+      }
+    },
+    {
       "id": "alanganallur-jallikattu-vadivasal",
       "name": "Alanganallur Jallikattu Vadivasal",
       "type": "heritage",
@@ -555,6 +578,29 @@
         "alt": "A tamer holds on to a bull at Alanganallur jallikattu",
         "local": "assets/img/places/alanganallur-jallikattu-vadivasal.webp",
         "thumb": "assets/img/places/alanganallur-jallikattu-vadivasal-480.webp"
+      }
+    },
+    {
+      "id": "palamedu-jallikattu-vadivasal",
+      "name": "Palamedu Jallikattu Vadivasal",
+      "type": "heritage",
+      "lat": 10.1065913,
+      "lng": 78.1133961,
+      "area": "Palamedu, 21 km north",
+      "address": "Vadivasal, Bathrakaliyamman Street, Palamedu 625503",
+      "h": [
+        [
+          6,
+          18
+        ]
+      ],
+      "hours": "Village lanes, daylight. Jallikattu: mid-January, during Pongal",
+      "story": "Palamedu's vadivasal opens on Mattu Pongal, the day of the bulls, with galleries that hold one of the biggest crowds of the season.",
+      "image": {
+        "file": "Bulls in Palamedu Jallikattu arena.jpg",
+        "alt": "Bulls and handlers in the Palamedu jallikattu arena",
+        "local": "assets/img/places/palamedu-jallikattu-vadivasal.webp",
+        "thumb": "assets/img/places/palamedu-jallikattu-vadivasal-480.webp"
       }
     },
     {

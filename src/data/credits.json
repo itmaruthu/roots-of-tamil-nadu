@@ -182,5 +182,21 @@
     "local": "assets/img/places/jallikattu-arena-alanganallur.webp",
     "thumb": "assets/img/places/jallikattu-arena-alanganallur-480.webp",
     "alt": "Jallikattu in Madurai (representative photo)"
+  },
+  "Avaniyapuram jallikattu.jpg": {
+    "artist": "Sundaram Perumal 96",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Avaniyapuram_jallikattu.jpg",
+    "local": "assets/img/places/avaniyapuram-jallikattu.webp",
+    "thumb": "assets/img/places/avaniyapuram-jallikattu-480.webp",
+    "alt": "A tamer clings to a bull at Avaniyapuram jallikattu"
+  },
+  "Bulls in Palamedu Jallikattu arena.jpg": {
+    "artist": "Rudolph.A.Furtado",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bulls_in_Palamedu_Jallikattu_arena.jpg",
+    "local": "assets/img/places/palamedu-jallikattu-vadivasal.webp",
+    "thumb": "assets/img/places/palamedu-jallikattu-vadivasal-480.webp",
+    "alt": "Bulls and handlers in the Palamedu jallikattu arena"
   }
 }

@@ -251,6 +251,8 @@
     "spend": "1 hour; a full day on jallikattu day",
     "know": "On jallikattu day, watch only from the official galleries.",
     "pair": [
+      "palamedu-jallikattu-vadivasal",
+      "avaniyapuram-jallikattu",
       "jallikattu-arena-alanganallur"
     ]
   },
@@ -615,5 +617,37 @@
     "best": "Late night to dawn",
     "spend": "45 minutes",
     "pair": []
+  },
+  "avaniyapuram-jallikattu": {
+    "hook": "The first jallikattu of Pongal",
+    "why": "Every year Madurai's jallikattu season opens here, on the first day of Pongal. There is no stadium: the village's own street is double-barricaded and becomes the arena, and families crowd onto the terraces of their houses to watch the bulls and tamers charge past. It is raw, local and electric, and the closest of the three to the city.",
+    "see": [
+      "Jallikattu on the first day of Pongal (mid-January)",
+      "The barricaded village street",
+      "Bulls being readied by their families before the run"
+    ],
+    "best": "Pongal day; be in place before sunrise",
+    "spend": "Half a day on jallikattu day",
+    "know": "Viewing space is limited and mostly on house terraces; follow police instructions and never enter the barricades.",
+    "pair": [
+      "palamedu-jallikattu-vadivasal",
+      "alanganallur-jallikattu-vadivasal"
+    ]
+  },
+  "palamedu-jallikattu-vadivasal": {
+    "hook": "Jallikattu on the day of the bulls",
+    "why": "On Mattu Pongal, the day Tamil Nadu honours its cattle, Palamedu opens its vadivasal and bull after bull charges into the arena while tamers try to hold the hump. Its galleries hold one of the biggest crowds of the season, and the village celebrates its bulls like heroes.",
+    "see": [
+      "Jallikattu on Mattu Pongal (mid-January)",
+      "The vadivasal by the Bathrakaliyamman temple",
+      "Decorated bulls and their owners"
+    ],
+    "best": "Mattu Pongal; arrive before dawn for a gallery seat",
+    "spend": "Half a day on jallikattu day",
+    "know": "Watch only from the galleries; the arena is for tamers and officials.",
+    "pair": [
+      "alanganallur-jallikattu-vadivasal",
+      "avaniyapuram-jallikattu"
+    ]
   }
 }

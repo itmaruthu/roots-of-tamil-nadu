@@ -17,11 +17,13 @@ export const LANDMARKS = {
   'samanar-hills': 'Samanar Hills',
   'yoga-narasimha-temple-yanaimalai': 'Yanaimalai',
   'vandiyur-mariamman-teppakulam': 'Teppakulam',
-  'alanganallur-jallikattu-vadivasal': 'Jallikattu',
+  'alanganallur-jallikattu-vadivasal': 'Alanganallur jallikattu',
+  'avaniyapuram-jallikattu': 'Avaniyapuram jallikattu',
+  'palamedu-jallikattu-vadivasal': 'Palamedu jallikattu',
   'jallikattu-arena-alanganallur': 'Jallikattu Arena',
   'pathu-thoon-ten-pillars': 'Ten Pillars'
 };
-const STAR = new Set(['keeladi-museum', 'alanganallur-jallikattu-vadivasal', 'jallikattu-arena-alanganallur', 'pathu-thoon-ten-pillars']);
+const STAR = new Set(['keeladi-museum', 'alanganallur-jallikattu-vadivasal', 'avaniyapuram-jallikattu', 'palamedu-jallikattu-vadivasal', 'jallikattu-arena-alanganallur', 'pathu-thoon-ten-pillars']);
 const BIG = new Set(['meenakshi-amman-temple', 'thiruparankundram-murugan-temple', 'kallazhagar-temple-alagar-kovil', 'pazhamudircholai-murugan-temple', 'pandi-muneeswarar-temple']);
 
 /**
