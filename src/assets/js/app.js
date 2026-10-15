@@ -19,7 +19,7 @@ let liveWait = { update() {} };
 const state = {
   places: [], moments: [],
   day: now.day, hour: 21, filter: 'all', view: 'old',
-  tab: 'open', showAll: false,
+  tab: 'open', showAll: false, tilt: store.get('roots-3d', true),
   selected: 'meenakshi-amman-temple', plan: store.get('roots-plan', []), me: null, timer: null
 };
 
@@ -75,6 +75,10 @@ function buildControls() {
   const legend = $('#legend');
   for (const [type, t] of Object.entries(TYPES)) legend.append(el('span', { dataset: { group: t.group } }, icon(type), t.label));
 
+  const set3d = (on) => { state.tilt = on; store.set('roots-3d', on); render(); };
+  $('#mode-3d').addEventListener('click', () => set3d(true));
+  $('#mode-2d').addEventListener('click', () => set3d(false));
+  let resizeT; addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(render, 150); });
   const views = $('#views');
   for (const [key, v] of Object.entries(VIEWS)) views.append(el('button', {
     type: 'button', 'aria-pressed': String(key === state.view), dataset: { view: key },
@@ -197,7 +201,9 @@ function render() {
   more.hidden = list.length <= LIMIT;
   more.textContent = state.showAll ? 'Show fewer' : `Show all ${list.length}`;
 
-  drawMap($('#map-svg'), { places: vis, view: state.view, selected: state.selected, isOpen: open, me: state.me, onSelect: (id) => select(id, true) });
+  $('#mode-3d').setAttribute('aria-pressed', String(state.tilt));
+  $('#mode-2d').setAttribute('aria-pressed', String(!state.tilt));
+  drawMap($('#map-svg'), { places: vis, view: state.view, selected: state.selected, isOpen: open, me: state.me, tilt: state.tilt, onSelect: (id) => select(id, true) });
   renderSpot();
   renderPlan();
   liveWait.update();

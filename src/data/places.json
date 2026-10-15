@@ -463,6 +463,41 @@
       }
     },
     {
+      "id": "keeladi-museum",
+      "name": "Keeladi Museum (Keezhadi)",
+      "type": "heritage",
+      "lat": 9.863592,
+      "lng": 78.1850176,
+      "area": "Keeladi, 9 km southeast",
+      "address": "Kondagai–Keeladi, Sivaganga district 630612",
+      "h": [
+        [
+          10,
+          18
+        ]
+      ],
+      "days": {
+        "0": [
+          [
+            10,
+            19
+          ]
+        ],
+        "6": [
+          [
+            10,
+            19
+          ]
+        ]
+      },
+      "hours": "10 am–6 pm (Sat–Sun to 7 pm)",
+      "story": "Finds from a Sangam-age town on the Vaigai, more than 2,000 years old: brick walls, ring wells, and pottery scratched with Tamil-Brahmi letters. The open-air excavation site is about a kilometre away.",
+      "tips": [
+        "Watch the intro film first",
+        "Combine with the dig site"
+      ]
+    },
+    {
       "id": "mattuthavani-flower-market",
       "name": "Mattuthavani flower market",
       "type": "market",

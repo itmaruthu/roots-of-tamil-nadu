@@ -358,7 +358,7 @@ async function renderPlace(p) {
     busStop: (() => {
       const stop = bus.places[p.id];
       if (!stop) return '';
-      const hub = bus.hubs[stop];
+      const hub = bus.hubs[stop] || bus.stopCoords?.[stop];
       const walk = hub ? distanceKm(p, hub) : null;
       return `Get off at <b>${esc(niceStop(stop))}</b> <span lang="ta">(${esc(bus.ta[stop] || '')})</span>${walk !== null && walk > 0.15 ? `, about ${esc(formatKm(walk))} on foot from here` : ''}.`;
     })(),

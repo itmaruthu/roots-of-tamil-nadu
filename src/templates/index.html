@@ -96,25 +96,30 @@
         <p class="lead">Markers sit at each place's real coordinates. Tap one for the story, live status and directions.</p>
       </div>
       <div class="chips filters" id="filters" role="group" aria-label="Filter by type"></div>
-      <div class="explore-grid">
-        <div>
-          <div class="map-card" id="map">
-            <div class="map-tools">
-              <div class="seg" id="views" role="group" aria-label="Map zoom"></div>
-              <button class="chip" id="near-me" type="button"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#locate"/></svg>Near me</button>
-            </div>
-            <svg class="map" id="map-svg" role="img" aria-label="Map of Madurai with places marked at their real locations"></svg>
-            <div class="legend" id="legend"></div>
-            <p class="map-note" id="map-note">Schematic map drawn from real coordinates. Street squares and the river are approximate.</p>
-            <div class="spot" id="spot" aria-live="polite"></div>
+      <div class="map-card" id="map">
+        <div class="map-tools">
+          <div class="seg" id="views" role="group" aria-label="Map zoom"></div>
+          <div class="map-tools-right">
+            <div class="seg" role="group" aria-label="Map style"><button type="button" id="mode-3d" aria-pressed="true">3D</button><button type="button" id="mode-2d" aria-pressed="false">2D</button></div>
+            <button class="chip" id="near-me" type="button"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#locate"/></svg>Near me</button>
           </div>
+        </div>
+        <div class="map-stage">
+          <svg class="map" id="map-svg" role="img" aria-label="Map of Madurai and its temples with places marked at their real locations"></svg>
+          <div class="spot" id="spot" aria-live="polite"></div>
+        </div>
+        <div class="legend" id="legend"></div>
+        <p class="map-note" id="map-note">Drawn from real coordinates. In 3D, temples rise as gopurams. Street squares and the river are approximate. Choose Region to see Thiruparankundram, Alagar Kovil, Pazhamudircholai and Keeladi.</p>
+      </div>
+      <div class="explore-grid">
+        <div class="explore-plan">
           <section class="plan" aria-labelledby="plan-title">
             <div class="row-between"><h3 id="plan-title">My Madurai day</h3><button class="linkbtn" id="clear-plan" type="button" hidden>Clear</button></div>
             <ol id="plan-list"></ol>
             <p class="note" id="plan-empty">Tap the star on any place. Roots orders your day by opening time.</p>
           </section>
         </div>
-        <div>
+        <div class="explore-tiles">
           <div class="status-tabs" id="status-tabs" role="group" aria-label="Show places by status">
             <button type="button" data-tab="open"><span class="dot dot--open"></span>Open now <b id="n-open">0</b></button>
             <button type="button" data-tab="later"><span class="dot dot--soon"></span>Opens later <b id="n-later">0</b></button>

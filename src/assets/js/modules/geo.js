@@ -6,7 +6,7 @@ export const MEENAKSHI = { lat: 9.9195045, lng: 78.1193418 };
 export const VIEWS = {
   old:    { label: 'Old city', halfKm: 1.4 },
   city:   { label: 'City',     halfKm: 5.5 },
-  region: { label: 'Region',   halfKm: 14, center: { lat: 9.985, lng: 78.14 } }
+  region: { label: 'Region',   halfKm: 15, center: { lat: 9.975, lng: 78.135 } }
 };
 
 // Half-widths (km) of the concentric street squares around the temple. Approximate.
@@ -53,12 +53,12 @@ export function formatKm(km) {
 }
 
 /** Returns project(lat,lng) -> [x,y] in a size×size box for a view. */
-export function projector(viewKey, size = 600, center = VIEWS[viewKey].center || MEENAKSHI) {
+export function projector(viewKey, size = 600, center = VIEWS[viewKey].center || MEENAKSHI, width = size) {
   const half = VIEWS[viewKey].halfKm;
   const scale = size / 2 / half; // px per km
   const kx = kmPerDegLng(center.lat);
   const fn = (lat, lng) => [
-    size / 2 + (lng - center.lng) * kx * scale,
+    width / 2 + (lng - center.lng) * kx * scale,
     size / 2 - (lat - center.lat) * KM_PER_DEG_LAT * scale
   ];
   fn.scale = scale;

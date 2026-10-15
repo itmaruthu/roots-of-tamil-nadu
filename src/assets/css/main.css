@@ -143,15 +143,17 @@ input[type="range"] { width: 100%; accent-color: var(--accent); margin: 0; heigh
 
 /* ---------- Explore ---------- */
 .filters { margin-bottom: 18px; }
-.explore-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 24px; align-items: start; }
-@media (max-width: 900px) { .explore-grid { grid-template-columns: minmax(0, 1fr); } }
-.map-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; display: flex; flex-direction: column; gap: 12px; box-shadow: var(--shadow); position: sticky; top: 84px; }
+.explore-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 24px; align-items: start; }
+.explore-tiles { grid-column: 1; grid-row: 1; min-width: 0; }
+.explore-plan { grid-column: 2; grid-row: 1; position: sticky; top: 84px; }
+@media (max-width: 900px) { .explore-grid { grid-template-columns: minmax(0, 1fr); } .explore-plan { grid-column: 1; grid-row: 2; position: static; } }
+.map-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; display: flex; flex-direction: column; gap: 12px; box-shadow: var(--shadow); margin-bottom: 24px; }
 @media (max-width: 900px) { .map-card { position: static; } }
 .map-tools { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center; }
 .seg { display: inline-flex; background: var(--surface-2); border-radius: 999px; padding: 3px; gap: 2px; }
 .seg button { border: 0; background: transparent; padding: 6px 12px; border-radius: 999px; font-weight: 600; font-size: 14px; color: var(--muted); cursor: pointer; }
 .seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
-.map { width: 100%; height: auto; aspect-ratio: 1; display: block; background: color-mix(in srgb, var(--surface-2) 55%, var(--surface)); border-radius: 12px; }
+.map { width: 100%; height: auto; aspect-ratio: 16 / 8; max-width: 100%; display: block; background: color-mix(in srgb, var(--surface-2) 55%, var(--surface)); border-radius: 12px; }
 .map-river { fill: none; stroke: color-mix(in srgb, #3B82C4 55%, var(--surface)); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; opacity: .6; }
 .map-ring { fill: none; stroke: var(--line); stroke-width: 1.5; }
 .map-label { font: 600 11px var(--font-text); fill: var(--muted); letter-spacing: .04em; }
@@ -521,3 +523,26 @@ section[id] { scroll-margin-top: 84px; }
 @media (max-width: 520px) { .ptile-actions .iconbtn:last-child { display: none; } .ptile-body { padding: 10px; } .ptile-name { font-size: 15px; } .iconbtn { padding: 5px 8px; font-size: 12px; } .status-tabs button { font-size: 14px; padding: 8px; } }
 
 .place-stack { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+
+/* ---------- Full-width map + 3D ---------- */
+.map-tools-right { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.map-stage { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 16px; align-items: start; }
+.map-stage .spot { border-top: 0; padding-top: 0; }
+@media (max-width: 900px) { .map-stage { grid-template-columns: minmax(0, 1fr); } .map-stage .spot { border-top: 1px solid var(--line); padding-top: 12px; } .map { aspect-ratio: 1; } }
+.map.is-3d { background: transparent; }
+.map-sky { fill: color-mix(in srgb, var(--marigold) 10%, var(--surface)); }
+.map-ground { fill: color-mix(in srgb, var(--leaf) 9%, var(--surface-2)); stroke: var(--line); }
+.map-grid { stroke: color-mix(in srgb, var(--ink) 8%, transparent); stroke-width: 1; }
+.pin-shadow { fill: color-mix(in srgb, var(--ink) 22%, transparent); }
+.pin-stem { stroke: color-mix(in srgb, var(--ink) 55%, transparent); stroke-width: 2; }
+.marker--temple .gopuram { stroke: color-mix(in srgb, var(--ink) 35%, transparent); stroke-width: .8; }
+.gopuram--0 { fill: color-mix(in srgb, var(--temple) 82%, #fff); }
+.gopuram--1 { fill: color-mix(in srgb, var(--temple) 60%, #fff); }
+.gopuram--cap { fill: color-mix(in srgb, var(--temple) 90%, #000); }
+.kalasam { fill: var(--marigold); }
+.marker:not(.is-open) .gopuram--0, .marker:not(.is-open) .gopuram--1 { fill: color-mix(in srgb, var(--muted) 45%, var(--surface)); }
+.marker.is-selected .gopuram { stroke: var(--ink); stroke-width: 2; }
+.map-tag { font: 700 13px var(--font-text); fill: var(--ink); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; pointer-events: none; }
+.map-tag.is-selected { fill: var(--accent); }
+.map-ring--3d { fill: color-mix(in srgb, var(--marigold) 7%, transparent); stroke: color-mix(in srgb, var(--gold) 55%, var(--line)); stroke-width: 1.6; }
+.map.is-3d .map-label { font-size: 12px; }
