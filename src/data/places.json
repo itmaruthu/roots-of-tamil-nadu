@@ -1,0 +1,1154 @@
+{
+  "$comment": "Hours: decimal hours in IST (21.5 = 9:30 pm). A range past 24 runs after midnight. 'days' overrides 'h' for a weekday (0 = Sunday); [] means closed. Sources: Google Maps listings checked 14-15 Oct 2026, shop signboards and press. Verify with each host before launch.",
+  "moments": [
+    {
+      "s": 1,
+      "e": 4,
+      "t": "The quiet hours. Only the hotels, the flower market and Paravai's night vegetable market are awake. Halwa returns at 4."
+    },
+    {
+      "s": 4,
+      "e": 5,
+      "t": "4 am. Prema Vilas lights its stoves and Koodal Azhagar opens its doors."
+    },
+    {
+      "s": 5,
+      "e": 6,
+      "t": "5 am. Meenakshi temple and Thiruparankundram open for the morning ritual."
+    },
+    {
+      "s": 6,
+      "e": 8,
+      "t": "Dawn. Sunrise on Samanar Hills while the jasmine trade peaks at Mattuthavani."
+    },
+    {
+      "s": 8,
+      "e": 10,
+      "t": "Breakfast. Idli on West Masi Street, or mutton at Sulthan."
+    },
+    {
+      "s": 10,
+      "e": 12,
+      "t": "Late morning. Masi street shops roll up their shutters, jigarthanda counters open and the Gandhi Museum welcomes visitors."
+    },
+    {
+      "s": 12,
+      "e": 15,
+      "t": "Lunch. Banana-leaf meals in the lanes around the temple."
+    },
+    {
+      "s": 15,
+      "e": 17,
+      "t": "Afternoon. Temples reopen at 4; bun parotta's first batch is on the griddle."
+    },
+    {
+      "s": 17,
+      "e": 18.5,
+      "t": "Evening. Butter buns come off the griddles; Teppakulam fills with families."
+    },
+    {
+      "s": 18.5,
+      "e": 20.75,
+      "t": "6:45 pm. The Nayak palace sound and light show begins."
+    },
+    {
+      "s": 20.75,
+      "e": 22,
+      "t": "9 pm. Palliarai: Shiva is carried by palanquin to Meenakshi's chamber."
+    },
+    {
+      "s": 22,
+      "e": 24,
+      "t": "Late night. Parotta and kari dosai keep the city awake."
+    },
+    {
+      "s": 0,
+      "e": 1,
+      "t": "After midnight. Sulthan still serves parotta until 1 am."
+    }
+  ],
+  "places": [
+    {
+      "id": "meenakshi-amman-temple",
+      "name": "Meenakshi Amman Temple",
+      "type": "temple",
+      "lat": 9.9195045,
+      "lng": 78.1193418,
+      "area": "Old city centre",
+      "address": "Madurai Main, Madurai 625001",
+      "h": [
+        [
+          5,
+          12.5
+        ],
+        [
+          16,
+          22
+        ]
+      ],
+      "hours": "5 am–12:30 pm, 4–10 pm",
+      "story": "The heart of Madurai: 14 gopurams and a city built in concentric squares around it. Around 9–9:30 pm, the Palliarai ceremony carries Shiva by palanquin to Meenakshi's chamber.",
+      "tips": [
+        "Phones and footwear go in lockers at the gates",
+        "Stay for the 9 pm Palliarai"
+      ],
+      "featured": true,
+      "image": {
+        "file": "Madurai Meenakshi amman east tower.jpg",
+        "alt": "The east gopuram of the Meenakshi Amman Temple",
+        "local": "assets/img/places/meenakshi-amman-temple.webp",
+        "thumb": "assets/img/places/meenakshi-amman-temple-480.webp"
+      }
+    },
+    {
+      "id": "koodal-azhagar-temple",
+      "name": "Koodal Azhagar Temple",
+      "type": "temple",
+      "lat": 9.9143799,
+      "lng": 78.1135494,
+      "area": "Near Periyar bus stand",
+      "address": "Koodal Alagar Perumal Koil St, Periyar, Madurai 625001",
+      "h": [
+        [
+          4,
+          12
+        ],
+        [
+          16,
+          20
+        ]
+      ],
+      "hours": "4 am–noon, 4–8 pm",
+      "story": "A Divya Desam of Vishnu a short walk from Meenakshi. Climb the tower to see him seated, standing and reclining on three levels.",
+      "tips": [
+        "Small ticket to climb the tower"
+      ],
+      "image": {
+        "file": "Madurai Koodal Alagar Temple Tower.jpg",
+        "alt": "The tower of Koodal Azhagar Temple",
+        "local": "assets/img/places/koodal-azhagar-temple.webp",
+        "thumb": "assets/img/places/koodal-azhagar-temple-480.webp"
+      }
+    },
+    {
+      "id": "immaiyil-nanmai-tharuvar-temple",
+      "name": "Immaiyil Nanmai Tharuvar Temple",
+      "type": "temple",
+      "lat": 9.9157941,
+      "lng": 78.1145354,
+      "area": "Periyar",
+      "address": "15 Arisekara St, Periyar, Madurai 625001",
+      "h": [
+        [
+          6.5,
+          12.25
+        ],
+        [
+          16.5,
+          21
+        ]
+      ],
+      "hours": "6:30 am–12:15 pm, 4:30–9 pm",
+      "story": "One of the city's oldest shrines, where Shiva himself is shown worshipping the lingam. The earth temple among Madurai's five-element shrines.",
+      "image": {
+        "file": "Immaiyilum Nanmai Tharuvaar Temple.jpg",
+        "alt": "The entrance of Immaiyil Nanmai Tharuvar Temple",
+        "local": "assets/img/places/immaiyil-nanmai-tharuvar-temple.webp",
+        "thumb": "assets/img/places/immaiyil-nanmai-tharuvar-temple-480.webp"
+      }
+    },
+    {
+      "id": "thiruvappudaiyar-temple",
+      "name": "Thiruvappudaiyar Temple, Sellur",
+      "type": "temple",
+      "lat": 9.9304762,
+      "lng": 78.1228144,
+      "area": "Sellur",
+      "address": "Thiru Aapudayaar Kovil Agraharam Rd, Sellur, Madurai 625002",
+      "h": [
+        [
+          6.5,
+          11
+        ],
+        [
+          17,
+          20
+        ]
+      ],
+      "hours": "6:30–11 am, 5–8 pm",
+      "story": "A Shiva temple praised in the Devaram hymns, on the north bank of the Vaigai.",
+      "image": {
+        "file": "Thiruappanur (1).jpg",
+        "alt": "The entrance arch of Thiruvappudaiyar Temple, Sellur",
+        "local": "assets/img/places/thiruvappudaiyar-temple.webp",
+        "thumb": "assets/img/places/thiruvappudaiyar-temple-480.webp"
+      }
+    },
+    {
+      "id": "vandiyur-mariamman-teppakulam",
+      "name": "Vandiyur Mariamman Teppakulam",
+      "type": "temple",
+      "lat": 9.9104431,
+      "lng": 78.1482011,
+      "area": "Vandiyur",
+      "address": "Mariamman Nagar, Madurai 625009",
+      "h": [
+        [
+          0,
+          24
+        ]
+      ],
+      "hours": "Tank open round the clock; evenings busiest",
+      "story": "A vast 17th-century temple tank from Thirumalai Nayak's reign, with an island mandapam. Evenings bring snack carts; the float festival comes in Thai (January–February).",
+      "tips": [
+        "Come at sunset",
+        "Float festival in Thai"
+      ],
+      "image": {
+        "file": "Vandiyur Mariamman Teppakulam.jpg",
+        "alt": "The Teppakulam tank and its island mandapam lit up at night",
+        "local": "assets/img/places/vandiyur-mariamman-teppakulam.webp",
+        "thumb": "assets/img/places/vandiyur-mariamman-teppakulam-480.webp"
+      }
+    },
+    {
+      "id": "pandi-muneeswarar-temple",
+      "name": "Pandi Muneeswarar Temple",
+      "type": "temple",
+      "lat": 9.9344035,
+      "lng": 78.1686052,
+      "area": "Melamadai",
+      "address": "Melamadai, Madurai 625020",
+      "h": [
+        [
+          6,
+          20
+        ]
+      ],
+      "hours": "6 am–8 pm",
+      "story": "Madurai's guardian folk deity, beloved by locals who come for justice and protection.",
+      "image": {
+        "file": "மதுரை பாண்டி முனீசுவரர்.jpg",
+        "alt": "Devotees at the Pandi Muneeswarar shrine",
+        "local": "assets/img/places/pandi-muneeswarar-temple.webp",
+        "thumb": "assets/img/places/pandi-muneeswarar-temple-480.webp"
+      }
+    },
+    {
+      "id": "thiruparankundram-murugan-temple",
+      "name": "Thiruparankundram Murugan Temple",
+      "type": "temple",
+      "lat": 9.8801051,
+      "lng": 78.0713555,
+      "area": "Thiruparankundram, 8 km southwest",
+      "address": "Periya Ratha Veethi, Thiruparankundram 625005",
+      "h": [
+        [
+          5,
+          12
+        ],
+        [
+          16,
+          21
+        ]
+      ],
+      "hours": "5 am–noon, 4–9 pm",
+      "story": "First of Murugan's six abodes, cut into a rock hill, where Murugan married Deivanai.",
+      "image": {
+        "file": "Thiruparankundram Murugan temple and rock hill.jpg",
+        "alt": "Thiruparankundram Murugan temple below its rock hill",
+        "local": "assets/img/places/thiruparankundram-murugan-temple.webp",
+        "thumb": "assets/img/places/thiruparankundram-murugan-temple-480.webp"
+      }
+    },
+    {
+      "id": "yoga-narasimha-temple-yanaimalai",
+      "name": "Yoga Narasimha Temple, Yanaimalai",
+      "type": "temple",
+      "lat": 9.9665402,
+      "lng": 78.1889971,
+      "area": "Narasingam, 10 km northeast",
+      "address": "Narasingam Main Rd, Narasingam 625107",
+      "h": [
+        [
+          7,
+          12
+        ],
+        [
+          16,
+          20
+        ]
+      ],
+      "hours": "7 am–noon, 4–8 pm",
+      "story": "A rock-cut cave temple carved into Elephant Hill in 770 CE. Go before sunset for the view.",
+      "image": {
+        "file": "Narasingam Yoga Narasimha Perumal Temple Madurai (2).jpg",
+        "alt": "Yoga Narasimha temple at the foot of Yanaimalai",
+        "local": "assets/img/places/yoga-narasimha-temple-yanaimalai.webp",
+        "thumb": "assets/img/places/yoga-narasimha-temple-yanaimalai-480.webp"
+      }
+    },
+    {
+      "id": "kalamegha-perumal-temple-thirumohur",
+      "name": "Kalamegha Perumal Temple, Thirumohur",
+      "type": "temple",
+      "lat": 9.9507999,
+      "lng": 78.2071004,
+      "area": "Thirumohur, 12 km northeast",
+      "address": "Thiruvathavur Rd, Tirumohur 625107",
+      "h": [
+        [
+          7,
+          12
+        ],
+        [
+          16,
+          20
+        ]
+      ],
+      "days": {
+        "6": [
+          [
+            5.5,
+            13
+          ],
+          [
+            16,
+            20.5
+          ]
+        ]
+      },
+      "hours": "7 am–noon, 4–8 pm (Sat 5:30 am–1 pm, 4–8:30 pm)",
+      "story": "A Divya Desam of Vishnu with a large temple tank, mentioned in ancient Tamil classics.",
+      "image": {
+        "file": "Thirumohoor Kalamegaperumal Temple - Madurai (1).jpg",
+        "alt": "The entrance tower of Kalamegha Perumal Temple, Thirumohur",
+        "local": "assets/img/places/kalamegha-perumal-temple-thirumohur.webp",
+        "thumb": "assets/img/places/kalamegha-perumal-temple-thirumohur-480.webp"
+      }
+    },
+    {
+      "id": "kallazhagar-temple-alagar-kovil",
+      "name": "Kallazhagar Temple, Alagar Kovil",
+      "type": "temple",
+      "lat": 10.0748476,
+      "lng": 78.2130549,
+      "area": "Alagar Kovil, 20 km north",
+      "address": "Alagar Kovil Main Rd, Alagar Kovil 625301",
+      "h": [
+        [
+          6,
+          12.5
+        ],
+        [
+          15.5,
+          19.5
+        ]
+      ],
+      "hours": "6 am–12:30 pm, 3:30–7:30 pm",
+      "story": "Vishnu's forest temple. At Chithirai, Kallazhagar rides a golden horse into the Vaigai to a city-wide welcome.",
+      "image": {
+        "file": "Gopuram of Alagarkoil temple.jpg",
+        "alt": "The Rajagopuram of the Kallazhagar Temple at Alagar Kovil",
+        "local": "assets/img/places/kallazhagar-temple-alagar-kovil.webp",
+        "thumb": "assets/img/places/kallazhagar-temple-alagar-kovil-480.webp"
+      }
+    },
+    {
+      "id": "pazhamudircholai-murugan-temple",
+      "name": "Pazhamudircholai Murugan Temple",
+      "type": "temple",
+      "lat": 10.0942972,
+      "lng": 78.2233107,
+      "area": "Alagar Hills, 22 km north",
+      "address": "Alagar Koil Rd, Alagar Hills 625301",
+      "h": [
+        [
+          6,
+          18
+        ]
+      ],
+      "hours": "6 am–6 pm, no midday break",
+      "story": "The sixth abode of Murugan, up the forest road above Alagar Kovil, where a boy-Murugan tested the poet Avvaiyar.",
+      "image": {
+        "file": "Pazhamudhircholai Koil.jpg",
+        "alt": "The gopuram of Pazhamudircholai Murugan Temple",
+        "local": "assets/img/places/pazhamudircholai-murugan-temple.webp",
+        "thumb": "assets/img/places/pazhamudircholai-murugan-temple-480.webp"
+      }
+    },
+    {
+      "id": "thirumalai-nayakkar-mahal",
+      "name": "Thirumalai Nayakkar Mahal",
+      "type": "heritage",
+      "lat": 9.9150904,
+      "lng": 78.1237483,
+      "area": "Mahal area",
+      "address": "Panthadi 1st St, Mahal Area, Madurai 625001",
+      "h": [
+        [
+          9,
+          17
+        ],
+        [
+          18.75,
+          21
+        ]
+      ],
+      "hours": "9 am–5 pm; light show 6:45 pm (English), 8 pm (Tamil)",
+      "story": "Built in 1636 by Tirumala Nayak, blending Dravidian and Islamic styles. Its courtyard comes alive for the evening sound and light show.",
+      "featured": true,
+      "image": {
+        "file": "Thirumalai Nayak palace big pillars.jpg",
+        "alt": "The giant pillars and arches of Thirumalai Nayakkar Mahal",
+        "local": "assets/img/places/thirumalai-nayakkar-mahal.webp",
+        "thumb": "assets/img/places/thirumalai-nayakkar-mahal-480.webp"
+      }
+    },
+    {
+      "id": "gandhi-memorial-museum",
+      "name": "Gandhi Memorial Museum",
+      "type": "heritage",
+      "lat": 9.9299477,
+      "lng": 78.1383853,
+      "area": "Tamukkam",
+      "address": "Collector Office Rd, Alwarpuram, Madurai 625020",
+      "h": [
+        [
+          10,
+          13
+        ],
+        [
+          14,
+          17
+        ]
+      ],
+      "days": {
+        "0": []
+      },
+      "hours": "10 am–1 pm, 2–5 pm; closed Sundays",
+      "story": "Gandhi adopted the loincloth in Madurai in 1921. Nearby: the Tamil Annai statue and World Tamil Sangam. Recent visitors report the main building under renovation.",
+      "image": {
+        "file": "Gandhi Memorial Museum Madurai TamilNadu India.jpg",
+        "alt": "The Gandhi Memorial Museum in the 1670 Tamukkam palace",
+        "local": "assets/img/places/gandhi-memorial-museum.webp",
+        "thumb": "assets/img/places/gandhi-memorial-museum-480.webp"
+      }
+    },
+    {
+      "id": "samanar-hills",
+      "name": "Samanar Hills (Jain beds)",
+      "type": "heritage",
+      "lat": 9.9221943,
+      "lng": 78.0489933,
+      "area": "Keelakuyilkudi, 10 km west",
+      "address": "Kilakuyilkudi, Madurai 625019",
+      "h": [
+        [
+          6,
+          18
+        ]
+      ],
+      "hours": "Daylight; best at sunrise",
+      "story": "A rock hill with Jain stone beds and inscriptions more than 2,000 years old, and the best sunrise near Madurai.",
+      "tips": [
+        "Carry water",
+        "Go at sunrise"
+      ],
+      "image": {
+        "file": "Sunset view from Samanar hills.jpg",
+        "alt": "Sunset over the plains from the top of Samanar Hills",
+        "local": "assets/img/places/samanar-hills.webp",
+        "thumb": "assets/img/places/samanar-hills-480.webp"
+      }
+    },
+    {
+      "id": "mattuthavani-flower-market",
+      "name": "Mattuthavani flower market",
+      "type": "market",
+      "lat": 9.9421709,
+      "lng": 78.1509903,
+      "area": "Mattuthavani",
+      "address": "Near Mattuthavani bus stand, Madurai 625007",
+      "h": [
+        [
+          0,
+          24
+        ]
+      ],
+      "days": {
+        "0": [
+          [
+            3,
+            22
+          ]
+        ],
+        "1": [
+          [
+            3,
+            22
+          ]
+        ]
+      },
+      "hours": "Round the clock most days (Sun, Mon 3 am–10 pm); busiest at dawn",
+      "story": "Madurai malli, the city's GI-tagged jasmine, changes hands in heaps before sunrise.",
+      "image": {
+        "file": "team:mattuthavani-flower-market",
+        "alt": "Heaps of Madurai jasmine at the Mattuthavani flower market",
+        "local": "assets/img/places/mattuthavani-flower-market.webp",
+        "thumb": "assets/img/places/mattuthavani-flower-market-480.webp",
+        "credit": "team"
+      }
+    },
+    {
+      "id": "prema-vilas",
+      "name": "Prema Vilas",
+      "type": "sweet",
+      "diet": "veg",
+      "since": "1954",
+      "lat": 9.9179762,
+      "lng": 78.111828,
+      "area": "Town Hall Road",
+      "address": "Town Hall Rd, Madurai 625001",
+      "h": [
+        [
+          4,
+          23
+        ]
+      ],
+      "hours": "4 am–11 pm (confirm)",
+      "story": "Hot wheat halwa served on a leaf, from 4 am.",
+      "image": {
+        "file": "team:prema-vilas",
+        "alt": "The Prema Vilas shopfront on Town Hall Road",
+        "local": "assets/img/places/prema-vilas.webp",
+        "thumb": "assets/img/places/prema-vilas-480.webp",
+        "credit": "team"
+      }
+    },
+    {
+      "id": "aathi-kalathu-nei-mittai-kadai",
+      "name": "Aathi Kalathu Nei Mittai Kadai (red board)",
+      "type": "sweet",
+      "diet": "veg",
+      "lat": 9.9198822,
+      "lng": 78.1216767,
+      "area": "East Avani Moola Street",
+      "address": "72/73 E Avani Moola St, Madurai 625001",
+      "h": [
+        [
+          9.5,
+          22.5
+        ]
+      ],
+      "hours": "9:30 am–10:30 pm",
+      "story": "The original red-board shop near the temple's Nandi: nei mittai and halwa, plus spicy kizhangu pottalam until 1 pm.",
+      "board": "red",
+      "image": {
+        "file": "team:aathi-kalathu-nei-mittai-kadai",
+        "alt": "The red signboard of Aathi Kalathu Original Nei Mittai Kadai",
+        "local": "assets/img/places/aathi-kalathu-nei-mittai-kadai.webp",
+        "thumb": "assets/img/places/aathi-kalathu-nei-mittai-kadai-480.webp",
+        "credit": "team"
+      }
+    },
+    {
+      "id": "murugan-idli-shop",
+      "name": "Murugan Idli Shop (original)",
+      "type": "meal",
+      "diet": "veg",
+      "lat": 9.9158906,
+      "lng": 78.1156145,
+      "area": "West Masi Street",
+      "address": "196 W Masi St, Madurai 625001",
+      "h": [
+        [
+          7,
+          23
+        ]
+      ],
+      "hours": "7 am–11 pm",
+      "story": "Soft idli on a banana leaf with a row of chutneys and podi.",
+      "image": {
+        "file": "team:murugan-idli-shop",
+        "alt": "The original Murugan Idli Shop on West Masi Street",
+        "local": "assets/img/places/murugan-idli-shop.webp",
+        "thumb": "assets/img/places/murugan-idli-shop-480.webp",
+        "credit": "team"
+      }
+    },
+    {
+      "id": "sulthan-hotel",
+      "name": "Sulthan Hotel",
+      "type": "meal",
+      "diet": "nonveg",
+      "lat": 9.9242015,
+      "lng": 78.123824,
+      "area": "North Veli Street",
+      "address": "122 N Veli St, Simmakkal, Madurai 625001",
+      "h": [
+        [
+          8,
+          25
+        ]
+      ],
+      "hours": "8 am–1 am",
+      "story": "A mutton breakfast from 8 am, and parotta until 1 am.",
+      "image": {
+        "file": "team:sulthan-hotel",
+        "alt": "The lit signboard of Yanaikal Sulthan Hotel at night",
+        "local": "assets/img/places/sulthan-hotel.webp",
+        "thumb": "assets/img/places/sulthan-hotel-480.webp",
+        "credit": "team"
+      }
+    },
+    {
+      "id": "jaya-vilas",
+      "name": "Jaya Vilas",
+      "type": "meal",
+      "diet": "nonveg",
+      "since": "1950",
+      "lat": 9.9201,
+      "lng": 78.1216006,
+      "area": "East Avani Moola Street",
+      "address": "78 E Avani Moola St, Madurai 625001",
+      "h": [
+        [
+          11.92,
+          22
+        ]
+      ],
+      "hours": "11:55 am–10 pm",
+      "story": "A meals club down a narrow lane near the temple, serving since 1950. Try the ayirai fish curry.",
+      "image": {
+        "file": "team:jaya-vilas",
+        "alt": "The Jeya Vilas Sappadu Club signboard on East Avani Moola Street",
+        "local": "assets/img/places/jaya-vilas.webp",
+        "thumb": "assets/img/places/jaya-vilas-480.webp",
+        "credit": "team"
+      }
+    },
+    {
+      "id": "hotel-sri-janakiram",
+      "name": "Hotel Sri Janakiram",
+      "type": "meal",
+      "diet": "nonveg",
+      "lat": 9.9258784,
+      "lng": 78.1164388,
+      "area": "Tamil Sangam Road",
+      "address": "49 Tamil Sangam Rd, Madurai 625001",
+      "h": [
+        [
+          12,
+          16.5
+        ]
+      ],
+      "hours": "Lunch only, noon–4:30 pm",
+      "story": "Banana-leaf non-veg meals with three gravies; try the mutton chukka.",
+      "image": {
+        "file": "team:hotel-sri-janakiram",
+        "alt": "The neon sign of Hotel Sri Janakiram",
+        "local": "assets/img/places/hotel-sri-janakiram.webp",
+        "thumb": "assets/img/places/hotel-sri-janakiram-480.webp",
+        "credit": "team"
+      }
+    },
+    {
+      "id": "konar-kadai",
+      "name": "Konar Kadai",
+      "type": "meal",
+      "diet": "nonveg",
+      "since": "1943",
+      "lat": 9.9252087,
+      "lng": 78.1204644,
+      "area": "North Veli Street",
+      "address": "N Veli St, Simmakkal, Madurai 625001",
+      "h": [
+        [
+          12,
+          23
+        ]
+      ],
+      "hours": "Noon–11 pm",
+      "story": "Where kari dosai is said to have started.",
+      "image": {
+        "file": "team:konar-kadai",
+        "alt": "Konar Kadai lit up at night",
+        "local": "assets/img/places/konar-kadai.webp",
+        "thumb": "assets/img/places/konar-kadai-480.webp",
+        "credit": "team"
+      }
+    },
+    {
+      "id": "new-janani-mess",
+      "name": "New Janani Mess",
+      "type": "meal",
+      "diet": "nonveg",
+      "lat": 9.9208803,
+      "lng": 78.124577,
+      "area": "Onion market",
+      "address": "East Avani Moola St, Madurai 625001",
+      "h": [
+        [
+          11,
+          24
+        ]
+      ],
+      "hours": "11 am–midnight",
+      "story": "Mutton chukka and vengaya kari in the busy onion market, until midnight.",
+      "image": {
+        "file": "team:new-janani-mess",
+        "alt": "New Janani Mess busy at night",
+        "local": "assets/img/places/new-janani-mess.webp",
+        "thumb": "assets/img/places/new-janani-mess-480.webp",
+        "credit": "team"
+      }
+    },
+    {
+      "id": "p-power-hotel",
+      "name": "P. Power Hotel",
+      "type": "meal",
+      "diet": "nonveg",
+      "lat": 9.9283525,
+      "lng": 78.0974108,
+      "area": "Market Road",
+      "address": "Market Rd, Navalar Nagar, Madurai 625016",
+      "h": [
+        [
+          12,
+          24
+        ]
+      ],
+      "days": {
+        "0": []
+      },
+      "hours": "Noon–midnight; closed Sundays; cash only",
+      "story": "A long mutton menu, from brain roast to kari dosai.",
+      "image": {
+        "file": "team:p-power-hotel",
+        "alt": "P. Power Hotel and mutton stall at night",
+        "local": "assets/img/places/p-power-hotel.webp",
+        "thumb": "assets/img/places/p-power-hotel-480.webp",
+        "credit": "team"
+      }
+    },
+    {
+      "id": "muthukumar-bun-parotta",
+      "name": "Muthukumar Bun Parotta",
+      "type": "meal",
+      "diet": "nonveg",
+      "lat": 9.917848,
+      "lng": 78.1250332,
+      "area": "Vilakkuthoon",
+      "address": "Kamarajar Salai, Mahal Area, Madurai 625001",
+      "h": [
+        [
+          13.5,
+          17
+        ],
+        [
+          18.75,
+          23
+        ]
+      ],
+      "days": {
+        "4": [
+          [
+            13.5,
+            23
+          ]
+        ]
+      },
+      "hours": "1:30–5 pm, 6:45–11 pm",
+      "story": "A ten-seat stall; flaky bun parotta with two salnas."
+    },
+    {
+      "id": "famous-jigarthanda",
+      "name": "Famous Jigarthanda, Vilakkuthoon",
+      "type": "drink",
+      "diet": "veg",
+      "since": "1977",
+      "lat": 9.9179665,
+      "lng": 78.1249581,
+      "area": "Vilakkuthoon",
+      "address": "94 Kamarajar Salai, Madurai 625001",
+      "h": [
+        [
+          10,
+          22.5
+        ]
+      ],
+      "hours": "10 am–10:30 pm",
+      "story": "The city's signature cold drink of milk, almond gum, nannari syrup and ice cream.",
+      "image": {
+        "file": "team:famous-jigarthanda",
+        "alt": "Crowds outside Famous Jigarthanda",
+        "local": "assets/img/places/famous-jigarthanda.webp",
+        "thumb": "assets/img/places/famous-jigarthanda-480.webp",
+        "credit": "team"
+      }
+    },
+    {
+      "id": "thirumalai-madai-paruthi-paal",
+      "name": "Sri Thirumalai Madai Karuppasamy Paruthi Paal",
+      "type": "drink",
+      "diet": "veg",
+      "lat": 9.916239,
+      "lng": 78.1321446,
+      "area": "Munichalai",
+      "address": "Chairman Muthuramaiyer Rd, Munichalai, Madurai 625009",
+      "h": [
+        [
+          9,
+          22.5
+        ]
+      ],
+      "days": {
+        "0": [],
+        "5": [
+          [
+            8.5,
+            22
+          ]
+        ],
+        "6": [
+          [
+            16,
+            22.5
+          ]
+        ]
+      },
+      "hours": "9 am–10:30 pm; Sat from 4 pm; closed Sundays",
+      "story": "Warm cottonseed milk with palm jaggery and dry ginger.",
+      "image": {
+        "file": "team:thirumalai-madai-paruthi-paal",
+        "alt": "The Karuppasamy paruthi paal stall",
+        "local": "assets/img/places/thirumalai-madai-paruthi-paal.webp",
+        "thumb": "assets/img/places/thirumalai-madai-paruthi-paal-480.webp",
+        "credit": "team"
+      }
+    },
+    {
+      "id": "kalapilla-tea-shop",
+      "name": "Kalapilla Tea Shop",
+      "type": "sweet",
+      "diet": "veg",
+      "lat": 9.9192166,
+      "lng": 78.1306578,
+      "area": "Munichalai Road",
+      "address": "113 Munichalai Rd, Madurai 625009",
+      "h": [
+        [
+          5.5,
+          22
+        ]
+      ],
+      "days": {
+        "0": [
+          [
+            5,
+            14
+          ]
+        ]
+      },
+      "hours": "5:30 am–10 pm (Sun to 2 pm); butter bun from evening",
+      "story": "A tea shop of more than 50 years; butter bun with hot cow's milk is the evening ritual."
+    },
+    {
+      "id": "lakshmi-butter-bun-sellur",
+      "name": "Lakshmi Butter Bun, Sellur",
+      "type": "sweet",
+      "diet": "veg",
+      "lat": 9.9343832,
+      "lng": 78.1223018,
+      "area": "Sellur",
+      "address": "Ahimsapuram 3rd St, Sellur, Madurai 625002",
+      "h": [
+        [
+          18.5,
+          22.5
+        ]
+      ],
+      "days": {
+        "5": [
+          [
+            18.5,
+            22
+          ]
+        ],
+        "6": [
+          [
+            18.5,
+            22
+          ]
+        ],
+        "0": [
+          [
+            18.5,
+            22
+          ]
+        ]
+      },
+      "hours": "6:30–10:30 pm (Fri–Sun to 10 pm)",
+      "story": "Buns toasted in butter with sugar or palm jaggery, eaten standing."
+    },
+    {
+      "id": "heritage-madurai",
+      "name": "Heritage Madurai",
+      "type": "stay",
+      "lat": 9.936392,
+      "lng": 78.0872787,
+      "area": "Kochadai",
+      "address": "11 Melakkal Rd, Kochadai, Madurai 625016",
+      "h": [
+        [
+          0,
+          24
+        ]
+      ],
+      "hours": "Hotel · 24-hour reception",
+      "story": "Tamil-style rooms and villas among old trees, with a pool built like a temple tank.",
+      "image": {
+        "file": "team:heritage-madurai",
+        "alt": "The Heritage Madurai sign at the entrance",
+        "local": "assets/img/places/heritage-madurai.webp",
+        "thumb": "assets/img/places/heritage-madurai-480.webp",
+        "credit": "team"
+      }
+    },
+    {
+      "id": "gateway-madurai-pasumalai",
+      "name": "Gateway Madurai, Pasumalai (Taj)",
+      "type": "stay",
+      "lat": 9.9000822,
+      "lng": 78.0841327,
+      "area": "Pasumalai hill",
+      "address": "40 Tirupparankundram Rd, Pasumalai, Madurai 625004",
+      "h": [
+        [
+          0,
+          24
+        ]
+      ],
+      "hours": "Hotel · 24-hour reception",
+      "story": "Colonial-style rooms on a hilltop, with peacocks wandering the lawns.",
+      "image": {
+        "file": "team:gateway-madurai-pasumalai",
+        "alt": "The colonial-style main building of Gateway Madurai on Pasumalai hill",
+        "local": "assets/img/places/gateway-madurai-pasumalai.webp",
+        "thumb": "assets/img/places/gateway-madurai-pasumalai-480.webp",
+        "credit": "team"
+      }
+    },
+    {
+      "id": "gopuram-grand",
+      "name": "Gopuram Grand",
+      "type": "stay",
+      "lat": 9.9197268,
+      "lng": 78.1177974,
+      "area": "West Chithirai Street",
+      "address": "22 W Chitrai St, Madurai 625001",
+      "h": [
+        [
+          0,
+          24
+        ]
+      ],
+      "hours": "Hotel · 24-hour reception",
+      "story": "Steps from the temple; its restaurant looks straight at the west gopuram.",
+      "image": {
+        "file": "team:gopuram-grand",
+        "alt": "The Gopuram Grand hotel facade lit at night",
+        "local": "assets/img/places/gopuram-grand.webp",
+        "thumb": "assets/img/places/gopuram-grand-480.webp",
+        "credit": "team"
+      }
+    },
+    {
+      "id": "east-masi-street-groceries",
+      "name": "East Masi Street groceries & spices",
+      "type": "grocery",
+      "lat": 9.9206,
+      "lng": 78.1231,
+      "area": "East Masi Street",
+      "address": "E Masi St, Madurai Main, Madurai 625001",
+      "h": [
+        [
+          9.5,
+          22
+        ]
+      ],
+      "days": {
+        "0": []
+      },
+      "hours": "Most shops 9:30 am–10 pm; many close on Sundays",
+      "story": "Madurai's wholesale lane for groceries, spices, dry fruits and flours. Families stock up here for weddings and festivals, and the shops deliver across the city.",
+      "tips": [
+        "Buy spices by weight",
+        "Many shops shut on Sunday"
+      ]
+    },
+    {
+      "id": "south-masi-street-textiles",
+      "name": "South Masi Street sarees & textiles",
+      "type": "dress",
+      "lat": 9.91742,
+      "lng": 78.12318,
+      "area": "South Masi Street",
+      "address": "S Masi St, Mahal Area, Madurai 625001",
+      "h": [
+        [
+          9.5,
+          21.5
+        ]
+      ],
+      "hours": "Big showrooms 9:30 am–9:30 pm, open daily",
+      "story": "Multi-floor saree showrooms and decades-old wholesale cloth shops line the southern Masi street: silk, cotton, wedding and everyday wear.",
+      "tips": [
+        "Busiest before festivals",
+        "Ask for Madurai cotton"
+      ],
+      "image": {
+        "file": "Madurai Market Area (241191293).jpeg",
+        "alt": "Garment shops on a Madurai market street",
+        "local": "assets/img/places/south-masi-street-textiles.webp",
+        "thumb": "assets/img/places/south-masi-street-textiles-480.webp"
+      }
+    },
+    {
+      "id": "sungudi-sarees-munichalai",
+      "name": "Sungudi saree makers, Munichalai",
+      "type": "dress",
+      "lat": 9.9177,
+      "lng": 78.1315,
+      "area": "Kamarajar Salai to Munichalai",
+      "address": "Kamarajar Salai, Munichalai, Madurai 625009",
+      "h": [
+        [
+          9.5,
+          20
+        ]
+      ],
+      "hours": "Shops about 9:30 am–8 pm",
+      "story": "Madurai's GI-tagged sungudi tie-dye sarees, made by the city's Sourashtra weaving families. Buy straight from makers' shops."
+    },
+    {
+      "id": "south-avani-moola-street-jewellery",
+      "name": "South Avani Moola Street jewellery",
+      "type": "jewel",
+      "lat": 9.9167,
+      "lng": 78.1182,
+      "area": "South Avani Moola Street",
+      "address": "S Avani Moola St, near Meenakshi Amman Temple, Madurai 625001",
+      "h": [
+        [
+          10,
+          21
+        ]
+      ],
+      "hours": "Most shops about 10 am–9 pm",
+      "story": "The gold street just south of the temple: rows of jewellers selling temple-style necklaces, wedding sets and everyday gold."
+    },
+    {
+      "id": "valayalkara-street-bangles",
+      "name": "Valayalkara Street bangles",
+      "type": "jewel",
+      "lat": 9.91816,
+      "lng": 78.11766,
+      "area": "Off West Avani Moola Street",
+      "address": "Big Valayalkara St, Madurai Main, Madurai 625001",
+      "h": [
+        [
+          10,
+          21
+        ]
+      ],
+      "hours": "Most shops about 10 am–9 pm",
+      "story": "Bangle street beside West Avani Moola: glass, metal, thread and bridal bangles in every size, wholesale and retail."
+    },
+    {
+      "id": "kamarajar-salai-vessels",
+      "name": "Kamarajar Salai steel & brass",
+      "type": "homeware",
+      "lat": 9.91789,
+      "lng": 78.12658,
+      "area": "Kamarajar Salai",
+      "address": "Kamarajar Salai, Madurai 625001",
+      "h": [
+        [
+          9.5,
+          21
+        ]
+      ],
+      "hours": "Most stores about 9:30 am–9 pm",
+      "story": "Stores stacked with steel, brass and cast-iron cookware and lamps. Families come here for wedding 'seer varisai' sets."
+    },
+    {
+      "id": "pudhu-mandapam",
+      "name": "Pudhu Mandapam & Kunnathur Chathiram",
+      "type": "homeware",
+      "lat": 9.9204,
+      "lng": 78.1212,
+      "area": "Opposite the temple east tower",
+      "address": "E Chitrai St and Kunnathur Chathiram, Madurai 625001",
+      "h": [
+        [
+          9,
+          21
+        ]
+      ],
+      "hours": "Shops about 9 am–9 pm; moving during restoration",
+      "story": "A 17th-century pillared hall facing the temple's east tower, long home to tailors, brassware, bangles and books. Its shops are moving to nearby Kunnathur Chathiram while the hall is restored.",
+      "image": {
+        "file": "Pudhu mandapam.jpg",
+        "alt": "The pillared Pudhu Mandapam hall opposite the temple",
+        "local": "assets/img/places/pudhu-mandapam.webp",
+        "thumb": "assets/img/places/pudhu-mandapam-480.webp"
+      }
+    },
+    {
+      "id": "central-vegetable-market",
+      "name": "Central Vegetable Market",
+      "type": "vegetable",
+      "lat": 9.93965,
+      "lng": 78.14842,
+      "area": "Melur Road, near Mattuthavani",
+      "address": "Melur Main Rd, KK Nagar, Madurai 625020",
+      "h": [
+        [
+          4,
+          22
+        ]
+      ],
+      "hours": "From before dawn into the evening; best early morning",
+      "story": "The old temple-area market, moved out to Melur Road: wholesale and retail vegetables, with the fruit and flower markets on the same road.",
+      "image": {
+        "file": "A man weighing tomatoes using his Tharasu in Madurai.jpg",
+        "alt": "A vendor weighing tomatoes in Madurai (representative photo)",
+        "local": "assets/img/places/central-vegetable-market.webp",
+        "thumb": "assets/img/places/central-vegetable-market-480.webp"
+      }
+    },
+    {
+      "id": "paravai-vegetable-market",
+      "name": "Paravai wholesale vegetable market",
+      "type": "vegetable",
+      "lat": 9.9576978,
+      "lng": 78.0719852,
+      "area": "Paravai, 10 km northwest",
+      "address": "Dindigul Main Rd, Paravai, Madurai 625402",
+      "h": [
+        [
+          0,
+          17
+        ],
+        [
+          20,
+          24
+        ]
+      ],
+      "hours": "Night market: from 8 pm through the next afternoon; busiest after 10 pm",
+      "story": "One of south Tamil Nadu's biggest vegetable markets. It comes alive overnight as lorries unload, with small eateries serving the night traders."
+    }
+  ]
+}

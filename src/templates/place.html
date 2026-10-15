@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en-IN" data-sprite="{{base}}assets/img/icons.svg">
+<head>
+{{head}}
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+{{header}}
+
+<main id="main" data-place-id="{{id}}" data-group="{{group}}">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="{{base}}index.html">Madurai</a> › <a href="{{base}}index.html#explore">{{groupLabel}}</a> › <span aria-current="page">{{name}}</span></nav>
+
+    <article>
+      <header class="place-hero">
+        <div class="place-facts">
+          <p class="eyebrow">{{kind}} · {{area}}{{since}}</p>
+          <h1>{{name}}</h1>
+          <p class="lead">{{story}}</p>
+          <p class="live status--closed" id="live" aria-live="polite">{{hoursText}}</p>
+          <div class="chips">{{diet}}</div>
+          <div class="hero-actions">
+            <a class="btn" href="{{directions}}" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#route"/></svg>Directions</a>
+            <a class="btn btn--ghost" href="{{base}}index.html#explore"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#pin"/></svg>See it on the live map</a>
+          </div>
+        </div>
+        <figure class="place-photo">
+          {{photo}}
+          {{photoCredit}}
+        </figure>
+      </header>
+
+      <div class="place-cols">
+        <div class="card">
+          <h2 class="h3">Opening hours</h2>
+          <table class="hours-table" id="hours">
+            <caption class="sr-only">Opening hours by day, Indian Standard Time</caption>
+            <tbody>{{hoursRows}}</tbody>
+          </table>
+          <p class="note">Times are IST. {{hoursText}}. Last checked against public listings; please confirm before travelling.</p>
+        </div>
+        <div class="card">
+          <h2 class="h3">Where it is</h2>
+          {{locator}}
+          <address>{{address}}</address>
+          <p class="note">{{fromTemple}}<span id="from-you"></span></p>
+          <p class="note">Coordinates: <span class="mono">{{lat}}, {{lng}}</span> · <a href="{{osm}}" target="_blank" rel="noopener noreferrer">OpenStreetMap</a></p>
+          <button class="chip" id="near-me" type="button"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#locate"/></svg>How far is it from me?</button>
+        </div>
+        {{tips}}
+        <div class="card">
+          <h2 class="h3">Nearby on Roots</h2>
+          <ul class="nearby">{{nearby}}</ul>
+        </div>
+      </div>
+    </article>
+  </div>
+</main>
+
+{{footer}}
+<script type="module" src="{{base}}assets/js/place.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en-IN" data-sprite="{{base}}assets/img/icons.svg">
+<head>
+{{head}}
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+{{header}}
+
+<main id="main" class="join-page">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="{{base}}index.html">Madurai</a> › <span aria-current="page">List your place</span></nav>
+
+    <header class="join-hero">
+      <div>
+        <p class="eyebrow">For hosts · free to join</p>
+        <h1>List your place on Roots</h1>
+        <p class="lead" lang="ta">உங்கள் கடையை Roots-இல் இலவசமாகச் சேர்க்கவும்.</p>
+        <p class="lead">Home kitchens, messes, restaurants, sweet shops, hotels, homestays, guides and artisans: tell us about your place and a Roots team member will call you, visit to verify, and put you on the map with your hours, story and photos.</p>
+      </div>
+      <ol class="join-steps">
+        <li><b>Tell us</b><span>Fill this form, or send a Tamil voice note.</span></li>
+        <li><b>We visit</b><span>A Roots person checks hygiene, hours and photos.</span></li>
+        <li><b>You go live</b><span>Listed in English and Tamil, with free Live wait tokens if you want them.</span></li>
+      </ol>
+    </header>
+
+    <div class="join-grid">
+      <form class="panel join-form" id="join-form" name="join" method="POST" action="{{base}}join.html" data-netlify="true" netlify-honeypot="company_website" autocomplete="on">
+        <input type="hidden" name="form-name" value="join">
+        <p class="hp" aria-hidden="true"><label>Leave this empty <input name="company_website" tabindex="-1" autocomplete="off"></label></p>
+
+        <fieldset>
+          <legend>What kind of place?</legend>
+          <div class="join-types">
+            <label><input type="radio" name="type" value="Home kitchen" required> Home kitchen</label>
+            <label><input type="radio" name="type" value="Street food / mess"> Street food or mess</label>
+            <label><input type="radio" name="type" value="Restaurant"> Restaurant</label>
+            <label><input type="radio" name="type" value="Sweet / snack shop"> Sweet or snack shop</label>
+            <label><input type="radio" name="type" value="Hotel / homestay"> Hotel or homestay</label>
+            <label><input type="radio" name="type" value="Guide / trail host"> Guide or trail host</label>
+            <label><input type="radio" name="type" value="Artisan / shop"> Artisan or shop</label>
+            <label><input type="radio" name="type" value="Other"> Other</label>
+          </div>
+        </fieldset>
+
+        <div class="join-fields">
+          <label class="field">Name of your place<input id="j-place" name="place" required maxlength="80" autocomplete="organization"></label>
+          <label class="field">Your name<input id="j-name" name="owner" required maxlength="60" autocomplete="name"></label>
+          <label class="field">Mobile number<input id="j-phone" name="phone" type="tel" required inputmode="tel" maxlength="14" pattern="(\+91)?[ \-]?[6-9][0-9]{4}[ \-]?[0-9]{5}" placeholder="98765 43210" autocomplete="tel"><small>Indian mobile, 10 digits</small></label>
+          <label class="field">Area or street<input id="j-area" name="area" required maxlength="80" placeholder="e.g. West Masi Street" autocomplete="street-address"></label>
+          <label class="field">Opening hours<input id="j-hours" name="hours" maxlength="80" placeholder="e.g. 6 pm – 11 pm, closed Sunday"></label>
+          <label class="field">Food<select id="j-diet" name="diet"><option value="">Not a food place</option><option>Vegetarian</option><option>Non-vegetarian</option><option>Both</option></select></label>
+        </div>
+        <label class="field">What makes your place special?<textarea id="j-story" name="story" rows="4" maxlength="600" placeholder="Your signature dish or service, since when, your family story…"></textarea></label>
+        <div class="join-checks">
+          <label><input type="checkbox" name="tokens" value="yes"> I'd like free Live wait tokens for my queue</label>
+          <label><input type="checkbox" name="voice" value="yes"> Please call me in Tamil</label>
+          <label><input type="checkbox" name="consent" value="yes" required> I agree that Roots may call me and visit to verify my place. My details are used only for listing on Roots.</label>
+        </div>
+        <button class="btn" type="submit">Send my details</button>
+        <p class="note" id="join-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <aside class="join-side">
+        <div class="panel">
+          <h3>Prefer to talk?</h3>
+          <p>Send a voice note in Tamil on WhatsApp with your shop name, area, timings and what you serve. Roots turns it into your listing.</p>
+          <a class="btn btn--ghost" id="join-wa" href="#" target="_blank" rel="noopener noreferrer" hidden><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#mic"/></svg>Send a voice note</a>
+          <p class="note" id="join-wa-note">Or call the Roots team on <a href="tel:{{tel}}">{{phone}}</a>, or email <a href="mailto:{{email}}">{{email}}</a>.</p>
+        </div>
+        <div class="panel">
+          <h3>What you get, free</h3>
+          <ul class="tips">
+            <li>Your place on the live map with hours and directions</li>
+            <li>A bilingual listing with your story and photos</li>
+            <li>Live wait tokens: QR standee, phone buttons, TV display</li>
+            <li>Visitors from Roots trails and the concierge</li>
+          </ul>
+          <p class="note">Roots earns only a small commission on bookings it brings you. Listing is always free.</p>
+        </div>
+      </aside>
+    </div>
+
+    <section class="panel join-done" id="join-done" hidden aria-live="polite">
+      <h2 class="h3">Thank you! Here's what you sent</h2>
+      <dl id="join-summary"></dl>
+      <p id="join-done-note"></p>
+      <div class="chips"><button class="btn btn--sm btn--ghost" id="join-copy" type="button">Copy my details</button><a class="btn btn--sm" href="{{base}}index.html#explore">See the live map</a></div>
+    </section>
+  </div>
+</main>
+
+{{footer}}
+<script type="module" src="{{base}}assets/js/join.js" data-whatsapp="{{whatsapp}}" data-forms="{{forms}}"></script>
+</body>
+</html>

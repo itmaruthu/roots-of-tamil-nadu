@@ -1,0 +1,15 @@
+{
+  "name": "roots-of-tamil-nadu",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Madurai Never Sleeps — a 24-hour guide to Madurai's temples, heritage and food, by Roots of Tamil Nadu.",
+  "type": "module",
+  "engines": { "node": ">=18.17" },
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "build": "node scripts/build.mjs",
+    "serve": "node scripts/serve.mjs",
+    "start": "npm run build && npm run serve",
+    "images": "node scripts/fetch-images.mjs"
+  }
+}

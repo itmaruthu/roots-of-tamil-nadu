@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en-IN" data-sprite="{{base}}assets/img/icons.svg">
+<head>
+{{head}}
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+{{header}}
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <figure class="hero-media">
+      <img id="hero-img" src="{{heroSrc}}" srcset="{{heroSrcset}}" sizes="100vw" alt="{{heroAlt}}" width="1600" height="1067" fetchpriority="high" decoding="async" referrerpolicy="no-referrer">
+    </figure>
+    <svg class="hero-art" viewBox="0 0 600 260" aria-hidden="true">
+      <g fill="#E8A317" fill-opacity=".12">
+        <path d="M60 260V200h70v60zM70 200l8-30h54l8 30zM84 170l7-26h38l7 26zM97 144l6-22h22l6 22zM109 122l5-18h10l5 18z"/>
+        <path d="M250 260V170h110v90zM262 170l12-44h72l12 44zM280 126l10-38h40l10 38zM296 88l8-30h24l8 30zM310 58l6-24h4l6 24z"/>
+        <path d="M460 260v-52h76v52zM470 208l9-32h56l9 32zM486 176l7-26h40l7 26zM499 150l6-22h20l6 22z"/>
+      </g>
+    </svg>
+    <div class="wrap">
+      <p class="eyebrow">Madurai · Tamil Nadu · Roots of Tamil Nadu</p>
+      <h1 id="hero-title">Madurai never sleeps</h1>
+      <p class="lead">A 2,500-year-old temple city that wakes at 4 am for halwa and still serves parotta at 1 am. See what is open right now, where it is, and the story behind every stop.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#clock"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#play"/></svg>Play the 24 hours</a>
+        <a class="btn btn--ghost" href="#explore"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#pin"/></svg>Open the live map</a>
+      </div>
+      <ul class="hero-stats">
+        <li><b>{{count}}</b><span>places with real hours</span></li>
+        <li><b>{{templeCount}}</b><span>temples</span></li>
+        <li><b>4 am</b><span>first halwa</span></li>
+        <li><b>1 am</b><span>last parotta</span></li>
+      </ul>
+    </div>
+    <p class="credit">{{heroCredit}}</p>
+  </section>
+
+  <section id="clock" class="section" aria-labelledby="clock-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The 24-hour city</p>
+        <h2 id="clock-title">Move the clock. Watch Madurai change.</h2>
+        <p class="lead">Every stop has real opening hours, checked against public listings. Pick a day and a time, or press play.</p>
+      </div>
+      <div class="clock-card">
+        <div class="sky" id="sky" aria-hidden="true">
+          <div class="stars" id="stars"></div>
+          <div class="orb" id="orb"></div>
+          <svg class="skyline" viewBox="0 0 1200 120" preserveAspectRatio="xMidYMax slice">
+            <rect x="0" y="104" width="1200" height="16"/>
+            <path d="M110 120V96h80v24zM120 96l8-20h64l8 20zM134 76l7-18h48l7 18zM147 58l6-16h30l6 16zM159 42l5-14h14l5 14z"/>
+            <path d="M330 120v-18h60v18zM340 102l6-14h48l6 14zM352 88l5-12h30l5 12z"/>
+            <path d="M540 120V86h130v34zM552 86l12-24h106l12 24zM570 62l10-22h70l10 22zM586 40l8-18h46l8 18zM600 22l6-14h26l6 14z"/>
+            <path d="M820 120v-22h70v22zM830 98l7-16h56l7 16zM844 82l6-14h36l6 14z"/>
+            <path d="M1010 120V92h90v28zM1020 92l9-20h72l9 20zM1036 72l8-18h50l8 18zM1050 54l6-16h28l6 16z"/>
+            <rect x="230" y="96" width="60" height="10"/><rect x="720" y="94" width="50" height="12"/><rect x="940" y="98" width="40" height="8"/>
+          </svg>
+          <div class="sky-text" id="sky-text"><span class="time" id="time">9 pm</span><span class="count" id="count"></span></div>
+        </div>
+        <div class="clock-controls">
+          <div class="chips" id="days" role="group" aria-label="Day of the week"></div>
+          <p class="moment" id="moment" aria-live="polite"></p>
+          <label class="note" for="clock-range">Time of day in Madurai (IST)</label>
+          <input id="clock-range" type="range" min="0" max="23.75" step="0.25" value="21">
+          <div class="ticks" aria-hidden="true"><span>12a</span><span>4a</span><span>8a</span><span>12p</span><span>4p</span><span>8p</span><span>12a</span></div>
+          <div class="chips">
+            <button class="chip" id="play" type="button" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#play"/></svg><span>Play the day</span></button>
+            <button class="chip" id="now" type="button"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#clock"/></svg>Now in Madurai</button>
+            <span class="chips" id="moments"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="explore" class="section" aria-labelledby="explore-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Explore</p>
+        <h2 id="explore-title">What's open, and exactly where</h2>
+        <p class="lead">Markers sit at each place's real coordinates. Tap one for the story, live status and directions.</p>
+      </div>
+      <div class="chips filters" id="filters" role="group" aria-label="Filter by type"></div>
+      <div class="explore-grid">
+        <div>
+          <div class="map-card" id="map">
+            <div class="map-tools">
+              <div class="seg" id="views" role="group" aria-label="Map zoom"></div>
+              <button class="chip" id="near-me" type="button"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#locate"/></svg>Near me</button>
+            </div>
+            <svg class="map" id="map-svg" role="img" aria-label="Map of Madurai with places marked at their real locations"></svg>
+            <div class="legend" id="legend"></div>
+            <p class="map-note" id="map-note">Schematic map drawn from real coordinates. Street squares and the river are approximate.</p>
+            <div class="spot" id="spot" aria-live="polite"></div>
+          </div>
+          <section class="plan" aria-labelledby="plan-title">
+            <div class="row-between"><h3 id="plan-title">My Madurai day</h3><button class="linkbtn" id="clear-plan" type="button" hidden>Clear</button></div>
+            <ol id="plan-list"></ol>
+            <p class="note" id="plan-empty">Tap the star on any place. Roots orders your day by opening time.</p>
+          </section>
+        </div>
+        <div>
+          <div class="list-head"><h3 id="open-head">Open now</h3><span class="note" id="sort-note"></span></div>
+          <ul class="places" id="open-list"></ul>
+          <details class="closed-group" id="closed-group"><summary id="closed-sum">Closed now</summary><ul class="places" id="closed-list"></ul></details>
+          <noscript><p class="note">Turn on JavaScript for live opening hours. Every place is listed in the directory below.</p></noscript>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="live" class="section livewait" aria-labelledby="live-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Live wait · Concierge</p>
+        <h2 id="live-title">Skip the queue, not the food</h2>
+        <p class="lead">Madurai's temples and messes have no token system today, so Roots brings one: a QR code, the vendor's phone and any old TV. Know the darshan wait before you go, hold your place at a busy mess, and ask the concierge anything. All three follow the clock above.</p>
+      </div>
+      <div class="live-grid" id="live-wait">
+        <div class="panel">
+          <h3>Darshan wait · Meenakshi temple</h3>
+          <div class="row-between"><p class="lw-big" id="lw-darshan-now">—</p><button class="chip" id="lw-festival" type="button" aria-pressed="false">Chithirai festival crowd</button></div>
+          <p class="note" id="lw-darshan-at"></p>
+          <div class="lw-bars" id="lw-bars" role="img" aria-label="Estimated darshan wait through the day"></div>
+          <p class="note" id="lw-best"></p>
+          <p class="note">Illustrative estimate. Roots does not run temple queues; in the pilot this comes from visitor reports, host check-ins at the gates and past patterns.</p>
+        </div>
+        <div class="panel">
+          <h3>Token queue · busy eateries</h3>
+          <label class="note" for="lw-shop">Eatery</label>
+          <select id="lw-shop" class="select"></select>
+          <div class="lw-screen" id="lw-screen">
+            <p class="lw-screen-name" id="lw-screen-name"></p>
+            <p class="lw-label">Now serving</p>
+            <p class="lw-number" id="lw-serving">—</p>
+            <p class="lw-next" id="lw-upnext"></p>
+          </div>
+          <p class="lw-msg" id="lw-msg" aria-live="polite"></p>
+          <div class="chips">
+            <button class="btn btn--sm" id="lw-take" type="button">Take a token</button>
+            <button class="btn btn--sm btn--ghost" id="lw-next" type="button">Vendor: call next</button>
+            <button class="btn btn--sm btn--ghost" id="lw-full" type="button">Show as TV display</button>
+          </div>
+          <p class="note">Simulated here. Pilot with partner eateries: guests scan a QR standee or message on WhatsApp, the vendor taps "Call next" on their phone, any old TV shows the number, and walk-ins without smartphones get a paper token from the same sequence.</p>
+        </div>
+        <div class="panel concierge">
+          <h3>Ask Roots · concierge</h3>
+          <div class="cc-log" id="cc-log" aria-live="polite"></div>
+          <div class="chips" id="cc-chips"></div>
+          <form class="cc-form" id="cc-form" autocomplete="off">
+            <label class="sr-only" for="cc-input">Ask the concierge</label>
+            <input id="cc-input" name="q" type="text" maxlength="200" placeholder="Ask in English or Tamil…">
+            <button class="btn btn--sm" type="submit">Ask</button>
+          </form>
+          <p class="note">Runs in your browser from Roots data. In production it answers on WhatsApp and Telegram.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="postcards-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Postcards</p>
+        <h2 id="postcards-title">Seven centuries in one city walk</h2>
+      </div>
+      <div class="postcards">
+{{postcards}}
+      </div>
+    </div>
+  </section>
+
+  <section id="hosts" class="section hosts" aria-labelledby="hosts-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">For hosts</p>
+        <h2 id="hosts-title">A voice note becomes a bilingual listing</h2>
+        <p class="lead">Street cooks and home kitchens don't fill in forms. They send a Tamil voice note on WhatsApp; Roots drafts the listing and books a verification visit.</p>
+      </div>
+      <div class="host-grid">
+        <div class="panel">
+          <h3>1 · The host speaks</h3>
+          <div class="chat">
+            <div class="bubble"><div class="voice"><span class="voice-play"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#play"/></svg></span><span class="wave" id="wave" aria-hidden="true"></span><span class="dur">0:24</span></div></div>
+            <div class="bubble"><p class="ta" lang="ta">வணக்கம். என் பெயர் செல்வி. நான் முனிச்சாலையில் வீட்டிலேயே சௌராஷ்டிரா சாப்பாடு செய்கிறேன். புளியோதரை, பொங்கல், கல்கண்டு சாதம் செய்வேன். ஒரே நேரத்தில் எட்டு பேர் வரை சாப்பிடலாம். மதியம் பன்னிரண்டு மணி முதல் மூன்று மணி வரை. ஒருவருக்கு முன்னூறு ரூபாய்.</p></div>
+            <div class="bubble"><p class="en">“Hello, I'm Selvi. I cook Sourashtra meals at home in Munichalai: puliyodarai, pongal, kalkandu sadham. Up to eight people at a time, 12 noon to 3 pm, ₹300 per person.”</p></div>
+          </div>
+          <p class="note">Illustrative sample host.</p>
+          <button class="btn" id="make-listing" type="button"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#mic"/></svg>Turn it into a listing</button>
+        </div>
+        <div class="panel">
+          <h3>2 · Roots builds the listing</h3>
+          <ol class="steps" id="steps">
+            <li>Transcribe the Tamil voice note</li>
+            <li>Pull out dishes, timings, group size and price</li>
+            <li>Write the listing in English and Tamil</li>
+            <li>Add the story and place it on a trail</li>
+            <li>Book a field verification visit</li>
+          </ol>
+          <div class="listing" id="listing" hidden>
+            <div class="listing-top"><span class="tile"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#meal"/></svg></span><div><h4>Sourashtra home lunch with Selvi</h4><p lang="ta">செல்வியுடன் சௌராஷ்டிரா வீட்டுச் சாப்பாடு</p></div></div>
+            <dl>
+              <dt>Area</dt><dd>Munichalai, Madurai</dd>
+              <dt>Menu</dt><dd>Puliyodarai, pongal, kalkandu sadham</dd>
+              <dt>When</dt><dd>Daily, 12 noon–3 pm</dd>
+              <dt>Group</dt><dd>Up to 8 guests</dd>
+              <dt>Price</dt><dd>₹300 per person, paid by UPI</dd>
+              <dt>Story</dt><dd>Madurai's Sourashtra community descends from silk weavers who migrated from Gujarat centuries ago. Selvi cooks her family's recipes.</dd>
+            </dl>
+            <div class="listing-foot"><span class="badge badge--veg">Vegetarian</span><span class="badge">Home dining</span><span class="badge badge--pending">Verification visit pending</span></div>
+          </div>
+          <p class="note" id="host-note">The AI steps are simulated in this prototype.</p>
+          <button class="btn btn--ghost" id="reset-listing" type="button" hidden>Run again</button>
+          <a class="btn" href="{{base}}join.html">List your place on Roots, free</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="directory-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Directory</p>
+        <h2 id="directory-title">Every place on Roots</h2>
+      </div>
+      <div class="directory">
+{{directory}}
+      </div>
+    </div>
+  </section>
+</main>
+
+{{footer}}
+<script type="module" src="{{base}}assets/js/app.js"></script>
+</body>
+</html>
