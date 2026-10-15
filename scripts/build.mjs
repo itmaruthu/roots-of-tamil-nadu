@@ -6,7 +6,8 @@
 //  - .preview/ variant for single-page hosts (Claude artifact preview); never deployed
 // Zero dependencies: Node 18+.
 
-import { readFile, writeFile, mkdir, rm, cp, readdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, rm, cp, readdir, rename } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -410,8 +411,23 @@ ${urls.map((u) => `  <url><loc>${esc(u.loc)}</loc><lastmod>${BUILD_DATE}</lastmo
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin
 
-/assets/*
+/assets/fonts/*
   Cache-Control: public, max-age=31536000, immutable
+
+/assets/img/*
+  Cache-Control: public, max-age=604800
+
+/assets/js-*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/css-*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
 
 /data/*
   Cache-Control: public, max-age=300
@@ -425,6 +441,22 @@ ${urls.map((u) => `  <url><loc>${esc(u.loc)}</loc><lastmod>${BUILD_DATE}</lastmo
   const bodyPart = home.slice(home.indexOf('<body>') + 6, home.indexOf('</body>'));
   await mkdir(join(ROOT, '.preview'), { recursive: true });
   await writeFile(join(ROOT, '.preview', 'index.html'), `<title>Madurai Never Sleeps</title>\n${headPart.replace(/<title>[^<]*<\/title>\n?/, '')}\n<div data-sprite-root>${bodyPart}</div>\n`);
+
+  // Cache busting: JS and CSS live in content-hashed folders, so browsers never mix a new page with old code.
+  const hash = createHash('sha256');
+  for (const dir of ['js', 'js/modules', 'css']) {
+    for (const f of (await readdir(join(SRC, 'assets', dir))).sort()) if (/\.(js|css)$/.test(f)) hash.update(await readFile(join(SRC, 'assets', dir, f)));
+  }
+  const v = hash.digest('hex').slice(0, 10);
+  await rename(join(DIST, 'assets/js'), join(DIST, `assets/js-${v}`));
+  await rename(join(DIST, 'assets/css'), join(DIST, `assets/css-${v}`));
+  const htmlFiles = ['index.html', 'join.html', '404.html', ...(await readdir(join(DIST, 'places'))).map((f) => `places/${f}`)].map((f) => join(DIST, f));
+  htmlFiles.push(join(ROOT, '.preview', 'index.html'));
+  for (const f of htmlFiles) {
+    if (!existsSync(f)) continue;
+    const s = await readFile(f, 'utf8');
+    await writeFile(f, s.replaceAll('assets/js/', `assets/js-${v}/`).replaceAll('assets/css/', `assets/css-${v}/`));
+  }
 
   const pages = (await readdir(join(DIST, 'places'))).length + 1;
   console.log(`Built ${pages} pages for ${SITE} → dist/`);
