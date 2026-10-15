@@ -37,6 +37,19 @@
     <p class="credit">{{heroCredit}}</p>
   </section>
 
+  <section id="temples" class="section" aria-labelledby="temples-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Four temples to plan around</p>
+        <h2 id="temples-title">Beyond Meenakshi: the sacred circle of Madurai</h2>
+        <p class="lead">Meenakshi is the heart, but Madurai's faith runs out to the hills. Plan a day around each of these.</p>
+      </div>
+      <div class="features">
+{{featured}}
+      </div>
+    </div>
+  </section>
+
   <section id="clock" class="section" aria-labelledby="clock-title">
     <div class="wrap">
       <div class="section-head">
@@ -102,9 +115,14 @@
           </section>
         </div>
         <div>
-          <div class="list-head"><h3 id="open-head">Open now</h3><span class="note" id="sort-note"></span></div>
-          <ul class="places" id="open-list"></ul>
-          <details class="closed-group" id="closed-group"><summary id="closed-sum">Closed now</summary><ul class="places" id="closed-list"></ul></details>
+          <div class="status-tabs" id="status-tabs" role="group" aria-label="Show places by status">
+            <button type="button" data-tab="open"><span class="dot dot--open"></span>Open now <b id="n-open">0</b></button>
+            <button type="button" data-tab="later"><span class="dot dot--soon"></span>Opens later <b id="n-later">0</b></button>
+            <button type="button" data-tab="closed"><span class="dot dot--closed"></span>Closed today <b id="n-closed">0</b></button>
+          </div>
+          <p class="list-note"><span id="open-head" aria-live="polite"></span> <span class="note" id="sort-note"></span></p>
+          <ul class="tiles" id="tiles"></ul>
+          <button class="btn btn--ghost more" id="more" type="button" hidden>Show all</button>
           <noscript><p class="note">Turn on JavaScript for live opening hours. Every place is listed in the directory below.</p></noscript>
         </div>
       </div>
@@ -157,6 +175,20 @@
           <p class="note">Runs in your browser from Roots data. In production it answers on WhatsApp and Telegram.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section id="festivals" class="section" aria-labelledby="festivals-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">When to come</p>
+        <h2 id="festivals-title">Festivals in every season</h2>
+        <p class="lead">There is no off-season in Madurai. Each season brings its own festivals at Meenakshi, Thiruparankundram, Alagar Kovil and Pandi Kovil.</p>
+      </div>
+      <div class="seasons">
+{{festivals}}
+      </div>
+      <p class="note">Festival dates follow the Tamil calendar and move each year; months shown are approximate. Confirm dates with the temple before you travel. Highlighted festivals draw the biggest crowds.</p>
     </div>
   </section>
 

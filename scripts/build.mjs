@@ -23,6 +23,7 @@ const config = JSON.parse(await readFile(join(ROOT, 'site.config.json'), 'utf8')
 const SITE = (process.env.SITE_URL || config.siteUrl).replace(/\/$/, '');
 const data = JSON.parse(await readFile(join(SRC, 'data/places.json'), 'utf8'));
 const bus = JSON.parse(await readFile(join(SRC, 'data/bus.json'), 'utf8'));
+const festivals = JSON.parse(await readFile(join(SRC, 'data/festivals.json'), 'utf8'));
 const credits = existsSync(join(SRC, 'data/credits.json')) ? JSON.parse(await readFile(join(SRC, 'data/credits.json'), 'utf8')) : {};
 const places = data.places;
 const BUILD_DATE = new Date().toISOString().slice(0, 10);
@@ -106,6 +107,7 @@ const header = (base) => `<header class="site-header">
       <a href="${base}index.html#clock">24 hours</a>
       <a href="${base}index.html#explore">Map</a>
       <a href="${base}index.html#live">Live wait</a>
+      <a href="${base}index.html#festivals">Festivals</a>
       <a href="${base}index.html#cabs">Cabs</a>
       <a href="${base}join.html">List your place</a>
       <a class="nav-cta" href="${base}index.html#explore">What's open now</a>
@@ -239,6 +241,44 @@ function homeSchema() {
   ];
 }
 
+const FEATURED = [
+  { id: 'meenakshi-amman-temple', tag: 'The heart of the city', why: 'Fourteen gopurams, the Hall of a Thousand Pillars and the goddess who rules Madurai. The old city is laid out in squares around it.' },
+  { id: 'thiruparankundram-murugan-temple', tag: 'First of Murugan’s six abodes', why: 'A temple cut into the rock of a sacred hill, where Murugan married Deivanai. Kanda Sashti here is unforgettable.' },
+  { id: 'kallazhagar-temple-alagar-kovil', tag: 'Alagar’s forest hill', why: 'Vishnu as Kallazhagar, Meenakshi’s brother, in a temple at the foot of the Alagar hills. Climb on to Pazhamudircholai.' },
+  { id: 'pandi-muneeswarar-temple', tag: 'Madurai’s guardian', why: 'Believed to be the Pandya king Nedunchezhiyan, worshipped with pongal and offerings. A living folk temple, busy and joyful.' }
+];
+
+function featured(base) {
+  return FEATURED.map(({ id, tag, why }) => {
+    const p = places.find((x) => x.id === id);
+    if (!p) return '';
+    const fest = festivals.seasons.flatMap((s) => s.festivals).find((f) => f.place === id && f.big) || festivals.seasons.flatMap((s) => s.festivals).find((f) => f.place === id);
+    const plan = planFor(bus, id, 'PERIYAR BUS STAND');
+    const busLine = plan ? `${plan.legs[0].buses.slice(0, 4).join(', ')} from Periyar${plan.direct ? '' : `, change at ${niceStop(plan.legs[1].from)}`}` : 'Walk from Periyar Bus Stand';
+    return `<article class="feature">
+      <a class="feature-media" href="${base}places/${esc(id)}.html" tabindex="-1" aria-hidden="true">${picture(p, base, 480, '(max-width: 700px) 100vw, 25vw')}</a>
+      <div class="feature-body">
+        <p class="eyebrow">${esc(tag)}</p>
+        <h3><a href="${base}places/${esc(id)}.html">${esc(p.name)}</a></h3>
+        <p>${esc(why)}</p>
+        <dl class="feature-facts">
+          <dt>Where</dt><dd>${esc(p.area)}</dd>
+          ${fest ? `<dt>Festival</dt><dd>${esc(fest.name)} · ${esc(fest.month)}</dd>` : ''}
+          <dt>Bus</dt><dd>${esc(busLine)}</dd>
+        </dl>
+        <p class="feature-live" data-live="${esc(id)}"></p>
+      </div>
+    </article>`;
+  }).join('\n');
+}
+
+function festivalsHtml(base) {
+  return festivals.seasons.map((s) => `<article class="season" data-months="${s.months.join(',')}">
+      <header><p class="season-range">${esc(s.range)}</p><h3>${esc(s.name)} <span lang="ta">${esc(s.ta)}</span></h3><p class="season-weather">${esc(s.weather)}</p><span class="season-now" hidden>Now</span></header>
+      <ul>${s.festivals.map((f) => `<li class="${f.big ? 'is-big' : ''}"><p class="fest-month">${esc(f.month)}</p><p class="fest-name">${f.place ? `<a href="${base}places/${esc(f.place)}.html">${esc(f.name)}</a>` : esc(f.name)}</p><p class="fest-where">${esc(f.where)}</p><p class="fest-text">${esc(f.text)}</p></li>`).join('')}</ul>
+    </article>`).join('\n');
+}
+
 async function renderHome(base, path) {
   const tpl = await readFile(join(SRC, 'templates/index.html'), 'utf8');
   return fill(tpl, {
@@ -258,6 +298,8 @@ async function renderHome(base, path) {
     count: String(places.length),
     templeCount: String(places.filter((p) => p.type === 'temple').length),
     postcards: postcards(base),
+    featured: featured(base),
+    festivals: festivalsHtml(base),
     directory: directory(base)
   });
 }

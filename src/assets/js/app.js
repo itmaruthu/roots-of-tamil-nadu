@@ -19,12 +19,13 @@ let liveWait = { update() {} };
 const state = {
   places: [], moments: [],
   day: now.day, hour: 21, filter: 'all', view: 'old',
+  tab: 'open', showAll: false,
   selected: 'meenakshi-amman-temple', plan: store.get('roots-plan', []), me: null, timer: null
 };
 
 init().catch((err) => {
   console.error(err);
-  $('#open-head').textContent = 'Could not load places. Please refresh.';
+  const h = document.querySelector('#open-head'); if (h) h.textContent = 'Could not load places. Please refresh.';
 });
 
 async function init() {
@@ -40,6 +41,7 @@ async function init() {
   const ctx = { state, places: state.places, placeUrl: PLACE_URL };
   liveWait = initLiveWait(ctx);
   initConcierge(ctx);
+  renderFeatured();
   render();
 }
 
@@ -57,6 +59,9 @@ function buildControls() {
     on: { click: () => { stop(); setHour(h); state.selected = id; render(); } }
   }, label)));
 
+  $$('#status-tabs button').forEach((b) => b.addEventListener('click', () => { state.tab = b.dataset.tab; state.showAll = false; render(); }));
+  $('#more').addEventListener('click', () => { state.showAll = !state.showAll; render(); });
+  markSeason();
   const filters = $('#filters');
   const all = el('button', { type: 'button', class: 'chip', 'aria-pressed': 'true', dataset: { filter: 'all' }, on: { click: () => setFilter('all') } },
     'All ', el('span', { class: 'n' }, state.places.length));
@@ -83,7 +88,27 @@ function buildControls() {
   $('#clear-plan').addEventListener('click', () => { state.plan = []; store.set('roots-plan', []); render(); });
 }
 
-function setFilter(f) { state.filter = f; render(); }
+function setFilter(f) { state.filter = f; state.showAll = false; render(); }
+
+// Festivals: mark the current season and show live status on the featured temples.
+function markSeason() {
+  const m = new Date().getMonth() + 1;
+  for (const s of $$('.season')) {
+    const now = s.dataset.months.split(',').map(Number).includes(m);
+    s.classList.toggle('is-now', now);
+    s.querySelector('.season-now').hidden = !now;
+  }
+}
+function renderFeatured() {
+  const t = nowInMadurai();
+  for (const n of $$('[data-live]')) {
+    const p = state.places.find((x) => x.id === n.dataset.live);
+    if (!p) continue;
+    const st = status(p, t.day, t.hour);
+    n.className = `feature-live status--${st.state}`;
+    n.textContent = `Right now: ${st.text}`;
+  }
+}
 function setHour(h) { state.hour = h; $('#clock-range').value = String(h); }
 
 function togglePlay() {
@@ -135,7 +160,11 @@ const origin = () => state.me || MEENAKSHI;
 function render() {
   const vis = state.places.filter(visible);
   const on = vis.filter(open);
-  const off = vis.filter((p) => !open(p));
+  const opensLater = (p) => !open(p) && hoursFor(p, state.day).some(([o]) => o > state.hour);
+  const later = vis.filter(opensLater);
+  const off = vis.filter((p) => !open(p) && !opensLater(p));
+  const firstOpen = (p) => (hoursFor(p, state.day).find(([o]) => o > state.hour) || [99])[0];
+  later.sort((a, b) => firstOpen(a) - firstOpen(b));
   if (state.me) { const d = (p) => distanceKm(state.me, p); on.sort((a, b) => d(a) - d(b)); off.sort((a, b) => d(a) - d(b)); }
 
   $('#time').textContent = formatHour(state.hour);
@@ -149,13 +178,20 @@ function render() {
   $$('#filters button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === state.filter)));
   $$('#views button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === state.view)));
 
-  $('#open-list').replaceChildren(...on.map((p) => card(p, true)));
-  $('#closed-list').replaceChildren(...off.map((p) => card(p, false)));
-  $('#open-head').textContent = on.length ? `Open now (${on.length})` : 'Everything here is resting';
-  $('#closed-sum').textContent = `Closed now (${off.length})`;
-  $('#closed-group').hidden = off.length === 0;
-  $('#sort-note').textContent = state.me ? 'Nearest first' : '';
-  if (off.some((p) => p.id === state.selected)) $('#closed-group').open = true;
+  const lists = { open: on, later, closed: off };
+  $('#n-open').textContent = on.length; $('#n-later').textContent = later.length; $('#n-closed').textContent = off.length;
+  $$('#status-tabs button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tab === state.tab)));
+  const list = lists[state.tab];
+  const LIMIT = 8;
+  const shown = state.showAll ? list : list.slice(0, LIMIT);
+  $('#tiles').replaceChildren(...shown.map((p) => card(p, state.tab === 'open')));
+  $('#open-head').textContent = list.length
+    ? { open: `${on.length} places open at ${formatHour(state.hour)}.`, later: 'Opening later today, soonest first.', closed: 'Closed for the rest of today.' }[state.tab]
+    : { open: 'Everything here is resting at this hour.', later: 'Nothing else opens later today.', closed: 'Nothing is closed for the day.' }[state.tab];
+  $('#sort-note').textContent = state.me && state.tab !== 'later' ? 'Nearest first.' : '';
+  const more = $('#more');
+  more.hidden = list.length <= LIMIT;
+  more.textContent = state.showAll ? 'Show fewer' : `Show all ${list.length}`;
 
   drawMap($('#map-svg'), { places: vis, view: state.view, selected: state.selected, isOpen: open, me: state.me, onSelect: (id) => select(id, true) });
   renderSpot();
@@ -166,7 +202,7 @@ function render() {
 function select(id, fromMap) {
   state.selected = id;
   render();
-  if (fromMap) $(`.place[data-id="${CSS.escape(id)}"]`)?.scrollIntoView({ block: 'nearest', behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+  if (fromMap) $(`.ptile[data-id="${CSS.escape(id)}"]`)?.scrollIntoView({ block: 'nearest', behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
 }
 
 const ASSET = (path) => new URL(`../../${path}`, import.meta.url).href;
@@ -201,39 +237,30 @@ function card(p, isOn) {
   const st = status(p, state.day, state.hour);
   const saved = state.plan.includes(p.id);
   const selected = p.id === state.selected;
-  const facts = [
-    el('span', {}, icon(p.type), TYPES[p.type].label),
-    el('span', {}, icon('pin'), p.area),
-    distanceNote(p, '', 'from Meenakshi') ? el('span', {}, icon('route'), distanceNote(p, '', 'from Meenakshi')) : null,
-    p.diet ? el('span', { class: `badge badge--${p.diet}` }, p.diet === 'veg' ? 'Veg' : 'Non-veg') : null,
-    p.since ? el('span', { class: 'since' }, `since ${p.since}`) : null
-  ];
+  const dist = distanceNote(p, '', 'from Meenakshi');
   return el('li', {
-    class: `place${isOn ? '' : ' is-closed'}${selected ? ' is-selected' : ''}`,
+    class: `ptile${isOn ? '' : ' is-closed'}${selected ? ' is-selected' : ''}`,
     dataset: { id: p.id, group: groupOf(p) }, tabindex: '0', 'aria-label': `${p.name}, ${st.text}`,
     on: {
       click: () => select(p.id, false),
       keydown: (e) => { if (e.target === e.currentTarget && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); select(p.id, false); } }
     }
   },
-  el('a', { class: 'place-media', href: PLACE_URL(p.id), tabindex: '-1', 'aria-hidden': 'true', on: { click: (e) => e.stopPropagation() } },
+  el('div', { class: 'ptile-media' },
     thumb(p, 'thumb'),
-    el('span', { class: `pill pill--${st.state}` }, st.state === 'closed' ? 'Closed' : st.state === 'soon' ? 'Closing soon' : 'Open')),
-  el('div', { class: 'place-body' },
-    el('div', { class: 'place-top' },
-      el('h4', { class: 'place-name' }, el('a', { href: PLACE_URL(p.id), on: { click: (e) => e.stopPropagation() } }, p.name)),
-      el('button', {
-        class: 'save', type: 'button', 'aria-pressed': String(saved), 'aria-label': `${saved ? 'Remove' : 'Add'} ${p.name} ${saved ? 'from' : 'to'} my day`,
-        on: { click: (e) => { e.stopPropagation(); togglePlan(p.id); } }
-      }, icon('star'))),
-    el('p', { class: `status status--${st.state}` }, icon('clock'), st.text),
-    el('p', { class: `place-story${selected ? '' : ' is-clamped'}` }, p.story),
-    el('div', { class: 'facts' }, ...facts),
-    selected ? el('p', { class: 'meta' }, `Hours: ${p.hours}`) : null,
-    el('div', { class: 'place-actions' },
-      el('a', { class: 'btn btn--sm', href: directionsUrl(p), target: '_blank', rel: 'noopener noreferrer', on: { click: (e) => e.stopPropagation() } }, icon('route'), 'Directions'),
-      el('a', { class: 'btn btn--sm btn--ghost', href: busUrl(p), target: '_blank', rel: 'noopener noreferrer', on: { click: (e) => e.stopPropagation() } }, icon('bus'), 'Bus'),
-      el('a', { class: 'btn btn--sm btn--ghost', href: PLACE_URL(p.id), on: { click: (e) => e.stopPropagation() } }, 'Photos, hours & story', icon('arrow'))))
+    el('span', { class: `ptile-status status-chip--${st.state}` }, st.text),
+    el('button', {
+      class: 'save', type: 'button', 'aria-pressed': String(saved), 'aria-label': `${saved ? 'Remove' : 'Add'} ${p.name} ${saved ? 'from' : 'to'} my day`,
+      on: { click: (e) => { e.stopPropagation(); togglePlan(p.id); } }
+    }, icon('star'))),
+  el('div', { class: 'ptile-body' },
+    el('h4', { class: 'ptile-name' }, el('a', { href: PLACE_URL(p.id), on: { click: (e) => e.stopPropagation() } }, p.name)),
+    el('p', { class: 'ptile-meta' }, icon(p.type), `${TYPES[p.type].label}${dist ? ` · ${dist}` : ''}`,
+      p.diet ? el('span', { class: `badge badge--${p.diet}` }, p.diet === 'veg' ? 'Veg' : 'Non-veg') : null),
+    el('div', { class: 'ptile-actions' },
+      el('a', { class: 'iconbtn', href: directionsUrl(p), target: '_blank', rel: 'noopener noreferrer', 'aria-label': `Directions to ${p.name}`, on: { click: (e) => e.stopPropagation() } }, icon('route'), 'Go'),
+      el('a', { class: 'iconbtn', href: PLACE_URL(p.id) + '#bus', 'aria-label': `Buses to ${p.name}`, on: { click: (e) => e.stopPropagation() } }, icon('bus'), 'Bus'),
+      el('a', { class: 'iconbtn', href: PLACE_URL(p.id), on: { click: (e) => e.stopPropagation() } }, 'Details', icon('arrow'))))
   );
 }
 
