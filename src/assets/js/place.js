@@ -67,7 +67,7 @@ async function init() {
       const hub = nearestHub(data, me);
       if (hub.km > 15) { box.replaceChildren(el('p', { class: 'note' }, `You seem to be outside Madurai (${formatKm(hub.km)} from the nearest city stop). The plan works once you're in the city.`)); return; }
       renderPlan(box, planFor(data, id, hub.name), hub, place, me);
-    }, () => { box.replaceChildren(...original, el('p', { class: 'note' }, 'Location permission was not given, so this shows buses from the main bus stand.')); }, { timeout: 8000, maximumAge: 300000 });
+    }, () => { box.replaceChildren(...original, el('p', { class: 'note' }, 'Location permission was not given, so this shows buses from the three main bus stands.')); }, { timeout: 8000, maximumAge: 300000 });
   };
   $('#bus-me')?.addEventListener('click', busFromMe);
 

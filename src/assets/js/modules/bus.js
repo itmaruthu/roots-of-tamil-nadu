@@ -3,7 +3,10 @@
 import { distanceKm } from './geo.js';
 
 const KEEP = new Set(['MGR', 'TPK', 'CMH', 'P']);
+const NAMES = { 'MGR BUS STAND': 'MGR Bus Stand, Mattuthavani', 'ARAPPALAYAM': 'Arappalayam Bus Stand' };
+export const MAIN_STANDS = ['PERIYAR BUS STAND', 'MGR BUS STAND', 'ARAPPALAYAM'];
 export function niceStop(name) {
+  if (NAMES[name]) return NAMES[name];
   return name.split(' ').map((w) => (KEEP.has(w) ? w : w.charAt(0) + w.slice(1).toLowerCase())).join(' ');
 }
 

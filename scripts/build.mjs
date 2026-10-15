@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url';
 import { validate } from './validate.mjs';
 import { TYPES, GROUPS, commonsImage, commonsPage, directionsUrl, busUrl, osmUrl, imageSrc } from '../src/assets/js/modules/catalog.js';
 import { DAYS, hoursFor, is24h, formatHour } from '../src/assets/js/modules/hours.js';
-import { planFor, defaultHub, niceStop } from '../src/assets/js/modules/bus.js';
+import { planFor, niceStop, MAIN_STANDS } from '../src/assets/js/modules/bus.js';
 import { MEENAKSHI, distanceKm, formatKm, nearest, nearestStand, projector, RINGS, VAIGAI } from '../src/assets/js/modules/geo.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -141,8 +141,8 @@ function footer(base) {
 const BOARDS = ['maroon', 'teal', 'indigo', 'ochre'];
 function busPlanHtml(plan) {
   if (!plan) return '';
-  const legs = plan.legs.map((l, i) => `<li>${i ? 'Change at' : 'From'} <b>${esc(niceStop(l.from))}</b>: bus ${l.buses.map((b) => `<span class="busno">${esc(b)}</span>`).join(' ')} to ${esc(niceStop(l.to))} · ${l.stops} stops</li>`).join('');
-  return `<p class="bus-head">${plan.direct ? 'Direct bus' : 'One change'} from ${esc(niceStop(plan.from))}${plan.fare ? ` · ₹${plan.fare}` : ''}</p><ol class="bus-legs">${legs}</ol><a class="bus-more" href="${esc(plan.url)}" target="_blank" rel="noopener noreferrer">Full route and live buses on MaduraiOne</a>`;
+  const legs = plan.legs.map((l, i) => `<li>${i ? `Change at <b>${esc(niceStop(l.from))}</b>:` : 'Take'} bus ${l.buses.map((b) => `<span class="busno">${esc(b)}</span>`).join(' ')} to ${esc(niceStop(l.to))} · ${l.stops} stops</li>`).join('');
+  return `<div class="bus-from"><p class="bus-head">From ${esc(niceStop(plan.from))} <span lang="ta">(${esc(bus.ta[plan.from] || '')})</span></p><p class="bus-meta">${plan.direct ? 'Direct bus' : 'One change'}${plan.fare ? ` · ₹${plan.fare} ordinary fare` : ''}</p><ol class="bus-legs">${legs}</ol><a class="bus-more" href="${esc(plan.url)}" target="_blank" rel="noopener noreferrer">Full route and live buses on MaduraiOne</a></div>`;
 }
 
 function boardColour(p) {
@@ -317,7 +317,9 @@ async function renderPlace(p) {
       const walk = hub ? distanceKm(p, hub) : null;
       return `Get off at <b>${esc(niceStop(stop))}</b> <span lang="ta">(${esc(bus.ta[stop] || '')})</span>${walk !== null && walk > 0.15 ? `, about ${esc(formatKm(walk))} on foot from here` : ''}.`;
     })(),
-    busPlan: busPlanHtml(planFor(bus, p.id, defaultHub(bus, p.id))),
+    busPlan: MAIN_STANDS.map((h) => bus.places[p.id] === h
+      ? `<div class="bus-from"><p class="bus-head">${esc(niceStop(h))}</p><p>This place is at the bus stand. Walk from here.</p></div>`
+      : busPlanHtml(planFor(bus, p.id, h))).join(''),
     busFetched: esc(new Date(bus.fetched).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })),
     osm: esc(osmUrl(p)),
     fromTemple: p.id === 'meenakshi-amman-temple' ? 'The centre of the old city' : `${formatKm(distanceKm(p, MEENAKSHI))} from Meenakshi Amman Temple`,

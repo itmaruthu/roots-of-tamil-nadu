@@ -374,7 +374,11 @@ address { font-style: normal; }
 .bus .btn { align-self: flex-start; }
 
 
-.bus-plan { display: flex; flex-direction: column; gap: 6px; }
+.bus-plan { display: flex; flex-direction: column; gap: 10px; }
+.bus-sub { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.bus-from { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; background: var(--bg); }
+.bus-from p { margin: 0; }
+.bus-meta { color: var(--muted); font-size: 14px; }
 .bus-head { font-weight: 600; }
 .bus-legs { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
 .busno { display: inline-block; font: 600 13px var(--font-mono); padding: 1px 6px; border-radius: 6px; background: color-mix(in srgb, var(--accent) 12%, var(--surface)); border: 1px solid var(--line); }
