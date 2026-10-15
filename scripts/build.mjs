@@ -121,9 +121,6 @@ const header = (base) => `<header class="site-header">
 </header>`;
 
 function footer(base) {
-  const seen = new Set();
-  const imaged = [hero, ...places.filter((p) => p.image && isCommons(p.image)).map((p) => p.image)].filter((img) => !seen.has(img.file) && seen.add(img.file));
-  const creditItems = imaged.map((img) => `<li>${esc(img.alt)}. ${imageCredit(img.file)}</li>`).join('\n          ');
   return `<footer class="site-footer">
   <div class="wrap">
     <div class="footer-note">
@@ -132,14 +129,7 @@ function footer(base) {
       <p>Opening hours come from public listings and shop signboards (last checked ${esc(config.dataCheckedOn)}). Hosts confirm their own details before launch; always check before you travel.</p>
       <p>No cookies, no ads, no trackers. "Near me" uses your location only on your device.</p>
       <p>Built by Team M2P Nexus, Madurai. <a href="mailto:${esc(config.contactEmail)}">${esc(config.contactEmail)}</a> · <a href="tel:${esc(config.contactPhone.replace(/\s/g, ''))}">${esc(config.contactPhone)}</a></p>
-      <p>© ${new Date().getFullYear()} Roots of Tamil Nadu.</p>
-    </div>
-    <div>
-      <h2>Photo credits</h2>
-      <ul class="credits">
-          ${creditItems}
-      </ul>
-      <p class="note">Temple and heritage photos are freely licensed on Wikimedia Commons; follow each link for the author and licence. Shop and hotel photos were gathered by the Roots team for this prototype and will be replaced with photos shared by each host.</p>
+      <p>© ${new Date().getFullYear()} Roots of Tamil Nadu. <a href="${base}credits.html">Photo credits</a></p>
     </div>
   </div>
 </footer>`;
@@ -355,7 +345,7 @@ async function renderHome(base, path) {
     heroSrc: esc(base + credits[hero.file].local),
     heroSrcset: `${esc(base + credits[hero.file].thumb)} 480w, ${esc(base + credits[hero.file].local)} 1200w`,
     heroAlt: esc(hero.alt),
-    heroCredit: imageCredit(hero.file),
+    heroCredit: '',
     count: String(places.length),
     templeCount: String(places.filter((p) => p.type === 'temple').length),
     postcards: postcards(base),
@@ -425,9 +415,7 @@ async function renderPlace(p) {
     since: p.since ? ` · since ${esc(p.since)}` : '',
     diet: p.diet ? `<span class="badge badge--${p.diet}">${p.diet === 'veg' ? 'Vegetarian' : 'Non-vegetarian'}</span>` : '',
     photo: `<span class="ph">${iconSvg(base, p.type)}${picture(p, base, 960, '(max-width: 860px) 100vw, 580px', true)}</span>`,
-    photoCredit: !p.image ? '' : p.image.credit === 'team'
-      ? '<p class="note">Photo gathered by the Roots team for this prototype; it will be replaced with the host\'s own photo.</p>'
-      : isCommons(p.image) ? `<p class="note">${imageCredit(p.image.file)}</p>` : '',
+    photoCredit: '',
     story: esc(p.story),
     hoursText: esc(p.hours),
     hoursRows: rows,
@@ -474,6 +462,29 @@ async function build() {
   }
 
   await writeFile(join(DIST, 'index.html'), await renderHome('', '/'));
+  {
+    const seen = new Set();
+    const imaged = [hero, ...places.filter((p) => p.image && isCommons(p.image)).map((p) => p.image)].filter((img) => !seen.has(img.file) && seen.add(img.file));
+    const items = imaged.map((img) => `<li>${esc(img.alt)}. ${imageCredit(img.file)}</li>`).join('\n        ');
+    await writeFile(join(DIST, 'credits.html'), `<!doctype html>
+<html lang="en-IN" data-sprite="assets/img/icons.svg">
+<head>
+${head({ title: 'Photo credits | Roots of Tamil Nadu', description: 'Photographers and licences for the photos used on Roots of Tamil Nadu.', path: '/credits.html', base: '' })}
+</head>
+<body>
+${header('')}
+<main id="main" class="wrap credits-page">
+  <h1>Photo credits</h1>
+  <p class="note">Temple, heritage and nature photos are freely licensed on Wikimedia Commons; follow each link for the author and licence. Shop and hotel photos were gathered by the Roots team for this prototype and will be replaced with photos shared by each host.</p>
+  <ul class="credits">
+        ${items}
+  </ul>
+</main>
+${footer('')}
+</body>
+</html>
+`);
+  }
   const joinTpl = await readFile(join(SRC, 'templates/join.html'), 'utf8');
   await writeFile(join(DIST, 'join.html'), fill(joinTpl, {
     base: '',
@@ -541,7 +552,7 @@ ${urls.map((u) => `  <url><loc>${esc(u.loc)}</loc><lastmod>${BUILD_DATE}</lastmo
   const v = hash.digest('hex').slice(0, 10);
   await rename(join(DIST, 'assets/js'), join(DIST, `assets/js-${v}`));
   await rename(join(DIST, 'assets/css'), join(DIST, `assets/css-${v}`));
-  const htmlFiles = ['index.html', 'join.html', '404.html', ...(await readdir(join(DIST, 'places'))).map((f) => `places/${f}`)].map((f) => join(DIST, f));
+  const htmlFiles = ['index.html', 'join.html', 'credits.html', '404.html', ...(await readdir(join(DIST, 'places'))).map((f) => `places/${f}`)].map((f) => join(DIST, f));
   htmlFiles.push(join(ROOT, '.preview', 'index.html'));
   for (const f of htmlFiles) {
     if (!existsSync(f)) continue;

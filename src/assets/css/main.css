@@ -620,3 +620,8 @@ section[id] { scroll-margin-top: 84px; }
 .pongal-cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 18px; }
 .pongal-cta p { margin: 0; flex: 1 1 360px; }
 .bus--trip #bus-me, .bus--trip .bus-plan, .bus--trip > .note { display: none; }
+
+/* Photo credits page */
+.credits-page { padding-block: 48px 72px; max-width: 860px; display: grid; gap: 16px; }
+.credits-page h1 { font-size: clamp(2rem, 4vw, 2.75rem); margin: 0; }
+.credits-page .credits { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; font-size: .95rem; line-height: 1.5; }
