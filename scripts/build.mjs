@@ -25,6 +25,7 @@ const SITE = (process.env.SITE_URL || config.siteUrl).replace(/\/$/, '');
 const data = JSON.parse(await readFile(join(SRC, 'data/places.json'), 'utf8'));
 const bus = JSON.parse(await readFile(join(SRC, 'data/bus.json'), 'utf8'));
 const festivals = JSON.parse(await readFile(join(SRC, 'data/festivals.json'), 'utf8'));
+const guide = JSON.parse(await readFile(join(SRC, 'data/guide.json'), 'utf8'));
 const credits = existsSync(join(SRC, 'data/credits.json')) ? JSON.parse(await readFile(join(SRC, 'data/credits.json'), 'utf8')) : {};
 const places = data.places;
 const BUILD_DATE = new Date().toISOString().slice(0, 10);
@@ -341,6 +342,24 @@ async function renderHome(base, path) {
   });
 }
 
+function whyHtml(p, base) {
+  const g = guide[p.id];
+  if (!g) return '';
+  const pairs = (g.pair || []).map((id) => places.find((x) => x.id === id)).filter(Boolean);
+  return `<section class="why" aria-labelledby="why-title">
+        <div class="why-main">
+          <h2 id="why-title">Why visit ${esc(p.name.replace(/\s*\(.*\)$/, ''))}</h2>
+          <p class="why-lead">${esc(g.why)}</p>
+          ${g.know ? `<p class="why-know"><b>Good to know:</b> ${esc(g.know)}</p>` : ''}
+        </div>
+        <div class="why-grid">
+          <div class="why-box"><h3>Don't miss</h3><ul class="why-list">${g.see.map((s) => `<li>${esc(s)}</li>`).join('')}</ul></div>
+          <div class="why-box"><h3>Plan it</h3><dl class="why-plan"><dt>Best time</dt><dd>${esc(g.best)}</dd><dt>Time needed</dt><dd>${esc(g.spend)}</dd><dt>Hours</dt><dd>${esc(p.hours)}</dd></dl></div>
+          ${pairs.length ? `<div class="why-box"><h3>Make a day of it</h3><ul class="why-pairs">${pairs.map((o) => `<li><a href="${base}places/${esc(o.id)}.html"><span class="why-pair-name">${esc(o.name)}</span><span class="why-pair-meta">${esc(TYPES[o.type].label)} · ${esc(formatKm(distanceKm(p, o)))} away</span></a></li>`).join('')}</ul></div>` : ''}
+        </div>
+      </section>`;
+}
+
 async function renderPlace(p) {
   const tpl = await readFile(join(SRC, 'templates/place.html'), 'utf8');
   const base = '../';
@@ -357,8 +376,11 @@ async function renderPlace(p) {
     { '@type': 'ListItem', position: 2, name: GROUPS[t.group].label, item: `${SITE}/#explore` },
     { '@type': 'ListItem', position: 3, name: p.name, item: placeUrl(p) }] };
   const kind = { meal: 'Restaurant', sweet: 'Sweets & snacks', drink: 'Drinks', temple: 'Temple', heritage: 'Heritage site', market: 'Market', stay: 'Hotel' }[p.type] || `Shopping · ${TYPES[p.type].label}`;
-  const description = `${p.name}, ${p.area}, Madurai: ${p.story} Hours: ${p.hours}.`.slice(0, 300);
+  const gd = guide[p.id];
+  const description = (gd ? `${gd.hook}. ${gd.why}` : `${p.name}, ${p.area}, Madurai: ${p.story} Hours: ${p.hours}.`).slice(0, 300);
   return fill(tpl, {
+    why: whyHtml(p, base),
+    hook: guide[p.id] ? `<p class="hook">${esc(guide[p.id].hook)}</p>` : '',
     base,
     head: head({
       title: `${p.name}, Madurai — hours, location & story | Roots of Tamil Nadu`,
