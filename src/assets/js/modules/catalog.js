@@ -44,6 +44,11 @@ export function imageSrc(place, width = 960, base = '') {
 export function directionsUrl(place) {
   return `https://www.google.com/maps/dir/?api=1&destination=${place.lat},${place.lng}`;
 }
+// Public-transport directions; Google Maps starts from the visitor's current location.
+export function busUrl(place) {
+  return `https://www.google.com/maps/dir/?api=1&destination=${place.lat},${place.lng}&travelmode=transit`;
+}
+
 export function osmUrl(place) {
   return `https://www.openstreetmap.org/?mlat=${place.lat}&mlon=${place.lng}#map=17/${place.lat}/${place.lng}`;
 }

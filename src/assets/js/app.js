@@ -1,7 +1,7 @@
 // Home page: 24-hour clock, filters, live list, real-coordinate map, day planner and host demo.
 import { el, icon, $, $$, store, prefersReducedMotion, spriteUrl } from './modules/dom.js';
 import { DAYS_SHORT, nowInMadurai, isOpen, status, hoursFor, is24h, formatHour } from './modules/hours.js';
-import { TYPES, GROUPS, groupOf, imageSrc, directionsUrl } from './modules/catalog.js';
+import { TYPES, GROUPS, groupOf, imageSrc, directionsUrl, busUrl } from './modules/catalog.js';
 import { distanceKm, formatKm, MEENAKSHI, VIEWS } from './modules/geo.js';
 import { drawMap } from './modules/map.js';
 import { initSky, paintSky } from './modules/sky.js';
@@ -232,6 +232,7 @@ function card(p, isOn) {
     selected ? el('p', { class: 'meta' }, `Hours: ${p.hours}`) : null,
     el('div', { class: 'place-actions' },
       el('a', { class: 'btn btn--sm', href: directionsUrl(p), target: '_blank', rel: 'noopener noreferrer', on: { click: (e) => e.stopPropagation() } }, icon('route'), 'Directions'),
+      el('a', { class: 'btn btn--sm btn--ghost', href: busUrl(p), target: '_blank', rel: 'noopener noreferrer', on: { click: (e) => e.stopPropagation() } }, icon('bus'), 'Bus'),
       el('a', { class: 'btn btn--sm btn--ghost', href: PLACE_URL(p.id), on: { click: (e) => e.stopPropagation() } }, 'Photos, hours & story', icon('arrow'))))
   );
 }
@@ -249,6 +250,7 @@ function renderSpot() {
     el('span', { class: 'note' }, p.area, distanceNote(p, ' · ', 'from Meenakshi temple')),
     el('div', { class: 'spot-actions' },
       el('a', { class: 'btn', href: directionsUrl(p), target: '_blank', rel: 'noopener noreferrer' }, icon('route'), 'Directions'),
+      el('a', { class: 'btn btn--ghost', href: busUrl(p), target: '_blank', rel: 'noopener noreferrer' }, icon('bus'), 'Bus route'),
       el('a', { class: 'btn btn--ghost', href: PLACE_URL(p.id) }, 'Story & hours', icon('arrow')))
   );
 }

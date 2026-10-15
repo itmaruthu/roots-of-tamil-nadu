@@ -1,7 +1,7 @@
 // Place page: live open/closed pill, today's row highlighted, distance from the visitor.
 import { $ } from './modules/dom.js';
 import { nowInMadurai, status } from './modules/hours.js';
-import { distanceKm, formatKm } from './modules/geo.js';
+import { distanceKm, formatKm, nearestStand } from './modules/geo.js';
 
 const DATA_URL = new URL('../../data/places.json', import.meta.url);
 const id = $('main')?.dataset.placeId;
@@ -34,7 +34,13 @@ async function init() {
     if (!('geolocation' in navigator)) { out.textContent = ' · Location is not available in this browser.'; return; }
     out.textContent = ' · Finding you…';
     navigator.geolocation.getCurrentPosition(
-      (pos) => { out.textContent = ` · ${formatKm(distanceKm({ lat: pos.coords.latitude, lng: pos.coords.longitude }, place))} from you`; },
+      (pos) => {
+        const me = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        out.textContent = ` · ${formatKm(distanceKm(me, place))} from you`;
+        const s = nearestStand(me);
+        const bus = $('#bus-you');
+        if (bus) bus.textContent = `Your nearest bus stand: ${s.name} (${s.ta}), ${formatKm(s.km)} from you.`;
+      },
       () => { out.textContent = ' · Location permission was not given.'; },
       { timeout: 8000, maximumAge: 300000 }
     );

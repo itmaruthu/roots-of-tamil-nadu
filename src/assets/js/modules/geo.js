@@ -35,6 +35,19 @@ export function distanceKm(a, b) {
   return 2 * R * Math.asin(Math.sqrt(s));
 }
 
+// Main bus stands (locations checked against map listings, October 2026).
+export const BUS_STANDS = [
+  { name: 'Periyar Bus Stand', ta: 'பெரியார் பேருந்து நிலையம்', lat: 9.915244, lng: 78.111584, serves: 'city and town buses' },
+  { name: 'MGR Bus Stand, Mattuthavani', ta: 'மாட்டுத்தாவணி பேருந்து நிலையம்', lat: 9.943495, lng: 78.156384, serves: 'long-distance and city buses' },
+  { name: 'Arappalayam Bus Stand', ta: 'ஆரப்பாளையம் பேருந்து நிலையம்', lat: 9.934933, lng: 78.103466, serves: 'buses towards Dindigul and Theni, and city buses' },
+  { name: 'Anna Bus Stand', ta: 'அண்ணா பேருந்து நிலையம்', lat: 9.924598, lng: 78.138551, serves: 'city buses, near the Government Hospital' },
+  { name: 'Palanganatham Bus Stand', ta: 'பழங்காநத்தம் பேருந்து நிலையம்', lat: 9.906319, lng: 78.094129, serves: 'city buses' }
+];
+
+export function nearestStand(pt) {
+  return BUS_STANDS.map((s) => ({ ...s, km: distanceKm(pt, s) })).sort((a, b) => a.km - b.km)[0];
+}
+
 export function formatKm(km) {
   return km < 1 ? `${Math.round(km * 1000 / 10) * 10} m` : `${km.toFixed(km < 10 ? 1 : 0)} km`;
 }

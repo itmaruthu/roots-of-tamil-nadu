@@ -71,7 +71,7 @@ export function initConcierge(ctx) {
         : `Darshan wait at Meenakshi temple around ${formatHour(hour)}: about ${w} minutes (estimate). Early morning, 5–7 am, is usually shortest.`];
     }
     if (has('cab', 'taxi', 'rental', 'rent a car', 'self drive', 'auto', 'bus', 'transport', 'airport', 'டாக்ஸி', 'வாடகை')) {
-      return ['Use government-approved rides: the prepaid taxi counter in the airport arrivals hall (fixed fare, receipt names the driver), TTDC tours and coaches (toll-free 1800 425 31111), or TNSTC city buses. For self-drive, rent only a car with a black plate and yellow letters; never a white-plate private car.',
+      return ['Use government-approved rides: the prepaid taxi counter in the airport arrivals hall (fixed fare, receipt names the driver), TTDC tours and coaches (toll-free 1800 425 31111), or TNSTC city buses (every place page has a "Bus route from my location" button). For self-drive, rent only a car with a black plate and yellow letters; never a white-plate private car.',
         el('p', {}, el('a', { href: '#cabs' }, 'How to check a cab is legal →'))];
     }
     const SHOP = [['saree', 'dress'], ['dress', 'dress'], ['cloth', 'dress'], ['sungudi', 'dress'], ['jewel', 'jewel'], ['gold', 'jewel'], ['bangle', 'jewel'], ['grocer', 'grocery'], ['spice', 'grocery'], ['vegetable', 'vegetable'], ['veggies', 'vegetable'], ['vessel', 'homeware'], ['brass', 'homeware'], ['steel', 'homeware'], ['craft', 'homeware'], ['flower', 'market'], ['malli', 'market'], ['jasmine', 'market']];

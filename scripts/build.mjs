@@ -11,9 +11,9 @@ import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { validate } from './validate.mjs';
-import { TYPES, GROUPS, commonsImage, commonsPage, directionsUrl, osmUrl, imageSrc } from '../src/assets/js/modules/catalog.js';
+import { TYPES, GROUPS, commonsImage, commonsPage, directionsUrl, busUrl, osmUrl, imageSrc } from '../src/assets/js/modules/catalog.js';
 import { DAYS, hoursFor, is24h, formatHour } from '../src/assets/js/modules/hours.js';
-import { MEENAKSHI, distanceKm, formatKm, nearest, projector, RINGS, VAIGAI } from '../src/assets/js/modules/geo.js';
+import { MEENAKSHI, distanceKm, formatKm, nearest, nearestStand, projector, RINGS, VAIGAI } from '../src/assets/js/modules/geo.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = join(ROOT, 'src');
@@ -301,6 +301,14 @@ async function renderPlace(p) {
     address: esc(p.address),
     lat: String(p.lat), lng: String(p.lng),
     directions: esc(directionsUrl(p)),
+    bus: esc(busUrl(p)),
+    busLine: (() => {
+      const s = nearestStand(p);
+      const stand = `<b>${esc(s.name)}</b> <span lang="ta">(${esc(s.ta)})</span>`;
+      return s.km > 5
+        ? `Outside the city: ${esc(formatKm(s.km))} from ${stand}, the nearest main bus stand. Check which bus runs here with the button below.`
+        : `Nearest bus stand: ${stand}, ${s.km < 0.15 ? 'right here' : esc(formatKm(s.km)) + ' away'}. It has ${esc(s.serves)}.`;
+    })(),
     osm: esc(osmUrl(p)),
     fromTemple: p.id === 'meenakshi-amman-temple' ? 'The centre of the old city' : `${formatKm(distanceKm(p, MEENAKSHI))} from Meenakshi Amman Temple`,
     locator: locator(p),

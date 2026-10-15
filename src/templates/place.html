@@ -46,6 +46,13 @@
           <p class="note">{{fromTemple}}<span id="from-you"></span></p>
           <p class="note">Coordinates: <span class="mono">{{lat}}, {{lng}}</span> · <a href="{{osm}}" target="_blank" rel="noopener noreferrer">OpenStreetMap</a></p>
           <button class="chip" id="near-me" type="button"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#locate"/></svg>How far is it from me?</button>
+          <div class="bus">
+            <h3><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#bus"/></svg>By bus</h3>
+            <p>{{busLine}}</p>
+            <p id="bus-you" class="note" aria-live="polite"></p>
+            <a class="btn btn--sm" href="{{bus}}" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#bus"/></svg>Bus route from my location</a>
+            <p class="note">Opens Google Maps public-transport directions from where you are. Route boards on Madurai buses are mostly in Tamil, so show the stand's Tamil name to the conductor.</p>
+          </div>
         </div>
         {{tips}}
         <div class="card">
