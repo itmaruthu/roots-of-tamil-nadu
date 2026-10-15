@@ -629,3 +629,27 @@ section[id] { scroll-margin-top: 84px; }
 .cc-title [lang="ta"] { color: var(--accent, #B3261E); }
 .cc-title small { flex-basis: 100%; font-size: .8rem; font-weight: 500; letter-spacing: .04em; opacity: .75; }
 .cc-about { margin: 0 0 12px; font-size: .9rem; line-height: 1.5; opacity: .85; }
+
+/* ---------- Homecoming ---------- */
+.homecoming { background: color-mix(in srgb, var(--accent) 7%, var(--bg)); }
+.home-steps { list-style: none; margin: 0 0 24px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; counter-reset: h; }
+@media (max-width: 860px) { .home-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .home-steps { grid-template-columns: minmax(0, 1fr); } }
+.home-steps li { counter-increment: h; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 4px; }
+.home-steps li::before { content: counter(h); width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--on-accent); font: 700 16px var(--font-mono); margin-bottom: 6px; }
+.home-steps span { color: var(--muted); font-size: 15px; }
+.home-pick { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; }
+.home-pick .field { flex: 1 1 280px; }
+.roots-page .join-grid { padding-bottom: 32px; }
+.roots-plan { padding-bottom: 64px; display: flex; flex-direction: column; gap: 20px; scroll-margin-top: 80px; }
+.roots-plan-head { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 24px; align-items: end; }
+@media (max-width: 860px) { .roots-plan-head { grid-template-columns: minmax(0, 1fr); } }
+.roots-plan-head h2 { font-size: clamp(28px, 4vw, 42px); text-wrap: balance; }
+.roots-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.roots-actions .note { flex-basis: 100%; }
+.roots-days { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.roots-day { background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--accent); border-radius: 14px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.roots-day-n { font: 700 12px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 0; }
+.roots-day h3 { font-size: 20px; margin: 0; }
+.roots-day ul { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 4px; font-size: 15px; }
+.roots-links a { font-weight: 600; }

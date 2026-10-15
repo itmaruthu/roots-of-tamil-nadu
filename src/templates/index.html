@@ -24,8 +24,9 @@
       <h1 id="hero-title">Madurai never sleeps</h1>
       <p class="lead">A 2,500-year-old temple city that wakes at 4 am for halwa and still serves parotta at 1 am. See what is open right now, where it is, and the story behind every stop.</p>
       <div class="hero-actions">
-        <a class="btn" href="#clock"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#play"/></svg>Play the 24 hours</a>
-        <a class="btn btn--ghost" href="#explore"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#pin"/></svg>Open the live map</a>
+        <a class="btn" href="{{base}}roots.html"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#pin"/></svg>Find your roots</a>
+        <a class="btn btn--ghost" href="#clock"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#play"/></svg>Play the 24 hours</a>
+        <a class="btn btn--ghost" href="#explore">Open the live map</a>
       </div>
       <ul class="hero-stats">
         <li><b>{{count}}</b><span>places with real hours</span></li>
@@ -33,6 +34,28 @@
         <li><b>4 am</b><span>first halwa</span></li>
         <li><b>1 am</b><span>last parotta</span></li>
       </ul>
+    </div>
+  </section>
+
+
+  <section id="homecoming" class="section homecoming" aria-labelledby="home-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Homecoming · <span lang="ta">வேர்களைத் தேடி</span></p>
+        <h2 id="home-title">Bring the Tamil world home</h2>
+        <p class="lead">Tamil families live across the world, from Singapore to Dubai to Toronto. Roots helps them come back to the native village and the family temple, with a local friend waiting. We start in Madurai, where our team knows every street, and grow district by district across Tamil Nadu.</p>
+      </div>
+      <ol class="home-steps">
+        <li><b>Find your roots</b><span>Native district, village and kuladeivam temple.</span></li>
+        <li><b>Ooru Nanbar</b><span>A verified local friend welcomes you and finds the old house and temple.</span></li>
+        <li><b>Homecoming trip</b><span>Village, family temple, heritage and food, day by day.</span></li>
+        <li><b>Every district</b><span>All 38 districts, with Madurai first.</span></li>
+      </ol>
+      <form class="home-pick" action="{{base}}roots.html" method="get">
+        <label class="field">Where is your family from?<select name="district" required><option value="">Choose your native district</option>{{districtOptions}}</select></label>
+        <button class="btn" type="submit">Plan my homecoming</button>
+        <a class="btn btn--ghost" href="{{base}}join.html?type=ooru-nanbar">Become an Ooru Nanbar</a>
+      </form>
     </div>
   </section>
 

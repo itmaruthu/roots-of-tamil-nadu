@@ -18,6 +18,11 @@ if (waNumber) {
   $('#join-wa-note').hidden = true;
 }
 
+if (new URLSearchParams(location.search).get('type') === 'ooru-nanbar') {
+  const r = document.querySelector('input[name="type"][value^="Ooru Nanbar"]');
+  if (r) r.checked = true;
+}
+
 function details(data) {
   return Object.entries(LABELS)
     .map(([k, label]) => [label, (data.get(k) || '').toString().trim()])

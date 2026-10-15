@@ -1,8 +1,35 @@
-# Roots of Tamil Nadu — Madurai Never Sleeps
+# Roots of Tamil Nadu — Bring the Tamil world home
 
-A fast, static, SEO-ready website that shows what is open in Madurai, hour by hour: temples, heritage sites, eateries, the flower market and stays, each pinned at its real coordinates.
+**யாதும் ஊரே · Every town is our town** · by Team M2P Nexus, Madurai · *வேரிலிருந்து வெற்றிவரை — From Roots to Success*
 
-Built for the **Tamil Nadu Tourism Innovation Challenge 2026** (themes: Culinary, Heritage & Culture, Digital).
+Our entry for the **Tamil Nadu Tourism Innovation Challenge 2026** (stage: POC / prototype).
+
+**Live prototype:** https://itmaruthu.github.io/roots-of-tamil-nadu/
+
+## The idea
+
+Tamil Nadu draws huge numbers of visitors, but most trips are short and little of the spend reaches villages, home cooks and local guides. About 2.2 million people of Tamil Nadu origin live abroad, and many want to show their children the native village and family temple, but have no way to find it or plan the trip. The state's own *Reaching Your Roots* (Vergalai Thedi) scheme does this for 200 diaspora youth a year.
+
+Roots scales that to every family, for the whole state, starting in Madurai:
+
+1. **Find your roots**: a family enters their native district, village and kuladeivam temple.
+2. **Ooru Nanbar**: a verified local friend welcomes them, finds the old house and the temple, and introduces the elders.
+3. **Homecoming trip**: village, family temple, heritage and the food of the district, day by day.
+4. **Live layer for every traveller**: what is open right now on a 24-hour clock, small messes and village hosts, city bus routes, festivals in every season, and **Aatruppadai**, a Tamil–English guide named after the Sangam poems that show travellers the way.
+
+Ideas borrowed from around the world and made Tamil: Ireland's diaspora welcome network (Ooru Nanbar), Copenhagen's CopenPay (Aram rewards), Kyoto's crowd forecasts (Live wait), Japan's stamp rallies (Arupadai Veedu passport) and Kerala's Responsible Tourism (village stays).
+
+## What works today
+
+| Feature | Where |
+| --- | --- |
+| Find your roots: homecoming planner for all 38 districts | `roots.html` |
+| Become an Ooru Nanbar / list your place | `join.html` |
+| 73 places with live hours, 24-hour clock, 3D map, 100 km day trips | home page |
+| City bus routes from Periyar, MGR (Mattuthavani) and Arappalayam stands | each place page |
+| Aatruppadai guide, Live wait tokens, festivals for every season, approved cabs | home page |
+
+The submitted version is preserved in the private repository `roots-of-tamil-nadu-submission`.
 
 ## Quick start
 

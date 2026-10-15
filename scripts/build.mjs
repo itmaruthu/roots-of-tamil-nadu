@@ -29,6 +29,7 @@ const data = JSON.parse(await readFile(join(SRC, 'data/places.json'), 'utf8'));
 const bus = JSON.parse(await readFile(join(SRC, 'data/bus.json'), 'utf8'));
 const festivals = JSON.parse(await readFile(join(SRC, 'data/festivals.json'), 'utf8'));
 const guide = JSON.parse(await readFile(join(SRC, 'data/guide.json'), 'utf8'));
+const districtData = JSON.parse(await readFile(join(SRC, 'data/districts.json'), 'utf8'));
 const credits = existsSync(join(SRC, 'data/credits.json')) ? JSON.parse(await readFile(join(SRC, 'data/credits.json'), 'utf8')) : {};
 const places = data.places;
 const BUILD_DATE = new Date().toISOString().slice(0, 10);
@@ -109,6 +110,7 @@ const header = (base) => `<header class="site-header">
   <div class="wrap">
     <a class="brand" href="${base}index.html" aria-label="${esc(config.name)} home"><img src="${base}assets/img/brand/logo.svg" alt="" width="36" height="36"><span>Roots<small>of Tamil Nadu · Madurai</small></span></a>
     <nav class="nav" aria-label="Primary">
+      <a href="${base}roots.html">Find your roots</a>
       <a href="${base}index.html#clock">24 hours</a>
       <a href="${base}index.html#explore">Map</a>
       <a href="${base}index.html#live">Live wait</a>
@@ -125,7 +127,7 @@ function footer(base) {
   <div class="wrap">
     <div class="footer-note">
       <a class="brand" href="${base}index.html"><img src="${base}assets/img/brand/logo.svg" alt="" width="36" height="36"><span>Roots<small>of Tamil Nadu</small></span></a>
-      <p>Authentic food, temples and heritage of Madurai, hour by hour. Built for the Tamil Nadu Tourism Innovation Challenge 2026.</p>
+      <p>Bringing the Tamil world home: homecoming trips, heritage and food for every Tamil family. Madurai first, every district next. Built for the Tamil Nadu Tourism Innovation Challenge 2026.</p>
       <p>Opening hours come from public listings and shop signboards (last checked ${esc(config.dataCheckedOn)}). Hosts confirm their own details before launch; always check before you travel.</p>
       <p>No cookies, no ads, no trackers. "Near me" uses your location only on your device.</p>
       <p>Built by Team M2P Nexus, Madurai. <a href="mailto:${esc(config.contactEmail)}">${esc(config.contactEmail)}</a> · <a href="tel:${esc(config.contactPhone.replace(/\s/g, ''))}">${esc(config.contactPhone)}</a></p>
@@ -333,6 +335,7 @@ function festivalsHtml(base) {
 async function renderHome(base, path) {
   const tpl = await readFile(join(SRC, 'templates/index.html'), 'utf8');
   return fill(tpl, {
+    districtOptions: districtData.districts.map((d) => `<option value="${esc(d.id)}">${esc(d.name)} · ${esc(d.ta)}</option>`).join(''),
     base,
     head: head({
       title: 'Madurai Never Sleeps · What’s open now in the temple city | Roots of Tamil Nadu',
@@ -485,6 +488,14 @@ ${footer('')}
 </html>
 `);
   }
+  const rootsTpl = await readFile(join(SRC, 'templates/roots.html'), 'utf8');
+  await writeFile(join(DIST, 'roots.html'), fill(rootsTpl, {
+    base: '',
+    head: head({ title: 'Find your roots: plan a homecoming to your native village | Roots of Tamil Nadu', description: 'Tamil families abroad: tell us your native district, village and kuladeivam temple and get a homecoming trip with a verified local friend, the Ooru Nanbar.', path: '/roots.html', base: '' }),
+    header: header(''), footer: footer(''),
+    email: esc(config.contactEmail),
+    districtOptions: districtData.districts.map((d) => `<option value="${esc(d.id)}">${esc(d.name)} · ${esc(d.ta)}</option>`).join('')
+  }));
   const joinTpl = await readFile(join(SRC, 'templates/join.html'), 'utf8');
   await writeFile(join(DIST, 'join.html'), fill(joinTpl, {
     base: '',
@@ -494,7 +505,7 @@ ${footer('')}
   }));
   for (const p of places) await writeFile(join(DIST, 'places', `${p.id}.html`), await renderPlace(p));
 
-  const urls = [{ loc: `${SITE}/`, pri: '1.0' }, { loc: `${SITE}/join.html`, pri: '0.8' }, ...places.map((p) => ({ loc: placeUrl(p), pri: p.featured ? '0.9' : '0.7', img: p.image && absImage(p) }))];
+  const urls = [{ loc: `${SITE}/`, pri: '1.0' }, { loc: `${SITE}/roots.html`, pri: '0.9' }, { loc: `${SITE}/join.html`, pri: '0.8' }, ...places.map((p) => ({ loc: placeUrl(p), pri: p.featured ? '0.9' : '0.7', img: p.image && absImage(p) }))];
   await writeFile(join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${urls.map((u) => `  <url><loc>${esc(u.loc)}</loc><lastmod>${BUILD_DATE}</lastmod><priority>${u.pri}</priority>${u.img ? `<image:image><image:loc>${esc(u.img)}</image:loc></image:image>` : ''}</url>`).join('\n')}
@@ -552,7 +563,7 @@ ${urls.map((u) => `  <url><loc>${esc(u.loc)}</loc><lastmod>${BUILD_DATE}</lastmo
   const v = hash.digest('hex').slice(0, 10);
   await rename(join(DIST, 'assets/js'), join(DIST, `assets/js-${v}`));
   await rename(join(DIST, 'assets/css'), join(DIST, `assets/css-${v}`));
-  const htmlFiles = ['index.html', 'join.html', 'credits.html', '404.html', ...(await readdir(join(DIST, 'places'))).map((f) => `places/${f}`)].map((f) => join(DIST, f));
+  const htmlFiles = ['index.html', 'join.html', 'roots.html', 'credits.html', '404.html', ...(await readdir(join(DIST, 'places'))).map((f) => `places/${f}`)].map((f) => join(DIST, f));
   htmlFiles.push(join(ROOT, '.preview', 'index.html'));
   for (const f of htmlFiles) {
     if (!existsSync(f)) continue;
