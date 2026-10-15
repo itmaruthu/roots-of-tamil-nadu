@@ -164,15 +164,40 @@ function render(f, res) {
   box.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-await load();
-$('#roots-form').addEventListener('submit', (e) => {
+// Load data once; the button works even if clicked before the data arrives.
+const ready = load();
+const form = $('#roots-form');
+
+async function go() {
+  const btn = form.querySelector('button[type=submit]');
+  btn.disabled = true; btn.textContent = 'Planning…';
+  try {
+    await ready;
+    const f = Object.fromEntries(new FormData(form));
+    f.kids = $('#r-kids').checked; f.tamil = $('#r-tamil').checked;
+    for (const k of ['village', 'temple', 'family', 'from']) f[k] = (f[k] || '').trim();
+    render(f, plan(f));
+  } catch (err) {
+    const box = $('#roots-plan');
+    box.replaceChildren(el('p', { class: 'note' }, 'Sorry, the plan could not load. Please refresh the page and try again.'));
+    box.hidden = false;
+    console.error(err);
+  } finally {
+    btn.disabled = false; btn.textContent = 'Plan my homecoming';
+  }
+}
+
+form.addEventListener('submit', (e) => {
   e.preventDefault();
-  const form = e.currentTarget;
-  if (!form.reportValidity()) return;
-  const f = Object.fromEntries(new FormData(form));
-  f.kids = $('#r-kids').checked; f.tamil = $('#r-tamil').checked;
-  for (const k of ['village', 'temple', 'family', 'from']) f[k] = (f[k] || '').trim();
-  render(f, plan(f));
+  if (form.reportValidity()) go();
 });
+
+// Arriving from the home page with a district chosen: show the plan straight away.
 const pre = new URLSearchParams(location.search).get('district');
-if (pre && districts.some((d) => d.id === pre)) $('#r-district').value = pre;
+if (pre) {
+  ready.then(() => {
+    if (!districts.some((d) => d.id === pre)) return;
+    $('#r-district').value = pre;
+    go();
+  });
+}
