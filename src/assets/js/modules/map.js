@@ -16,8 +16,12 @@ export const LANDMARKS = {
   'keeladi-museum': 'Keeladi',
   'samanar-hills': 'Samanar Hills',
   'yoga-narasimha-temple-yanaimalai': 'Yanaimalai',
-  'vandiyur-mariamman-teppakulam': 'Teppakulam'
+  'vandiyur-mariamman-teppakulam': 'Teppakulam',
+  'alanganallur-jallikattu-vadivasal': 'Jallikattu',
+  'jallikattu-arena-alanganallur': 'Jallikattu Arena',
+  'pathu-thoon-ten-pillars': 'Ten Pillars'
 };
+const STAR = new Set(['keeladi-museum', 'alanganallur-jallikattu-vadivasal', 'jallikattu-arena-alanganallur', 'pathu-thoon-ten-pillars']);
 const BIG = new Set(['meenakshi-amman-temple', 'thiruparankundram-murugan-temple', 'kallazhagar-temple-alagar-kovil', 'pazhamudircholai-murugan-temple', 'pandi-muneeswarar-temple']);
 
 /**
@@ -98,7 +102,7 @@ export function drawMap(root, { places, view, selected, isOpen, onSelect, me, ti
     const isSel = p.id === selected;
     const group = TYPES[p.type].group;
     const g = svg('g', {
-      class: `marker marker--${group}${open ? ' is-open' : ''}${isSel ? ' is-selected' : ''}`,
+      class: `marker marker--${group}${open ? ' is-open' : ''}${isSel ? ' is-selected' : ''}${STAR.has(p.id) ? ' is-star' : ''}`,
       transform: `translate(${x.toFixed(1)} ${y.toFixed(1)})`,
       tabindex: '0', role: 'button',
       'aria-label': `${p.name}, ${open ? 'open' : 'closed'}`,
@@ -125,7 +129,8 @@ export function drawMap(root, { places, view, selected, isOpen, onSelect, me, ti
         g.append(svg('circle', { cy: -h - 6 * k, r: 2.6 * k, class: 'kalasam' }));
         top = -h - 10 * k;
       } else {
-        const h = (open ? 30 : 22) * k, r = (open ? 10 : 7.5) * k;
+        const boost = STAR.has(p.id) ? 1.45 : 1;
+        const h = (open ? 30 : 22) * k * boost, r = (open ? 10 : 7.5) * k * boost;
         g.append(svg('line', { x1: 0, y1: 0, x2: 0, y2: -h, class: 'pin-stem' }));
         if (open && p.type !== 'stay') g.append(svg('circle', { cy: -h, r, class: 'marker-pulse' }));
         g.append(svg('circle', { cy: -h, r, class: 'marker-dot' }));
@@ -134,7 +139,7 @@ export function drawMap(root, { places, view, selected, isOpen, onSelect, me, ti
         top = -h - r;
       }
     } else {
-      const r = p.id === 'meenakshi-amman-temple' ? 15 : BIG.has(p.id) ? 13 : open ? 11 : 8;
+      const r = p.id === 'meenakshi-amman-temple' ? 15 : BIG.has(p.id) || STAR.has(p.id) ? 13 : open ? 11 : 8;
       if (open && p.type !== 'stay') g.append(svg('circle', { r, class: 'marker-pulse' }));
       g.append(svg('circle', { r, class: 'marker-dot' }));
       const sz = (r * 1.3) / 24;
@@ -143,7 +148,7 @@ export function drawMap(root, { places, view, selected, isOpen, onSelect, me, ti
     }
     root.append(g);
     const name = LANDMARKS[p.id];
-    if (name && (view !== 'old' || BIG.has(p.id)) || isSel) labels.push({ x, y: y + top - 6, text: name || p.name, sel: isSel });
+    if (name && (view !== 'old' || BIG.has(p.id) || p.id === 'pathu-thoon-ten-pillars') || isSel) labels.push({ x, y: y + top - 6, text: name || p.name, sel: isSel });
   }
 
   // Labels on top of everything, with a halo for legibility.

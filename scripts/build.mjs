@@ -275,6 +275,38 @@ function featured(base) {
   }).join('\n');
 }
 
+const HIGHLIGHTS = [
+  { id: 'keeladi-museum', stat: '2,000+', unit: 'years', tag: 'Keeladi · Sangam-age town', title: 'Keeladi: where Tamil history was dug up',
+    text: 'A brick-built town on the Vaigai with ring wells, drains and pottery scratched with Tamil-Brahmi letters. The museum tells the story; the open-air dig site is a kilometre away.' },
+  { id: 'alanganallur-jallikattu-vadivasal', stat: '3', unit: 'villages, 3 days', tag: 'Jallikattu · every Pongal', title: 'Jallikattu: Madurai’s bull-taming festival',
+    text: 'In mid-January Avaniyapuram, Palamedu and Alanganallur hold jallikattu on consecutive days. Any time of year you can stand at the Alanganallur vadivasal or walk the new 67-acre arena.',
+    also: 'jallikattu-arena-alanganallur' },
+  { id: 'pathu-thoon-ten-pillars', stat: '12 m', unit: 'granite pillars', tag: 'Pathu Thoon · Nayak palace', title: 'Pathu Thoon: the Ten Pillars',
+    text: 'Ten giant pillars of Thirumalai Nayak’s lost Rangavilasam palace, standing in a lane of textile shops behind the Mahal. Most visitors walk past without knowing.' }
+];
+
+function highlightsHtml(base) {
+  return HIGHLIGHTS.map((h) => {
+    const p = places.find((x) => x.id === h.id);
+    if (!p) return '';
+    const plan = planFor(bus, h.id, 'PERIYAR BUS STAND');
+    const busLine = plan ? `Bus ${plan.legs.map((l) => l.buses.slice(0, 3).join(', ')).join(' then ')} from Periyar to ${niceStop(plan.to)}` : '';
+    const also = h.also && places.find((x) => x.id === h.also);
+    return `<article class="highlight">
+      <p class="highlight-stat"><b>${esc(h.stat)}</b> <span>${esc(h.unit)}</span></p>
+      <p class="eyebrow">${esc(h.tag)}</p>
+      <h3><a href="${base}places/${esc(h.id)}.html">${esc(h.title)}</a></h3>
+      <p>${esc(h.text)}</p>
+      <dl class="feature-facts">
+        <dt>Where</dt><dd>${esc(p.area)}</dd>
+        <dt>Hours</dt><dd>${esc(p.hours)}</dd>
+        ${busLine ? `<dt>Bus</dt><dd>${esc(busLine)}</dd>` : ''}
+      </dl>
+      <div class="chips"><a class="btn btn--sm" href="${base}places/${esc(h.id)}.html">Plan a visit</a>${also ? `<a class="btn btn--sm btn--ghost" href="${base}places/${esc(also.id)}.html">${esc(also.name)}</a>` : ''}</div>
+    </article>`;
+  }).join('\n');
+}
+
 function festivalsHtml(base) {
   return festivals.seasons.map((s) => `<article class="season" data-months="${s.months.join(',')}">
       <header><p class="season-range">${esc(s.range)}</p><h3>${esc(s.name)} <span lang="ta">${esc(s.ta)}</span></h3><p class="season-weather">${esc(s.weather)}</p><span class="season-now" hidden>Now</span></header>
@@ -302,6 +334,7 @@ async function renderHome(base, path) {
     templeCount: String(places.filter((p) => p.type === 'temple').length),
     postcards: postcards(base),
     featured: featured(base),
+    highlights: highlightsHtml(base),
     festivals: festivalsHtml(base),
     directory: directory(base)
   });
@@ -360,7 +393,7 @@ async function renderPlace(p) {
       if (!stop) return '';
       const hub = bus.hubs[stop] || bus.stopCoords?.[stop];
       const walk = hub ? distanceKm(p, hub) : null;
-      return `Get off at <b>${esc(niceStop(stop))}</b> <span lang="ta">(${esc(bus.ta[stop] || '')})</span>${walk !== null && walk > 0.15 ? `, about ${esc(formatKm(walk))} on foot from here` : ''}.`;
+      return `Get off at <b>${esc(niceStop(stop))}</b> <span lang="ta">(${esc(bus.ta[stop] || '')})</span>${walk === null || walk <= 0.15 ? '' : walk > 1.5 ? `, then about ${esc(formatKm(walk))} by auto or on foot` : `, about ${esc(formatKm(walk))} on foot from here`}.`;
     })(),
     busPlan: MAIN_STANDS.map((h) => bus.places[p.id] === h
       ? `<div class="bus-from"><p class="bus-head">${esc(niceStop(h))}</p><p>This place is at the bus stand. Walk from here.</p></div>`

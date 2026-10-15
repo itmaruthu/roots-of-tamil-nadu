@@ -498,6 +498,68 @@
       ]
     },
     {
+      "id": "pathu-thoon-ten-pillars",
+      "name": "Pathu Thoon (Ten Pillars)",
+      "type": "heritage",
+      "lat": 9.9166743,
+      "lng": 78.1235034,
+      "area": "Mahal area, behind the Nayakkar Mahal",
+      "address": "Pathu Thoon Street, Mahal Area, Madurai 625001",
+      "h": [
+        [
+          0,
+          24
+        ]
+      ],
+      "hours": "Open street, any time; best in daylight",
+      "story": "Ten granite pillars about 12 m tall, all that stands of the Rangavilasam wing of Thirumalai Nayak's palace, where his brother Muthialu Nayak lived. Today they rise from a lane of textile shops.",
+      "tips": [
+        "Pair with the Nayakkar Mahal",
+        "Look up between the shops"
+      ]
+    },
+    {
+      "id": "alanganallur-jallikattu-vadivasal",
+      "name": "Alanganallur Jallikattu Vadivasal",
+      "type": "heritage",
+      "lat": 10.0471746,
+      "lng": 78.0905551,
+      "area": "Alanganallur, 15 km north",
+      "address": "Vadivasal, Alanganallur, Madurai district 625501",
+      "h": [
+        [
+          6,
+          18
+        ]
+      ],
+      "hours": "Village gate, daylight. Jallikattu: mid-January, during Pongal",
+      "story": "The most famous vadivasal in Tamil Nadu. Once a year at Pongal, bulls burst from this gate and tamers try to hold on to the hump. The other days, it is a quiet village lane with the gate and galleries.",
+      "tips": [
+        "January: arrive before dawn",
+        "Watch from the galleries only"
+      ]
+    },
+    {
+      "id": "jallikattu-arena-alanganallur",
+      "name": "Kalaignar Centenary Jallikattu Arena",
+      "type": "heritage",
+      "lat": 10.0754262,
+      "lng": 78.0576984,
+      "area": "Keelakarai, near Alanganallur",
+      "address": "Keelakarai, Alanganallur, Madurai district 625501",
+      "h": [
+        [
+          9,
+          17
+        ]
+      ],
+      "hours": "9 am–5 pm",
+      "story": "A 67-acre arena the state opened in 2024 for jallikattu, with galleries under the hills. Outside the season visitors can walk the ground and see where the bulls run.",
+      "tips": [
+        "Combine with Alanganallur vadivasal"
+      ]
+    },
+    {
       "id": "mattuthavani-flower-market",
       "name": "Mattuthavani flower market",
       "type": "market",

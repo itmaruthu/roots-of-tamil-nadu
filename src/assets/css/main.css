@@ -546,3 +546,23 @@ section[id] { scroll-margin-top: 84px; }
 .map-tag.is-selected { fill: var(--accent); }
 .map-ring--3d { fill: color-mix(in srgb, var(--marigold) 7%, transparent); stroke: color-mix(in srgb, var(--gold) 55%, var(--line)); stroke-width: 1.6; }
 .map.is-3d .map-label { font-size: 12px; }
+
+/* ---------- Only in Madurai ---------- */
+.only { background: var(--ink); color: var(--bg); }
+.only .section-head h2, .only .lead { color: var(--bg); }
+.only .lead { opacity: .8; }
+.only .eyebrow { color: var(--marigold); }
+.highlights { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 18px; }
+.highlight { border: 1px solid color-mix(in srgb, var(--bg) 18%, transparent); border-radius: 20px; padding: 22px; display: flex; flex-direction: column; gap: 10px; background: color-mix(in srgb, var(--bg) 5%, transparent); }
+.highlight h3 { margin: 0; font-size: 24px; }
+.highlight h3 a { color: var(--bg); text-decoration: none; }
+.highlight h3 a:hover { text-decoration: underline; }
+.highlight > p { margin: 0; }
+.highlight-stat { display: flex; align-items: baseline; gap: 10px; }
+.highlight-stat b { font: 700 56px/1 var(--font-display, 'Playfair Display', serif); color: var(--marigold); }
+.highlight-stat span { font-size: 14px; letter-spacing: .06em; text-transform: uppercase; opacity: .75; }
+.highlight .feature-facts dt { color: color-mix(in srgb, var(--bg) 60%, transparent); }
+.highlight .chips { margin-top: auto; padding-top: 6px; }
+.highlight .btn--ghost { color: var(--bg); border-color: color-mix(in srgb, var(--bg) 40%, transparent); }
+.marker.is-star .marker-dot { stroke: var(--marigold); stroke-width: 3; }
+.marker.is-star .pin-stem { stroke: var(--gold); stroke-width: 3; }
