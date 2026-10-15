@@ -2,42 +2,176 @@
   "note": "Festival dates follow the Tamil calendar and move each year. Months are approximate; confirm dates with the temple before you travel.",
   "seasons": [
     {
-      "id": "summer", "name": "Summer", "ta": "இளவேனில் · முதுவேனில்", "months": [3, 4, 5],
-      "range": "March – May", "weather": "Hot days (often 35–40 °C). Go early morning and after sunset.",
+      "id": "summer",
+      "name": "Summer",
+      "ta": "இளவேனில் · முதுவேனில்",
+      "months": [
+        3,
+        4,
+        5
+      ],
+      "range": "March – May",
+      "weather": "Hot days (often 35–40 °C). Go early morning and after sunset.",
       "festivals": [
-        { "name": "Panguni Brahmotsavam", "month": "Panguni · Mar–Apr", "place": "thiruparankundram-murugan-temple", "where": "Thiruparankundram", "text": "The temple's great festival, celebrating Murugan's wedding to Deivanai here." },
-        { "name": "Chithirai Thiruvizha", "month": "Chithirai · Apr–May", "place": "meenakshi-amman-temple", "where": "Meenakshi Temple", "text": "Madurai's biggest festival: Meenakshi's celestial wedding, the temple chariots and the city's busiest days of the year.", "big": true },
-        { "name": "Kallazhagar enters the Vaigai", "month": "Chithirai full moon", "place": "kallazhagar-temple-alagar-kovil", "where": "Alagar Kovil → Madurai", "text": "Alagar travels from his hill temple to Madurai. Ethir Sevai welcomes him; he enters the Vaigai on the full moon.", "big": true },
-        { "name": "Vaikasi Visakam", "month": "Vaikasi · May–Jun", "place": "thiruparankundram-murugan-temple", "where": "Thiruparankundram", "text": "Murugan's birth star, celebrated at his first abode." }
+        {
+          "name": "Panguni Brahmotsavam",
+          "month": "Panguni · Mar–Apr",
+          "place": "thiruparankundram-murugan-temple",
+          "where": "Thiruparankundram",
+          "text": "The temple's great festival, celebrating Murugan's wedding to Deivanai here."
+        },
+        {
+          "name": "Chithirai Thiruvizha",
+          "month": "Chithirai · Apr–May",
+          "place": "meenakshi-amman-temple",
+          "where": "Meenakshi Temple",
+          "text": "Madurai's biggest festival: Meenakshi's celestial wedding, the temple chariots and the city's busiest days of the year.",
+          "big": true
+        },
+        {
+          "name": "Kallazhagar enters the Vaigai",
+          "month": "Chithirai full moon",
+          "place": "kallazhagar-temple-alagar-kovil",
+          "where": "Alagar Kovil → Madurai",
+          "text": "Alagar travels from his hill temple to Madurai. Ethir Sevai welcomes him; he enters the Vaigai on the full moon.",
+          "big": true
+        },
+        {
+          "name": "Vaikasi Visakam",
+          "month": "Vaikasi · May–Jun",
+          "place": "thiruparankundram-murugan-temple",
+          "where": "Thiruparankundram",
+          "text": "Murugan's birth star, celebrated at his first abode."
+        }
       ]
     },
     {
-      "id": "monsoon", "name": "Light monsoon", "ta": "கார்", "months": [6, 7, 8, 9],
-      "range": "June – September", "weather": "Madurai gets little of the south-west monsoon: warm, breezy, occasional showers.",
+      "id": "monsoon",
+      "name": "Light monsoon",
+      "ta": "கார்",
+      "months": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "range": "June – September",
+      "weather": "Madurai gets little of the south-west monsoon: warm, breezy, occasional showers.",
       "festivals": [
-        { "name": "Aadi Brahmotsavam and car festival", "month": "Aadi · Jul–Aug", "place": "kallazhagar-temple-alagar-kovil", "where": "Alagar Kovil", "text": "Ten days of festival at the hill temple; the great chariot is pulled on the Aadi full moon.", "big": true },
-        { "name": "Unity feast", "month": "15 August", "place": "pandi-muneeswarar-temple", "where": "Pandi Kovil", "text": "Every Independence Day, thousands sit together for a communal meal at Pandi Muneeswarar's temple." },
-        { "name": "Avani Moola festival", "month": "Avani · Aug–Sep", "place": "meenakshi-amman-temple", "where": "Meenakshi Temple", "text": "Processions on the Avani Moola streets retell Shiva's sacred plays in Madurai." }
+        {
+          "name": "Aadi Brahmotsavam and car festival",
+          "month": "Aadi · Jul–Aug",
+          "place": "kallazhagar-temple-alagar-kovil",
+          "where": "Alagar Kovil",
+          "text": "Ten days of festival at the hill temple; the great chariot is pulled on the Aadi full moon.",
+          "big": true
+        },
+        {
+          "name": "Unity feast",
+          "month": "15 August",
+          "place": "pandi-muneeswarar-temple",
+          "where": "Pandi Kovil",
+          "text": "Every Independence Day, thousands sit together for a communal meal at Pandi Muneeswarar's temple."
+        },
+        {
+          "name": "Avani Moola festival",
+          "month": "Avani · Aug–Sep",
+          "place": "meenakshi-amman-temple",
+          "where": "Meenakshi Temple",
+          "text": "Processions on the Avani Moola streets retell Shiva's sacred plays in Madurai."
+        }
       ]
     },
     {
-      "id": "rains", "name": "Festive rains", "ta": "கூதிர் · முன்பனி", "months": [10, 11, 12],
-      "range": "October – December", "weather": "The north-east monsoon brings Madurai's real rain. Green and cooler; carry an umbrella.",
+      "id": "rains",
+      "name": "Festive rains",
+      "ta": "கூதிர் · முன்பனி",
+      "months": [
+        10,
+        11,
+        12
+      ],
+      "range": "October – December",
+      "weather": "The north-east monsoon brings Madurai's real rain. Green and cooler; carry an umbrella.",
       "festivals": [
-        { "name": "Navaratri", "month": "Purattasi · Sep–Oct", "place": "meenakshi-amman-temple", "where": "Meenakshi Temple", "text": "Nine nights; the goddess wears a different form each evening and homes set out golu dolls." },
-        { "name": "Kanda Sashti", "month": "Aippasi · Oct–Nov", "place": "thiruparankundram-murugan-temple", "where": "Thiruparankundram", "text": "The temple's most important festival. Murugan's victory over Surapadman is enacted on the sixth day.", "big": true },
-        { "name": "Karthigai Deepam", "month": "Karthigai · Nov–Dec", "place": "thiruparankundram-murugan-temple", "where": "Thiruparankundram", "text": "Lamps everywhere, and a great lamp lit on the hill." },
-        { "name": "Vaikunta Ekadasi", "month": "Margazhi · Dec–Jan", "place": "kallazhagar-temple-alagar-kovil", "where": "Alagar Kovil", "text": "One of Alagar's most important days, with crowds through the night." }
+        {
+          "name": "Navaratri",
+          "month": "Purattasi · Sep–Oct",
+          "place": "meenakshi-amman-temple",
+          "where": "Meenakshi Temple",
+          "text": "Nine nights; the goddess wears a different form each evening and homes set out golu dolls."
+        },
+        {
+          "name": "Kanda Sashti",
+          "month": "Aippasi · Oct–Nov",
+          "place": "thiruparankundram-murugan-temple",
+          "where": "Thiruparankundram and Pazhamudircholai",
+          "text": "Murugan's victory over Surapadman, enacted on the sixth day. The biggest festival at Thiruparankundram, and celebrated at Pazhamudircholai like all six abodes.",
+          "big": true
+        },
+        {
+          "name": "Kanda Sashti at the sixth abode",
+          "month": "Aippasi · Oct–Nov",
+          "place": "pazhamudircholai-murugan-temple",
+          "where": "Pazhamudircholai",
+          "text": "Pilgrims climb the hill road above Alagar Kovil for the six days of Kanda Sashti."
+        },
+        {
+          "name": "Karthigai Deepam",
+          "month": "Karthigai · Nov–Dec",
+          "place": "thiruparankundram-murugan-temple",
+          "where": "Thiruparankundram",
+          "text": "Lamps everywhere, and a great lamp lit on the hill."
+        },
+        {
+          "name": "Vaikunta Ekadasi",
+          "month": "Margazhi · Dec–Jan",
+          "place": "kallazhagar-temple-alagar-kovil",
+          "where": "Alagar Kovil",
+          "text": "One of Alagar's most important days, with crowds through the night."
+        }
       ]
     },
     {
-      "id": "winter", "name": "Winter", "ta": "பின்பனி", "months": [1, 2],
-      "range": "January – February", "weather": "The best weather of the year: clear, mild days and cool mornings.",
+      "id": "winter",
+      "name": "Winter",
+      "ta": "பின்பனி",
+      "months": [
+        1,
+        2
+      ],
+      "range": "January – February",
+      "weather": "The best weather of the year: clear, mild days and cool mornings.",
       "festivals": [
-        { "name": "Pongal and jallikattu", "month": "Thai · mid-January", "place": "", "where": "Avaniyapuram, Palamedu, Alanganallur", "text": "The harvest festival. Madurai's famous bull-taming events run on consecutive days in three villages.", "big": true },
-        { "name": "Teppa Thiruvizha (float festival)", "month": "Thai full moon · Jan–Feb", "place": "vandiyur-mariamman-teppakulam", "where": "Vandiyur Teppakulam", "text": "Meenakshi and Sundareswarar float on a lit raft across the great tank." },
-        { "name": "Float festival", "month": "Thai · Jan–Feb", "place": "thiruparankundram-murugan-temple", "where": "Thiruparankundram", "text": "Murugan's own float festival at the foot of the hill." },
-        { "name": "Masi float festival", "month": "Masi · Feb–Mar", "place": "kallazhagar-temple-alagar-kovil", "where": "Alagar Kovil", "text": "One of Alagar Kovil's most prominent festivals." }
+        {
+          "name": "Pongal and jallikattu",
+          "month": "Thai · mid-January",
+          "place": "",
+          "where": "Avaniyapuram, Palamedu, Alanganallur",
+          "text": "The harvest festival. Madurai's famous bull-taming events run on consecutive days in three villages.",
+          "big": true
+        },
+        {
+          "name": "Teppa Thiruvizha (float festival)",
+          "month": "Thai full moon · Jan–Feb",
+          "place": "vandiyur-mariamman-teppakulam",
+          "where": "Vandiyur Teppakulam",
+          "text": "Meenakshi and Sundareswarar float on a lit raft across the great tank."
+        },
+        {
+          "name": "Float festival",
+          "month": "Thai · Jan–Feb",
+          "place": "thiruparankundram-murugan-temple",
+          "where": "Thiruparankundram",
+          "text": "Murugan's own float festival at the foot of the hill."
+        },
+        {
+          "name": "Masi float festival",
+          "month": "Masi · Feb–Mar",
+          "place": "kallazhagar-temple-alagar-kovil",
+          "where": "Alagar Kovil",
+          "text": "One of Alagar Kovil's most prominent festivals."
+        }
       ]
     }
   ]

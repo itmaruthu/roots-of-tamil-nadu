@@ -245,6 +245,7 @@ function homeSchema() {
 const FEATURED = [
   { id: 'meenakshi-amman-temple', tag: 'The heart of the city', why: 'Fourteen gopurams, the Hall of a Thousand Pillars and the goddess who rules Madurai. The old city is laid out in squares around it.' },
   { id: 'thiruparankundram-murugan-temple', tag: 'First of Murugan’s six abodes', why: 'A temple cut into the rock of a sacred hill, where Murugan married Deivanai. Kanda Sashti here is unforgettable.' },
+  { id: 'pazhamudircholai-murugan-temple', tag: 'Sixth of Murugan’s six abodes', why: 'High on the forest road above Alagar Kovil, where boy-Murugan tested the poet Avvaiyar. Cool forest air and monkeys all the way up.' },
   { id: 'kallazhagar-temple-alagar-kovil', tag: 'Alagar’s forest hill', why: 'Vishnu as Kallazhagar, Meenakshi’s brother, in a temple at the foot of the Alagar hills. Climb on to Pazhamudircholai.' },
   { id: 'pandi-muneeswarar-temple', tag: 'Madurai’s guardian', why: 'Believed to be the Pandya king Nedunchezhiyan, worshipped with pongal and offerings. A living folk temple, busy and joyful.' }
 ];
@@ -255,7 +256,8 @@ function featured(base) {
     if (!p) return '';
     const fest = festivals.seasons.flatMap((s) => s.festivals).find((f) => f.place === id && f.big) || festivals.seasons.flatMap((s) => s.festivals).find((f) => f.place === id);
     const plan = planFor(bus, id, 'PERIYAR BUS STAND');
-    const busLine = plan ? `${plan.legs[0].buses.slice(0, 4).join(', ')} from Periyar${plan.direct ? '' : `, change at ${niceStop(plan.legs[1].from)}`}` : 'Walk from Periyar Bus Stand';
+    const uphill = id === 'pazhamudircholai-murugan-temple' ? places.find((x) => x.id === 'kallazhagar-temple-alagar-kovil') : null;
+    const busLine = uphill && plan ? `${plan.legs[0].buses.slice(0, 4).join(', ')} from Periyar to Alagar Kovil, then up the hill road` : plan ? `${plan.legs[0].buses.slice(0, 4).join(', ')} from Periyar${plan.direct ? '' : `, change at ${niceStop(plan.legs[1].from)}`}` : 'Walk from Periyar Bus Stand';
     return `<article class="feature">
       <a class="feature-media" href="${base}places/${esc(id)}.html" tabindex="-1" aria-hidden="true">${picture(p, base, 480, '(max-width: 700px) 100vw, 25vw')}</a>
       <div class="feature-body">
