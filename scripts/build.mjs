@@ -313,10 +313,13 @@ function highlightsHtml(base) {
 }
 
 const CIRCUITS = [
-  { name: 'Close to Madurai', note: 'Under an hour: birds, rock hills and a poet-saint\u2019s temple', ids: ['arittapatti-biodiversity-site', 'thiruvathavur-thirumarainathar-temple', 'kutladampatti-falls', 'vettangudi-bird-sanctuary'] },
+  { name: 'Close to Madurai', note: 'Under an hour: birds, rock hills and a poet-saint\u2019s temple', ids: ['arittapatti-biodiversity-site', 'thiruvathavur-thirumarainathar-temple', 'vettangudi-bird-sanctuary'] },
   { name: 'Chettinad', note: 'Merchant palaces, handmade tiles, rock-cut Ganesha and a hill fort', ids: ['pillayarpatti-karpaga-vinayagar-temple', 'kundrakudi-murugan-temple', 'kanadukathan-chettinad-palace', 'athangudi-tiles', 'thirumayam-fort'] },
-  { name: 'Dindigul hills', note: 'A rock fort, a forest hill station and a monsoon waterfall', ids: ['dindigul-rock-fort', 'sirumalai-hills'] },
-  { name: 'Western Ghats', note: 'Dam, forest falls, Andal\u2019s tower and a pilgrim trek', ids: ['srivilliputhur-andal-temple', 'sathuragiri-hills', 'vaigai-dam', 'kumbakkarai-falls'] },
+  { name: 'Dindigul', note: 'A 17th-century fort on one giant rock', ids: ['dindigul-rock-fort'] },
+  { name: 'Waterfalls', note: 'Forest pools and cliffs of the Western Ghats; best after the rains', ids: ['kumbakkarai-falls', 'suruli-falls', 'thalaiyar-falls', 'ayyanar-falls', 'kutladampatti-falls'] },
+  { name: 'Hills', note: 'Cool air above the plains: Kodaikanal, Meghamalai and Murugan\u2019s Palani', ids: ['kodaikanal', 'palani-murugan-temple', 'meghamalai', 'sirumalai-hills'] },
+  { name: 'Western Ghats temples & dam', note: 'Andal\u2019s tower, a pilgrim trek and the Vaigai dam', ids: ['srivilliputhur-andal-temple', 'sathuragiri-hills', 'vaigai-dam'] },
+  { name: 'Rock-cut wonders', note: 'Temples and paintings carved into living rock', ids: ['kazhugumalai-vettuvan-koil', 'sittanavasal-cave', 'pillayarpatti-karpaga-vinayagar-temple'] },
   { name: 'Sivaganga & Thiruchuli', note: 'Rebel queens, the Marudhu brothers and Ramana\u2019s birthplace', ids: ['sivaganga-palace', 'kalayarkoil-temple', 'thiruchuli-thirumeninathar-temple'] }
 ];
 
@@ -394,7 +397,7 @@ async function renderPlace(p) {
     { '@type': 'ListItem', position: 1, name: 'Madurai', item: `${SITE}/` },
     { '@type': 'ListItem', position: 2, name: GROUPS[t.group].label, item: `${SITE}/#explore` },
     { '@type': 'ListItem', position: 3, name: p.name, item: placeUrl(p) }] };
-  const kind = { meal: 'Restaurant', sweet: 'Sweets & snacks', drink: 'Drinks', temple: 'Temple', heritage: 'Heritage site', market: 'Market', stay: 'Hotel' }[p.type] || `Shopping · ${TYPES[p.type].label}`;
+  const kind = { meal: 'Restaurant', sweet: 'Sweets & snacks', drink: 'Drinks', temple: 'Temple', heritage: 'Heritage site', market: 'Market', stay: 'Hotel', nature: 'Nature & falls' }[p.type] || `Shopping · ${TYPES[p.type].label}`;
   const gd = guide[p.id];
   const description = (gd ? `${gd.hook}. ${gd.why}` : `${p.name}, ${p.area}, Madurai: ${p.story} Hours: ${p.hours}.`).slice(0, 300);
   return fill(tpl, {

@@ -740,7 +740,8 @@
     "know": "Phones are kept in lockers outside.",
     "getting": "About 90 km by road, around 2 hours by car.",
     "pair": [
-      "sathuragiri-hills"
+      "sathuragiri-hills",
+      "ayyanar-falls"
     ]
   },
   "pillayarpatti-karpaga-vinayagar-temple": {
@@ -823,7 +824,8 @@
     "know": "Little shade; carry water and a hat.",
     "getting": "About 100 km by road, around 2.5 hours by car; on the Karaikudi–Pudukkottai road.",
     "pair": [
-      "kanadukathan-chettinad-palace"
+      "kanadukathan-chettinad-palace",
+      "sittanavasal-cave"
     ]
   },
   "vaigai-dam": {
@@ -852,7 +854,8 @@
     "know": "Carry cash for entry and parking; keep food away from monkeys.",
     "getting": "Buses to Theni and Periyakulam leave from Arappalayam bus stand. About 90 km by road, around 2 hours by car.",
     "pair": [
-      "vaigai-dam"
+      "vaigai-dam",
+      "suruli-falls"
     ]
   },
   "sathuragiri-hills": {
@@ -922,6 +925,132 @@
     "getting": "About 55 km by road, around an hour by car.",
     "pair": [
       "kalayarkoil-temple"
+    ]
+  },
+  "suruli-falls": {
+    "hook": "A waterfall of the siddhars",
+    "why": "Water from the Meghamalai hills drops in two stages at Suruli, into a pool where pilgrims and families bathe. The forest walk in is full of butterflies, and the caves and shrines around the falls are linked to the siddhars, Tamil Nadu's mystic saints.",
+    "see": [
+      "The two-tier falls",
+      "The forest walk from the gate",
+      "Cave shrines near the falls"
+    ],
+    "best": "June to October, mornings",
+    "spend": "2–3 hours",
+    "know": "Keep bags closed: the monkeys are bold.",
+    "getting": "Buses to Cumbum leave from Arappalayam bus stand; the falls are about 10 km beyond. About 130 km by road, around 3 hours by car.",
+    "pair": [
+      "meghamalai",
+      "kumbakkarai-falls"
+    ]
+  },
+  "ayyanar-falls": {
+    "hook": "A temple waterfall in elephant country",
+    "why": "Above Rajapalayam, a forest road leads to the Neer Kaatha Ayyanar temple and a waterfall beside it, with a longer guided trek to the main falls deeper in the forest. It is wild and beautiful, and part of an elephant reserve.",
+    "see": [
+      "The falls beside the Ayyanar temple",
+      "Birds of the Western Ghats",
+      "The guided trek to the main falls (with forest permission)"
+    ],
+    "best": "After the monsoon",
+    "spend": "Half a day",
+    "know": "The forest gate opens only on some days and closes in heavy rain; check before you go and never go deep without a guide.",
+    "getting": "About 115 km by road, around 2.5 hours by car.",
+    "pair": [
+      "srivilliputhur-andal-temple"
+    ]
+  },
+  "thalaiyar-falls": {
+    "hook": "One of Tamil Nadu's tallest waterfalls",
+    "why": "On the way up to Kodaikanal, look across the valley from the viewpoint on the ghat road: a thin silver ribbon of water falls hundreds of metres down a sheer cliff. Locals call it Rat Tail Falls. It is a breathtaking stop on the drive.",
+    "see": [
+      "The falls from the ghat-road viewpoint",
+      "The Manjalar valley below"
+    ],
+    "best": "After the monsoon, clear mornings",
+    "spend": "20 minutes (a stop on the Kodaikanal drive)",
+    "know": "The trek to the base is long and hard; most visitors enjoy it from the viewpoint.",
+    "getting": "On the Kodaikanal ghat road, about 90 km from Madurai; around 2.5 hours by car.",
+    "pair": [
+      "kodaikanal"
+    ]
+  },
+  "kodaikanal": {
+    "hook": "The princess of hill stations",
+    "why": "Climb from Madurai's heat into cool pine forest and mist. Kodaikanal's star-shaped lake is ringed by walking and cycling paths, with boats, viewpoints over the plains, homemade chocolates and eucalyptus oil. Stay a night if you can.",
+    "see": [
+      "Boating and cycling around the lake",
+      "Coaker's Walk and the valley views",
+      "Pine forest and Pillar Rocks viewpoints"
+    ],
+    "best": "March to June, and September to October",
+    "spend": "A full day, or overnight",
+    "getting": "About 120 km by road via Batlagundu and the ghat road, around 3 to 3.5 hours by car.",
+    "pair": [
+      "thalaiyar-falls",
+      "palani-murugan-temple"
+    ]
+  },
+  "palani-murugan-temple": {
+    "hook": "Murugan's third abode, on a hilltop",
+    "why": "Palani is one of the six abodes of Murugan and among India's most visited temples. Climb the steps through the hillside shrines, or ride the winch train or rope car. At the top Murugan stands as Dhandayuthapani, the renunciate with a staff. Taste the famous panchamirtham before you leave.",
+    "see": [
+      "The climb, winch or rope car",
+      "Dhandayuthapani at the summit",
+      "Palani panchamirtham"
+    ],
+    "best": "Early morning; Thai Poosam (Jan–Feb) for the great pilgrimage",
+    "spend": "Half a day",
+    "know": "Phones are deposited at the counter.",
+    "getting": "About 120 km by road via Dindigul, around 2.5–3 hours by car.",
+    "pair": [
+      "kodaikanal"
+    ]
+  },
+  "meghamalai": {
+    "hook": "Tea, mist and the high wavy mountains",
+    "why": "A narrow ghat road climbs from the Cumbum valley into Meghamalai's tea estates, lakes and evergreen forest. It is one of the least crowded hill escapes in Tamil Nadu, where you may meet elephants and giant squirrels on the way.",
+    "see": [
+      "Tea estates in the mist",
+      "The Highwavys lakes and dams",
+      "Wildlife on the ghat road"
+    ],
+    "best": "September to March",
+    "spend": "A full day, or overnight",
+    "know": "The ghat road has a forest check post with set hours; carry fuel and food.",
+    "getting": "About 130 km by road via Theni and Chinnamanur, then the ghat road; around 3.5 hours by car.",
+    "pair": [
+      "suruli-falls"
+    ]
+  },
+  "kazhugumalai-vettuvan-koil": {
+    "hook": "A temple carved out of a hilltop",
+    "why": "In the 8th century Pandya sculptors began carving a temple downward out of the top of a granite hill, like Ellora in the south. They never finished, and that is what makes it astonishing: you can see exactly how it was made. Jain beds and Tirthankara carvings line the same rock.",
+    "see": [
+      "The monolithic Vettuvan Koil",
+      "Jain sculptures and inscriptions on the hill",
+      "Views from the top"
+    ],
+    "best": "Morning or late afternoon",
+    "spend": "1.5 hours",
+    "know": "The gates usually open around 10 am.",
+    "getting": "About 130 km by road, around 3 hours by car.",
+    "pair": []
+  },
+  "sittanavasal-cave": {
+    "hook": "The Ajanta of the south",
+    "why": "Inside a small Jain cave temple carved into a rock hill are paintings more than a thousand years old: lotuses, fish, elephants and bathers on a ceiling pond. Ancient Jain stone beds lie on the hill nearby.",
+    "see": [
+      "The lotus-pond ceiling painting",
+      "The meditation hall's echo",
+      "Jain beds on the hill"
+    ],
+    "best": "Morning",
+    "spend": "1.5 hours",
+    "know": "No flash or torches near the paintings.",
+    "getting": "About 120 km by road, around 2.5 hours by car.",
+    "pair": [
+      "thirumayam-fort"
     ]
   }
 }

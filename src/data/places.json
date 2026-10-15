@@ -1353,7 +1353,13 @@
         ]
       ],
       "hours": "Daytime; flows after the rains",
-      "story": "A waterfall in the Sirumalai foothills, nicknamed Madurai's Kutralam, at its best after the monsoon."
+      "story": "A waterfall in the Sirumalai foothills, nicknamed Madurai's Kutralam, at its best after the monsoon.",
+      "image": {
+        "file": "Kutladampatti near Vadipatti by Essaar on 17102011 2.jpg",
+        "alt": "Water cascading over rocks at Kutladampatti",
+        "local": "assets/img/places/kutladampatti-falls.webp",
+        "thumb": "assets/img/places/kutladampatti-falls-480.webp"
+      }
     },
     {
       "id": "thiruvathavur-thirumarainathar-temple",
@@ -1395,7 +1401,13 @@
         ]
       ],
       "hours": "9 am–5 pm",
-      "story": "A 17th-century fort of the Madurai Nayaks on a single giant rock, later held by Hyder Ali, Tipu Sultan and the British."
+      "story": "A 17th-century fort of the Madurai Nayaks on a single giant rock, later held by Hyder Ali, Tipu Sultan and the British.",
+      "image": {
+        "file": "Temple atop the Dindigul Fort.jpg",
+        "alt": "The temple and walls on top of Dindigul Rock Fort",
+        "local": "assets/img/places/dindigul-rock-fort.webp",
+        "thumb": "assets/img/places/dindigul-rock-fort-480.webp"
+      }
     },
     {
       "id": "sirumalai-hills",
@@ -1414,7 +1426,13 @@
         ]
       ],
       "hours": "Daylight; forest check post",
-      "story": "A quiet hill station of 18 hairpin bends, forests, mist and a viewpoint over Dindigul, the nearest hills to Madurai."
+      "story": "A quiet hill station of 18 hairpin bends, forests, mist and a viewpoint over Dindigul, the nearest hills to Madurai.",
+      "image": {
+        "file": "Sirumalai Hills,viewed from Mathamalai Annai Veilankanni Church,Dindigul,TN,India.jpg",
+        "alt": "The Sirumalai hills seen from Dindigul",
+        "local": "assets/img/places/sirumalai-hills.webp",
+        "thumb": "assets/img/places/sirumalai-hills-480.webp"
+      }
     },
     {
       "id": "srivilliputhur-andal-temple",
@@ -1437,7 +1455,13 @@
         ]
       ],
       "hours": "6:30 am–1 pm, 4–9 pm",
-      "story": "Birthplace of Andal, the only woman among the Alvar saints. Its rajagopuram is the emblem of Tamil Nadu."
+      "story": "Birthplace of Andal, the only woman among the Alvar saints. Its rajagopuram is the emblem of Tamil Nadu.",
+      "image": {
+        "file": "Andal Temple.jpg",
+        "alt": "The rajagopuram of Srivilliputhur Andal temple",
+        "local": "assets/img/places/srivilliputhur-andal-temple.webp",
+        "thumb": "assets/img/places/srivilliputhur-andal-temple-480.webp"
+      }
     },
     {
       "id": "pillayarpatti-karpaga-vinayagar-temple",
@@ -1460,7 +1484,13 @@
         ]
       ],
       "hours": "6 am–1 pm, 4–8:30 pm",
-      "story": "One of the oldest rock-cut Ganesha shrines in India, cut into a hillock in Chettinad and loved by the Nagarathar community."
+      "story": "One of the oldest rock-cut Ganesha shrines in India, cut into a hillock in Chettinad and loved by the Nagarathar community.",
+      "image": {
+        "file": "Pillayarpatti temple.jpg",
+        "alt": "The gopuram of Pillayarpatti Karpaga Vinayagar temple",
+        "local": "assets/img/places/pillayarpatti-karpaga-vinayagar-temple.webp",
+        "thumb": "assets/img/places/pillayarpatti-karpaga-vinayagar-temple-480.webp"
+      }
     },
     {
       "id": "kundrakudi-murugan-temple",
@@ -1483,7 +1513,13 @@
         ]
       ],
       "hours": "5 am–12:30 pm, 4–8 pm",
-      "story": "A hillock temple of six-faced Murugan on his peacock, about 150 rock-cut steps up, a few minutes from Pillayarpatti."
+      "story": "A hillock temple of six-faced Murugan on his peacock, about 150 rock-cut steps up, a few minutes from Pillayarpatti.",
+      "image": {
+        "file": "Kundrakudi Temple Car.jpg",
+        "alt": "The temple car at Kundrakudi Murugan temple",
+        "local": "assets/img/places/kundrakudi-murugan-temple.webp",
+        "thumb": "assets/img/places/kundrakudi-murugan-temple-480.webp"
+      }
     },
     {
       "id": "kanadukathan-chettinad-palace",
@@ -1502,7 +1538,13 @@
         ]
       ],
       "hours": "10 am–6 pm (view from outside; some mansions open for a fee)",
-      "story": "The grand mansions of the Nagarathar merchants: Burma teak, Italian marble, Belgian glass and Athangudi tiles, in streets of palaces."
+      "story": "The grand mansions of the Nagarathar merchants: Burma teak, Italian marble, Belgian glass and Athangudi tiles, in streets of palaces.",
+      "image": {
+        "file": "India Tamil Nadu Kanadukathan Raja Palace.JPG",
+        "alt": "The Raja palace mansion at Kanadukathan, Chettinad",
+        "local": "assets/img/places/kanadukathan-chettinad-palace.webp",
+        "thumb": "assets/img/places/kanadukathan-chettinad-palace-480.webp"
+      }
     },
     {
       "id": "athangudi-tiles",
@@ -1529,6 +1571,12 @@
             17
           ]
         ]
+      },
+      "image": {
+        "file": "Chettinad Athangudi tile making - vrtmrtn2k26 (19).jpg",
+        "alt": "Hand-made Athangudi tiles in Chettinad patterns",
+        "local": "assets/img/places/athangudi-tiles.webp",
+        "thumb": "assets/img/places/athangudi-tiles-480.webp"
       }
     },
     {
@@ -1548,7 +1596,13 @@
         ]
       ],
       "hours": "9 am–5 pm",
-      "story": "A 17th-century hill fort of great boulders, with cannons, a rock-cut Shiva shrine and views over Chettinad."
+      "story": "A 17th-century hill fort of great boulders, with cannons, a rock-cut Shiva shrine and views over Chettinad.",
+      "image": {
+        "file": "Thirumayam fort - N-TN-174.JPG",
+        "alt": "The boulder walls of Thirumayam Fort",
+        "local": "assets/img/places/thirumayam-fort.webp",
+        "thumb": "assets/img/places/thirumayam-fort-480.webp"
+      }
     },
     {
       "id": "vaigai-dam",
@@ -1581,6 +1635,12 @@
             20
           ]
         ]
+      },
+      "image": {
+        "file": "Vaigai Dam in Dec 2011.jpg",
+        "alt": "Vaigai Dam and its gardens",
+        "local": "assets/img/places/vaigai-dam.webp",
+        "thumb": "assets/img/places/vaigai-dam-480.webp"
       }
     },
     {
@@ -1619,7 +1679,13 @@
         ]
       ],
       "hours": "Pilgrim trek on set days only (around new and full moon)",
-      "story": "A forest pilgrimage to Shiva, the abode of the 18 Siddhars, reached by a steep 8 km trek in the Western Ghats."
+      "story": "A forest pilgrimage to Shiva, the abode of the 18 Siddhars, reached by a steep 8 km trek in the Western Ghats.",
+      "image": {
+        "file": "Sathuragiri Sundara Mahalingam Temple (95363).jpg",
+        "alt": "The forest path at Sathuragiri",
+        "local": "assets/img/places/sathuragiri-hills.webp",
+        "thumb": "assets/img/places/sathuragiri-hills-480.webp"
+      }
     },
     {
       "id": "vettangudi-bird-sanctuary",
@@ -1661,7 +1727,13 @@
         ]
       ],
       "hours": "5:30 am–noon, 4–8:30 pm",
-      "story": "An ancient Shiva temple sung in the Devaram, and the birthplace of Ramana Maharshi, whose childhood home is preserved nearby."
+      "story": "An ancient Shiva temple sung in the Devaram, and the birthplace of Ramana Maharshi, whose childhood home is preserved nearby.",
+      "image": {
+        "file": "Tiruchuli Temple North side.jpg",
+        "alt": "Thiruchuli Thirumeninathar temple, north side",
+        "local": "assets/img/places/thiruchuli-thirumeninathar-temple.webp",
+        "thumb": "assets/img/places/thiruchuli-thirumeninathar-temple-480.webp"
+      }
     },
     {
       "id": "kalayarkoil-temple",
@@ -1706,6 +1778,200 @@
       "story": "The palace of the Sivaganga kingdom, tied to Queen Velu Nachiyar and the Marudhu brothers, India's early fighters against the British.",
       "days": {
         "0": []
+      }
+    },
+    {
+      "id": "suruli-falls",
+      "name": "Suruli Falls",
+      "short": "Suruli Falls",
+      "type": "nature",
+      "trip": true,
+      "lat": 9.6552222,
+      "lng": 77.309054,
+      "area": "Near Cumbum, Theni, 94 km west",
+      "address": "Suruli Reserve Forest, near Cumbum 625516",
+      "h": [
+        [
+          8,
+          16
+        ]
+      ],
+      "hours": "8 am–4 pm",
+      "story": "A two-tier waterfall from the Meghamalai hills near Cumbum, reached by a forest walk, with siddhar caves and shrines around it."
+    },
+    {
+      "id": "ayyanar-falls",
+      "name": "Ayyanar Falls, Rajapalayam",
+      "short": "Ayyanar Falls",
+      "type": "nature",
+      "trip": true,
+      "lat": 9.5206042,
+      "lng": 77.4479065,
+      "area": "Rajapalayam, Western Ghats, 86 km southwest",
+      "address": "Ayyanar Kovil, near Rajapalayam 626117",
+      "h": [
+        [
+          9,
+          16
+        ]
+      ],
+      "hours": "Forest gate open on limited days; check before going",
+      "story": "A forest waterfall beside the old Neer Kaatha Ayyanar temple in the Western Ghats above Rajapalayam.",
+      "days": {
+        "1": [],
+        "2": [],
+        "4": [],
+        "5": []
+      }
+    },
+    {
+      "id": "thalaiyar-falls",
+      "name": "Thalaiyar (Rat Tail) Falls",
+      "short": "Thalaiyar Falls",
+      "type": "nature",
+      "trip": true,
+      "lat": 10.2240126,
+      "lng": 77.5984868,
+      "area": "On the Kodaikanal ghat road, 66 km northwest",
+      "address": "Viewpoint on the Laws Ghat Road, Dindigul district 624101",
+      "h": [
+        [
+          6,
+          18
+        ]
+      ],
+      "hours": "Daylight; seen from the ghat road",
+      "story": "One of the tallest waterfalls in Tamil Nadu, a thin silver ribbon down a sheer cliff, seen from a viewpoint on the road to Kodaikanal.",
+      "image": {
+        "file": "Rattail falls.jpg",
+        "alt": "Thalaiyar (Rat Tail) Falls down a sheer cliff",
+        "local": "assets/img/places/thalaiyar-falls.webp",
+        "thumb": "assets/img/places/thalaiyar-falls-480.webp"
+      }
+    },
+    {
+      "id": "kodaikanal",
+      "name": "Kodaikanal",
+      "short": "Kodaikanal",
+      "type": "nature",
+      "trip": true,
+      "lat": 10.2343586,
+      "lng": 77.4863295,
+      "area": "Kodaikanal hills, 78 km northwest",
+      "address": "Kodaikanal Lake, Kodaikanal 624101",
+      "h": [
+        [
+          6,
+          19
+        ]
+      ],
+      "hours": "Lake area open from morning to evening",
+      "story": "The 'princess of hill stations': a star-shaped lake, pine forests, misty viewpoints and cool air, above Madurai's plains.",
+      "image": {
+        "file": "Kodaikanal Lake View.JPG",
+        "alt": "Kodaikanal lake among pine forest",
+        "local": "assets/img/places/kodaikanal.webp",
+        "thumb": "assets/img/places/kodaikanal-480.webp"
+      }
+    },
+    {
+      "id": "palani-murugan-temple",
+      "name": "Palani Dhandayuthapani Temple",
+      "short": "Palani",
+      "type": "temple",
+      "trip": true,
+      "lat": 10.4388012,
+      "lng": 77.5206165,
+      "area": "Palani hill, 87 km northwest",
+      "address": "Giri Veethi, Palani 624601",
+      "h": [
+        [
+          5.5,
+          21.5
+        ]
+      ],
+      "hours": "5:30 am–9:30 pm",
+      "story": "Murugan's third abode, on a hill above Palani, reached by steps, a winch train or a rope car; one of the most visited temples in India.",
+      "image": {
+        "file": "Palani Hill.JPG",
+        "alt": "Palani hill with the Murugan temple on top",
+        "local": "assets/img/places/palani-murugan-temple.webp",
+        "thumb": "assets/img/places/palani-murugan-temple-480.webp"
+      }
+    },
+    {
+      "id": "meghamalai",
+      "name": "Meghamalai (High Wavy Mountains)",
+      "short": "Meghamalai",
+      "type": "nature",
+      "trip": true,
+      "lat": 9.6771656,
+      "lng": 77.3830433,
+      "area": "Meghamalai, Theni, 85 km west",
+      "address": "Meghamalai tea estates, Theni district 625515",
+      "h": [
+        [
+          6,
+          18
+        ]
+      ],
+      "hours": "Daylight; forest check post on the ghat road",
+      "story": "Misty tea estates, lakes and forest on the 'high wavy mountains' of the Western Ghats, where elephants still cross the road.",
+      "image": {
+        "file": "Meghamalai Mountains.jpg",
+        "alt": "The Meghamalai mountains of the Western Ghats",
+        "local": "assets/img/places/meghamalai.webp",
+        "thumb": "assets/img/places/meghamalai-480.webp"
+      }
+    },
+    {
+      "id": "kazhugumalai-vettuvan-koil",
+      "name": "Kazhugumalai Vettuvan Koil",
+      "short": "Kazhugumalai",
+      "type": "heritage",
+      "trip": true,
+      "lat": 9.1529407,
+      "lng": 77.7042926,
+      "area": "Kazhugumalai, near Kovilpatti, 96 km southwest",
+      "address": "Kalugumalai, Thoothukudi district 628552",
+      "h": [
+        [
+          10,
+          17
+        ]
+      ],
+      "hours": "About 10 am–5 pm",
+      "story": "An 8th-century Pandya temple carved from the top of a single granite hill, left unfinished, with Jain carvings on the same rock.",
+      "image": {
+        "file": "Vettuvan Koil.JPG",
+        "alt": "The monolithic Vettuvan Koil carved into the hilltop at Kazhugumalai",
+        "local": "assets/img/places/kazhugumalai-vettuvan-koil.webp",
+        "thumb": "assets/img/places/kazhugumalai-vettuvan-koil-480.webp"
+      }
+    },
+    {
+      "id": "sittanavasal-cave",
+      "name": "Sittanavasal Cave Paintings",
+      "short": "Sittanavasal",
+      "type": "heritage",
+      "trip": true,
+      "lat": 10.4557516,
+      "lng": 78.7250782,
+      "area": "Sittanavasal, Pudukkottai, 89 km northeast",
+      "address": "Cave Road, Sittanavasal 622101",
+      "h": [
+        [
+          10,
+          17
+        ]
+      ],
+      "hours": "10 am–5 pm",
+      "story": "A Jain rock-cut cave with paintings over a thousand years old, including a famous lotus-pond ceiling: the 'Ajanta of the south'.",
+      "image": {
+        "file": "A aesthetic rock view of Sittanavasal 1.JPG",
+        "alt": "The rock hill at Sittanavasal",
+        "local": "assets/img/places/sittanavasal-cave.webp",
+        "thumb": "assets/img/places/sittanavasal-cave-480.webp"
       }
     }
   ]
