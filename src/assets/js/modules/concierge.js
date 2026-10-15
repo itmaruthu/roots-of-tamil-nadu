@@ -29,7 +29,7 @@ export function initConcierge(ctx) {
     input.value = '';
   });
 
-  say('bot', [`Vanakkam! I'm the Roots concierge. Ask me what's open, where to eat, or how busy the temple is. I answer for the time on the clock above (${formatHour(ctx.state.hour)}).`]);
+  say('bot', [`Vanakkam! I'm Aatruppadai, your guide, like the Sangam bards who showed travellers the way. Ask me what's open, where to eat, or how busy the temple is. I answer for the time on the clock above (${formatHour(ctx.state.hour)}).`]);
 
   function ask(q) {
     say('me', [q]);
