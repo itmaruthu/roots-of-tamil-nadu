@@ -31,6 +31,7 @@
       </header>
 
       <div class="place-cols">
+        <div class="place-stack">
         <div class="card">
           <h2 class="h3">Opening hours</h2>
           <table class="hours-table" id="hours">
@@ -38,6 +39,12 @@
             <tbody>{{hoursRows}}</tbody>
           </table>
           <p class="note">Times are IST. {{hoursText}}. Last checked against public listings; please confirm before travelling.</p>
+        </div>
+        {{tips}}
+        <div class="card">
+          <h2 class="h3">Nearby on Roots</h2>
+          <ul class="nearby">{{nearby}}</ul>
+        </div>
         </div>
         <div class="card">
           <h2 class="h3">Where it is</h2>
@@ -57,11 +64,6 @@
             </div>
             <p class="note">Bus numbers and stops: <a href="https://maduraione.in" target="_blank" rel="noopener noreferrer">MaduraiOne</a> community transit map, fetched {{busFetched}}. Show the Tamil stop name to the conductor and check the board before you board.</p>
           </div>
-        </div>
-        {{tips}}
-        <div class="card">
-          <h2 class="h3">Nearby on Roots</h2>
-          <ul class="nearby">{{nearby}}</ul>
         </div>
       </div>
     </article>

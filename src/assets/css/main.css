@@ -519,3 +519,5 @@ address { font-style: normal; }
 
 section[id] { scroll-margin-top: 84px; }
 @media (max-width: 520px) { .ptile-actions .iconbtn:last-child { display: none; } .ptile-body { padding: 10px; } .ptile-name { font-size: 15px; } .iconbtn { padding: 5px 8px; font-size: 12px; } .status-tabs button { font-size: 14px; padding: 8px; } }
+
+.place-stack { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
