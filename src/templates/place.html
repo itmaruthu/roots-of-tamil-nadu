@@ -44,8 +44,14 @@
         </div>
         {{tips}}
         <div class="card">
-          <h2 class="h3">Nearby on Roots</h2>
-          <ul class="nearby">{{nearby}}</ul>
+          <h2 class="h3">All places by distance</h2>
+          <div class="chips nearby-modes" id="nearby-modes" role="group" aria-label="Measure distance from" hidden>
+            <button class="chip" type="button" data-from="here" aria-pressed="true">From here</button>
+            <button class="chip" type="button" data-from="me" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#locate"/></svg>Near me</button>
+          </div>
+          <p class="note" id="nearby-note" aria-live="polite"></p>
+          <ul class="nearby" id="nearby">{{nearby}}</ul>
+          <button class="btn btn--sm btn--ghost" id="nearby-more" type="button" hidden>Show all places</button>
         </div>
         </div>
         <div class="card">

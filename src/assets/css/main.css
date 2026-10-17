@@ -696,3 +696,8 @@ section[id] { scroll-margin-top: 84px; }
 .hours-pick .hour { min-width: 0; padding: 8px 2px; white-space: nowrap; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: 600 14px var(--font-text); cursor: pointer; }
 .hours-pick .hour:hover { border-color: var(--accent); }
 .hours-pick .hour[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.nearby-modes { margin: 4px 0 8px; }
+.nearby-st { font-weight: 600; }
+.nearby-st.status--open, .nearby-st.status--closing { color: var(--leaf); }
+#nearby-more { margin-top: 10px; align-self: flex-start; }
+.nearby .tile { flex: 0 0 40px; }

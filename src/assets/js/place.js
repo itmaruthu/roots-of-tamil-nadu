@@ -1,5 +1,6 @@
 // Place page: live open/closed pill, today's row highlighted, distance from the visitor.
-import { $ } from './modules/dom.js';
+import { $, $$, icon } from './modules/dom.js';
+import { TYPES } from './modules/catalog.js';
 import { nowInMadurai, status } from './modules/hours.js';
 import { el } from './modules/dom.js';
 import { distanceKm, formatKm } from './modules/geo.js';
@@ -72,6 +73,53 @@ async function init() {
   };
   $('#bus-me')?.addEventListener('click', busFromMe);
 
+  // All places by distance: from this place, or from the visitor ("Near me").
+  const list = $('#nearby'), more = $('#nearby-more'), note = $('#nearby-note'), modes = $('#nearby-modes');
+  const others = places.filter((o) => o.id !== id);
+  const nd = { from: 'here', me: null, all: false };
+  const SHORT = 8;
+  const drawNearby = () => {
+    const { day, hour } = nowInMadurai();
+    const rows = others.map((o) => ({ o, here: distanceKm(place, o), you: nd.me ? distanceKm(nd.me, o) : null }))
+      .sort((a, b) => (nd.from === 'me' && nd.me ? a.you - b.you : a.here - b.here));
+    const shown = nd.all ? rows : rows.slice(0, SHORT);
+    list.replaceChildren(...shown.map(({ o, here, you }) => {
+      const st = status(o, day, hour);
+      const dist = nd.from === 'me' && you != null
+        ? `${formatKm(you)} from you · ${formatKm(here)} from here`
+        : `${formatKm(here)} from here${you != null ? ` · ${formatKm(you)} from you` : ''}`;
+      return el('li', {}, el('a', { href: `${o.id}.html` },
+        el('span', { class: 'tile' }, icon(o.type)),
+        el('span', {}, el('b', {}, o.short || o.name),
+          el('small', {}, `${TYPES[o.type].label} · ${dist}`),
+          el('small', { class: `nearby-st status--${st.state}` }, st.text))));
+    }));
+    more.hidden = rows.length <= SHORT;
+    more.textContent = nd.all ? 'Show fewer' : `Show all ${rows.length} places`;
+    for (const b of $$('button', modes)) b.setAttribute('aria-pressed', String(b.dataset.from === nd.from));
+  };
+  const locateMe = (done) => {
+    if (!('geolocation' in navigator)) { note.textContent = 'Location is not available in this browser.'; return; }
+    note.textContent = 'Finding you…';
+    navigator.geolocation.getCurrentPosition((pos) => {
+      nd.me = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      note.textContent = `You are ${formatKm(distanceKm(nd.me, place))} from ${place.short || place.name}. Your location stays on your device.`;
+      const fy = $('#from-you'); if (fy) fy.textContent = ` · ${formatKm(distanceKm(nd.me, place))} from you`;
+      done?.();
+    }, () => { note.textContent = 'Location permission was not given, so distances are from this place.'; nd.from = 'here'; drawNearby(); },
+    { timeout: 8000, maximumAge: 300000 });
+  };
+  if (list) {
+    modes.hidden = false;
+    modes.addEventListener('click', (e) => {
+      const b = e.target.closest('button[data-from]'); if (!b) return;
+      nd.from = b.dataset.from;
+      if (nd.from === 'me' && !nd.me) { drawNearby(); locateMe(drawNearby); } else drawNearby();
+    });
+    more.addEventListener('click', () => { nd.all = !nd.all; drawNearby(); });
+    drawNearby();
+  }
+
   $('#near-me')?.addEventListener('click', () => {
     const out = $('#from-you');
     if (!('geolocation' in navigator)) { out.textContent = ' · Location is not available in this browser.'; return; }
@@ -80,6 +128,7 @@ async function init() {
       (pos) => {
         const me = { lat: pos.coords.latitude, lng: pos.coords.longitude };
         out.textContent = ` · ${formatKm(distanceKm(me, place))} from you`;
+        nd.me = me; if (list) drawNearby();
       },
       () => { out.textContent = ' · Location permission was not given.'; },
       { timeout: 8000, maximumAge: 300000 }
