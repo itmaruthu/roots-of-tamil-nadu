@@ -85,6 +85,12 @@ function buildControls() {
     on: { click: () => { state.view = key; render(); } }
   }, v.label));
 
+  const hours = $('#hours');
+  for (let h = 0; h < 24; h++) {
+    const label = `${h % 12 || 12} ${h < 12 ? 'am' : 'pm'}`;
+    hours.append(el('button', { type: 'button', class: 'hour', dataset: { h: String(h) }, 'aria-pressed': 'false',
+      on: { click: () => { stop(); setHour(h); render(); } } }, label));
+  }
   $('#clock-range').addEventListener('input', (e) => { stop(); state.hour = Number(e.target.value); render(); });
   $('#now').addEventListener('click', () => { stop(); const n = nowInMadurai(); state.day = n.day; setHour(Math.floor(n.hour * 4) / 4); render(); });
   $('#play').addEventListener('click', togglePlay);
@@ -162,6 +168,12 @@ const visible = (p) => state.filter === 'all' || groupOf(p) === state.filter;
 const origin = () => state.me || MEENAKSHI;
 
 function render() {
+  for (const b of $$('#hours .hour')) {
+    const on = Number(b.dataset.h) === Math.floor(state.hour);
+    if (b.getAttribute('aria-pressed') !== String(on)) {
+      b.setAttribute('aria-pressed', String(on));
+    }
+  }
   const vis = state.places.filter(visible);
   const on = vis.filter(open);
   const opensLater = (p) => !open(p) && hoursFor(p, state.day).some(([o]) => o > state.hour);
