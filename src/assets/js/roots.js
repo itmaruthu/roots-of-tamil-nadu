@@ -1,6 +1,7 @@
 // Find your roots: builds a homecoming trip for a diaspora family from their native district,
 // village and family temple, using Roots places near the district and each district's landmarks.
-import { el, $ } from './modules/dom.js';
+import { el, $, icon } from './modules/dom.js';
+import { EMERGENCY, SEARCHES, PHARMACY_TIP, mapSearch } from './modules/health.js';
 
 const DATA_URL = new URL('../../data/places.json', import.meta.url);
 const DIST_URL = new URL('../../data/districts.json', import.meta.url);
@@ -145,6 +146,7 @@ function render(f, res) {
         el('p', { class: 'roots-part-l' }, label), el('ul', {}, ...day[k].map(entry)))),
       day.go ? el('p', { class: 'roots-go' }, day.go) : '');
   });
+  lines.push('', `Emergency: ${EMERGENCY.map((e) => `${e.n} ${e.label}`).join(' · ')}`);
   const text = lines.join('\n');
   const subject = `Ooru Nanbar request: ${f.family || 'family'} to ${f.village || res.d.name}, ${res.d.name}`;
   const mail = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`${text}\n\nKuladeivam: ${f.temple || '-'}\nTravelling from: ${f.from || '-'}\nTamil-English guide: ${f.tamil ? 'yes' : 'no'}`)}`;
@@ -159,7 +161,14 @@ function render(f, res) {
       el('div', { class: 'roots-actions' },
         el('a', { class: 'btn', href: mail }, 'Request my Ooru Nanbar'), copy,
         el('p', { class: 'note' }, `Or email ${EMAIL}. A Roots team member replies within two working days.`))),
-    el('ol', { class: 'roots-days' }, ...days));
+    el('ol', { class: 'roots-days' }, ...days),
+    el('div', { class: 'health' },
+      el('h3', {}, icon('health'), `Health & safety in ${res.d.name}`),
+      el('div', { class: 'chips' }, ...SEARCHES.map((x) => el('a', { class: 'btn btn--sm btn--ghost', href: mapSearch(x.q, res.d.lat, res.d.lng), target: '_blank', rel: 'noopener noreferrer' }, icon(x.icon), x.label))),
+      el('p', { class: 'note' }, `The government hospital in ${res.d.name} town has a 24-hour casualty ward. Your Ooru Nanbar will share the nearest hospital and pharmacy to your village before you arrive.`),
+      el('p', { class: 'health-l' }, 'Emergency numbers'),
+      el('ul', { class: 'health-nums' }, ...EMERGENCY.map((e) => el('li', {}, el('a', { class: 'health-num', href: `tel:${e.n}` }, icon('phone'), el('b', {}, e.n)), el('span', {}, e.label)))),
+      el('p', { class: 'note' }, PHARMACY_TIP)));
   box.hidden = false;
   box.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }

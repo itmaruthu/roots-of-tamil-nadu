@@ -658,3 +658,20 @@ section[id] { scroll-margin-top: 84px; }
 .roots-part ul { list-style: none; padding: 0; }
 .roots-part--stay .roots-part-l { color: var(--leaf); }
 .roots-go { margin: 0; font-weight: 600; font-size: 15px; color: var(--accent); border-top: 1px dashed var(--line); padding-top: 8px; }
+
+/* ---------- Health & safety ---------- */
+.health { margin-top: 16px; padding: 16px 18px; border: 1px solid var(--line); border-left: 4px solid var(--leaf); border-radius: 14px; background: var(--surface); display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.health h2, .health h3 { display: flex; align-items: center; gap: 8px; margin: 0; }
+.health h3 { font-size: 18px; }
+.health .i { color: var(--leaf); }
+.health-l { margin: 4px 0 0; font: 700 11px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.health-nums { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+.health-nums li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
+.health-num { display: inline-flex; align-items: center; gap: 6px; min-width: 76px; padding: 6px 10px; border-radius: 999px; background: color-mix(in srgb, var(--leaf) 12%, var(--surface)); color: var(--ink); text-decoration: none; font-family: var(--font-mono); }
+.health-hosp ul { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.health-hosp li { display: flex; flex-direction: column; font-size: 15px; }
+.health-hosp a { font-weight: 700; }
+.health-hosp span { color: var(--muted); font-size: 13px; }
+.health-page { padding-block: 8px 64px; display: flex; flex-direction: column; gap: 12px; max-width: 900px; }
+.health-page h1 { font-size: clamp(36px, 5vw, 56px); margin: 0; }
+.health .btn:not(.btn--ghost) .i { color: inherit; }

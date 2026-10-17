@@ -15,6 +15,7 @@ import { validate } from './validate.mjs';
 import { TYPES, GROUPS, commonsImage, commonsPage, directionsUrl, busUrl, osmUrl, imageSrc } from '../src/assets/js/modules/catalog.js';
 import { DAYS, hoursFor, is24h, formatHour } from '../src/assets/js/modules/hours.js';
 import { planFor, niceStop, MAIN_STANDS } from '../src/assets/js/modules/bus.js';
+import { EMERGENCY, MADURAI_HOSPITALS, SEARCHES, PHARMACY_TIP, mapSearch, hospitalSearch } from '../src/assets/js/modules/health.js';
 import { MEENAKSHI, distanceKm, formatKm, nearest, nearestStand, projector, RINGS, VAIGAI } from '../src/assets/js/modules/geo.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -131,10 +132,29 @@ function footer(base) {
       <p>Opening hours come from public listings and shop signboards (last checked ${esc(config.dataCheckedOn)}). Hosts confirm their own details before launch; always check before you travel.</p>
       <p>No cookies, no ads, no trackers. "Near me" uses your location only on your device.</p>
       <p>Built by Team M2P Nexus, Madurai. <a href="mailto:${esc(config.contactEmail)}">${esc(config.contactEmail)}</a> · <a href="tel:${esc(config.contactPhone.replace(/\s/g, ''))}">${esc(config.contactPhone)}</a></p>
-      <p>© ${new Date().getFullYear()} Roots of Tamil Nadu. <a href="${base}credits.html">Photo credits</a></p>
+      <p>© ${new Date().getFullYear()} Roots of Tamil Nadu. <a href="${base}health.html">Health &amp; safety</a> · <a href="${base}credits.html">Photo credits</a></p>
     </div>
   </div>
 </footer>`;
+}
+
+// Health & safety block: live map searches (around a point or the visitor), emergency numbers,
+// and Madurai's 24-hour hospital emergency departments when the point is near Madurai.
+function healthHtml(base, { lat, lng, label, showHospitals = true, heading = 'h3' } = {}) {
+  const ico = (id) => `<svg class="i" aria-hidden="true"><use href="${base}assets/img/icons.svg#${id}"/></svg>`;
+  const nearMadurai = lat == null || distanceKm(MEENAKSHI, { lat, lng }) < 25;
+  const btns = SEARCHES.map((s) => `<a class="btn btn--sm btn--ghost" href="${esc(mapSearch(s.q, lat, lng))}" target="_blank" rel="noopener noreferrer">${ico(s.icon)}${esc(s.label)}</a>`).join('');
+  const me = lat != null ? `<a class="btn btn--sm" href="${esc(mapSearch('24 hour hospital'))}" target="_blank" rel="noopener noreferrer">${ico('locate')}Hospitals near my location</a>` : '';
+  const nums = EMERGENCY.map((e) => `<li><a class="health-num" href="tel:${e.n}">${ico('phone')}<b>${e.n}</b></a><span>${esc(e.label)}</span></li>`).join('');
+  const hosp = showHospitals && nearMadurai ? `<div class="health-hosp"><p class="health-l">24-hour emergency in Madurai</p><ul>${MADURAI_HOSPITALS.map((h) => `<li><a href="${esc(hospitalSearch(h))}" target="_blank" rel="noopener noreferrer">${esc(h.name)}</a><span>${esc(h.area)} · ${esc(h.note)}</span></li>`).join('')}</ul></div>` : '';
+  return `<div class="health" id="health">
+            <${heading}>${ico('health')}Health &amp; safety${label ? ` near ${esc(label)}` : ''}</${heading}>
+            <div class="chips">${me}${btns}</div>
+            ${hosp}
+            <p class="health-l">Emergency numbers</p>
+            <ul class="health-nums">${nums}</ul>
+            <p class="note">${esc(PHARMACY_TIP)} Map searches open Google Maps around ${label ? esc(label) : 'you'}.</p>
+          </div>`;
 }
 
 const BOARDS = ['maroon', 'teal', 'indigo', 'ochre'];
@@ -440,6 +460,7 @@ async function renderPlace(p) {
     busPlan: MAIN_STANDS.map((h) => bus.places[p.id] === h
       ? `<div class="bus-from"><p class="bus-head">${esc(niceStop(h))}</p><p>This place is at the bus stand. Walk from here.</p></div>`
       : busPlanHtml(planFor(bus, p.id, h))).join(''),
+    health: healthHtml('../', { lat: p.lat, lng: p.lng, label: p.short || p.name }),
     busFetched: esc(new Date(bus.fetched).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })),
     osm: esc(osmUrl(p)),
     fromTemple: p.id === 'meenakshi-amman-temple' ? 'The centre of the old city' : `${formatKm(distanceKm(p, MEENAKSHI))} from Meenakshi Amman Temple`,
@@ -496,6 +517,25 @@ ${footer('')}
     email: esc(config.contactEmail),
     districtOptions: districtData.districts.map((d) => `<option value="${esc(d.id)}">${esc(d.name)} · ${esc(d.ta)}</option>`).join('')
   }));
+  await writeFile(join(DIST, 'health.html'), `<!doctype html>
+<html lang="en-IN" data-sprite="assets/img/icons.svg">
+<head>
+${head({ title: 'Health & safety: 24-hour hospitals, clinics and pharmacies | Roots of Tamil Nadu', description: 'Emergency numbers for Tamil Nadu, 24-hour hospital emergency departments in Madurai, and live map searches for hospitals, clinics and pharmacies open near you.', path: '/health.html', base: '' })}
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+${header('')}
+<main id="main" class="wrap health-page">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Roots of Tamil Nadu</a> › <span aria-current="page">Health &amp; safety</span></nav>
+  <p class="eyebrow">Travel with peace of mind</p>
+  <h1>Health &amp; safety</h1>
+  <p class="lead">In an emergency, call <a href="tel:108"><b>108</b></a> for a free ambulance anywhere in Tamil Nadu, or <a href="tel:112"><b>112</b></a>. For a hospital, clinic or pharmacy, tap a button below: it opens the map around your current location, with what is open now.</p>
+  ${healthHtml('', { heading: 'h2' })}
+</main>
+${footer('')}
+</body>
+</html>
+`);
   const joinTpl = await readFile(join(SRC, 'templates/join.html'), 'utf8');
   await writeFile(join(DIST, 'join.html'), fill(joinTpl, {
     base: '',
@@ -505,7 +545,7 @@ ${footer('')}
   }));
   for (const p of places) await writeFile(join(DIST, 'places', `${p.id}.html`), await renderPlace(p));
 
-  const urls = [{ loc: `${SITE}/`, pri: '1.0' }, { loc: `${SITE}/roots.html`, pri: '0.9' }, { loc: `${SITE}/join.html`, pri: '0.8' }, ...places.map((p) => ({ loc: placeUrl(p), pri: p.featured ? '0.9' : '0.7', img: p.image && absImage(p) }))];
+  const urls = [{ loc: `${SITE}/`, pri: '1.0' }, { loc: `${SITE}/roots.html`, pri: '0.9' }, { loc: `${SITE}/health.html`, pri: '0.6' }, { loc: `${SITE}/join.html`, pri: '0.8' }, ...places.map((p) => ({ loc: placeUrl(p), pri: p.featured ? '0.9' : '0.7', img: p.image && absImage(p) }))];
   await writeFile(join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${urls.map((u) => `  <url><loc>${esc(u.loc)}</loc><lastmod>${BUILD_DATE}</lastmod><priority>${u.pri}</priority>${u.img ? `<image:image><image:loc>${esc(u.img)}</image:loc></image:image>` : ''}</url>`).join('\n')}
@@ -563,7 +603,7 @@ ${urls.map((u) => `  <url><loc>${esc(u.loc)}</loc><lastmod>${BUILD_DATE}</lastmo
   const v = hash.digest('hex').slice(0, 10);
   await rename(join(DIST, 'assets/js'), join(DIST, `assets/js-${v}`));
   await rename(join(DIST, 'assets/css'), join(DIST, `assets/css-${v}`));
-  const htmlFiles = ['index.html', 'join.html', 'roots.html', 'credits.html', '404.html', ...(await readdir(join(DIST, 'places'))).map((f) => `places/${f}`)].map((f) => join(DIST, f));
+  const htmlFiles = ['index.html', 'join.html', 'roots.html', 'health.html', 'credits.html', '404.html', ...(await readdir(join(DIST, 'places'))).map((f) => `places/${f}`)].map((f) => join(DIST, f));
   htmlFiles.push(join(ROOT, '.preview', 'index.html'));
   for (const f of htmlFiles) {
     if (!existsSync(f)) continue;
