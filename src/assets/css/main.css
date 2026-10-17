@@ -85,7 +85,21 @@ button { font: inherit; color: inherit; }
 .nav { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
 .nav a { text-decoration: none; font-weight: 600; font-size: 15px; padding: 8px 12px; border-radius: 999px; color: var(--muted); }
 .nav a:hover { color: var(--ink); background: var(--surface-2); }
-@media (max-width: 720px) { .nav a:not(.nav-cta) { display: none; } }
+/* Mobile: a Menu button opens all links */
+.nav-menu { display: none; position: relative; }
+.nav-menu summary { list-style: none; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 700; font-size: 15px; padding: 9px 14px; border-radius: 999px; background: var(--ink); color: var(--bg); }
+.nav-menu summary::-webkit-details-marker { display: none; }
+.nav-burger, .nav-burger::before, .nav-burger::after { display: block; width: 16px; height: 2px; border-radius: 2px; background: currentColor; position: relative; }
+.nav-burger::before, .nav-burger::after { content: ""; position: absolute; left: 0; }
+.nav-burger::before { top: -5px; } .nav-burger::after { top: 5px; }
+.nav-menu[open] .nav-burger { background: transparent; }
+.nav-menu[open] .nav-burger::before { top: 0; transform: rotate(45deg); }
+.nav-menu[open] .nav-burger::after { top: 0; transform: rotate(-45deg); }
+.nav-drop { position: absolute; right: 0; top: calc(100% + 8px); min-width: 240px; max-width: calc(100vw - 32px); display: flex; flex-direction: column; gap: 2px; padding: 8px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 16px 40px rgb(0 0 0 / 18%); }
+.nav-drop a { text-decoration: none; font-weight: 600; font-size: 16px; padding: 12px 14px; border-radius: 10px; color: var(--ink); }
+.nav-drop a:hover { background: var(--surface-2); }
+.nav-drop .nav-cta { margin-top: 4px; text-align: center; }
+@media (max-width: 960px) { .nav { display: none; } .nav-menu { display: block; } }
 .nav-cta { background: var(--ink); color: var(--bg) !important; }
 
 /* ---------- Buttons & chips ---------- */

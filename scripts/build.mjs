@@ -107,20 +107,28 @@ function head({ title, description, path, base, image, imageAlt, type = 'website
 ${extra}`;
 }
 
+const NAV = [
+  ['roots.html', 'Find your roots'], ['index.html#clock', '24 hours'], ['index.html#explore', 'Map'],
+  ['index.html#live', 'Live wait'], ['index.html#festivals', 'Festivals'], ['index.html#cabs', 'Cabs'],
+  ['join.html', 'List your place']
+];
 const header = (base) => `<header class="site-header">
   <div class="wrap">
     <a class="brand" href="${base}index.html" aria-label="${esc(config.name)} home"><img src="${base}assets/img/brand/logo.svg" alt="" width="36" height="36"><span>Roots<small>of Tamil Nadu · Madurai</small></span></a>
     <nav class="nav" aria-label="Primary">
-      <a href="${base}roots.html">Find your roots</a>
-      <a href="${base}index.html#clock">24 hours</a>
-      <a href="${base}index.html#explore">Map</a>
-      <a href="${base}index.html#live">Live wait</a>
-      <a href="${base}index.html#festivals">Festivals</a>
-      <a href="${base}index.html#cabs">Cabs</a>
-      <a href="${base}join.html">List your place</a>
+      ${NAV.map(([href, label]) => `<a href="${base}${href}">${label}</a>`).join('\n      ')}
       <a class="nav-cta" href="${base}index.html#explore">What's open now</a>
     </nav>
+    <details class="nav-menu">
+      <summary aria-label="Open menu"><span class="nav-burger" aria-hidden="true"></span>Menu</summary>
+      <nav class="nav-drop" aria-label="Menu">
+        ${NAV.map(([href, label]) => `<a href="${base}${href}">${label}</a>`).join('\n        ')}
+        <a href="${base}health.html">Health &amp; safety</a>
+        <a class="nav-cta" href="${base}index.html#explore">What's open now</a>
+      </nav>
+    </details>
   </div>
+  <script type="module" src="${base}assets/js/nav.js"></script>
 </header>`;
 
 function footer(base) {
