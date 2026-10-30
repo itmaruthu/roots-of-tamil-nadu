@@ -101,8 +101,8 @@ function head({ title, description, path, base, image, imageAlt, type = 'website
 <link rel="apple-touch-icon" href="${base}assets/img/brand/icon-192.png">
 <link rel="manifest" href="${base}manifest.webmanifest">
 <link rel="preload" href="${base}assets/fonts/hind-madurai-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="${base}assets/fonts/playfair-display-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="${base}assets/fonts/ibm-plex-mono-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="${base}assets/fonts/bodoni-moda-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="${base}assets/fonts/noto-serif-tamil-tamil-600-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${base}assets/css/main.css">
 ${extra}`;
 }
@@ -114,7 +114,7 @@ const NAV = [
 ];
 const header = (base) => `<header class="site-header">
   <div class="wrap">
-    <a class="brand" href="${base}index.html" aria-label="${esc(config.name)} home"><img src="${base}assets/img/brand/logo.svg" alt="" width="36" height="36"><span>Roots<small>of Tamil Nadu · Madurai</small></span></a>
+    <a class="brand" href="${base}index.html" aria-label="${esc(config.name)} home"><img src="${base}assets/img/brand/logo.svg" alt="" width="36" height="36"><span>Roots<small>of Tamil Nadu</small></span></a>
     <nav class="nav" aria-label="Primary">
       ${NAV.map(([href, label]) => `<a href="${base}${href}">${label}</a>`).join('\n      ')}
       <a class="nav-cta" href="${base}index.html#explore">What's open now</a>
@@ -366,7 +366,7 @@ async function renderHome(base, path) {
     districtOptions: districtData.districts.map((d) => `<option value="${esc(d.id)}">${esc(d.name)} · ${esc(d.ta)}</option>`).join(''),
     base,
     head: head({
-      title: 'Madurai Never Sleeps · What’s open now in the temple city | Roots of Tamil Nadu',
+      title: 'Roots of Tamil Nadu · Come home to your village, temple and food',
       description: `Live opening hours and real locations for ${places.length} temples, heritage sites, eateries and stays in Madurai — from 4 am halwa to 1 am parotta.`,
       path, base, imageAlt: 'Roots of Tamil Nadu: Madurai Never Sleeps',
       extra: [`<link rel="preload" as="image" href="${esc(base + credits[hero.file].local)}" imagesrcset="${esc(base + credits[hero.file].thumb)} 480w, ${esc(base + credits[hero.file].local)} 1200w" imagesizes="100vw">`, ...homeSchema().map(jsonld)].join('\n')
