@@ -2,6 +2,8 @@
 // village and family temple, using Roots places near the district and each district's landmarks.
 import { el, $, icon } from './modules/dom.js';
 import { EMERGENCY, SEARCHES, PHARMACY_TIP, mapSearch } from './modules/health.js';
+import { TIERS, CURRENCIES, RATES_AS_OF, currencyFor, estimate, money } from './modules/cost.js';
+import { drawCard, shareCard, saveCard } from './modules/rootscard.js';
 
 const DATA_URL = new URL('../../data/places.json', import.meta.url);
 const DIST_URL = new URL('../../data/districts.json', import.meta.url);
@@ -147,20 +149,75 @@ function render(f, res) {
       day.go ? el('p', { class: 'roots-go' }, day.go) : '');
   });
   lines.push('', `Emergency: ${EMERGENCY.map((e) => `${e.n} ${e.label}`).join(' · ')}`);
-  const text = lines.join('\n');
   const subject = `Ooru Nanbar request: ${f.family || 'family'} to ${f.village || res.d.name}, ${res.d.name}`;
-  const mail = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`${text}\n\nKuladeivam: ${f.temple || '-'}\nTravelling from: ${f.from || '-'}\nTamil-English guide: ${f.tamil ? 'yes' : 'no'}`)}`;
+
+  // Price estimate: people, comfort and currency change it live; the request email and copied plan carry it.
+  const cost = { people: f.kids ? 4 : 2, tier: 'comfortable', cur: currencyFor(f.from) };
+  const both = (inr) => (cost.cur === 'INR' ? money(inr) : `${money(inr)} (about ${money(inr, cost.cur)})`);
+  const costText = () => {
+    const e = estimate({ days: res.days, people: cost.people, tier: cost.tier, kids: f.kids });
+    return [`Estimate (${TIERS[cost.tier].label}, ${cost.people} people, flights not included): ${both(e.total)}`,
+      ...e.lines.map((l) => `  ${l.label}: ${money(l.amt)}`)].join('\n');
+  };
+  const fullText = () => `${lines.join('\n')}\n\n${costText()}`;
+  const mail = el('a', { class: 'btn' }, 'Request my Ooru Nanbar');
+  const setMail = () => mail.setAttribute('href', `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`${fullText()}\n\nKuladeivam: ${f.temple || '-'}\nTravelling from: ${f.from || '-'}\nPeople: ${cost.people}\nTamil-English guide: ${f.tamil ? 'yes' : 'no'}`)}`);
   const copy = el('button', { class: 'btn btn--ghost', type: 'button', on: { click: async (e) => {
-    try { await navigator.clipboard.writeText(text); e.currentTarget.textContent = 'Copied'; } catch { e.currentTarget.textContent = 'Copy not available'; }
+    try { await navigator.clipboard.writeText(fullText()); e.currentTarget.textContent = 'Copied'; } catch { e.currentTarget.textContent = 'Copy not available'; }
   } } }, 'Copy this plan');
+
+  const select = (label, id, options, value, on) => el('label', { class: 'field' }, label,
+    el('select', { id, on: { change: (e) => { on(e.target.value); update(); } } },
+      ...options.map(([v, t]) => el('option', { value: v, selected: String(v) === String(value) }, t))));
+  const out = el('div', { class: 'cost-out' });
+  function update() {
+    const e = estimate({ days: res.days, people: cost.people, tier: cost.tier, kids: f.kids });
+    const abroad = cost.cur !== 'INR';
+    out.replaceChildren(
+      el('p', { class: 'cost-total' }, el('b', {}, abroad ? money(e.total, cost.cur) : money(e.total)),
+        el('span', {}, abroad ? ` · ${money(e.total)}` : '', ` for ${res.days} days`)),
+      el('p', { class: 'cost-sub' }, `About ${abroad ? money(e.perPerson, cost.cur) : money(e.perPerson)} a person · ${abroad ? money(e.perDay, cost.cur) : money(e.perDay)} a day`),
+      el('p', { class: 'note' }, `${TIERS[cost.tier].label}: ${TIERS[cost.tier].note.toLowerCase()}.`),
+      el('table', { class: 'cost-table' }, el('tbody', {}, ...e.lines.map((l) => el('tr', { class: l.k === 'fee' ? 'cost-fee' : null },
+        el('th', { scope: 'row' }, l.label), el('td', {}, money(l.amt)), abroad ? el('td', {}, money(l.amt, cost.cur)) : null)))),
+      el('p', { class: 'note' }, `Flights to India are not included. A planning estimate, not a quote: your Ooru Nanbar confirms real prices before you book. ${abroad ? `Exchange rate approximate (${RATES_AS_OF}): 1 ${cost.cur} ≈ ₹${CURRENCIES[cost.cur].rate}.` : ''}`));
+    setMail();
+  }
+  const costPanel = el('div', { class: 'panel cost' },
+    el('h3', {}, 'What this trip costs'),
+    el('div', { class: 'cost-fields' },
+      select('People travelling', 'c-people', Array.from({ length: 12 }, (_, i) => [i + 1, String(i + 1)]), cost.people, (v) => { cost.people = Number(v); }),
+      select('Comfort', 'c-tier', Object.entries(TIERS).map(([k, t]) => [k, t.label]), cost.tier, (v) => { cost.tier = v; }),
+      select('Show in', 'c-cur', Object.entries(CURRENCIES).map(([k, c]) => [k, `${k} · ${c.name}`]), cost.cur, (v) => { cost.cur = v; })),
+    out);
+  update();
+
+  // Family roots card: drawn in the browser, shared or saved from it.
+  const canvas = el('canvas', { class: 'roots-card-img', width: 1080, height: 1350, role: 'img',
+    'aria-label': `Roots card: ${f.family ? `the ${f.family} family` : 'our family'} is coming home to ${f.village || res.d.name}, ${res.d.name} district` });
+  const fileName = `roots-${(f.family || 'family').toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${res.d.id}`;
+  const shareText = `${f.family ? `The ${f.family} family` : 'Our family'} is coming home to ${f.village || res.d.name}, ${res.d.name}. Find your roots: ${location.origin}${location.pathname}`;
+  const shareBtn = el('button', { class: 'btn', type: 'button', on: { click: async (e) => {
+    const b = e.currentTarget;
+    try { const r = await shareCard(canvas, fileName, shareText); b.textContent = r === 'saved' ? 'Saved: share it from your photos' : r === 'shared' ? 'Shared' : 'Share my roots card'; } catch { b.textContent = 'Sharing not available'; }
+  } } }, 'Share my roots card');
+  const saveBtn = el('button', { class: 'btn btn--ghost', type: 'button', on: { click: () => saveCard(canvas, fileName) } }, 'Save image');
+  const cardPanel = el('div', { class: 'panel roots-card' },
+    el('h3', {}, 'Your family roots card'),
+    el('p', { class: 'note' }, 'Share it on WhatsApp with the family. It is made on this device; nothing is uploaded.'),
+    canvas,
+    el('div', { class: 'roots-actions' }, shareBtn, saveBtn));
+  drawCard(canvas, { family: f.family, village: f.village, temple: f.temple, from: f.from, days: res.days, d: res.d, districts, site: `${location.origin}${location.pathname}` })
+    .catch((err) => console.error(err));
 
   box.replaceChildren(
     el('div', { class: 'roots-plan-head' },
       el('div', {}, el('p', { class: 'eyebrow' }, `${res.d.name} · ${res.d.ta}`), el('h2', {}, title),
         el('p', { class: 'lead' }, `A ${res.days}-day homecoming. Nearest airport: ${res.air.name}, about ${road(res.air, res.d)} km from ${res.d.name}.`)),
       el('div', { class: 'roots-actions' },
-        el('a', { class: 'btn', href: mail }, 'Request my Ooru Nanbar'), copy,
+        mail, copy,
         el('p', { class: 'note' }, `Or email ${EMAIL}. A Roots team member replies within two working days.`))),
+    el('div', { class: 'roots-extras' }, cardPanel, costPanel),
     el('ol', { class: 'roots-days' }, ...days),
     el('div', { class: 'health' },
       el('h3', {}, icon('health'), `Health & safety in ${res.d.name}`),

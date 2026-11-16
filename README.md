@@ -24,6 +24,7 @@ Ideas borrowed from around the world and made Tamil: Ireland's diaspora welcome 
 | Feature | Where |
 | --- | --- |
 | Find your roots: homecoming planner for all 38 districts | `roots.html` |
+| Family roots card to share on WhatsApp, and a trip price estimate in rupees and 16 home currencies | `roots.html`, after planning |
 | Become an Ooru Nanbar / list your place | `join.html` |
 | 73 places with live hours, 24-hour clock, 3D map, 100 km day trips | home page |
 | City bus routes from Periyar, MGR (Mattuthavani) and Arappalayam stands | each place page |

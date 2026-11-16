@@ -695,6 +695,22 @@ section[id] { scroll-margin-top: 84px; }
 .roots-part--stay .roots-part-l { color: var(--leaf); }
 .roots-go { margin: 0; font-weight: 600; font-size: 15px; color: var(--accent); border-top: 1px dashed var(--line); padding-top: 8px; }
 
+/* Roots card and trip price estimate */
+.roots-extras { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 16px; align-items: start; }
+@media (max-width: 860px) { .roots-extras { grid-template-columns: minmax(0, 1fr); } }
+.roots-card-img { display: block; width: 100%; max-width: 420px; height: auto; aspect-ratio: 4 / 5; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface-2); }
+.cost-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.cost-out { display: flex; flex-direction: column; gap: 8px; }
+.cost-total { margin: 0; font-size: 16px; color: var(--muted); }
+.cost-total b { font: 600 clamp(30px, 4vw, 40px)/1.1 var(--font-display); color: var(--accent); }
+.cost-sub { margin: 0; font-weight: 600; }
+.cost-table { width: 100%; border-collapse: collapse; font-size: 15px; font-variant-numeric: tabular-nums; }
+.cost-table th { text-align: left; font-weight: 400; padding: 8px 8px 8px 0; }
+.cost-table td { text-align: right; padding: 8px 0 8px 12px; white-space: nowrap; }
+.cost-table td + td { color: var(--muted); }
+.cost-table tr { border-top: 1px dashed var(--line); }
+.cost-fee th, .cost-fee td { color: var(--muted); }
+
 /* ---------- Health & safety ---------- */
 .health { margin-top: 16px; padding: 16px 18px; border: 1px solid var(--line); border-left: 4px solid var(--leaf); border-radius: var(--radius-lg); background: var(--surface); display: flex; flex-direction: column; gap: 10px; min-width: 0; }
 .health h2, .health h3 { display: flex; align-items: center; gap: 8px; margin: 0; }
