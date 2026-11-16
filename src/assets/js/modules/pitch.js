@@ -1,4 +1,4 @@
-// Pitch guide: a step-by-step bar for presenting Roots live. Start it with ?pitch=1 on any page.
+// Pitch guide: a step-by-step bar for presenting Roots live. Start it with ?pitch=1 or #pitch on any page.
 // It walks one family's homecoming, then the live city, in the order of the five-minute demo.
 import { el } from './dom.js';
 
@@ -27,7 +27,7 @@ const read = () => { try { return sessionStorage.getItem('pitch'); } catch { ret
 const page = (u) => u.pathname.replace(/index\.html$/, '');
 const query = (u) => { const q = new URLSearchParams(u.search); q.delete('pitch'); q.sort(); return q.toString(); };
 
-const asked = new URLSearchParams(location.search).get('pitch');
+const asked = new URLSearchParams(location.search).get('pitch') ?? (location.hash === '#pitch' ? '1' : null);
 let at = asked !== null ? Math.max(0, (Number(asked) || 1) - 1) : Number(read()) || 0;
 at = Math.min(at, STEPS.length - 1);
 save(at);

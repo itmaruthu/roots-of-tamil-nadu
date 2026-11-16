@@ -6,7 +6,7 @@ if (menu) {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu.open) { menu.open = false; menu.querySelector('summary').focus(); } });
 }
 
-// Pitch guide: a step-by-step bar for live demos. Start it with ?pitch=1; it follows across pages until closed.
+// Pitch guide: a step-by-step bar for live demos. Start it with ?pitch=1 or #pitch; it follows across pages until closed.
 let pitching = null;
 try { pitching = sessionStorage.getItem('pitch'); } catch { /* storage unavailable */ }
-if (new URLSearchParams(location.search).has('pitch') || pitching !== null) import('./modules/pitch.js');
+if (new URLSearchParams(location.search).has('pitch') || location.hash === '#pitch' || pitching !== null) import('./modules/pitch.js');

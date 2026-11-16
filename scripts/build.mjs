@@ -601,7 +601,7 @@ ${urls.map((u) => `  <url><loc>${esc(u.loc)}</loc><lastmod>${BUILD_DATE}</lastmo
     .replace('<title>', '<meta name="claude:viewport-fit-sides" content="cover">\n<title>');
   const bodyPart = home.slice(home.indexOf('<body>') + 6, home.indexOf('</body>'));
   await mkdir(join(ROOT, '.preview'), { recursive: true });
-  await writeFile(join(ROOT, '.preview', 'index.html'), `<title>Madurai Never Sleeps</title>\n${headPart.replace(/<title>[^<]*<\/title>\n?/, '')}\n<div data-sprite-root>${bodyPart}</div>\n`);
+  await writeFile(join(ROOT, '.preview', 'index.html'), `<title>${esc(config.name)}</title>\n${headPart.replace(/<title>[^<]*<\/title>\n?/, '')}\n<div data-sprite-root>${bodyPart}</div>\n`);
 
   // Cache busting: JS and CSS live in content-hashed folders, so browsers never mix a new page with old code.
   const hash = createHash('sha256');
