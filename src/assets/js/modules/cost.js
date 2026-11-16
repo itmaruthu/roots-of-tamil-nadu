@@ -14,7 +14,11 @@ export const NANBAR_DAY = 2500;      // Ooru Nanbar, per day with the family
 export const NANBAR_DAYS = 2;        // village day and one more
 export const COORDINATION_FEE = 5000; // Roots coordination fee, per family
 const TEMPLE = 1500;                 // pongal or abhishekam at the kuladeivam, flowers, priest's dakshina
-const EXPERIENCE = 200;              // entry tickets and small experiences, per person per day
+const TICKETS = 100;                 // government monument, museum and darshan tickets, per person per day
+const EXPERIENCE = 100;              // small local experiences, per person per day
+export const COMMISSION = 0.12;      // paid by hosts out of their price, not added to the family's bill
+const GST_TRAVEL = 5;                // % on hotel rooms up to ₹7,500, restaurant meals and cabs
+const GST_FEE = 18;                  // % on the Roots coordination fee
 
 // Approximate rupees per unit. Shown as approximate; families check the rate before they pay.
 export const RATES_AS_OF = 'November 2026';
@@ -75,11 +79,30 @@ export function estimate({ days, people, tier = 'comfortable', kids = false }) {
     { k: 'cab', label: `${cab.kind} with driver × ${days} days`, amt: Math.round(cab.day * t.cabUp) * days },
     { k: 'nanbar', label: `Ooru Nanbar × ${NANBAR_DAYS} days`, amt: NANBAR_DAY * NANBAR_DAYS },
     { k: 'meals', label: `Meals for ${people} × ${days} days`, amt: t.meal * people * days },
-    { k: 'temple', label: 'Kuladeivam offering, entry tickets and experiences', amt: TEMPLE + EXPERIENCE * people * days },
+    { k: 'temple', label: 'Kuladeivam offering, entry tickets and experiences', amt: TEMPLE + (TICKETS + EXPERIENCE) * people * days },
     { k: 'fee', label: 'Roots coordination fee', amt: COORDINATION_FEE }
   ];
   const total = lines.reduce((s, l) => s + l.amt, 0);
-  return { lines, total, perDay: total / days, perPerson: total / people, nights, rooms };
+  return { lines, total, perDay: total / days, perPerson: total / people, nights, rooms, tickets: TICKETS * people * days };
+}
+
+/**
+ * Where the family's money goes: local people, the government, and Roots.
+ * Illustrative: prices are treated as GST-inclusive and every hotel, restaurant and cab as GST-registered.
+ */
+export function split(e) {
+  const amt = (k) => e.lines.find((l) => l.k === k).amt;
+  const booked = amt('stay') + amt('cab') + amt('nanbar') + amt('meals');
+  const gst = (amt('stay') + amt('cab') + amt('meals')) * GST_TRAVEL / (100 + GST_TRAVEL) + amt('fee') * GST_FEE / (100 + GST_FEE);
+  const gov = gst + e.tickets;
+  const roots = amt('fee') * 100 / (100 + GST_FEE) + booked * COMMISSION;
+  const local = e.total - gov - roots;
+  const pct = (v) => Math.round((v / e.total) * 100);
+  return [
+    { k: 'local', label: 'Local people', note: 'Your Ooru Nanbar, village cooks, hotels, drivers and the temple', amt: local, pct: 100 - pct(gov) - pct(roots) },
+    { k: 'gov', label: 'Government', note: 'GST, and tickets for monuments, museums and darshan', amt: gov, pct: pct(gov) },
+    { k: 'roots', label: 'Roots', note: 'Coordination fee, and a 12% commission paid by hosts', amt: roots, pct: pct(roots) }
+  ];
 }
 
 /** Round to a sensible figure for an estimate: nearest 100 rupees, or a whole unit abroad. */

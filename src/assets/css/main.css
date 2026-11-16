@@ -710,6 +710,71 @@ section[id] { scroll-margin-top: 84px; }
 .cost-table td + td { color: var(--muted); }
 .cost-table tr { border-top: 1px dashed var(--line); }
 .cost-fee th, .cost-fee td { color: var(--muted); }
+.roots-stack { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.roots-extras, #your-nanbar, .nanbars { scroll-margin-top: 88px; }
+.roots-part--gov .roots-part-l { color: var(--gold); }
+
+/* Where the money goes */
+.split { display: flex; flex-direction: column; gap: 10px; border-top: 1px solid var(--line); padding-top: 14px; margin-top: 4px; }
+.split h4 { margin: 0; font: italic 500 18px/1.25 var(--font-display); }
+.split-bar { display: flex; gap: 2px; height: 14px; border-radius: 3px; overflow: hidden; }
+.split-seg { flex: 0 0 0; min-width: 4px; }
+.split-seg--local, .split-row--local .split-pct { --c: var(--leaf); }
+.split-seg--gov, .split-row--gov .split-pct { --c: var(--gold); }
+.split-seg--roots, .split-row--roots .split-pct { --c: var(--accent); }
+.split-seg { background: var(--c); }
+.split-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.split-row { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; gap: 10px; align-items: baseline; }
+.split-pct { font: 600 22px/1 var(--font-display); color: var(--c); font-variant-numeric: tabular-nums; }
+.split-what { display: flex; flex-direction: column; gap: 2px; font-size: 15px; }
+.split-what small { font-size: 13px; color: var(--muted); }
+.split-amt { font-size: 15px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Ooru Nanbar profiles */
+.nanbars { padding: 16px 0 64px; }
+.nanbar-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px; }
+.nanbar-list > li { background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--leaf); border-radius: var(--radius-lg); padding: 18px; min-width: 0; }
+.nanbar { display: flex; flex-direction: column; gap: 10px; }
+.nanbar-top { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; gap: 12px; align-items: start; }
+.nanbar-face { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--leaf) 16%, var(--surface)); color: var(--leaf); font: 600 24px/1 var(--font-display); }
+.nanbar h4 { margin: 0; font: 500 22px/1.2 var(--font-display); }
+.nanbar h4 span { font: 600 15px var(--font-tamil); color: var(--muted); }
+.nanbar p { margin: 0; }
+.nanbar-where { font-weight: 600; font-size: 15px; }
+.nanbar-work, .nanbar-langs { font-size: 14px; color: var(--muted); }
+.nanbar-tag { font-size: 12px; font-weight: 600; padding: 2px 8px; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--muted); }
+.nanbar-knows, .nanbar-checks { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; font-size: 15px; }
+.nanbar-knows { border-top: 1px dashed var(--line); padding-top: 10px; }
+.nanbar-checks { font-size: 13.5px; color: var(--leaf); font-weight: 600; }
+.nanbar-checks li::before { content: "✓ "; }
+
+/* Pitch guide bar */
+.has-pitch { padding-bottom: 150px; }
+.pitch { position: fixed; z-index: 60; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 12px max(16px, env(safe-area-inset-left, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)); background: #1B1613; color: #F4EEE4; border-top: 3px solid var(--zari); }
+.pitch-n { margin: 0; font: italic 500 20px/1 var(--font-display); color: #D9AE52; white-space: nowrap; }
+.pitch-say { display: flex; flex-direction: column; gap: 2px; min-width: 0; font-size: 14px; line-height: 1.4; }
+.pitch-say b { font-size: 15px; }
+.pitch-say span { color: #D8CEC0; }
+.pitch-nav { display: flex; gap: 8px; }
+.pitch-btn { min-height: 44px; min-width: 44px; padding: 0 14px; border-radius: var(--radius); border: 1px solid #6B5F57; background: transparent; color: inherit; font: 600 15px var(--font-text); cursor: pointer; }
+.pitch-btn--next { background: #F4EEE4; color: #1B1613; border-color: #F4EEE4; }
+.pitch-btn:disabled { opacity: .4; cursor: default; }
+.pitch-btn:focus-visible { outline: 2px solid #D9AE52; outline-offset: 2px; }
+@media (max-width: 640px) {
+  .pitch { grid-template-columns: auto minmax(0, 1fr); row-gap: 8px; }
+  .pitch-nav { grid-column: 1 / -1; }
+  .pitch-btn { flex: 1; } .pitch-btn--x { flex: 0 0 44px; }
+  .has-pitch { padding-bottom: 210px; }
+}
+
+/* Phone: long card lists become rows you swipe sideways, so the home page stays short */
+@media (max-width: 700px) {
+  .features, .highlights, .circuits, .seasons, .pongal-days, .cab-grid {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; padding-bottom: 10px;
+    overscroll-behavior-x: contain; scrollbar-width: thin;
+  }
+  .features > *, .highlights > *, .circuits > *, .seasons > *, .pongal-days > *, .cab-grid > * { flex: 0 0 86%; scroll-snap-align: start; min-width: 0; }
+}
 
 /* ---------- Health & safety ---------- */
 .health { margin-top: 16px; padding: 16px 18px; border: 1px solid var(--line); border-left: 4px solid var(--leaf); border-radius: var(--radius-lg); background: var(--surface); display: flex; flex-direction: column; gap: 10px; min-width: 0; }

@@ -1,0 +1,35 @@
+{
+ "note": "Sample profiles for the prototype. They are not real people. Replace with verified Ooru Nanbar hosts before launch.",
+ "nanbars": [
+  {
+   "id": "sample-madurai",
+   "name": "Murugan",
+   "ta": "முருகன்",
+   "village": "Vadipatti",
+   "district": "madurai",
+   "work": "Farmer and temple committee member",
+   "langs": ["Tamil", "English"],
+   "knows": ["Ayyanar and Karuppasamy temples around Vadipatti", "Old family streets and the village elders", "Jallikattu villages of Alanganallur and Palamedu"]
+  },
+  {
+   "id": "sample-sivaganga",
+   "name": "Meenal",
+   "ta": "மீனாள்",
+   "village": "Kanadukathan",
+   "district": "sivaganga",
+   "work": "Retired schoolteacher",
+   "langs": ["Tamil", "English", "Malay"],
+   "knows": ["Chettinad family houses and their records", "The nine clan temples of the Nagarathar", "Athangudi tile makers and Chettinad home kitchens"]
+  },
+  {
+   "id": "sample-thanjavur",
+   "name": "Kathir",
+   "ta": "கதிர்",
+   "village": "Thiruvaiyaru",
+   "district": "thanjavur",
+   "work": "Guide and nadaswaram player",
+   "langs": ["Tamil", "English", "Hindi"],
+   "knows": ["Village temples along the Kaveri", "Temple priests for pongal and abhishekam", "Veena makers and Thanjavur painting families"]
+  }
+ ]
+}

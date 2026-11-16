@@ -2,11 +2,12 @@
 // village and family temple, using Roots places near the district and each district's landmarks.
 import { el, $, icon } from './modules/dom.js';
 import { EMERGENCY, SEARCHES, PHARMACY_TIP, mapSearch } from './modules/health.js';
-import { TIERS, CURRENCIES, RATES_AS_OF, currencyFor, estimate, money } from './modules/cost.js';
+import { TIERS, CURRENCIES, RATES_AS_OF, currencyFor, estimate, split, money } from './modules/cost.js';
 import { drawCard, shareCard, saveCard } from './modules/rootscard.js';
 
 const DATA_URL = new URL('../../data/places.json', import.meta.url);
 const DIST_URL = new URL('../../data/districts.json', import.meta.url);
+const NANBAR_URL = new URL('../../data/nanbars.json', import.meta.url);
 const PLACE_URL = (id) => new URL(`../../places/${id}.html`, import.meta.url).href;
 const EMAIL = document.querySelector('script[data-email]')?.dataset.email || '';
 
@@ -31,11 +32,21 @@ const km = (a, b) => {
 const road = (a, b) => Math.round(km(a, b) * 1.3 / 5) * 5; // straight line × 1.3 ≈ road distance
 const nearest = (list, p) => list.map((x) => ({ ...x, d: km(p, x) })).sort((a, b) => a.d - b.d)[0];
 
-let places = [], districts = [], airports = [];
+let places = [], districts = [], airports = [], nanbars = [];
+
+// Government first: every plan points to the state's own services before anyone else's.
+const GOV = {
+  stay: { href: 'https://www.ttdconline.com/', t: 'TTDC Hotel Tamil Nadu', x: 'state-run hotels' },
+  tour: { href: 'https://www.ttdconline.com/', t: 'TTDC tours and coaches', x: 'state tourism corporation' },
+  bus: { href: 'https://www.tnstc.in/', t: 'TNSTC buses', x: 'state transport' },
+  pooja: { href: 'https://hrce.tn.gov.in/', t: 'HR&CE temple services', x: 'pongal, abhishekam and donations, where your temple is under HR&CE' },
+  darshan: { href: 'https://hrce.tn.gov.in/', t: 'HR&CE darshan tickets', x: 'official temple tickets' }
+};
 
 async function load() {
-  const [p, d] = await Promise.all([fetch(DATA_URL).then((r) => r.json()), fetch(DIST_URL).then((r) => r.json())]);
-  places = p.places; districts = d.districts; airports = d.airports;
+  const [p, d, n] = await Promise.all([fetch(DATA_URL).then((r) => r.json()), fetch(DIST_URL).then((r) => r.json()),
+    fetch(NANBAR_URL).then((r) => r.json()).catch(() => ({ nanbars: [] }))]);
+  places = p.places; districts = d.districts; airports = d.airports; nanbars = n.nanbars;
 }
 
 function placeLink(p, extra = '') {
@@ -84,33 +95,34 @@ function plan(form) {
     see: [`About ${road(air, d)} km to ${d.name}. Settle in, then an easy evening walk.`, ...asLinks(see(1), dist)],
     eat: orText(asLinks(eat(1), (p) => p.area), [`${d.food[0]} for your first dinner`]),
     shop: ['A local SIM card and a little cash for temples and bus fares'],
-    stay: stayTown });
+    stay: stayTown, gov: [GOV.stay, GOV.bus] });
   out.push({ t: `Come home to ${village}`,
     see: ['Your Ooru Nanbar, a verified local friend, meets you in the village.', `${temple.charAt(0).toUpperCase()}${temple.slice(1)}: pongal or an abhishekam arranged with the temple.`,
       'Find the family street or house and meet the elders who remember the family.', ...(form.kids ? ['For the children: their names in Tamil on a family-tree card.'] : [])],
     eat: ['Lunch on a banana leaf in a village home', 'Evening tea and snacks with relatives'],
     shop: ['Flowers, coconuts and a new veshti or saree for the temple offering'],
-    stay: stayVillage });
+    stay: stayVillage, gov: [GOV.pooja] });
   out.push({ t: `Heritage of ${d.name}`,
     see: local(['temple', 'heritage', 'nature']) >= 2 ? asLinks(see(3), dist) : [...d.known, ...asLinks(see(1).filter((p) => p.d < 60), dist)],
     eat: orText(asLinks(eat(2), (p) => p.area), d.food),
     shop: orText(asLinks(shop(2), (p) => p.area), d.shop),
-    stay: stayTown });
+    stay: stayTown, gov: [GOV.tour, 'Monument and museum tickets at the counter'] });
   if (days >= 4) out.push({ t: `Taste and shop ${d.name}`,
     see: ['A morning market walk with your Ooru Nanbar', ...asLinks(see(1).filter((p) => p.d < 60), dist)],
     eat: orText(asLinks(eat(3), (p) => p.area), [d.food[1] || 'Street snacks and the sweet shop your Ooru Nanbar swears by', 'A home-cooked dinner with a local family']),
     shop: orText(asLinks(shop(3), (p) => p.area), [d.shop[1] || 'Handloom, brass and spices at the town bazaar', 'Bangles and flowers for the women of the family']),
-    stay: stayTown });
+    stay: stayTown, gov: ['Poompuhar and Co-optex: the state craft and handloom showrooms'] });
   if (days >= 5) out.push(nearMadurai ? { t: 'Keeladi and Madurai by night',
     see: ['Keeladi: a 2,600-year-old Tamil city by the Vaigai, with pots inscribed in Tamil-Brahmi.', ...asLinks([places.find((p) => p.id === KEELADI.id), places.find((p) => p.id === 'meenakshi-amman-temple')].filter((p) => p && !used.has(p.id)))],
     eat: ['Madurai never sleeps: the night food streets', ...asLinks(mEat(3), (p) => p.area)],
     shop: orText(asLinks(mShop(2), (p) => p.area), ['Sungudi sarees and temple jewellery']),
-    stay: mStays.length ? [...asLinks(mStays.slice(0, 2), (p) => p.area)] : ['A hotel near the Meenakshi temple'] }
+    stay: mStays.length ? [...asLinks(mStays.slice(0, 2), (p) => p.area)] : ['A hotel near the Meenakshi temple'],
+    gov: [GOV.darshan, 'Keeladi Museum and the Nayakkar Mahal sound and light show: tickets at the counter'] }
     : { t: 'Murugan\'s abode near you',
     see: [`${abode.name}, one of Murugan's six abodes (Arupadai Veedu), ${road(d, abode)} km away. Collect your first Arupadai passport stamp.`, ...asLinks([places.find((p) => p.id === abode.id)].filter(Boolean))],
     eat: ['Temple prasadam and a pilgrim-town meal'],
     shop: ['Prayer beads, brass lamps and pictures from the temple stalls'],
-    stay: stayTown });
+    stay: stayTown, gov: [GOV.darshan] });
   if (days >= 7) {
     out.push({ t: 'Relatives and rest',
       see: ['A free day for relatives, a wedding or a second temple visit', ...asLinks(see(1), dist)],
@@ -121,7 +133,7 @@ function plan(form) {
       see: [`${abode2.name}, another of Murugan's six abodes (${road(d, abode2)} km): one more Arupadai passport stamp. Children collect all six over the years.`, ...asLinks([places.find((p) => p.id === abode2.id)].filter(Boolean))],
       eat: orText(asLinks(eat(1), (p) => p.area), [d.food[0]]),
       shop: [`Take-home gifts: ${d.shop[0]}`],
-      stay: stayTown });
+      stay: stayTown, gov: [GOV.darshan] });
   }
   const trip = out.slice(0, days);
   const last = trip.at(-1);
@@ -130,13 +142,30 @@ function plan(form) {
   return { d, air, days, out: trip };
 }
 
+const CHECKS = ['Identity and address checked', 'Met in person by the Roots team', 'Vouched for by the village panchayat or temple committee'];
+function nanbarCard(n) {
+  const d = districts.find((x) => x.id === n.district);
+  return el('article', { class: 'nanbar' },
+    el('div', { class: 'nanbar-top' },
+      el('span', { class: 'nanbar-face', 'aria-hidden': 'true' }, n.name.charAt(0)),
+      el('div', {}, el('h4', {}, n.name, ' ', el('span', { lang: 'ta' }, n.ta)),
+        el('p', { class: 'nanbar-where' }, `${n.village}, ${d ? d.name : ''}`),
+        el('p', { class: 'nanbar-work' }, n.work)),
+      el('span', { class: 'nanbar-tag' }, 'Sample')),
+    el('p', { class: 'nanbar-langs' }, `Speaks ${n.langs.join(', ')}`),
+    el('ul', { class: 'nanbar-knows' }, ...n.knows.map((k) => el('li', {}, k))),
+    el('ul', { class: 'nanbar-checks' }, ...CHECKS.map((c) => el('li', {}, c))));
+}
+
 function render(f, res) {
   const box = $('#roots-plan');
   const title = `${f.family ? `The ${f.family} family` : 'Your family'}: homecoming to ${f.village || res.d.name}`;
   const lines = [title, `${res.d.name} district (${res.d.ta}) · ${res.days} days${f.from ? ` · from ${f.from}` : ''}`, ''];
-  const PARTS = [['see', 'See'], ['eat', 'Eat'], ['shop', 'Shop'], ['stay', 'Stay']];
-  const entry = (e) => (typeof e === 'string' ? el('li', {}, e) : placeLink(e.p, e.x));
-  const entryText = (e) => (typeof e === 'string' ? e : `${e.p.short || e.p.name}${e.x ? ` (${e.x})` : ''}`);
+  const PARTS = [['see', 'See'], ['eat', 'Eat'], ['shop', 'Shop'], ['stay', 'Stay'], ['gov', 'Govt']];
+  const entry = (e) => (typeof e === 'string' ? el('li', {}, e)
+    : e.href ? el('li', {}, el('a', { href: e.href, target: '_blank', rel: 'noopener noreferrer' }, e.t), e.x ? ` · ${e.x}` : '')
+    : placeLink(e.p, e.x));
+  const entryText = (e) => (typeof e === 'string' ? e : `${e.href ? e.t : e.p.short || e.p.name}${e.x ? ` (${e.x})` : ''}`);
   const days = res.out.map((day, i) => {
     lines.push(`Day ${i + 1}: ${day.t}`);
     for (const [k, label] of PARTS) if (day[k]?.length) lines.push(`  ${label}: ${day[k].map(entryText).join('; ')}`);
@@ -180,6 +209,15 @@ function render(f, res) {
       el('p', { class: 'note' }, `${TIERS[cost.tier].label}: ${TIERS[cost.tier].note.toLowerCase()}.`),
       el('table', { class: 'cost-table' }, el('tbody', {}, ...e.lines.map((l) => el('tr', { class: l.k === 'fee' ? 'cost-fee' : null },
         el('th', { scope: 'row' }, l.label), el('td', {}, money(l.amt)), abroad ? el('td', {}, money(l.amt, cost.cur)) : null)))),
+      el('div', { class: 'split' },
+        el('h4', {}, 'Where your money goes'),
+        el('div', { class: 'split-bar', role: 'img', 'aria-label': split(e).map((x) => `${x.label} ${x.pct}%`).join(', ') },
+          ...split(e).map((x) => el('span', { class: `split-seg split-seg--${x.k}`, style: { 'flex-grow': String(x.pct) } }))),
+        el('ul', { class: 'split-list' }, ...split(e).map((x) => el('li', { class: `split-row split-row--${x.k}` },
+          el('span', { class: 'split-pct' }, `${x.pct}%`),
+          el('span', { class: 'split-what' }, el('b', {}, x.label), el('small', {}, x.note)),
+          el('span', { class: 'split-amt' }, money(x.amt))))),
+        el('p', { class: 'note' }, 'An illustration: it assumes GST-registered hotels, restaurants and cabs at 5%, and 18% GST on the Roots fee.')),
       el('p', { class: 'note' }, `Flights to India are not included. A planning estimate, not a quote: your Ooru Nanbar confirms real prices before you book. ${abroad ? `Exchange rate approximate (${RATES_AS_OF}): 1 ${cost.cur} ≈ ₹${CURRENCIES[cost.cur].rate}.` : ''}`));
     setMail();
   }
@@ -210,6 +248,13 @@ function render(f, res) {
   drawCard(canvas, { family: f.family, village: f.village, temple: f.temple, from: f.from, days: res.days, d: res.d, districts, site: `${location.origin}${location.pathname}` })
     .catch((err) => console.error(err));
 
+  const dkm = (n) => { const nd = districts.find((x) => x.id === n.district); return nd ? km(res.d, nd) : 1e9; };
+  const mine = [...nanbars].sort((a, b) => dkm(a) - dkm(b))[0];
+  const nanbarPanel = mine ? el('div', { class: 'panel nanbar-match', id: 'your-nanbar' },
+    el('h3', {}, 'Your Ooru Nanbar'),
+    nanbarCard(mine),
+    el('p', { class: 'note' }, `A sample profile. After your request, Roots matches a verified Ooru Nanbar from ${f.village || res.d.name} and sends you their name, photo and phone number.`)) : '';
+
   box.replaceChildren(
     el('div', { class: 'roots-plan-head' },
       el('div', {}, el('p', { class: 'eyebrow' }, `${res.d.name} · ${res.d.ta}`), el('h2', {}, title),
@@ -217,7 +262,7 @@ function render(f, res) {
       el('div', { class: 'roots-actions' },
         mail, copy,
         el('p', { class: 'note' }, `Or email ${EMAIL}. A Roots team member replies within two working days.`))),
-    el('div', { class: 'roots-extras' }, cardPanel, costPanel),
+    el('div', { class: 'roots-extras', id: 'roots-extras' }, el('div', { class: 'roots-stack' }, cardPanel, nanbarPanel), costPanel),
     el('ol', { class: 'roots-days' }, ...days),
     el('div', { class: 'health' },
       el('h3', {}, icon('health'), `Health & safety in ${res.d.name}`),
@@ -259,11 +304,20 @@ form.addEventListener('submit', (e) => {
 });
 
 // Arriving from the home page with a district chosen: show the plan straight away.
-const pre = new URLSearchParams(location.search).get('district');
+const qs = new URLSearchParams(location.search);
+const pre = qs.get('district');
 if (pre) {
   ready.then(() => {
     if (!districts.some((d) => d.id === pre)) return;
     $('#r-district').value = pre;
+    for (const k of ['village', 'temple', 'family', 'from']) if (qs.get(k)) $(`#r-${k}`).value = qs.get(k).slice(0, 60);
+    if (['3', '5', '7'].includes(qs.get('days'))) $('#r-days').value = qs.get('days');
     go();
   });
 }
+
+// The Ooru Nanbar section under the form: who the family will meet.
+ready.then(() => {
+  const list = $('#nanbar-list');
+  if (list && nanbars.length) list.replaceChildren(...nanbars.map((n) => el('li', {}, nanbarCard(n))));
+}).catch(() => {});
