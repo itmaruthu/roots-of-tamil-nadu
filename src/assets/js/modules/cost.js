@@ -8,10 +8,13 @@ export const TIERS = {
 };
 
 // Cab per day by group size, with driver and fuel for about 250 km (government-permitted taxis).
-const cabFor = (people) => (people <= 4 ? { kind: 'Sedan', day: 3000 } : people <= 7 ? { kind: 'SUV', day: 4000 } : { kind: 'Tempo Traveller', day: 6000 });
+const VEHICLES = [[4, 'Sedan', 3000], [7, 'SUV', 4000], [12, 'Tempo Traveller', 6000], [20, 'Mini coach', 9000], [35, 'Coach', 14000], [50, 'Large coach', 18000]];
+const cabFor = (people) => { const [, kind, day] = VEHICLES.find(([seats]) => people <= seats) || VEHICLES.at(-1); return { kind, day }; };
+const pl = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
 
 export const NANBAR_DAY = 2500;      // Ooru Nanbar, per day with the family
-export const NANBAR_DAYS = 2;        // village day and one more
+// The village day and one more; on long stays, about one day in four.
+export const nanbarDays = (days) => Math.min(days, Math.max(2, Math.ceil(days / 4)));
 export const COORDINATION_FEE = 5000; // Roots coordination fee, per family
 const TEMPLE = 1500;                 // pongal or abhishekam at the kuladeivam, flowers, priest's dakshina
 const TICKETS = 100;                 // government monument, museum and darshan tickets, per person per day
@@ -73,14 +76,15 @@ export function currencyFor(from) {
 /** Line items for a trip. Nights = days - 1: the family flies home on the last evening. */
 export function estimate({ days, people, tier = 'comfortable', kids = false }) {
   const t = TIERS[tier] || TIERS.comfortable;
-  const nights = Math.max(1, days - 1);
+  const nights = days - 1;
+  const withNanbar = nanbarDays(days);
   const rooms = Math.max(1, Math.ceil(people / (kids ? 3 : 2)));
   const cab = cabFor(people);
   const lines = [
-    { k: 'stay', label: `Stay: ${rooms} room${rooms > 1 ? 's' : ''} × ${nights} nights`, amt: rooms * nights * t.room },
-    { k: 'cab', label: `${cab.kind} with driver × ${days} days`, amt: Math.round(cab.day * t.cabUp) * days },
-    { k: 'nanbar', label: `Ooru Nanbar × ${NANBAR_DAYS} days`, amt: NANBAR_DAY * NANBAR_DAYS },
-    { k: 'meals', label: `Meals for ${people} × ${days} days`, amt: t.meal * people * days },
+    { k: 'stay', label: nights ? `Stay: ${pl(rooms, 'room')} × ${pl(nights, 'night')}` : 'Stay: none, a day visit', amt: rooms * nights * t.room },
+    { k: 'cab', label: `${cab.kind} with driver × ${pl(days, 'day')}`, amt: Math.round(cab.day * t.cabUp) * days },
+    { k: 'nanbar', label: `Ooru Nanbar × ${pl(withNanbar, 'day')}`, amt: NANBAR_DAY * withNanbar },
+    { k: 'meals', label: `Meals for ${people} × ${pl(days, 'day')}`, amt: t.meal * people * days },
     { k: 'temple', label: 'Kuladeivam offering, entry tickets and experiences', amt: TEMPLE + (TICKETS + EXPERIENCE) * people * days },
     { k: 'fee', label: 'Roots coordination fee', amt: COORDINATION_FEE }
   ];

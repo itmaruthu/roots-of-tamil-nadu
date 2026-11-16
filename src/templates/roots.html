@@ -37,7 +37,8 @@
             <div class="combo"><input id="r-village" name="village" maxlength="80" placeholder="Choose a district first" disabled></div>
             <small>Not on the list? Type its name.</small></div>
           <label class="field">Kuladeivam (family temple)<input id="r-temple" name="temple" maxlength="80" placeholder="e.g. Ayyanar, Karuppasamy, Mariamman"></label>
-          <label class="field">Days in Tamil Nadu<select id="r-days" name="days"><option>3</option><option selected>5</option><option>7</option></select></label>
+          <div class="field"><label for="r-days">Days in Tamil Nadu</label>
+            <div class="combo"><input id="r-days" name="days" value="5" required inputmode="numeric" maxlength="2"></div><small>1 to 30 days</small></div>
           <div class="field"><label for="r-from">Travelling from</label>
             <div class="combo"><input id="r-from" name="from" maxlength="60" placeholder="Type or choose a country"></div></div>
           <label class="field">Family name (optional)<input id="r-family" name="family" maxlength="60" autocomplete="family-name"></label>

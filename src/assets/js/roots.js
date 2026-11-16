@@ -63,7 +63,7 @@ function plan(form) {
   const d = districts.find((x) => x.id === form.district);
   const village = form.village || `your village in ${d.name}`;
   const temple = form.temple || 'your kuladeivam temple';
-  const days = Number(form.days) || 5;
+  const days = Math.min(30, Math.max(1, Math.round(Number(form.days)) || 5));
   const air = nearest(airports, d);
   const near = places.map((p) => ({ ...p, d: km(d, p) })).filter((p) => p.d < 110).sort((a, b) => a.d - b.d);
   const dist = (p) => (road(d, p) < 5 ? 'in town' : `${road(d, p)} km`);
@@ -110,12 +110,12 @@ function plan(form) {
     eat: orText(asLinks(eat(2), (p) => p.area), d.food),
     shop: orText(asLinks(shop(2), (p) => p.area), d.shop),
     stay: stayTown, gov: [GOV.tour, 'Monument and museum tickets at the counter'] });
-  if (days >= 4) out.push({ t: `Taste and shop ${d.name}`,
+  out.push({ t: `Taste and shop ${d.name}`,
     see: ['A morning market walk with your Ooru Nanbar', ...asLinks(see(1).filter((p) => p.d < 60), dist)],
     eat: orText(asLinks(eat(3), (p) => p.area), [d.food[1] || 'Street snacks and the sweet shop your Ooru Nanbar swears by', 'A home-cooked dinner with a local family']),
     shop: orText(asLinks(shop(3), (p) => p.area), [d.shop[1] || 'Handloom, brass and spices at the town bazaar', 'Bangles and flowers for the women of the family']),
     stay: stayTown, gov: ['Poompuhar and Co-optex: the state craft and handloom showrooms'] });
-  if (days >= 5) out.push(nearMadurai ? { t: 'Keeladi and Madurai by night',
+  out.push(nearMadurai ? { t: 'Keeladi and Madurai by night',
     see: ['Keeladi: a 2,600-year-old Tamil city by the Vaigai, with pots inscribed in Tamil-Brahmi.', ...asLinks([places.find((p) => p.id === KEELADI.id), places.find((p) => p.id === 'meenakshi-amman-temple')].filter((p) => p && !used.has(p.id)))],
     eat: ['Madurai never sleeps: the night food streets', ...asLinks(mEat(3), (p) => p.area)],
     shop: orText(asLinks(mShop(2), (p) => p.area), ['Sungudi sarees and temple jewellery']),
@@ -126,25 +126,49 @@ function plan(form) {
     eat: ['Temple prasadam and a pilgrim-town meal'],
     shop: ['Prayer beads, brass lamps and pictures from the temple stalls'],
     stay: stayTown, gov: [GOV.darshan] });
-  if (days >= 7) {
-    out.push({ t: 'Relatives and rest',
-      see: ['A free day for relatives, a wedding or a second temple visit', ...asLinks(see(1), dist)],
-      eat: ['A family feast at home with relatives'],
-      shop: ['Tailors and silk: a family outfit for the next festival', ...asLinks(shop(1), (p) => p.area)],
-      stay: stayTown });
-    out.push({ t: 'Arupadai passport and goodbyes',
-      see: [`${abode2.name}, another of Murugan's six abodes (${road(d, abode2)} km): one more Arupadai passport stamp. Children collect all six over the years.`, ...asLinks([places.find((p) => p.id === abode2.id)].filter(Boolean))],
-      eat: orText(asLinks(eat(1), (p) => p.area), [d.food[0]]),
-      shop: [`Take-home gifts: ${d.shop[0]}`],
-      stay: stayTown, gov: [GOV.darshan] });
+  out.push({ t: 'Relatives and rest',
+    see: ['A free day for relatives, a wedding or a second temple visit', ...asLinks(see(1), dist)],
+    eat: ['A family feast at home with relatives'],
+    shop: ['Tailors and silk: a family outfit for the next festival', ...asLinks(shop(1), (p) => p.area)],
+    stay: stayTown });
+  const finale = { t: 'Arupadai passport and goodbyes',
+    see: [`${abode2.name}, another of Murugan's six abodes (${road(d, abode2)} km): one more Arupadai passport stamp. Children collect all six over the years.`, ...asLinks([places.find((p) => p.id === abode2.id)].filter(Boolean))],
+    eat: orText(asLinks(eat(1), (p) => p.area), [d.food[0]]),
+    shop: [`Take-home gifts: ${d.shop[0]}`],
+    stay: stayTown, gov: [GOV.darshan] };
+
+  // Longer stays (8 to 30 days): day trips to the districts next door, slow days in the village,
+  // and the rest of Murugan's six abodes, in turn.
+  const nextDoor = districts.filter((x) => x.id !== d.id).map((x) => ({ ...x, d: km(d, x) })).sort((a, b) => a.d - b.d);
+  const moreAbodes = abodes.filter((a) => a.name !== abode2.name && (nearMadurai || a.name !== abode.name));
+  const VILLAGE_DAYS = [
+    { t: `A slow day in ${village}`, see: ['Walk the family land, the tank and the fields with the elders', 'Children spend the morning at the village school'], eat: ['Cook a grandmother\'s recipe with the family'], shop: ['Fresh vegetables and flowers from the weekly market'] },
+    { t: 'The family story', see: ['Sit with the elders and record the family story on video', 'Photograph the old house, the street and the temple for the family album'], eat: ['Tiffin at the tea shop where the village meets'], shop: ['Old family photographs copied and framed in town'] },
+    { t: 'Giving back', see: [`A gift to ${village}: books for the school, a lamp for the temple or trees by the tank`, 'Annadhanam at the temple: a meal offered to the whole village'], eat: ['Annadhanam lunch, served on banana leaves'], shop: ['Rice, vegetables and vessels for the annadhanam, bought locally'] },
+    { t: 'Festival and craft', see: ['A special pooja or the village festival, if the dates match', 'Watch a local craft: weaving, pottery or kolam drawing'], eat: ['Festival sweets made at home'], shop: ['A piece made by the craftsperson you met'] },
+    { t: 'Temples around the village', see: ['The other temples your grandparents walked to: the Amman, the Ayyanar at the boundary, the Pillaiyar by the tank', 'Light a lamp at each with your Ooru Nanbar'], eat: ['Pongal and sundal offered at the temple'], shop: ['Oil, wicks and flowers from the temple-street stalls'] },
+    { t: 'Cousins\' day', see: ['A day for the children: village games, a bullock-cart ride and a swim at the pump-set', 'Evening stories from the elders under the neem tree'], eat: ['A picnic lunch in the fields'], shop: ['Palm-leaf toys and tops from the village shop'] }
+  ];
+  const extras = [];
+  for (let i = 0, n = 0, v = 0, a = 0; extras.length < days - 7; i++) {
+    const kind = i % 4;
+    if (kind === 1) { const x = VILLAGE_DAYS[v++ % VILLAGE_DAYS.length]; extras.push({ ...x, stay: stayVillage }); }
+    else if (kind === 3 && a < moreAbodes.length) { const x = moreAbodes[a++];
+      extras.push({ t: `Murugan's abode: ${x.name}`, see: [`${x.name}, one of Murugan's six abodes, ${road(d, x)} km away: another Arupadai passport stamp.`, ...asLinks([places.find((p) => p.id === x.id)].filter(Boolean))],
+        eat: ['Temple prasadam and a pilgrim-town meal'], shop: ['Prayer beads, brass lamps and pictures from the temple stalls'], stay: road(d, x) > 200 ? [`A night near ${x.name}; TTDC runs hotels in most temple towns`] : stayTown, gov: [GOV.darshan, ...(road(d, x) > 200 ? [GOV.stay] : [])] }); }
+    else { const x = nextDoor[n++ % nextDoor.length];
+      extras.push({ t: `Day trip to ${x.name}`, see: [`${x.name} (${x.ta}), about ${road(d, x)} km away`, ...x.known], eat: [x.food[0]], shop: [x.shop[0]],
+        stay: road(d, x) > 150 ? [`A night in ${x.name} town, or back to your hotel`] : stayTown, gov: [GOV.tour, GOV.bus] }); }
   }
-  const trip = out.slice(0, days);
+  // One or two days: the village comes first. A week or more: the full circuit, ending at an abode.
+  const trip = days === 1 ? [out[1]] : days < 7 ? out.slice(0, days) : [...out, ...extras, finale];
   const last = trip.at(-1);
   last.stay = null;
   last.go = `Evening: fly home from ${air.name} with a Taste & Craft box of sweets, spices and a keepsake.`;
   return { d, air, days, out: trip };
 }
 
+const pl = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
 const CHECKS = ['Identity and address checked', 'Met in person by the Roots team', 'Vouched for by the village panchayat or temple committee'];
 function nanbarCard(n) {
   const d = districts.find((x) => x.id === n.district);
@@ -163,7 +187,7 @@ function nanbarCard(n) {
 function render(f, res) {
   const box = $('#roots-plan');
   const title = `${f.family ? `The ${f.family} family` : 'Your family'}: homecoming to ${f.village || res.d.name}`;
-  const lines = [title, `${f.taluk ? `${f.taluk} taluk, ` : ''}${res.d.name} district (${res.d.ta}) · ${res.days} days${f.from ? ` · from ${f.from}` : ''}`, ''];
+  const lines = [title, `${f.taluk ? `${f.taluk} taluk, ` : ''}${res.d.name} district (${res.d.ta}) · ${pl(res.days, 'day')}${f.from ? ` · from ${f.from}` : ''}`, ''];
   const PARTS = [['see', 'See'], ['eat', 'Eat'], ['shop', 'Shop'], ['stay', 'Stay'], ['gov', 'Govt']];
   const entry = (e) => (typeof e === 'string' ? el('li', {}, e)
     : e.href ? el('li', {}, el('a', { href: e.href, target: '_blank', rel: 'noopener noreferrer' }, e.t), e.x ? ` · ${e.x}` : '')
@@ -202,6 +226,10 @@ function render(f, res) {
     el('select', { id, on: { change: (e) => { on(e.target.value); update(); } } },
       ...options.map(([v, t]) => el('option', { value: v, selected: String(v) === String(value) }, t))));
   const out = el('div', { class: 'cost-out' });
+  const peopleInput = el('input', { id: 'c-people', value: String(cost.people), inputmode: 'numeric', maxlength: '2' });
+  const peopleField = el('div', { class: 'field' }, el('label', { for: 'c-people' }, 'People travelling'), el('div', { class: 'combo' }, peopleInput));
+  const peopleBox = combo(peopleInput, { strict: true, strictMessage: 'Choose 1 to 50', options: () => Array.from({ length: 50 }, (_, i) => String(i + 1)),
+    onPick: (o) => { if (o) { cost.people = Number(o.v); update(); } else peopleBox.set(String(cost.people)); } });
   const curInput = el('input', { id: 'c-cur', value: cost.cur, maxlength: '24' });
   const curField = el('div', { class: 'field' }, el('label', { for: 'c-cur' }, 'Show in'), el('div', { class: 'combo' }, curInput));
   const curBox = combo(curInput, { strict: true, strictMessage: 'Choose a currency from the list',
@@ -212,7 +240,7 @@ function render(f, res) {
     const abroad = cost.cur !== 'INR';
     out.replaceChildren(
       el('p', { class: 'cost-total' }, el('b', {}, abroad ? money(e.total, cost.cur) : money(e.total)),
-        el('span', {}, abroad ? ` · ${money(e.total)}` : '', ` for ${res.days} days`)),
+        el('span', {}, abroad ? ` · ${money(e.total)}` : '', ` for ${pl(res.days, 'day')}`)),
       el('p', { class: 'cost-sub' }, `About ${abroad ? money(e.perPerson, cost.cur) : money(e.perPerson)} a person · ${abroad ? money(e.perDay, cost.cur) : money(e.perDay)} a day`),
       el('p', { class: 'note' }, `${TIERS[cost.tier].label}: ${TIERS[cost.tier].note.toLowerCase()}.`),
       el('table', { class: 'cost-table' }, el('tbody', {}, ...e.lines.map((l) => el('tr', { class: l.k === 'fee' ? 'cost-fee' : null },
@@ -232,7 +260,7 @@ function render(f, res) {
   const costPanel = el('div', { class: 'panel cost' },
     el('h3', {}, 'What this trip costs'),
     el('div', { class: 'cost-fields' },
-      select('People travelling', 'c-people', Array.from({ length: 12 }, (_, i) => [i + 1, String(i + 1)]), cost.people, (v) => { cost.people = Number(v); }),
+      peopleField,
       select('Comfort', 'c-tier', Object.entries(TIERS).map(([k, t]) => [k, t.label]), cost.tier, (v) => { cost.tier = v; }),
       curField),
     out);
@@ -317,6 +345,8 @@ const villageBox = combo(iVillage, {
     return t ? taluks[t] : Object.entries(taluks).flatMap(([name, list]) => list.map((v) => ({ v, hint: `${name} taluk`, taluk: name })));
   },
   onPick: (o) => { if (o?.taluk && !iTaluk.value.trim()) talukBox.set(o.taluk); } });
+const daysBox = combo($('#r-days'), { strict: true, strictMessage: 'Choose 1 to 30 days', options: () => Array.from({ length: 30 }, (_, i) => String(i + 1)),
+  onPick: (o) => { if (!o) daysBox.set('5'); } });
 combo($('#r-from'), { options: () => COUNTRIES, empty: 'Not on the list? Keep what you typed.' });
 
 async function go() {
@@ -356,7 +386,7 @@ if (pre) {
     const taluk = (qs.get('taluk') || '').slice(0, 60) || Object.keys(taluks).find((t) => village && taluks[t].some((v) => v.toLowerCase() === village.toLowerCase())) || '';
     talukBox.set(taluk); villageBox.set(village);
     for (const k of ['temple', 'family', 'from']) if (qs.get(k)) $(`#r-${k}`).value = qs.get(k).slice(0, 60);
-    if (['3', '5', '7'].includes(qs.get('days'))) $('#r-days').value = qs.get('days');
+    if (/^([1-9]|[12]\d|30)$/.test(qs.get('days') || '')) daysBox.set(qs.get('days'));
     go();
   });
 }

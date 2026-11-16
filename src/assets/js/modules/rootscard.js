@@ -140,7 +140,7 @@ export async function drawCard(canvas, o) {
   label('Coming from', 'எங்கிருந்து');
   value(o.from ? title(o.from) : 'Far away');
   label('Homecoming', 'வருகை');
-  value(`${o.days} days with our Ooru Nanbar`, 36);
+  value(`${o.days} ${o.days === 1 ? 'day' : 'days'} with our Ooru Nanbar`, 36);
 
   // Footer.
   ctx.fillStyle = C.line; ctx.fillRect(PAD, H - 160, W - PAD * 2, 2);
