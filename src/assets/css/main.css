@@ -695,6 +695,54 @@ section[id] { scroll-margin-top: 84px; }
 .roots-part--stay .roots-part-l { color: var(--leaf); }
 .roots-go { margin: 0; font-weight: 600; font-size: 15px; color: var(--accent); border-top: 1px dashed var(--line); padding-top: 8px; }
 
+/* Live wait: steps, three linked screens, facts */
+.lw-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 28px; margin-bottom: 28px; }
+@media (max-width: 860px) { .lw-steps { grid-template-columns: minmax(0, 1fr); } }
+.lw-demo { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(16px, 2.4vw, 24px); display: flex; flex-direction: column; gap: 16px; margin-bottom: 20px; }
+.lw-demo-head { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: end; }
+.lw-demo-head h3 { font: 500 clamp(22px, 2.6vw, 28px)/1.2 var(--font-display); margin: 0 0 4px; }
+.lw-pick { min-width: min(100%, 240px); }
+.lw-screens { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+@media (max-width: 900px) { .lw-screens { grid-template-columns: minmax(0, 1fr); } }
+.lw-dev { border: 1px solid var(--line-strong); border-radius: 14px; background: var(--bg); display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
+.lw-role { margin: 0; padding: 10px 14px; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; border-bottom: 1px solid var(--line); background: var(--surface-2); }
+.lw-role .i { color: var(--accent); font-size: 17px; }
+.lw-dev-body { padding: 16px 14px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.lw-dev-body p { margin: 0; }
+.lw-count { font-size: 16px; color: var(--muted); }
+.lw-count b { font: 600 44px/1 var(--font-display); color: var(--accent); margin-right: 6px; }
+.lw-line { font-size: 15px; }
+.lw-ask { font-size: 14px; font-weight: 600; margin-top: 4px; }
+.lw-label2 { font-size: 13px; font-weight: 600; color: var(--muted); }
+.lw-token { font: 600 64px/1 var(--font-display); color: var(--ink); font-variant-numeric: tabular-nums; }
+.lw-token.is-turn { color: var(--leaf); }
+.lw-turn { font-weight: 700; color: var(--leaf); }
+.lw-main { align-self: stretch; justify-content: center; min-height: 48px; margin-top: auto; }
+.lw-dev-body .btn--sm { align-self: flex-start; }
+.lw-progress { height: 8px; border-radius: 4px; background: var(--surface-2); overflow: hidden; }
+.lw-progress span { display: block; height: 100%; background: var(--leaf); transition: width .4s var(--ease); }
+.lw-near { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; font-size: 14.5px; }
+.lw-near a { font-weight: 600; }
+.lw-facts { list-style: none; margin: 0 0 28px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 28px; }
+@media (max-width: 860px) { .lw-facts { grid-template-columns: minmax(0, 1fr); } }
+.lw-facts li { display: flex; flex-direction: column; gap: 4px; border-top: 1px solid var(--line-strong); padding: 14px 0; }
+.lw-facts b { font: 500 19px/1.2 var(--font-display); }
+.lw-facts span { color: var(--muted); font-size: 15px; }
+.live-grid--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 860px) { .live-grid--two { grid-template-columns: minmax(0, 1fr); } }
+.lw-big { font-size: clamp(26px, 3.2vw, 36px); }
+.lw-level--short { --lv: var(--leaf); } .lw-level--mid { --lv: var(--gold); } .lw-level--long { --lv: var(--accent); }
+.lw-big[class*="lw-level"] { color: var(--lv); }
+.lw-bar[class*="lw-level"] .lw-fill { background: color-mix(in srgb, var(--lv) 55%, var(--surface-2)); }
+.lw-bar.is-now[class*="lw-level"] .lw-fill { background: var(--lv); box-shadow: 0 0 0 2px var(--ink); }
+.lw-key { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; font-size: 13px; color: var(--muted); margin: 0; }
+.lw-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; }
+.lw-dot--short { background: var(--leaf); } .lw-dot--mid { background: var(--gold); } .lw-dot--long { background: var(--accent); }
+.lw-best { margin: 0; font-weight: 700; }
+.lw-report { border-top: 1px dashed var(--line); padding-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.lw-report-q { margin: 0; font-weight: 600; font-size: 15px; }
+@media (prefers-reduced-motion: reduce) { .lw-progress span { transition: none; } }
+
 /* Beyond Madurai: city cards */
 .city h3 span { font: 600 16px var(--font-tamil); color: var(--muted); }
 .city-kind { margin: 8px 0 0; font: italic 500 15px var(--font-display); color: var(--muted); }

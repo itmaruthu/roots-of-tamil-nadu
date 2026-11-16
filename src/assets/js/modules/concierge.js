@@ -6,7 +6,7 @@ import { isOpen, status, formatHour, hoursFor, is24h } from './hours.js';
 import { darshanWait } from './livewait.js';
 import { distanceKm, formatKm, MEENAKSHI } from './geo.js';
 
-const SUGGESTIONS = ['What is open now?', 'How do I get a safe cab?', 'Where to buy sarees?', 'Veg food near the temple', 'Which temples are open?', 'How long is the darshan wait?', 'Late-night food', 'இப்போ என்ன திறந்திருக்கு?'];
+const SUGGESTIONS = ['How long is the queue at Konar Kadai?', 'What is open now?', 'How do I get a safe cab?', 'Where to buy sarees?', 'Veg food near the temple', 'Which temples are open?', 'How long is the darshan wait?', 'Late-night food', 'இப்போ என்ன திறந்திருக்கு?'];
 
 const GENERIC = new Set(['hotel', 'temple', 'shop', 'mess', 'kadai', 'stall', 'stalls', 'madurai', 'market', 'original', 'famous', 'board', 'butter', 'the', 'sri', 'tea']);
 function keywords(p) {
@@ -63,7 +63,10 @@ export function initConcierge(ctx) {
       .sort((a, b) => b.score - a.score)[0]?.p;
     if (has('wait', 'queue', 'busy', 'crowd', 'darshan', 'கூட்டம்', 'காத்திரு')) {
       if (named && named.type !== 'temple') {
-        return [`${named.name}: ${status(named, day, hour).text}. Busy eateries use Roots tokens: take one in the Live wait section and get an alert when you're next.`];
+        const live = isOpen(named, day, hour) ? ctx.liveWait?.queue(named.id) : null;
+        return [live
+          ? `${named.name}: ${live.waiting} parties waiting, about ${live.minutes} min. Take a token above and walk around; your phone tells you when you are next.`
+          : `${named.name}: ${status(named, day, hour).text}. Busy eateries use Roots tokens: take one in the Live wait section and get an alert when you're next.`];
       }
       const w = darshanWait(hour, day, false);
       return [w === null

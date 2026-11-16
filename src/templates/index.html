@@ -174,38 +174,76 @@
       <div class="section-head">
         <p class="eyebrow">Live wait · Aatruppadai</p>
         <h2 id="live-title">Skip the queue, not the food</h2>
-        <p class="lead">Madurai's temples and messes have no token system today, so Roots brings one: a QR code, the vendor's phone and any old TV. Know the darshan wait before you go, hold your place at a busy mess, and ask Aatruppadai, our guide, anything. All three follow the clock above.</p>
+        <p class="lead">Madurai's temples and messes have no token system today, so Roots brings one that needs no app and no new machine: a QR code at the door, the owner's own phone and any old TV. Guests hold their place and walk around instead of standing in line.</p>
       </div>
-      <div class="live-grid" id="live-wait">
+
+      <ol class="join-steps lw-steps">
+        <li><b>Scan the QR at the door</b><span>The token opens in the phone's browser: no app, no sign-up. No smartphone? Ask at the counter for a paper token from the same line.</span></li>
+        <li><b>Walk away and explore</b><span>The phone shows how many are ahead and about how long, with places to see within a few minutes' walk.</span></li>
+        <li><b>Come back when you are called</b><span>The number shows on the guest's phone and on the shop's TV, and can be read aloud.</span></li>
+      </ol>
+
+      <div class="lw-demo" id="live-wait">
+        <div class="lw-demo-head">
+          <div><h3>Try it: three screens, one queue</h3><p class="note">Take a token as a guest, then call the next number as the owner. All three screens follow the clock above.</p></div>
+          <label class="field lw-pick" for="lw-shop">Eatery<select id="lw-shop" class="select"></select></label>
+        </div>
+        <div class="lw-screens">
+          <article class="lw-dev">
+            <p class="lw-role"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#phone"/></svg>Guest's phone</p>
+            <div class="lw-dev-body" id="lw-guest" aria-live="polite"></div>
+          </article>
+          <article class="lw-dev">
+            <p class="lw-role"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#meal"/></svg>Owner's phone</p>
+            <div class="lw-dev-body" id="lw-vendor"></div>
+          </article>
+          <article class="lw-dev">
+            <p class="lw-role"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#star"/></svg>Any TV in the shop</p>
+            <div class="lw-dev-body">
+              <div class="lw-screen" id="lw-screen">
+                <p class="lw-screen-name" id="lw-screen-name"></p>
+                <p class="lw-label">Now serving · <span lang="ta">இப்போதைய எண்</span></p>
+                <p class="lw-number" id="lw-serving">—</p>
+                <p class="lw-next" id="lw-upnext"></p>
+              </div>
+              <div class="chips">
+                <button class="chip" id="lw-voice" type="button" aria-pressed="false">Read numbers aloud</button>
+                <button class="chip" id="lw-full" type="button">Full screen</button>
+              </div>
+            </div>
+          </article>
+        </div>
+        <p class="note">A working model in your browser: the three screens share one queue here, and the kitchen serves a party every few seconds once you hold a token. In the pilot the same three pages run on real phones and a TV, joined by a free realtime database.</p>
+      </div>
+
+      <ul class="lw-facts">
+        <li><b>What the owner needs</b><span>A printed QR, their own phone and any TV or spare phone. Nothing to install.</span></li>
+        <li><b>What it costs</b><span>Free to join. About ₹500 a month if the shop wants the TV display and weekly reports.</span></li>
+        <li><b>What the city gains</b><span>Guests spend their waiting time in the shops and temples next door, not on the pavement.</span></li>
+      </ul>
+
+      <div class="live-grid live-grid--two">
         <div class="panel">
           <h3>Darshan wait · Meenakshi temple</h3>
           <div class="row-between"><p class="lw-big" id="lw-darshan-now">—</p><button class="chip" id="lw-festival" type="button" aria-pressed="false">Chithirai festival crowd</button></div>
           <p class="note" id="lw-darshan-at"></p>
           <div class="lw-bars" id="lw-bars" role="img" aria-label="Estimated darshan wait through the day"></div>
-          <p class="note" id="lw-best"></p>
-          <p class="note">Illustrative estimate. Roots does not run temple queues; in the pilot this comes from visitor reports, host check-ins at the gates and past patterns.</p>
-        </div>
-        <div class="panel">
-          <h3>Token queue · busy eateries</h3>
-          <label class="note" for="lw-shop">Eatery</label>
-          <select id="lw-shop" class="select"></select>
-          <div class="lw-screen" id="lw-screen">
-            <p class="lw-screen-name" id="lw-screen-name"></p>
-            <p class="lw-label">Now serving</p>
-            <p class="lw-number" id="lw-serving">—</p>
-            <p class="lw-next" id="lw-upnext"></p>
+          <p class="lw-key"><span class="lw-dot lw-dot--short"></span>Short, under 20 min <span class="lw-dot lw-dot--mid"></span>Moderate <span class="lw-dot lw-dot--long"></span>Long, over 45 min</p>
+          <p class="lw-best" id="lw-best"></p>
+          <div class="lw-report">
+            <p class="lw-report-q">Just came out? How long did you wait?</p>
+            <div class="chips" id="lw-report">
+              <button class="chip" type="button" data-wait="short">Under 20 min</button>
+              <button class="chip" type="button" data-wait="mid">20 to 45 min</button>
+              <button class="chip" type="button" data-wait="long">Over 45 min</button>
+            </div>
+            <p class="note" id="lw-report-msg" aria-live="polite"></p>
           </div>
-          <p class="lw-msg" id="lw-msg" aria-live="polite"></p>
-          <div class="chips">
-            <button class="btn btn--sm" id="lw-take" type="button">Take a token</button>
-            <button class="btn btn--sm btn--ghost" id="lw-next" type="button">Vendor: call next</button>
-            <button class="btn btn--sm btn--ghost" id="lw-full" type="button">Show as TV display</button>
-          </div>
-          <p class="note">Simulated here. Pilot with partner eateries: guests scan a QR standee or message on WhatsApp, the vendor taps "Call next" on their phone, any old TV shows the number, and walk-ins without smartphones get a paper token from the same sequence.</p>
+          <p class="note">An estimate, shown here from an illustrative pattern. Roots does not run temple queues: in the pilot the figure comes from visitors' one-tap reports like the one above, Ooru Nanbar check-ins at the gates and past days. For a fixed slot, book the temple's own special darshan through <a href="https://hrce.tn.gov.in/" target="_blank" rel="noopener noreferrer">HR&amp;CE</a>.</p>
         </div>
         <div class="panel concierge">
           <h3 class="cc-title"><span lang="ta">ஆற்றுப்படை</span> Aatruppadai <small>Ask the way, the Sangam way</small></h3>
-          <p class="cc-about">In Sangam poems like the <i>Perumpanatruppadai</i>, a bard returning home meets a traveller and tells him the road, where to eat and who will welcome him. Ask the same of us.</p>
+          <p class="cc-about">In Sangam poems like the <i>Perumpanatruppadai</i>, a bard returning home meets a traveller and tells him the road, where to eat and who will welcome him. Ask the same of us: it knows the queue and the darshan wait too.</p>
           <div class="cc-log" id="cc-log" aria-live="polite"></div>
           <div class="chips" id="cc-chips"></div>
           <form class="cc-form" id="cc-form" autocomplete="off">

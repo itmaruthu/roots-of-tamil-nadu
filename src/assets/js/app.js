@@ -40,6 +40,7 @@ async function init() {
   buildControls();
   const ctx = { state, places: state.places, placeUrl: PLACE_URL };
   liveWait = initLiveWait(ctx);
+  ctx.liveWait = liveWait; // the guide reads live queue figures from it
   initConcierge(ctx);
   renderFeatured();
   render();
