@@ -743,6 +743,10 @@ section[id] { scroll-margin-top: 84px; }
 .lw-report-q { margin: 0; font-weight: 600; font-size: 15px; }
 @media (prefers-reduced-motion: reduce) { .lw-progress span { transition: none; } }
 
+/* The clock's "live" marker */
+.live-tag { display: inline-flex; align-items: center; gap: 6px; margin-left: 10px; padding: 3px 10px; border-radius: 999px; font: 600 13px/1.4 var(--font-text); background: rgb(14 11 10 / .55); color: #F4EEE4; vertical-align: middle; }
+.live-tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #4ADE80; }
+
 /* Festival days that are not consecutive carry their own label */
 .pongal-days.fest-days li::before { content: attr(data-when); }
 @media (min-width: 900px) { .pongal-days.fest-days { grid-template-columns: repeat(4, minmax(0, 1fr)); } }

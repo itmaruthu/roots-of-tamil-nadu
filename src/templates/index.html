@@ -63,7 +63,7 @@
       <div class="section-head">
         <p class="eyebrow">The 24-hour city</p>
         <h2 id="clock-title">Move the clock. Watch Madurai change.</h2>
-        <p class="lead">Every stop has real opening hours, checked against public listings. Pick a day and a time, or press play.</p>
+        <p class="lead">Every stop has real opening hours, checked against public listings. The clock opens on the time in Madurai right now. Pick another day or hour, or press play.</p>
       </div>
       <div class="clock-card">
         <div class="sky" id="sky" aria-hidden="true">
@@ -78,18 +78,18 @@
             <path d="M1010 120V92h90v28zM1020 92l9-20h72l9 20zM1036 72l8-18h50l8 18zM1050 54l6-16h28l6 16z"/>
             <rect x="230" y="96" width="60" height="10"/><rect x="720" y="94" width="50" height="12"/><rect x="940" y="98" width="40" height="8"/>
           </svg>
-          <div class="sky-text" id="sky-text"><span class="time" id="time">9 pm</span><span class="count" id="count"></span></div>
+          <div class="sky-text" id="sky-text"><span class="time" id="time"></span><span class="live-tag" id="live-tag" hidden>Now in Madurai</span><span class="count" id="count"></span></div>
         </div>
         <div class="clock-controls">
           <div class="chips" id="days" role="group" aria-label="Day of the week"></div>
           <p class="moment" id="moment" aria-live="polite"></p>
           <label class="note" for="clock-range">Time of day in Madurai (IST)</label>
-          <input id="clock-range" type="range" min="0" max="23.75" step="0.25" value="21">
+          <input id="clock-range" type="range" min="0" max="23.75" step="0.25" value="12">
           <div class="ticks" aria-hidden="true"><span>12a</span><span>4a</span><span>8a</span><span>12p</span><span>4p</span><span>8p</span><span>12a</span></div>
           <div class="hours-pick" id="hours" role="group" aria-label="Pick an hour"></div>
           <div class="chips">
             <button class="chip" id="play" type="button" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#play"/></svg><span>Play the day</span></button>
-            <button class="chip" id="now" type="button"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#clock"/></svg>Now in Madurai</button>
+            <button class="chip" id="now" type="button" aria-pressed="true"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#clock"/></svg>Now in Madurai</button>
             <span class="chips" id="moments"></span>
           </div>
         </div>

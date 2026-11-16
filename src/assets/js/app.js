@@ -18,7 +18,8 @@ const now = nowInMadurai();
 let liveWait = { update() {} };
 const state = {
   places: [], moments: [],
-  day: now.day, hour: 21, filter: 'all', view: 'region',
+  // The clock opens on the time in Madurai right now and follows it (live) until the visitor moves it.
+  day: now.day, hour: Math.round(now.hour * 60) / 60, live: true, filter: 'all', view: 'region',
   tab: 'open', showAll: false, tilt: store.get('roots-3d', true),
   selected: 'meenakshi-amman-temple', plan: store.get('roots-plan', []), me: null, timer: null
 };
@@ -51,13 +52,13 @@ function buildControls() {
   const days = $('#days');
   DAYS_SHORT.forEach((d, i) => days.append(el('button', {
     type: 'button', class: 'chip chip--sm', 'aria-pressed': 'false', dataset: { day: i },
-    on: { click: () => { state.day = i; render(); } }
+    on: { click: () => { state.live = false; state.day = i; render(); } }
   }, d)));
 
   const moments = $('#moments');
   QUICK.forEach(([h, label, id]) => moments.append(el('button', {
     type: 'button', class: 'chip', 'aria-pressed': 'false', dataset: { hour: h },
-    on: { click: () => { stop(); setHour(h); state.selected = id; render(); } }
+    on: { click: () => { state.live = false; stop(); setHour(h); state.selected = id; render(); } }
   }, label)));
 
   $$('#status-tabs button').forEach((b) => b.addEventListener('click', () => { state.tab = b.dataset.tab; state.showAll = false; render(); }));
@@ -90,10 +91,22 @@ function buildControls() {
   for (let h = 0; h < 24; h++) {
     const label = `${h % 12 || 12} ${h < 12 ? 'am' : 'pm'}`;
     hours.append(el('button', { type: 'button', class: 'hour', dataset: { h: String(h) }, 'aria-pressed': 'false',
-      on: { click: () => { stop(); setHour(h); render(); } } }, label));
+      on: { click: () => { state.live = false; stop(); setHour(h); render(); } } }, label));
   }
-  $('#clock-range').addEventListener('input', (e) => { stop(); state.hour = Number(e.target.value); render(); });
-  $('#now').addEventListener('click', () => { stop(); const n = nowInMadurai(); state.day = n.day; setHour(Math.floor(n.hour * 4) / 4); render(); });
+  $('#clock-range').addEventListener('input', (e) => { state.live = false; stop(); state.hour = Number(e.target.value); render(); });
+  $('#now').addEventListener('click', () => { stop(); state.live = true; syncNow(); render(); });
+  $('#clock-range').value = String(state.hour);
+  // While live, follow the real clock. Skip a tick if the visitor is in the middle of using a list or a form,
+  // so the page is not redrawn under their fingers.
+  setInterval(() => {
+    if (!state.live || state.timer || document.hidden) return;
+    const busy = document.activeElement?.closest?.('#tiles, #live-wait, #cc-form, .map-stage, #filters');
+    const before = formatHour(state.hour);
+    if (busy) return;
+    syncNow();
+    if (formatHour(state.hour) !== before) render();
+  }, 20_000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && state.live) { syncNow(); render(); } });
   $('#play').addEventListener('click', togglePlay);
   $('#near-me').addEventListener('click', locate);
   $('#clear-plan').addEventListener('click', () => { state.plan = []; store.set('roots-plan', []); render(); });
@@ -121,10 +134,13 @@ function renderFeatured() {
   }
 }
 function setHour(h) { state.hour = h; $('#clock-range').value = String(h); }
+/** Set the clock to this minute in Madurai (IST), whatever time zone the visitor is in. */
+function syncNow() { const n = nowInMadurai(); state.day = n.day; setHour(Math.round(n.hour * 60) / 60); }
 
 function togglePlay() {
   if (state.timer) return stop();
-  if (state.hour >= 23.75) setHour(0);
+  state.live = false;
+  if (state.hour >= 23.75) setHour(0); else setHour(Math.floor(state.hour * 4) / 4);
   const btn = $('#play');
   btn.setAttribute('aria-pressed', 'true');
   btn.querySelector('use').setAttribute('href', `${spriteUrl()}#pause`);
@@ -190,6 +206,8 @@ function render() {
   if (state.me) { const d = (p) => distanceKm(state.me, p); on.sort((a, b) => d(a) - d(b)); off.sort((a, b) => d(a) - d(b)); }
 
   $('#time').textContent = formatHour(state.hour);
+  $('#live-tag').hidden = !state.live;
+  $('#now').setAttribute('aria-pressed', String(state.live));
   $('#count').textContent = `${on.length} of ${vis.length} open`;
   const m = state.moments.find((x) => state.hour >= x.s && state.hour < x.e);
   $('#moment').textContent = m ? m.t : '';
