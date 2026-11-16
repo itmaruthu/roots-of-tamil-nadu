@@ -1,13 +1,17 @@
 // "List your place" form. On Netlify the POST is captured by Netlify Forms (free tier, no server).
 // Elsewhere (or in the preview) it falls back to showing the details so they can be copied or sent on WhatsApp.
 import { el, $ } from './modules/dom.js';
+import { locality } from './modules/locality.js';
 
 const form = $('#join-form');
 const status = $('#join-status');
 const script = document.querySelector('script[data-whatsapp]');
 const waNumber = (script?.dataset.whatsapp || '').replace(/\D/g, '');
 
-const LABELS = { type: 'Type', place: 'Place', owner: 'Name', phone: 'Mobile', area: 'Area', hours: 'Hours', diet: 'Food', story: 'Special', tokens: 'Live wait tokens', voice: 'Call in Tamil' };
+const LABELS = { type: 'Type', place: 'Place', owner: 'Name', phone: 'Mobile', district: 'District', taluk: 'Taluk', town: 'Town or village', area: 'Area', hours: 'Hours', diet: 'Food', story: 'Special', tokens: 'Live wait tokens', voice: 'Call in Tamil' };
+
+// District, taluk and town: type or pick. The pilot is in Madurai, so that is chosen to begin with.
+if (form) locality({ district: $('#j-district'), taluk: $('#j-taluk'), village: $('#j-town'), start: 'madurai' });
 
 function waLink(text) { return `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`; }
 

@@ -342,7 +342,10 @@ const talukBox = combo(iTaluk, { empty: 'Not on the list? Newer taluks may be mi
 const villageBox = combo(iVillage, {
   options: () => {
     const t = talukOf(iTaluk.value);
-    return t ? taluks[t] : Object.entries(taluks).flatMap(([name, list]) => list.map((v) => ({ v, hint: `${name} taluk`, taluk: name })));
+    const list = t ? taluks[t] : Object.entries(taluks).flatMap(([name, l]) => l.map((v) => ({ v, hint: `${name} taluk`, taluk: name })));
+    // The district's own town or city comes first: the census lists villages, not cities.
+    const town = districts.find((d) => d.id === fDistrict.value)?.name;
+    return town && !list.some((o) => (o.v || o) === town) ? [{ v: town, hint: 'town or city' }, ...list] : list;
   },
   onPick: (o) => { if (o?.taluk && !iTaluk.value.trim()) talukBox.set(o.taluk); } });
 const daysBox = combo($('#r-days'), { strict: true, strictMessage: 'Choose 1 to 30 days', options: () => Array.from({ length: 30 }, (_, i) => String(i + 1)),

@@ -26,7 +26,7 @@ Ideas borrowed from around the world and made Tamil: Ireland's diaspora welcome 
 | Find your roots: homecoming planner for all 38 districts | `roots.html` |
 | District, taluk and village as type-and-select fields (2011 Census village directory), and a country list for "Travelling from" | `roots.html` |
 | Family roots card to share on WhatsApp, and a trip price estimate in rupees and 16 home currencies | `roots.html`, after planning |
-| Become an Ooru Nanbar / list your place | `join.html` |
+| Become an Ooru Nanbar / list your place, with district, taluk and town as type-and-select fields | `join.html` |
 | 73 places with live hours, 24-hour clock, 3D map, 100 km day trips | home page |
 | City bus routes from Periyar, MGR (Mattuthavani) and Arappalayam stands | each place page |
 | Aatruppadai guide, Live wait tokens, festivals for every season, approved cabs | home page |

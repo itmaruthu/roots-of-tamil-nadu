@@ -50,6 +50,13 @@
           <label class="field">Name of your place<input id="j-place" name="place" required maxlength="80" autocomplete="organization"></label>
           <label class="field">Your name<input id="j-name" name="owner" required maxlength="60" autocomplete="name"></label>
           <label class="field">Mobile number<input id="j-phone" name="phone" type="tel" required inputmode="tel" maxlength="14" pattern="(\+91)?[ \-]?[6-9][0-9]{4}[ \-]?[0-9]{5}" placeholder="98765 43210" autocomplete="tel"><small>Indian mobile, 10 digits</small></label>
+          <div class="field"><label for="j-district">District</label>
+            <div class="combo"><input id="j-district" name="district" required maxlength="40" placeholder="Type or choose a district"></div></div>
+          <div class="field"><label for="j-taluk">Taluk</label>
+            <div class="combo"><input id="j-taluk" name="taluk" maxlength="60" placeholder="Choose a district first" disabled></div></div>
+          <div class="field"><label for="j-town">Town, city or village</label>
+            <div class="combo"><input id="j-town" name="town" required maxlength="80" placeholder="Choose a district first" disabled></div>
+            <small>Not on the list? Type its name.</small></div>
           <label class="field">Area or street<input id="j-area" name="area" required maxlength="80" placeholder="e.g. West Masi Street" autocomplete="street-address"></label>
           <label class="field">Opening hours<input id="j-hours" name="hours" maxlength="80" placeholder="e.g. 6 pm – 11 pm, closed Sunday"></label>
           <label class="field">Food<select id="j-diet" name="diet"><option value="">Not a food place</option><option>Vegetarian</option><option>Non-vegetarian</option><option>Both</option></select></label>
