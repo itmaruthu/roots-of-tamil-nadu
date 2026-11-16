@@ -130,7 +130,7 @@ Use only photos you took or have written permission to use, and get consent from
 | AI chatbot | "Ask Roots" concierge (rule-based, in the browser) | Same answers over WhatsApp or Telegram, plus an open-weight language model for free-form questions |
 | Traffic, waiting system, queue display | Live wait: darshan estimate, token queue, TV "Now serving" screen (simulated) | Supabase Realtime free tier for live tokens; web push alerts; the display is a web page on any phone or TV |
 
-The darshan wait figures and the token queue are simulated in this prototype and labelled as such on the page.
+The darshan wait (for every Madurai temple, on its real opening hours) and the token queue are simulated in this prototype and labelled as such on the page.
 
 ## Host sign-up (join.html)
 

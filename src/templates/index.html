@@ -224,12 +224,18 @@
 
       <div class="live-grid live-grid--two">
         <div class="panel">
-          <h3>Darshan wait · Meenakshi temple</h3>
-          <div class="row-between"><p class="lw-big" id="lw-darshan-now">—</p><button class="chip" id="lw-festival" type="button" aria-pressed="false">Chithirai festival crowd</button></div>
+          <h3>Darshan wait</h3>
+          <div class="field"><label for="lw-temple">Temple</label>
+            <div class="combo"><input id="lw-temple" maxlength="60" placeholder="Type or choose a temple"></div></div>
+          <div class="row-between"><p class="lw-big" id="lw-darshan-now">—</p><button class="chip" id="lw-festival" type="button" aria-pressed="false">Festival crowd</button></div>
           <p class="note" id="lw-darshan-at"></p>
           <div class="lw-bars" id="lw-bars" role="img" aria-label="Estimated darshan wait through the day"></div>
           <p class="lw-key"><span class="lw-dot lw-dot--short"></span>Short, under 20 min <span class="lw-dot lw-dot--mid"></span>Moderate <span class="lw-dot lw-dot--long"></span>Long, over 45 min</p>
           <p class="lw-best" id="lw-best"></p>
+          <div class="lw-quiet" id="lw-quiet-box">
+            <p class="lw-report-q" id="lw-quiet-title">Shorter waits right now</p>
+            <ul class="lw-quiet-list" id="lw-quiet"></ul>
+          </div>
           <div class="lw-report">
             <p class="lw-report-q">Just came out? How long did you wait?</p>
             <div class="chips" id="lw-report">
@@ -239,7 +245,7 @@
             </div>
             <p class="note" id="lw-report-msg" aria-live="polite"></p>
           </div>
-          <p class="note">An estimate, shown here from an illustrative pattern. Roots does not run temple queues: in the pilot the figure comes from visitors' one-tap reports like the one above, Ooru Nanbar check-ins at the gates and past days. For a fixed slot, book the temple's own special darshan through <a href="https://hrce.tn.gov.in/" target="_blank" rel="noopener noreferrer">HR&amp;CE</a>.</p>
+          <p class="note">An estimate for each temple, shown here from an illustrative pattern on its real opening hours. Roots does not run temple queues: in the pilot the figure comes from visitors' one-tap reports like the one above, Ooru Nanbar check-ins at the gates and past days. For a fixed slot, book the temple's own special darshan through <a href="https://hrce.tn.gov.in/" target="_blank" rel="noopener noreferrer">HR&amp;CE</a>.</p>
         </div>
         <div class="panel concierge">
           <h3 class="cc-title"><span lang="ta">ஆற்றுப்படை</span> Aatruppadai <small>Ask the way, the Sangam way</small></h3>

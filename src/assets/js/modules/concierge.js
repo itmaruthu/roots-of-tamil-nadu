@@ -68,10 +68,15 @@ export function initConcierge(ctx) {
           ? `${named.name}: ${live.waiting} parties waiting, about ${live.minutes} min. Take a token above and walk around; your phone tells you when you are next.`
           : `${named.name}: ${status(named, day, hour).text}. Busy eateries use Roots tokens: take one in the Live wait section and get an alert when you're next.`];
       }
-      const w = darshanWait(hour, day, false);
+      // Any temple by name; Meenakshi when none is named.
+      const t = named && named.type === 'temple' ? named : ctx.places.find((p) => p.id === 'meenakshi-amman-temple');
+      const w = darshanWait(hour, day, false, t);
+      const quiet = ctx.places.filter((p) => p.type === 'temple' && p.id !== t.id).map((p) => ({ p, w: darshanWait(hour, day, false, p) }))
+        .filter((x) => x.w !== null && (w === null || x.w < w)).sort((a, b) => a.w - b.w)[0];
+      const tip = quiet ? ` ${quiet.p.short || quiet.p.name} is ${w === null ? 'open' : 'quieter'} now, about ${quiet.w} minutes.` : '';
       return [w === null
-        ? `Meenakshi temple is closed at ${formatHour(hour)}. It opens 5 am–12:30 pm and 4–10 pm.`
-        : `Darshan wait at Meenakshi temple around ${formatHour(hour)}: about ${w} minutes (estimate). Early morning, 5–7 am, is usually shortest.`];
+        ? `${t.name} is closed at ${formatHour(hour)}. Hours: ${t.hours}.${tip}`
+        : `Darshan wait at ${t.name} around ${formatHour(hour)}: about ${w} minutes (estimate).${tip}`];
     }
     if (has('cab', 'taxi', 'rental', 'rent a car', 'self drive', 'auto', 'bus', 'transport', 'airport', 'டாக்ஸி', 'வாடகை')) {
       return ['Use government-approved rides: the prepaid taxi counter in the airport arrivals hall (fixed fare, receipt names the driver), TTDC tours and coaches (toll-free 1800 425 31111), or TNSTC city buses (every place page has a "Bus route from my location" button). For self-drive, rent only a car with a black plate and yellow letters; never a white-plate private car.',

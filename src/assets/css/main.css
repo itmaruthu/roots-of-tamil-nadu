@@ -739,6 +739,14 @@ section[id] { scroll-margin-top: 84px; }
 .lw-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; }
 .lw-dot--short { background: var(--leaf); } .lw-dot--mid { background: var(--gold); } .lw-dot--long { background: var(--accent); }
 .lw-best { margin: 0; font-weight: 700; }
+/* Other temples with a shorter wait */
+.lw-quiet { border-top: 1px dashed var(--line); padding-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.lw-quiet-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.lw-quiet-btn { width: 100%; min-height: 44px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 12px; align-items: baseline; text-align: left; padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--bg); color: var(--ink); font: inherit; cursor: pointer; }
+.lw-quiet-btn:hover { border-color: var(--line-strong); }
+.lw-quiet-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lw-quiet-btn span { font-weight: 700; color: var(--lv); white-space: nowrap; }
+.lw-quiet-btn small { grid-column: 1 / -1; color: var(--muted); font-size: 13px; }
 .lw-report { border-top: 1px dashed var(--line); padding-top: 12px; display: flex; flex-direction: column; gap: 8px; }
 .lw-report-q { margin: 0; font-weight: 600; font-size: 15px; }
 @media (prefers-reduced-motion: reduce) { .lw-progress span { transition: none; } }
