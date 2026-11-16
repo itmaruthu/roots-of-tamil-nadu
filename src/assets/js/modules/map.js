@@ -23,8 +23,8 @@ export const LANDMARKS = {
   'jallikattu-arena-alanganallur': 'Jallikattu Arena',
   'pathu-thoon-ten-pillars': 'Ten Pillars'
 };
-const STAR = new Set(['keeladi-museum', 'alanganallur-jallikattu-vadivasal', 'avaniyapuram-jallikattu', 'palamedu-jallikattu-vadivasal', 'jallikattu-arena-alanganallur', 'pathu-thoon-ten-pillars']);
-const BIG = new Set(['meenakshi-amman-temple', 'thiruparankundram-murugan-temple', 'kallazhagar-temple-alagar-kovil', 'pazhamudircholai-murugan-temple', 'pandi-muneeswarar-temple']);
+export const STAR = new Set(['keeladi-museum', 'alanganallur-jallikattu-vadivasal', 'avaniyapuram-jallikattu', 'palamedu-jallikattu-vadivasal', 'jallikattu-arena-alanganallur', 'pathu-thoon-ten-pillars']);
+export const BIG = new Set(['meenakshi-amman-temple', 'thiruparankundram-murugan-temple', 'kallazhagar-temple-alagar-kovil', 'pazhamudircholai-murugan-temple', 'pandi-muneeswarar-temple']);
 
 /**
  * @param {SVGSVGElement} root

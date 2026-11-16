@@ -216,10 +216,36 @@ function render() {
 
   $('#mode-3d').setAttribute('aria-pressed', String(state.tilt));
   $('#mode-2d').setAttribute('aria-pressed', String(!state.tilt));
-  drawMap($('#map-svg'), { places: vis, view: state.view, selected: state.selected, isOpen: open, me: state.me, tilt: state.tilt, onSelect: (id) => select(id, true) });
+  drawStage(vis);
   renderSpot();
   renderPlan();
   liveWait.update();
+}
+
+// The map: real 3D (WebGL) when 3D is chosen and the browser can draw it; the flat SVG plan otherwise.
+// The 3D code loads only when the map is near the screen, so the rest of the page is not slowed by it.
+let map3d = null, map3dState = 'idle';
+function drawStage(vis) {
+  const flat = $('#map-svg');
+  const opts = { places: vis, view: state.view, selected: state.selected, isOpen: open, me: state.me, onSelect: (id) => select(id, true) };
+  if (state.tilt && map3dState === 'idle') {
+    map3dState = 'waiting';
+    const start = () => {
+      map3dState = 'loading';
+      import('./modules/map3d.js').then((m) => { map3d = m.createMap3d($('.map-stage'), flat); map3dState = 'ready'; render(); })
+        .catch((err) => { console.warn('3D map not available, showing the drawn map instead.', err); map3dState = 'failed'; render(); });
+    };
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => { if (entries.some((e) => e.isIntersecting)) { io.disconnect(); start(); } }, { rootMargin: '900px' });
+      io.observe($('#map'));
+    } else start();
+  }
+  const use3d = state.tilt && map3dState === 'ready';
+  map3d?.show(use3d);
+  flat.toggleAttribute('hidden', use3d);
+  $('#map').classList.toggle('is-webgl', use3d);
+  if (use3d) map3d.update({ ...opts, hour: state.hour });
+  else drawMap(flat, { ...opts, tilt: state.tilt });
 }
 
 function select(id, fromMap) {

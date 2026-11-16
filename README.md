@@ -83,6 +83,10 @@ or edit `siteUrl` in `site.config.json`. Also put your team's address in `public
 └── dist/                     Build output (git-ignored)
 ```
 
+## 3D map
+
+The Explore map is real 3D (WebGL): drag to turn, pinch or use the buttons to zoom, and the sun and moon follow the 24-hour clock. It uses three.js r170 (MIT), self-hosted in `src/assets/js/vendor/` so the site still makes no third-party requests; it loads only when the map nears the screen. Browsers without WebGL get the drawn SVG map. Places stand at their real coordinates; tower heights, hills and the river's width are stylised.
+
 ## SEO
 
 - One crawlable page per place (`/places/<slug>.html`) with a unique title, meta description and canonical URL.

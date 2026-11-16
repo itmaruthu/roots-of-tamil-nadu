@@ -11,6 +11,18 @@ const mix = (a, b, k) => rgb(a).map((v, i) => Math.round(v + (rgb(b)[i] - v) * k
 const css = (c) => `rgb(${c.join(',')})`;
 const luminance = (c) => (0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2]) / 255;
 
+/** Sky colours and the sun or moon's place for an hour: { top, bottom } as [r,g,b], day, and f (0 at rise, 1 at set). */
+export function skyAt(hour) {
+  let i = 0;
+  while (i < STOPS.length - 2 && hour >= STOPS[i + 1][0]) i++;
+  const [h0, t0, b0] = STOPS[i];
+  const [h1, t1, b1] = STOPS[i + 1];
+  const k = (hour - h0) / (h1 - h0);
+  const day = hour >= 6 && hour <= 18.5;
+  const f = day ? (hour - 6) / 12.5 : ((hour < 6 ? hour + 24 : hour) - 18.5) / 11.5;
+  return { top: mix(t0, t1, k), bottom: mix(b0, b1, k), day, f };
+}
+
 export function initSky(stars) {
   // Deterministic pseudo-random star field.
   for (let s = 0; s < 46; s++) {
