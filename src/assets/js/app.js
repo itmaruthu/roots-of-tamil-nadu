@@ -39,7 +39,7 @@ async function init() {
   state.places = data.places.filter((p) => !p.city); // the clock and map are Madurai's; other cities have their own pages
   state.moments = data.moments;
   buildControls();
-  const ctx = { state, places: state.places, placeUrl: PLACE_URL };
+  const ctx = { state, places: state.places, allPlaces: data.places, cities: data.cities || [], placeUrl: PLACE_URL }; // the guide knows every city
   liveWait = initLiveWait(ctx);
   ctx.liveWait = liveWait; // the guide reads live queue figures from it
   initConcierge(ctx);

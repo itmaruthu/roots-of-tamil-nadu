@@ -739,6 +739,11 @@ section[id] { scroll-margin-top: 84px; }
 .lw-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; }
 .lw-dot--short { background: var(--leaf); } .lw-dot--mid { background: var(--gold); } .lw-dot--long { background: var(--accent); }
 .lw-best { margin: 0; font-weight: 700; }
+/* Guide answers */
+.cc-log { position: relative; height: 360px; }
+.cc-list li small { display: block; color: var(--muted); font-size: 13px; line-height: 1.4; }
+.cc-msg a { font-weight: 600; }
+
 /* Other temples with a shorter wait */
 .lw-quiet { border-top: 1px dashed var(--line); padding-top: 12px; display: flex; flex-direction: column; gap: 8px; }
 .lw-quiet-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
