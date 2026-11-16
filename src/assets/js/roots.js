@@ -4,9 +4,12 @@ import { el, $, icon } from './modules/dom.js';
 import { EMERGENCY, SEARCHES, PHARMACY_TIP, mapSearch } from './modules/health.js';
 import { TIERS, CURRENCIES, RATES_AS_OF, currencyFor, estimate, split, money } from './modules/cost.js';
 import { drawCard, shareCard, saveCard } from './modules/rootscard.js';
+import { combo } from './modules/combo.js';
+import { COUNTRIES } from './modules/countries.js';
 
 const DATA_URL = new URL('../../data/places.json', import.meta.url);
 const DIST_URL = new URL('../../data/districts.json', import.meta.url);
+const VILLAGE_URL = (id) => new URL(`../../data/villages/${id}.json`, import.meta.url);
 const NANBAR_URL = new URL('../../data/nanbars.json', import.meta.url);
 const PLACE_URL = (id) => new URL(`../../places/${id}.html`, import.meta.url).href;
 const EMAIL = document.querySelector('script[data-email]')?.dataset.email || '';
@@ -160,7 +163,7 @@ function nanbarCard(n) {
 function render(f, res) {
   const box = $('#roots-plan');
   const title = `${f.family ? `The ${f.family} family` : 'Your family'}: homecoming to ${f.village || res.d.name}`;
-  const lines = [title, `${res.d.name} district (${res.d.ta}) · ${res.days} days${f.from ? ` · from ${f.from}` : ''}`, ''];
+  const lines = [title, `${f.taluk ? `${f.taluk} taluk, ` : ''}${res.d.name} district (${res.d.ta}) · ${res.days} days${f.from ? ` · from ${f.from}` : ''}`, ''];
   const PARTS = [['see', 'See'], ['eat', 'Eat'], ['shop', 'Shop'], ['stay', 'Stay'], ['gov', 'Govt']];
   const entry = (e) => (typeof e === 'string' ? el('li', {}, e)
     : e.href ? el('li', {}, el('a', { href: e.href, target: '_blank', rel: 'noopener noreferrer' }, e.t), e.x ? ` · ${e.x}` : '')
@@ -190,7 +193,7 @@ function render(f, res) {
   };
   const fullText = () => `${lines.join('\n')}\n\n${costText()}`;
   const mail = el('a', { class: 'btn' }, 'Request my Ooru Nanbar');
-  const setMail = () => mail.setAttribute('href', `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`${fullText()}\n\nKuladeivam: ${f.temple || '-'}\nTravelling from: ${f.from || '-'}\nPeople: ${cost.people}\nTamil-English guide: ${f.tamil ? 'yes' : 'no'}`)}`);
+  const setMail = () => mail.setAttribute('href', `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`${fullText()}\n\nTaluk: ${f.taluk || '-'}\nKuladeivam: ${f.temple || '-'}\nTravelling from: ${f.from || '-'}\nPeople: ${cost.people}\nTamil-English guide: ${f.tamil ? 'yes' : 'no'}`)}`);
   const copy = el('button', { class: 'btn btn--ghost', type: 'button', on: { click: async (e) => {
     try { await navigator.clipboard.writeText(fullText()); e.currentTarget.textContent = 'Copied'; } catch { e.currentTarget.textContent = 'Copy not available'; }
   } } }, 'Copy this plan');
@@ -199,6 +202,11 @@ function render(f, res) {
     el('select', { id, on: { change: (e) => { on(e.target.value); update(); } } },
       ...options.map(([v, t]) => el('option', { value: v, selected: String(v) === String(value) }, t))));
   const out = el('div', { class: 'cost-out' });
+  const curInput = el('input', { id: 'c-cur', value: cost.cur, maxlength: '24' });
+  const curField = el('div', { class: 'field' }, el('label', { for: 'c-cur' }, 'Show in'), el('div', { class: 'combo' }, curInput));
+  const curBox = combo(curInput, { strict: true, strictMessage: 'Choose a currency from the list',
+    options: () => Object.entries(CURRENCIES).map(([k, c]) => ({ v: k, hint: c.name })),
+    onPick: (o) => { if (o) { cost.cur = o.v; update(); } else curBox.set(cost.cur); } });
   function update() {
     const e = estimate({ days: res.days, people: cost.people, tier: cost.tier, kids: f.kids });
     const abroad = cost.cur !== 'INR';
@@ -226,7 +234,7 @@ function render(f, res) {
     el('div', { class: 'cost-fields' },
       select('People travelling', 'c-people', Array.from({ length: 12 }, (_, i) => [i + 1, String(i + 1)]), cost.people, (v) => { cost.people = Number(v); }),
       select('Comfort', 'c-tier', Object.entries(TIERS).map(([k, t]) => [k, t.label]), cost.tier, (v) => { cost.tier = v; }),
-      select('Show in', 'c-cur', Object.entries(CURRENCIES).map(([k, c]) => [k, `${k} · ${c.name}`]), cost.cur, (v) => { cost.cur = v; })),
+      curField),
     out);
   update();
 
@@ -245,7 +253,7 @@ function render(f, res) {
     el('p', { class: 'note' }, 'Share it on WhatsApp with the family. It is made on this device; nothing is uploaded.'),
     canvas,
     el('div', { class: 'roots-actions' }, shareBtn, saveBtn));
-  drawCard(canvas, { family: f.family, village: f.village, temple: f.temple, from: f.from, days: res.days, d: res.d, districts, site: `${location.origin}${location.pathname}` })
+  drawCard(canvas, { family: f.family, village: f.village, taluk: f.taluk, temple: f.temple, from: f.from, days: res.days, d: res.d, districts, site: `${location.origin}${location.pathname}` })
     .catch((err) => console.error(err));
 
   const dkm = (n) => { const nd = districts.find((x) => x.id === n.district); return nd ? km(res.d, nd) : 1e9; };
@@ -257,7 +265,7 @@ function render(f, res) {
 
   box.replaceChildren(
     el('div', { class: 'roots-plan-head' },
-      el('div', {}, el('p', { class: 'eyebrow' }, `${res.d.name} · ${res.d.ta}`), el('h2', {}, title),
+      el('div', {}, el('p', { class: 'eyebrow' }, `${f.taluk ? `${f.taluk} taluk · ` : ''}${res.d.name} · ${res.d.ta}`), el('h2', {}, title),
         el('p', { class: 'lead' }, `A ${res.days}-day homecoming. Nearest airport: ${res.air.name}, about ${road(res.air, res.d)} km from ${res.d.name}.`)),
       el('div', { class: 'roots-actions' },
         mail, copy,
@@ -279,6 +287,38 @@ function render(f, res) {
 const ready = load();
 const form = $('#roots-form');
 
+// District → taluk → village: each a type-and-select field. Taluks and villages load per district.
+const fDistrict = $('#r-district'), iDistrict = $('#r-district-name'), iTaluk = $('#r-taluk'), iVillage = $('#r-village');
+let taluks = {};
+const talukOf = (name) => Object.keys(taluks).find((t) => t.toLowerCase() === name.trim().toLowerCase());
+
+async function setDistrict(d) {
+  fDistrict.value = d ? d.id : '';
+  talukBox.set(''); villageBox.set('');
+  taluks = {};
+  for (const i of [iTaluk, iVillage]) { i.disabled = !d; i.placeholder = d ? 'Loading…' : 'Choose a district first'; }
+  if (!d) return;
+  try { taluks = (await fetch(VILLAGE_URL(d.id)).then((r) => r.json())).taluks; } catch { taluks = {}; }
+  if (fDistrict.value !== d.id) return; // the visitor has already chosen another district
+  const has = Object.keys(taluks).length;
+  iTaluk.placeholder = has ? `Type or choose a taluk in ${d.name}` : 'Type the taluk';
+  iVillage.placeholder = has ? 'Type or choose a village' : 'Type the village or town';
+}
+
+const districtBox = combo(iDistrict, { strict: true, strictMessage: 'Choose a district from the list',
+  options: () => districts.map((d) => ({ v: d.name, hint: d.ta, id: d.id })),
+  onPick: (o) => { const d = o && districts.find((x) => x.id === o.id); if ((d ? d.id : '') !== fDistrict.value) setDistrict(d); } });
+const talukBox = combo(iTaluk, { empty: 'Not on the list? Newer taluks may be missing: keep what you typed.',
+  options: () => Object.keys(taluks).map((t) => ({ v: t, hint: `${taluks[t].length} villages` })),
+  onPick: () => { villageBox.set(''); } });
+const villageBox = combo(iVillage, {
+  options: () => {
+    const t = talukOf(iTaluk.value);
+    return t ? taluks[t] : Object.entries(taluks).flatMap(([name, list]) => list.map((v) => ({ v, hint: `${name} taluk`, taluk: name })));
+  },
+  onPick: (o) => { if (o?.taluk && !iTaluk.value.trim()) talukBox.set(o.taluk); } });
+combo($('#r-from'), { options: () => COUNTRIES, empty: 'Not on the list? Keep what you typed.' });
+
 async function go() {
   const btn = form.querySelector('button[type=submit]');
   btn.disabled = true; btn.textContent = 'Planning…';
@@ -286,7 +326,7 @@ async function go() {
     await ready;
     const f = Object.fromEntries(new FormData(form));
     f.kids = $('#r-kids').checked; f.tamil = $('#r-tamil').checked;
-    for (const k of ['village', 'temple', 'family', 'from']) f[k] = (f[k] || '').trim();
+    for (const k of ['taluk', 'village', 'temple', 'family', 'from']) f[k] = (f[k] || '').trim();
     render(f, plan(f));
   } catch (err) {
     const box = $('#roots-plan');
@@ -303,14 +343,19 @@ form.addEventListener('submit', (e) => {
   if (form.reportValidity()) go();
 });
 
-// Arriving from the home page with a district chosen: show the plan straight away.
+// Arriving with a district chosen (from the home page or a shared link): show the plan straight away.
 const qs = new URLSearchParams(location.search);
 const pre = qs.get('district');
 if (pre) {
-  ready.then(() => {
-    if (!districts.some((d) => d.id === pre)) return;
-    $('#r-district').value = pre;
-    for (const k of ['village', 'temple', 'family', 'from']) if (qs.get(k)) $(`#r-${k}`).value = qs.get(k).slice(0, 60);
+  ready.then(async () => {
+    const d = districts.find((x) => x.id === pre);
+    if (!d) return;
+    districtBox.set(d.name);
+    await setDistrict(d);
+    const village = (qs.get('village') || '').slice(0, 60);
+    const taluk = (qs.get('taluk') || '').slice(0, 60) || Object.keys(taluks).find((t) => village && taluks[t].some((v) => v.toLowerCase() === village.toLowerCase())) || '';
+    talukBox.set(taluk); villageBox.set(village);
+    for (const k of ['temple', 'family', 'from']) if (qs.get(k)) $(`#r-${k}`).value = qs.get(k).slice(0, 60);
     if (['3', '5', '7'].includes(qs.get('days'))) $('#r-days').value = qs.get('days');
     go();
   });

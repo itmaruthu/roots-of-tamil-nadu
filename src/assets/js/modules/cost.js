@@ -43,13 +43,15 @@ export const CURRENCIES = {
 };
 
 const PLACES_TO_CURRENCY = [
+  [/\bindia\b|chennai|bengaluru|bangalore|mumbai|delhi|hyderabad|kolkata|pune/, 'INR'],
+  [/switzerland|zurich|geneva/, 'EUR'],
   [/singapore/, 'SGD'],
   [/malaysia|kuala lumpur|\bkl\b|penang|ipoh|johor|klang|seremban/, 'MYR'],
   [/dubai|abu dhabi|sharjah|ajman|\buae\b|emirates|al ain/, 'AED'],
   [/saudi|riyadh|jeddah|dammam|khobar|jubail/, 'SAR'],
   [/qatar|doha/, 'QAR'],
   [/kuwait/, 'KWD'],
-  [/oman|muscat|salalah/, 'OMR'],
+  [/\boman\b|muscat|salalah/, 'OMR'],
   [/canada|toronto|vancouver|montreal|ottawa|calgary|brampton|scarborough|mississauga/, 'CAD'],
   [/\buk\b|united kingdom|england|britain|london|birmingham|manchester|leicester|croydon|scotland|wales/, 'GBP'],
   [/australia|sydney|melbourne|perth|brisbane|adelaide|canberra/, 'AUD'],

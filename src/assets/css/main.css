@@ -695,6 +695,19 @@ section[id] { scroll-margin-top: 84px; }
 .roots-part--stay .roots-part-l { color: var(--leaf); }
 .roots-go { margin: 0; font-weight: 600; font-size: 15px; color: var(--accent); border-top: 1px dashed var(--line); padding-top: 8px; }
 
+/* Type-and-select fields */
+.field > label { font: inherit; }
+.combo { position: relative; }
+.combo input { padding-right: 36px; background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%); background-position: calc(100% - 19px) 50%, calc(100% - 14px) 50%; background-size: 5px 5px; background-repeat: no-repeat; }
+.combo input:disabled { opacity: .6; cursor: not-allowed; }
+.combo-list { position: absolute; z-index: 30; left: 0; right: 0; top: calc(100% + 4px); margin: 0; padding: 4px; list-style: none; max-height: 264px; overflow-y: auto; overscroll-behavior: contain; background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-lg); box-shadow: 0 8px 24px rgb(27 22 19 / .14); font-weight: 400; }
+.combo-opt { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; min-height: 40px; padding: 8px 10px; border-radius: var(--radius); cursor: pointer; font-size: 16px; }
+.combo-opt small { color: var(--muted); font-size: 13px; text-align: right; }
+.combo-opt:hover, .combo-opt[aria-selected="true"] { background: var(--surface-2); }
+.combo-opt[aria-selected="true"] { box-shadow: inset 3px 0 0 var(--accent); }
+.combo-note { padding: 8px 10px; font-size: 13px; color: var(--muted); }
+@media (pointer: coarse) { .combo-opt { min-height: 44px; } }
+
 /* Roots card and trip price estimate */
 .roots-extras { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 16px; align-items: start; }
 @media (max-width: 860px) { .roots-extras { grid-template-columns: minmax(0, 1fr); } }

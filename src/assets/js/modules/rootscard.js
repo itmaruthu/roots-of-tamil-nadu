@@ -75,7 +75,7 @@ function map(ctx, x, y, w, h, districts, home) {
 /**
  * Draw the card.
  * @param {HTMLCanvasElement} canvas
- * @param {{family:string, village:string, temple:string, from:string, days:number, d:object, districts:object[], site:string}} o
+ * @param {{family:string, village:string, taluk:string, temple:string, from:string, days:number, d:object, districts:object[], site:string}} o
  */
 export async function drawCard(canvas, o) {
   await fonts();
@@ -110,8 +110,11 @@ export async function drawCard(canvas, o) {
   ctx.fillStyle = C.kavi; ctx.fillText(village, PAD, y);
   y += Math.round(s * 0.2) + 56;
   ctx.font = `400 34px ${F.text}`; ctx.fillStyle = C.granite;
-  ctx.fillText(`${o.d.name} district`, PAD, y);
-  const wDistrict = ctx.measureText(`${o.d.name} district`).width;
+  let where = `${o.d.name} district`;
+  // Add the taluk when it says something new and the line still fits beside the Tamil name.
+  if (o.taluk && o.taluk.toLowerCase() !== o.d.name.toLowerCase() && ctx.measureText(`${title(o.taluk)} taluk, ${where}`).width < max - 260) where = `${title(o.taluk)} taluk, ${where}`;
+  ctx.fillText(where, PAD, y);
+  const wDistrict = ctx.measureText(where).width;
   ctx.font = `600 32px ${F.tamil}`; ctx.fillStyle = C.stone;
   ctx.fillText(`  ·  ${o.d.ta}`, PAD + wDistrict, y);
 
