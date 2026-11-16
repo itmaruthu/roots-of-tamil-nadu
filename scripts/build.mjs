@@ -113,24 +113,26 @@ function head({ title, description, path, base, image, imageAlt, type = 'website
 ${extra}`;
 }
 
+// [link, English label, Tamil label]. The Tamil label shows on pages that offer the language switch.
 const NAV = [
-  ['roots.html', 'Find your roots'], ['aatruppadai.html', 'Aatruppadai'], ['index.html#clock', '24 hours'], ['index.html#explore', 'Map'],
-  ['index.html#live', 'Live wait'], ['index.html#festivals', 'Festivals'], ['index.html#cabs', 'Cabs'],
-  ['join.html', 'List your place']
+  ['roots.html', 'Find your roots', 'வேர்களைத் தேடி'], ['aatruppadai.html', 'Aatruppadai', 'ஆற்றுப்படை'], ['index.html#clock', '24 hours', '24 மணி நேரம்'], ['index.html#explore', 'Map', 'வரைபடம்'],
+  ['index.html#live', 'Live wait', 'காத்திருப்பு'], ['index.html#festivals', 'Festivals', 'திருவிழாக்கள்'], ['index.html#cabs', 'Cabs', 'வாடகை வண்டி'],
+  ['join.html', 'List your place', 'இடத்தைச் சேர்க்க']
 ];
 const header = (base) => `<header class="site-header">
   <div class="wrap">
     <a class="brand" href="${base}index.html" aria-label="${esc(config.name)} home"><img src="${base}assets/img/brand/logo.svg" alt="" width="36" height="36"><span>Roots<small>of Tamil Nadu</small></span></a>
     <nav class="nav" aria-label="Primary">
-      ${NAV.map(([href, label]) => `<a href="${base}${href}">${label}</a>`).join('\n      ')}
-      <a class="nav-cta" href="${base}index.html#explore">What's open now</a>
+      ${NAV.map(([href, label, ta]) => `<a href="${base}${href}" data-ta="${ta}">${label}</a>`).join('\n      ')}
+      <a class="nav-cta" href="${base}index.html#explore" data-ta="இப்போது திறந்தவை">What's open now</a>
     </nav>
+    <button class="lang-btn" id="lang-btn" type="button" hidden></button>
     <details class="nav-menu">
-      <summary aria-label="Open menu"><span class="nav-burger" aria-hidden="true"></span>Menu</summary>
+      <summary aria-label="Open menu"><span class="nav-burger" aria-hidden="true"></span><span data-ta="பட்டியல்">Menu</span></summary>
       <nav class="nav-drop" aria-label="Menu">
-        ${NAV.map(([href, label]) => `<a href="${base}${href}">${label}</a>`).join('\n        ')}
-        <a href="${base}health.html">Health &amp; safety</a>
-        <a class="nav-cta" href="${base}index.html#explore">What's open now</a>
+        ${NAV.map(([href, label, ta]) => `<a href="${base}${href}" data-ta="${ta}">${label}</a>`).join('\n        ')}
+        <a href="${base}health.html" data-ta="உடல்நலம் &amp; பாதுகாப்பு">Health &amp; safety</a>
+        <a class="nav-cta" href="${base}index.html#explore" data-ta="இப்போது திறந்தவை">What's open now</a>
       </nav>
     </details>
   </div>

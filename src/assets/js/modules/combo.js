@@ -1,6 +1,6 @@
 // Type-and-select field: a text input with a list under it. Type to filter, or open the list and pick.
 // Follows the ARIA combobox pattern: arrow keys move, Enter picks, Escape closes.
-import { el } from './dom.js';
+import { el, t } from './dom.js';
 
 const MAX = 60;
 let seq = 0;
@@ -40,8 +40,8 @@ export function combo(input, cfg) {
     active = -1;
     const rows = shown.map((o, i) => el('li', { class: 'combo-opt', role: 'option', id: `${id}-${i}`, 'aria-selected': 'false', dataset: { i: String(i) } },
       el('span', {}, o.v), o.hint ? el('small', {}, o.hint) : ''));
-    if (!found.length) rows.push(el('li', { class: 'combo-note', role: 'presentation' }, cfg.strict ? 'No match. Check the spelling.' : (cfg.empty || 'Not on the list? Keep what you typed.')));
-    else if (found.length > MAX) rows.push(el('li', { class: 'combo-note', role: 'presentation' }, `${found.length - MAX} more. Keep typing to narrow the list.`));
+    if (!found.length) rows.push(el('li', { class: 'combo-note', role: 'presentation' }, cfg.strict ? t('No match. Check the spelling.', 'பொருத்தம் இல்லை. எழுத்தைச் சரிபாருங்கள்.') : t(cfg.empty || 'Not on the list? Keep what you typed.', 'பட்டியலில் இல்லையா? நீங்கள் எழுதியதையே வைத்துக்கொள்ளலாம்.')));
+    else if (found.length > MAX) rows.push(el('li', { class: 'combo-note', role: 'presentation' }, t(`${found.length - MAX} more. Keep typing to narrow the list.`, `இன்னும் ${found.length - MAX} உள்ளன. தொடர்ந்து எழுதுங்கள்.`)));
     list.replaceChildren(...rows);
     list.scrollTop = 0;
   }
@@ -81,7 +81,7 @@ export function combo(input, cfg) {
     if (cfg.strict) {
       const found = text ? matches() : [];
       if (found.length === 1) { pick(found[0]); return; }
-      input.setCustomValidity(text ? (cfg.strictMessage || 'Choose one from the list') : '');
+      input.setCustomValidity(text ? t(cfg.strictMessage || 'Choose one from the list', 'பட்டியலிலிருந்து ஒன்றைத் தேர்வு செய்யுங்கள்') : '');
       cfg.onPick?.(null);
     } else if (typed) {
       input.value = text;

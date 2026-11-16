@@ -1,6 +1,7 @@
 // District → taluk → town or village, as three type-and-select fields.
 // Taluks and villages load per district from data/villages/<district>.json (2011 Census village directory).
 import { combo } from './combo.js';
+import { t } from './dom.js';
 
 const DIST_URL = new URL('../../../data/districts.json', import.meta.url);
 const VILLAGE_URL = (id) => new URL(`../../../data/villages/${id}.json`, import.meta.url);
@@ -17,13 +18,13 @@ export async function locality({ district, taluk, village, start }) {
     current = d ? d.id : '';
     talukBox.set(''); villageBox.set('');
     taluks = {};
-    for (const i of [taluk, village]) { i.disabled = !d; i.placeholder = d ? 'Loading…' : 'Choose a district first'; }
+    for (const i of [taluk, village]) { i.disabled = !d; i.placeholder = d ? t('Loading…', 'ஏற்றுகிறது…') : t('Choose a district first', 'முதலில் மாவட்டத்தைத் தேர்வு செய்யுங்கள்'); }
     if (!d) return;
     try { taluks = (await fetch(VILLAGE_URL(d.id)).then((r) => r.json())).taluks; } catch { taluks = {}; }
     if (current !== d.id) return; // another district was chosen meanwhile
     const has = Object.keys(taluks).length;
-    taluk.placeholder = has ? `Type or choose a taluk in ${d.name}` : 'Type the taluk';
-    village.placeholder = has ? 'Type or choose a town or village' : 'Type the town or village';
+    taluk.placeholder = has ? t(`Type or choose a taluk in ${d.name}`, 'வட்டத்தை எழுதுங்கள் அல்லது தேர்வு செய்யுங்கள்') : t('Type the taluk', 'வட்டத்தை எழுதுங்கள்');
+    village.placeholder = has ? t('Type or choose a town or village', 'ஊரை எழுதுங்கள் அல்லது தேர்வு செய்யுங்கள்') : t('Type the town or village', 'ஊரை எழுதுங்கள்');
   }
 
   const districtBox = combo(district, { strict: true, strictMessage: 'Choose a district from the list',
@@ -42,6 +43,7 @@ export async function locality({ district, taluk, village, start }) {
     },
     onPick: (o) => { if (o?.taluk && !taluk.value.trim()) talukBox.set(o.taluk); } });
 
+  for (const i of [taluk, village]) i.placeholder = t('Choose a district first', 'முதலில் மாவட்டத்தைத் தேர்வு செய்யுங்கள்');
   try { districts = (await fetch(DIST_URL).then((r) => r.json())).districts; } catch { districts = []; }
   const first = start && districts.find((d) => d.id === start);
   if (first && !district.value) { districtBox.set(first.name); await choose(first); }

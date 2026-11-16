@@ -1,6 +1,6 @@
 // Find your roots: builds a homecoming trip for a diaspora family from their native district,
 // village and family temple, using Roots places near the district and each district's landmarks.
-import { el, $, icon } from './modules/dom.js';
+import { el, $, icon, t } from './modules/dom.js';
 import { EMERGENCY, SEARCHES, PHARMACY_TIP, mapSearch } from './modules/health.js';
 import { TIERS, CURRENCIES, RATES_AS_OF, currencyFor, estimate, split, money } from './modules/cost.js';
 import { drawCard, shareCard, saveCard } from './modules/rootscard.js';
@@ -324,18 +324,19 @@ async function setDistrict(d) {
   fDistrict.value = d ? d.id : '';
   talukBox.set(''); villageBox.set('');
   taluks = {};
-  for (const i of [iTaluk, iVillage]) { i.disabled = !d; i.placeholder = d ? 'Loading…' : 'Choose a district first'; }
+  for (const i of [iTaluk, iVillage]) { i.disabled = !d; i.placeholder = d ? t('Loading…', 'ஏற்றுகிறது…') : t('Choose a district first', 'முதலில் மாவட்டத்தைத் தேர்வு செய்யுங்கள்'); }
   if (!d) return;
   try { taluks = (await fetch(VILLAGE_URL(d.id)).then((r) => r.json())).taluks; } catch { taluks = {}; }
   if (fDistrict.value !== d.id) return; // the visitor has already chosen another district
   const has = Object.keys(taluks).length;
-  iTaluk.placeholder = has ? `Type or choose a taluk in ${d.name}` : 'Type the taluk';
-  iVillage.placeholder = has ? 'Type or choose a village' : 'Type the village or town';
+  iTaluk.placeholder = has ? t(`Type or choose a taluk in ${d.name}`, 'வட்டத்தை எழுதுங்கள் அல்லது தேர்வு செய்யுங்கள்') : t('Type the taluk', 'வட்டத்தை எழுதுங்கள்');
+  iVillage.placeholder = has ? t('Type or choose a village', 'ஊரை எழுதுங்கள் அல்லது தேர்வு செய்யுங்கள்') : t('Type the village or town', 'ஊரை எழுதுங்கள்');
 }
 
 const districtBox = combo(iDistrict, { strict: true, strictMessage: 'Choose a district from the list',
   options: () => districts.map((d) => ({ v: d.name, hint: d.ta, id: d.id })),
   onPick: (o) => { const d = o && districts.find((x) => x.id === o.id); if ((d ? d.id : '') !== fDistrict.value) setDistrict(d); } });
+for (const i of [iTaluk, iVillage]) i.placeholder = t('Choose a district first', 'முதலில் மாவட்டத்தைத் தேர்வு செய்யுங்கள்');
 const talukBox = combo(iTaluk, { empty: 'Not on the list? Newer taluks may be missing: keep what you typed.',
   options: () => Object.keys(taluks).map((t) => ({ v: t, hint: `${taluks[t].length} villages` })),
   onPick: () => { villageBox.set(''); } });
@@ -354,7 +355,7 @@ combo($('#r-from'), { options: () => COUNTRIES, empty: 'Not on the list? Keep wh
 
 async function go() {
   const btn = form.querySelector('button[type=submit]');
-  btn.disabled = true; btn.textContent = 'Planning…';
+  btn.disabled = true; btn.textContent = t('Planning…', 'திட்டமிடுகிறது…');
   try {
     await ready;
     const f = Object.fromEntries(new FormData(form));
@@ -367,7 +368,7 @@ async function go() {
     box.hidden = false;
     console.error(err);
   } finally {
-    btn.disabled = false; btn.textContent = 'Plan my homecoming';
+    btn.disabled = false; btn.textContent = t('Plan my homecoming', 'என் பயணத்தைத் திட்டமிடு');
   }
 }
 

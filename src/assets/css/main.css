@@ -115,7 +115,8 @@ button { font: inherit; color: inherit; }
 .nav-drop a { text-decoration: none; font-weight: 500; font-size: 17px; padding: 12px 14px; color: var(--ink); border-radius: var(--radius); }
 .nav-drop a:hover { background: var(--surface-2); }
 .nav-drop .nav-cta { margin-top: 6px; text-align: center; }
-@media (max-width: 1020px) { .nav { display: none; } .nav-menu { display: block; } }
+@media (max-width: 1140px) { .nav { display: none; } .nav-menu { display: block; } }
+:root[data-lang="ta"] .nav { display: none; } :root[data-lang="ta"] .nav-menu { display: block; } /* Tamil labels are longer: use the menu at every width */
 .nav .nav-cta, .nav-drop .nav-cta { background: var(--ink); color: var(--bg) !important; border-radius: var(--radius); padding: 9px 16px; margin-left: 8px; border: 0; }
 
 /* ---------- Buttons & chips ---------- */
@@ -739,6 +740,21 @@ section[id] { scroll-margin-top: 84px; }
 .lw-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; }
 .lw-dot--short { background: var(--leaf); } .lw-dot--mid { background: var(--gold); } .lw-dot--long { background: var(--accent); }
 .lw-best { margin: 0; font-weight: 700; }
+/* Language switch, and Tamil in headings */
+.lang-btn { min-height: 40px; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); font: 600 15px/1 var(--font-text); cursor: pointer; white-space: nowrap; }
+.lang-btn:hover { border-color: var(--accent); }
+.lang-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 1140px) { .lang-btn { margin-left: auto; } }
+:root[data-lang="ta"] .lang-btn { margin-left: auto; }
+:root[data-lang="ta"] h1, :root[data-lang="ta"] h2, :root[data-lang="ta"] h3 { font-family: var(--font-tamil); line-height: 1.3; letter-spacing: 0; }
+:root[data-lang="ta"] h1 { font-size: clamp(28px, 5vw, 48px); }
+:root[data-lang="ta"] .nav a { padding-inline: 8px; font-size: 14px; }
+
+/* Voice controls for the guide */
+.cc-voice { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.cc-voice .note { flex-basis: 100%; margin: 0; }
+#cc-mic[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+
 /* Aatruppadai page */
 .aat-page { padding-bottom: 72px; }
 .aat-page section { padding-top: clamp(40px, 6vw, 72px); scroll-margin-top: 80px; }

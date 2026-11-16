@@ -48,6 +48,10 @@ function append(node, children) {
   }
 }
 
+/** The page's language ('en' or 'ta'), and a picker for the two wordings of a string. */
+export const isTa = () => document.documentElement.dataset.lang === 'ta';
+export const t = (en, ta) => (isTa() ? ta : en);
+
 export const $ = (sel, root = document) => root.querySelector(sel);
 export const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 

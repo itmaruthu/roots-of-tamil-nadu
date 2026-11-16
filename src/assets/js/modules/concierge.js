@@ -3,7 +3,7 @@
 // prices, and (with permission) the visitor's own location. Simple English and a few Tamil keywords.
 // It does not go to the internet: what Roots does not know, it says so. In production the same
 // answers are served on WhatsApp, with a language model for free-form questions.
-import { el, $, store } from './dom.js';
+import { el, $, store, t, isTa } from './dom.js';
 import { isOpen, status, formatHour, hoursFor, is24h } from './hours.js';
 import { darshanWait } from './livewait.js';
 import { distanceKm, formatKm, MEENAKSHI } from './geo.js';
@@ -19,20 +19,20 @@ const SUGGESTIONS = ['Places to visit near me', 'Best food near me', 'Famous foo
 
 // Dishes people ask for by name, and where Roots sends them.
 const DISHES = [
-  [['jigarthanda', 'jil jil'], 'Jigarthanda', ['famous-jigarthanda']],
-  [['kari dosa', 'kari dosai', 'kari thosai'], 'Kari dosai', ['konar-kadai', 'p-power-hotel']],
-  [['parotta', 'porotta', 'paratha', 'salna'], 'Parotta', ['muthukumar-bun-parotta', 'sulthan-hotel']],
-  [['halwa', 'alwa', 'nei mittai'], 'Halwa', ['prema-vilas', 'aathi-kalathu-nei-mittai-kadai']],
+  [['jigarthanda', 'jil jil', 'ஜிகர்தண்டா'], 'Jigarthanda', ['famous-jigarthanda']],
+  [['kari dosa', 'kari dosai', 'kari thosai', 'கறி தோசை'], 'Kari dosai', ['konar-kadai', 'p-power-hotel']],
+  [['parotta', 'porotta', 'paratha', 'salna', 'பரோட்டா', 'புரோட்டா'], 'Parotta', ['muthukumar-bun-parotta', 'sulthan-hotel']],
+  [['halwa', 'alwa', 'nei mittai', 'அல்வா', 'ஹல்வா'], 'Halwa', ['prema-vilas', 'aathi-kalathu-nei-mittai-kadai']],
   [['sambar idli', 'sambar'], 'Sambar idli', ['ratna-cafe-triplicane']],
-  [['idli', 'idly', 'pongal vadai'], 'Idli', ['murugan-idli-shop', 'rayars-mess-mylapore', 'ratna-cafe-triplicane']],
+  [['idli', 'idly', 'pongal vadai', 'இட்லி'], 'Idli', ['murugan-idli-shop', 'rayars-mess-mylapore', 'ratna-cafe-triplicane']],
   [['paruthi paal', 'cottonseed', 'cotton seed'], 'Paruthi paal', ['thirumalai-madai-paruthi-paal']],
   [['butter bun', 'bun butter'], 'Butter bun', ['kalapilla-tea-shop', 'lakshmi-butter-bun-sellur']],
   [['chukka', 'mutton'], 'Mutton chukka and mutton meals', ['hotel-sri-janakiram', 'new-janani-mess', 'p-power-hotel', 'sulthan-hotel']],
   [['ayirai', 'fish curry', 'fish'], 'Ayirai fish curry', ['jaya-vilas']],
-  [['butter dosa', 'ghee roast', 'dosa', 'dosai'], 'Dosai', ['parthasarathy-vilas-thiruvanaikaval', 'konar-kadai']],
+  [['butter dosa', 'ghee roast', 'dosa', 'dosai', 'தோசை'], 'Dosai', ['parthasarathy-vilas-thiruvanaikaval', 'konar-kadai']],
   [['chandrakala', 'suryakala'], 'Chandrakala', ['bombay-sweets-thanjavur']],
-  [['degree coffee', 'filter coffee', 'coffee', 'kaapi'], 'Degree coffee', ['sri-mangalambika-vilas-kumbakonam']],
-  [['macaroon', 'macaron'], 'Thoothukudi macaroon', ['ganesh-bakery-thoothukudi']],
+  [['degree coffee', 'filter coffee', 'coffee', 'kaapi', 'காபி', 'காப்பி'], 'Degree coffee', ['sri-mangalambika-vilas-kumbakonam']],
+  [['macaroon', 'macaron', 'மக்ரூன்'], 'Thoothukudi macaroon', ['ganesh-bakery-thoothukudi']],
   [['ice cream', 'icecream'], 'Ice cream', ['michaels-ice-cream-trichy', 'famous-jigarthanda']]
 ];
 
@@ -64,7 +64,7 @@ export function initConcierge(ctx) {
   if (!log || !form) return null;
 
   const all = ctx.allPlaces || ctx.places;
-  const regions = [{ id: 'madurai', name: 'Madurai', district: 'madurai', lat: MEENAKSHI.lat, lng: MEENAKSHI.lng }, ...(ctx.cities || [])];
+  const regions = [{ id: 'madurai', name: 'Madurai', ta: 'மதுரை', district: 'madurai', lat: MEENAKSHI.lat, lng: MEENAKSHI.lng }, ...(ctx.cities || [])];
   const regionOf = (p) => p.city || 'madurai';
   const kb = { districts: [], airports: [], festivals: { seasons: [] }, guide: {} };
   const ready = Promise.all([
@@ -75,7 +75,8 @@ export function initConcierge(ctx) {
   let me = ctx.state.me || null;
 
   const chips = $('#cc-chips');
-  for (const s of SUGGESTIONS) chips.append(el('button', { type: 'button', class: 'chip chip--sm', on: { click: () => ask(s) } }, s));
+  const SUGGESTIONS_TA = ['அருகில் உணவு', 'மதுரையில் பிரபல உணவு', 'தஞ்சாவூரில் என்ன பார்க்கலாம்', 'ஜிகர்தண்டா எங்கே', 'அருகிலுள்ள கோயில்கள்', 'சித்திரை திருவிழா', 'இப்போ என்ன திறந்திருக்கு?'];
+  for (const s of (isTa() ? SUGGESTIONS_TA : SUGGESTIONS)) chips.append(el('button', { type: 'button', class: 'chip chip--sm', on: { click: () => ask(s) } }, s));
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const q = input.value.trim().slice(0, 200);
@@ -83,9 +84,10 @@ export function initConcierge(ctx) {
     input.value = '';
   });
 
-  say('bot', ['Vanakkam! I\'m Aatruppadai, your guide, like the Sangam bards who showed travellers the way. Ask me where to eat, what a town is famous for, what to see near you, how long the queue is, or how to plan a homecoming. I answer from what Roots knows, for this hour in Madurai.']);
+  say('bot', [t('Vanakkam! I\'m Aatruppadai, your guide, like the Sangam bards who showed travellers the way. Ask me where to eat, what a town is famous for, what to see near you, how long the queue is, or how to plan a homecoming. I answer from what Roots knows, for this hour in Madurai.',
+    'வணக்கம்! நான் ஆற்றுப்படை, உங்கள் வழிகாட்டி. பயணிகளுக்கு வழி காட்டிய சங்க காலப் பாணர்களைப் போல. எங்கே சாப்பிடலாம், ஓர் ஊர் எதற்குப் புகழ் பெற்றது, உங்கள் அருகில் என்ன பார்க்கலாம், வரிசை எவ்வளவு, ஊருக்கு எப்படி வருவது என்று கேளுங்கள். தமிழிலும் கேட்கலாம்; பதில்கள் இப்போதைக்கு ஆங்கிலத்தில் வரும்.')], true);
 
-  const NEAR = ['near me', 'nearby', 'near by', 'around me', 'close to me', 'my location', 'where am i', 'from here', 'around here', 'அருகில்', 'பக்கத்தில்', 'பக்கத்துல'];
+  const NEAR = ['near me', 'nearby', 'near by', 'around me', 'close to me', 'my location', 'where am i', 'from here', 'around here', 'அருகில்', 'அருகிலுள்ள', 'அருகே', 'பக்கத்தில்', 'பக்கத்துல', 'பக்கத்தில'];
   async function ask(q) {
     say('me', [q]);
     await ready;
@@ -94,13 +96,13 @@ export function initConcierge(ctx) {
     if (NEAR.some((w) => low.includes(w)) && !me && !urgent) {
       me = ctx.state.me || null;
       if (!me) {
-        const wait = say('bot', ['Finding you… Your location stays on this device.']);
+        const wait = say('bot', [t('Finding you… Your location stays on this device.', 'உங்கள் இருப்பிடத்தைத் தேடுகிறேன்… அது இந்தக் கருவியிலேயே இருக்கும்.')], true);
         me = await locate();
         wait.remove();
-        if (!me) { say('bot', ['I could not get your location, so here is the answer for Madurai. You can also name a town: "food in Thanjavur".', ...answer(q)]); return; }
+        if (!me) { say('bot', ['I could not get your location, so here is the answer for Madurai. You can also name a town: "food in Thanjavur".', ...answer(q).filter(Boolean)]); return; }
       }
     }
-    say('bot', answer(q));
+    say('bot', answer(q).filter(Boolean));
   }
   function locate() {
     return new Promise((resolve) => {
@@ -110,9 +112,10 @@ export function initConcierge(ctx) {
     });
   }
 
-  function say(who, parts) {
+  function say(who, parts, quiet = false) {
     const bubble = el('div', { class: `cc-msg cc-msg--${who}` }, ...parts.map((p) => (typeof p === 'string' ? el('p', {}, p) : p)));
     log.append(bubble);
+    if (who === 'bot' && !quiet) ctx.onAnswer?.(bubble.innerText); // read aloud, where the page offers it
     log.scrollTop = who === 'bot' ? Math.max(0, bubble.offsetTop - 8) : log.scrollHeight;
     return bubble;
   }
@@ -132,9 +135,11 @@ export function initConcierge(ctx) {
   /** Where the question is about: a town named in it, else where the visitor is, else Madurai. */
   function scope(q) {
     const words = q.replace(/[^a-z஀-௿ ]/g, ' ').split(/\s+/);
-    const named = regions.find((r) => q.includes(r.name.toLowerCase()) || words.some((w) => ALIAS[w] && ALIAS[w] === r.district && r.id !== 'kumbakonam'));
+    // Tamil names take endings (தஞ்சாவூர் → தஞ்சாவூரில், கும்பகோணம் → கும்பகோணத்தில்), so match on the stem.
+    const taStem = (ta) => (ta || '').replace(/(ம்|்)$/, '');
+    const named = regions.find((r) => q.includes(r.name.toLowerCase()) || (r.ta && q.includes(taStem(r.ta))) || words.some((w) => ALIAS[w] && ALIAS[w] === r.district && r.id !== 'kumbakonam'));
     if (named) return { ...regionScope(named), named: true };
-    const d = kb.districts.find((x) => q.includes(x.name.toLowerCase()) || words.some((w) => ALIAS[w] === x.id));
+    const d = kb.districts.find((x) => q.includes(x.name.toLowerCase()) || q.includes(taStem(x.ta)) || words.some((w) => ALIAS[w] === x.id));
     if (d) {
       const r = regions.find((x) => x.district === d.id && x.id !== 'kumbakonam');
       return { ...(r ? regionScope(r) : areaScope({ lat: d.lat, lng: d.lng }, d.name, d)), named: true };
@@ -180,7 +185,7 @@ export function initConcierge(ctx) {
     if (/^(hi|hello|hey|vanakkam|வணக்கம்)\b/.test(q) || has('who are you', 'what can you', 'help me', 'aatruppadai', 'ஆற்றுப்படை')) {
       return ['Vanakkam! I can tell you: the best food places and famous dishes of a town; what to see near you or in any of six cities; what is open at this hour; the queue at a mess and the darshan wait at a temple; safe cabs and buses; festivals; and how to plan a homecoming to your native village. Try a suggestion below.'];
     }
-    if (has('emergency', 'hospital', 'doctor', 'ambulance', 'police', 'pharmacy', 'medical', 'unwell', 'sick', 'மருத்துவ')) {
+    if (has('emergency', 'hospital', 'doctor', 'ambulance', 'police', 'pharmacy', 'medical', 'unwell', 'sick', 'மருத்துவ', 'ஆஸ்பத்திரி', 'டாக்டர்', 'அவசர', 'போலீஸ்', 'காவல்', 'மருந்து')) {
       return [`Emergency numbers in Tamil Nadu: ${EMERGENCY.map((e) => `${e.n} (${e.label})`).join(', ')}.`, more(PAGE('health.html'), '24-hour hospitals, clinics and pharmacies near you')];
     }
 
@@ -190,7 +195,7 @@ export function initConcierge(ctx) {
       .filter((x) => x.score > 0).sort((a, b) => b.score - a.score)[0]?.p;
 
     // ---- queues and darshan ----
-    if (has('wait', 'queue', 'busy', 'crowd', 'darshan', 'token', 'கூட்டம்', 'காத்திரு')) {
+    if (has('wait', 'queue', 'busy', 'crowd', 'darshan', 'token', 'கூட்டம்', 'காத்திரு', 'வரிசை', 'தரிசன', 'டோக்கன்')) {
       if (named && named.type !== 'temple') {
         const live = openNow(named) ? ctx.liveWait?.queue(named.id) : null;
         return [live
@@ -213,18 +218,18 @@ export function initConcierge(ctx) {
       const a = kb.airports.map((x) => ({ x, km: distanceKm(sc.anchor, x) })).sort((p1, p2) => p1.km - p2.km)[0];
       return [a ? `The nearest airport to ${sc.name} is ${a.x.name} airport, about ${formatKm(a.km * 1.3)} by road. At Madurai airport, use the prepaid taxi counter in the arrivals hall: you pay a fixed fare first and the receipt names the driver.` : 'Use the prepaid taxi counter in the arrivals hall.'];
     }
-    if (has('cab', 'taxi', 'rental', 'rent a car', 'self drive', 'auto', 'bus', 'transport', 'டாக்ஸி', 'வாடகை', 'பேருந்து')) {
+    if (has('cab', 'taxi', 'rental', 'rent a car', 'self drive', 'auto', 'bus', 'transport', 'டாக்ஸி', 'வாடகை', 'பேருந்து', 'பஸ்', 'ஆட்டோ', 'வண்டி')) {
       return ['Use government-approved rides: the prepaid taxi counter in the airport arrivals hall (fixed fare, receipt names the driver), TTDC tours and coaches (toll-free 1800 425 31111), or TNSTC city buses (every Madurai place page has a "Bus route from my location" button). For self-drive, rent only a car with a black plate and yellow letters; never a white-plate private car.',
         more(PAGE('index.html#cabs'), 'How to check a cab is legal')];
     }
 
     // ---- Roots itself: homecoming, cost, hosts ----
-    if (has('cost', 'price', 'budget', 'how much', 'expensive', 'செலவு')) {
+    if (has('cost', 'price', 'budget', 'how much', 'expensive', 'செலவு', 'விலை', 'எவ்வளவு ஆகும்', 'கட்டணம்')) {
       const e = estimate({ days: 5, people: 4, tier: 'comfortable', kids: true });
       return [`A homecoming for a family of 4, for 5 days at a comfortable level, comes to about ${money(e.total)}: stay, cab with driver, your Ooru Nanbar, meals, temple offerings and the Roots fee. Flights are not included. The planner gives your own figure in your home currency and shows how much reaches local people.`,
         more(PAGE(`roots.html${sc.district ? `?district=${sc.district.id}` : ''}`), 'Plan and price my homecoming')];
     }
-    if (has('roots', 'homecoming', 'home coming', 'native', 'ancestral', 'village', 'kuladeivam', 'kula deivam', 'ooru nanbar', 'nanbar', 'grandfather', 'grandmother', 'family temple', 'சொந்த ஊர்', 'குலதெய்வ', 'ஊர்')) {
+    if (has('roots', 'homecoming', 'home coming', 'native', 'ancestral', 'village', 'kuladeivam', 'kula deivam', 'ooru nanbar', 'nanbar', 'grandfather', 'grandmother', 'family temple', 'சொந்த ஊர்', 'குலதெய்வ', 'ஊர் நண்பர்', 'வேர்', 'பூர்வீக')) {
       return ['Roots brings Tamil families home. Tell us your native district, taluk and village and your kuladeivam, and you get a day-by-day trip. An Ooru Nanbar, a verified friend in your own village, meets you there, finds the old house and the family temple and introduces the elders.',
         more(PAGE(`roots.html${sc.district && sc.district.id !== 'madurai' ? `?district=${sc.district.id}` : ''}`), 'Find your roots')];
     }
@@ -233,9 +238,9 @@ export function initConcierge(ctx) {
     }
 
     // ---- festivals ----
-    if (has('festival', 'chithirai', 'chitirai', 'pongal', 'jallikattu', 'thiruvizha', 'when to come', 'best time', 'season', 'திருவிழா', 'பொங்கல்')) {
-      if (has('chithirai', 'chitirai', 'azhagar', 'alagar')) return ['Chithirai Thiruvizha fills about two weeks of April–May in Madurai: Meenakshi is crowned and married at her temple, the great chariots are pulled round the Masi streets, and on the full moon Kallazhagar rides a golden horse into the Vaigai before lakhs of people. Dates are announced by the temple each year.', more(PAGE('index.html#chithirai'), 'The festival, day by day')];
-      if (has('pongal', 'jallikattu', 'பொங்கல்')) return ['Pongal is the harvest festival, around 13–16 January: Bhogi, Thai Pongal, Mattu Pongal and Kaanum Pongal. Jallikattu follows at Avaniyapuram, Palamedu and Alanganallur, all near Madurai. Roots matches visitors with village families for Pongal.', more(PAGE('index.html#pongal'), 'Pongal in the villages')];
+    if (has('festival', 'chithirai', 'chitirai', 'pongal', 'jallikattu', 'thiruvizha', 'when to come', 'best time', 'season', 'திருவிழா', 'பொங்கல்', 'சித்திரை', 'ஜல்லிக்கட்டு', 'பண்டிகை')) {
+      if (has('chithirai', 'chitirai', 'azhagar', 'alagar', 'சித்திரை', 'அழகர்')) return ['Chithirai Thiruvizha fills about two weeks of April–May in Madurai: Meenakshi is crowned and married at her temple, the great chariots are pulled round the Masi streets, and on the full moon Kallazhagar rides a golden horse into the Vaigai before lakhs of people. Dates are announced by the temple each year.', more(PAGE('index.html#chithirai'), 'The festival, day by day')];
+      if (has('pongal', 'jallikattu', 'பொங்கல்', 'ஜல்லிக்கட்டு')) return ['Pongal is the harvest festival, around 13–16 January: Bhogi, Thai Pongal, Mattu Pongal and Kaanum Pongal. Jallikattu follows at Avaniyapuram, Palamedu and Alanganallur, all near Madurai. Roots matches visitors with village families for Pongal.', more(PAGE('index.html#pongal'), 'Pongal in the villages')];
       const m = new Date().getMonth() + 1;
       const s = kb.festivals.seasons.find((x) => x.months.includes(m)) || kb.festivals.seasons[0];
       if (s) return [`This season in Madurai (${s.name}, ${s.range}): ${s.weather}`, el('ul', { class: 'cc-list' }, ...s.festivals.slice(0, 5).map((f) => el('li', {}, el('b', {}, f.name), ` · ${f.month} · ${f.where}`, el('small', {}, f.text)))),
@@ -254,8 +259,8 @@ export function initConcierge(ctx) {
 
     // ---- food ----
     const SHOP = [['saree', 'dress'], ['dress', 'dress'], ['cloth', 'dress'], ['sungudi', 'dress'], ['silk', 'dress'], ['jewel', 'jewel'], ['gold', 'jewel'], ['bangle', 'jewel'], ['grocer', 'grocery'], ['spice', 'grocery'], ['vegetable', 'vegetable'], ['veggies', 'vegetable'], ['vessel', 'homeware'], ['brass', 'homeware'], ['steel', 'homeware'], ['craft', 'homeware'], ['lamp', 'homeware'], ['veena', 'homeware'], ['painting', 'homeware'], ['doll', 'homeware'], ['flower', 'market'], ['malli', 'market'], ['jasmine', 'market']];
-    const foodWord = has('food', 'eat', 'restaurant', 'mess', 'lunch', 'dinner', 'breakfast', 'tiffin', 'snack', 'sweet', 'hungry', 'meal', 'dish', 'cuisine', 'taste', 'சாப்பா', 'சாப்பி', 'உணவு', 'பசி');
-    if (foodWord && has('famous', 'special', 'known for', 'must try', 'must-try', 'signature', 'traditional', 'local dish', 'what to eat', 'what should i eat', 'பிரபல')) {
+    const foodWord = has('food', 'eat', 'restaurant', 'mess', 'lunch', 'dinner', 'breakfast', 'tiffin', 'snack', 'sweet', 'hungry', 'meal', 'dish', 'cuisine', 'taste', 'சாப்பா', 'சாப்பி', 'உணவு', 'பசி', 'டிபன்', 'இனிப்பு', 'ஹோட்டல்', 'மெஸ்', 'சாப்பிட');
+    if (foodWord && has('famous', 'special', 'known for', 'must try', 'must-try', 'signature', 'traditional', 'local dish', 'what to eat', 'what should i eat', 'பிரபல', 'புகழ்', 'சிறப்பு', 'ஸ்பெஷல்', 'பேமஸ்')) {
       const lead = known('food') || `Famous food ${sc.where}:`;
       if (!eats.length) {
         const nearest = all.filter((p) => group(p) === 'eat').sort(byDistance)[0];
@@ -283,14 +288,14 @@ export function initConcierge(ctx) {
 
     // ---- shopping, stays ----
     const shopType = SHOP.find(([w]) => q.includes(w))?.[1];
-    if (shopType || has('shop', 'shopping', 'buy', 'market', 'souvenir', 'gift', 'கடை', 'வாங்க', 'மார்க்கெட்')) {
+    if (shopType || has('shop', 'shopping', 'buy', 'market', 'souvenir', 'gift', 'கடை', 'வாங்க', 'மார்க்கெட்', 'சேலை', 'புடவை', 'நகை', 'சந்தை')) {
       const kinds = ['market', 'grocery', 'dress', 'jewel', 'homeware', 'vegetable'];
       let s = sc.pool.filter((p) => (shopType ? p.type === shopType : kinds.includes(p.type))).sort(byDistance);
       if (!s.length && shopType) s = all.filter((p) => p.type === shopType).sort(byDistance);
       const lead = known('shop');
       return s.length ? [lead, `Where to shop ${sc.where}:`, list(s, sc.anchor, 6)].filter(Boolean) : [lead || `Roots has no shops listed ${sc.where} yet.`];
     }
-    if (has('stay', 'room', 'lodge', 'resort', 'sleep', 'where to stay', 'accommodation', 'தங்க')) {
+    if (has('stay', 'room', 'lodge', 'resort', 'sleep', 'where to stay', 'accommodation', 'தங்க', 'அறை', 'லாட்ஜ்', 'விடுதி')) {
       const s = sc.pool.filter((p) => p.type === 'stay').sort(byDistance);
       return s.length ? [`Places to stay ${sc.where}, all with 24-hour reception. Roots also arranges verified village homestays through your Ooru Nanbar.`, list(s, sc.anchor)]
         : [`Roots has no stays listed ${sc.where} yet. TTDC runs Hotel Tamil Nadu in most towns, and your Ooru Nanbar can arrange a village homestay.`];
@@ -308,7 +313,7 @@ export function initConcierge(ctx) {
 
     // ---- what to see and do ----
     const sights = sc.pool.filter((p) => ['temple', 'heritage', 'trips'].includes(group(p)));
-    const hoursAsked = /(\d+)\s*(hours?|hrs?)/.exec(q)?.[1] || (has('half day', 'half a day') ? 4 : has('one day', 'a day', 'full day', 'whole day') ? 8 : null);
+    const hoursAsked = /(\d+)\s*(hours?|hrs?|மணி)/.exec(q)?.[1] || (has('half day', 'half a day') ? 4 : has('one day', 'a day', 'full day', 'whole day') ? 8 : null);
     if (hoursAsked) {
       const n = Number(hoursAsked) <= 2 ? 2 : Number(hoursAsked) <= 4 ? 3 : 5;
       const stops = sights.filter((p) => openNow(p) && distanceKm(sc.anchor, p) < (n <= 3 ? 6 : 25)).sort(byDistance).slice(0, n);
@@ -330,7 +335,7 @@ export function initConcierge(ctx) {
       const n = (sc.pool.filter((p) => p.type === 'nature').length ? sc.pool : all).filter((p) => p.type === 'nature').sort(byDistance);
       return [`Hills, falls and the outdoors ${sc.where}:`, list(n, sc.anchor, 6)];
     }
-    if (has('see', 'visit', 'places', 'sight', 'things to do', 'what to do', 'explore', 'suggest', 'recommend', 'tour', 'around', 'near', 'where am i', 'பார்க்க', 'சுற்றி', 'அருகில்')) {
+    if (has('see', 'visit', 'places', 'sight', 'things to do', 'what to do', 'explore', 'suggest', 'recommend', 'tour', 'around', 'near', 'where am i', 'பார்க்க', 'சுற்றி', 'அருகில்', 'அருகிலுள்ள', 'அருகே', 'இடங்கள்', 'சுற்றுலா', 'பக்கத்தில்')) {
       const lead = sc.located ? (sc.you ? `You are ${sc.you}.` : '') : sc.district && !sc.region ? known('known') : '';
       const pick = sc.located ? [...sc.pool].filter((p) => p.type !== 'stay').sort(byDistance) : openFirst(sights);
       if (!pick.length) return [lead || `Roots has nothing listed ${sc.where} yet.`];
@@ -358,7 +363,7 @@ export function initConcierge(ctx) {
       const dh = kb.districts.filter((d) => tokens.some((t) => `${d.known.join(' ')} ${d.food.join(' ')} ${d.shop.join(' ')}`.toLowerCase().includes(t)));
       if (dh.length) return ['Roots knows it from these districts:', el('ul', { class: 'cc-list' }, ...dh.slice(0, 5).map((d) => el('li', {}, el('a', { href: PAGE(`roots.html?district=${d.id}`) }, d.name), el('small', {}, [...d.known, ...d.food, ...d.shop].join('; ')))))];
     }
-    return ['I don\'t have that in what Roots knows yet, and I would rather say so than guess. I can tell you where to eat, what a town is famous for, what to see near you, what is open now, the queue and darshan wait, safe cabs, festivals, and how to plan a homecoming. Try a suggestion below.'];
+    return [t('', 'அது Roots-க்கு இன்னும் தெரியாது; ஊகித்துச் சொல்வதை விட, தெரியாது என்று சொல்வதே சரி. '), 'I don\'t have that in what Roots knows yet, and I would rather say so than guess. I can tell you where to eat, what a town is famous for, what to see near you, what is open now, the queue and darshan wait, safe cabs, festivals, and how to plan a homecoming. Try a suggestion below.'];
   }
   return { ask };
 }

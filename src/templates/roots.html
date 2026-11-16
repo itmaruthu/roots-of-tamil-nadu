@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-IN" data-sprite="{{base}}assets/img/icons.svg">
+<html lang="en-IN" data-langs="en ta" data-sprite="{{base}}assets/img/icons.svg">
 <head>
 {{head}}
 </head>
@@ -9,61 +9,61 @@
 
 <main id="main" class="roots-page">
   <div class="wrap">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="{{base}}index.html">Roots of Tamil Nadu</a> › <span aria-current="page">Find your roots</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="{{base}}index.html">Roots of Tamil Nadu</a> › <span aria-current="page" data-ta="உங்கள் வேர்களைத் தேடுங்கள்">Find your roots</span></nav>
 
     <header class="join-hero">
       <div>
         <p class="eyebrow">Homecoming · <span lang="ta">வேர்களைத் தேடி</span></p>
-        <h1>Find your roots</h1>
-        <p class="lead">Your grandparents' village, your family temple, the food you grew up hearing about. Tell us where your family comes from and we will plan the trip home, with a local friend waiting in the village.</p>
+        <h1 data-ta="உங்கள் வேர்களைத் தேடுங்கள்">Find your roots</h1>
+        <p class="lead" data-ta="உங்கள் தாத்தா பாட்டியின் ஊர், உங்கள் குலதெய்வக் கோயில், கேட்டு வளர்ந்த உணவு. உங்கள் குடும்பம் எங்கிருந்து வந்தது என்று சொல்லுங்கள்; ஊரில் காத்திருக்கும் ஒரு நண்பருடன் உங்கள் பயணத்தை நாங்கள் திட்டமிடுகிறோம்.">Your grandparents' village, your family temple, the food you grew up hearing about. Tell us where your family comes from and we will plan the trip home, with a local friend waiting in the village.</p>
         <p class="lead" lang="ta">உங்கள் சொந்த ஊருக்கு, உங்கள் குலதெய்வக் கோயிலுக்கு, உங்கள் குழந்தைகளுடன்.</p>
       </div>
       <ol class="join-steps">
-        <li><b>Tell us your roots</b><span>District, village and kuladeivam temple.</span></li>
-        <li><b>Meet your Ooru Nanbar</b><span>A verified local friend who knows the village, the temple and the elders.</span></li>
-        <li><b>Come home</b><span>A day-by-day trip: village, temple, heritage and the food of your district.</span></li>
+        <li><b data-ta="உங்கள் வேர்களைச் சொல்லுங்கள்">Tell us your roots</b><span data-ta="மாவட்டம், ஊர், குலதெய்வக் கோயில்.">District, village and kuladeivam temple.</span></li>
+        <li><b data-ta="உங்கள் ஊர் நண்பரைச் சந்தியுங்கள்">Meet your Ooru Nanbar</b><span data-ta="ஊரையும் கோயிலையும் பெரியவர்களையும் அறிந்த, சரிபார்க்கப்பட்ட உள்ளூர் நண்பர்.">A verified local friend who knows the village, the temple and the elders.</span></li>
+        <li><b data-ta="ஊருக்கு வாருங்கள்">Come home</b><span data-ta="நாள்வாரிப் பயணம்: ஊர், கோயில், பாரம்பரியம், உங்கள் மாவட்டத்தின் உணவு.">A day-by-day trip: village, temple, heritage and the food of your district.</span></li>
       </ol>
     </header>
 
     <div class="join-grid">
       <form class="panel join-form" id="roots-form" autocomplete="on">
         <div class="join-fields">
-          <div class="field"><label for="r-district-name">Native district</label>
-            <div class="combo"><input id="r-district-name" required placeholder="Type or choose a district"></div>
-            <input type="hidden" id="r-district" name="district"><small>All 38 districts of Tamil Nadu</small></div>
-          <div class="field"><label for="r-taluk">Taluk</label>
+          <div class="field"><label for="r-district-name" data-ta="சொந்த மாவட்டம்">Native district</label>
+            <div class="combo"><input id="r-district-name" required placeholder="Type or choose a district" data-ta-ph="மாவட்டத்தை எழுதுங்கள் அல்லது தேர்வு செய்யுங்கள்"></div>
+            <input type="hidden" id="r-district" name="district"><small data-ta="தமிழ்நாட்டின் 38 மாவட்டங்களும்">All 38 districts of Tamil Nadu</small></div>
+          <div class="field"><label for="r-taluk" data-ta="வட்டம் (தாலுகா)">Taluk</label>
             <div class="combo"><input id="r-taluk" name="taluk" maxlength="60" placeholder="Choose a district first" disabled></div></div>
-          <div class="field"><label for="r-village">Native village or town</label>
+          <div class="field"><label for="r-village" data-ta="சொந்த ஊர் / கிராமம்">Native village or town</label>
             <div class="combo"><input id="r-village" name="village" maxlength="80" placeholder="Choose a district first" disabled></div>
-            <small>Not on the list? Type its name.</small></div>
-          <label class="field">Kuladeivam (family temple)<input id="r-temple" name="temple" maxlength="80" placeholder="e.g. Ayyanar, Karuppasamy, Mariamman"></label>
-          <div class="field"><label for="r-days">Days in Tamil Nadu</label>
-            <div class="combo"><input id="r-days" name="days" value="5" required inputmode="numeric" maxlength="2"></div><small>1 to 30 days</small></div>
-          <div class="field"><label for="r-from">Travelling from</label>
-            <div class="combo"><input id="r-from" name="from" maxlength="60" placeholder="Type or choose a country"></div></div>
-          <label class="field">Family name (optional)<input id="r-family" name="family" maxlength="60" autocomplete="family-name"></label>
+            <small data-ta="பட்டியலில் இல்லையா? பெயரை எழுதுங்கள்.">Not on the list? Type its name.</small></div>
+          <label class="field"><span data-ta="குலதெய்வம்">Kuladeivam (family temple)</span><input id="r-temple" name="temple" maxlength="80" placeholder="e.g. Ayyanar, Karuppasamy, Mariamman" data-ta-ph="எ.கா. அய்யனார், கருப்பசாமி, மாரியம்மன்"></label>
+          <div class="field"><label for="r-days" data-ta="தமிழ்நாட்டில் எத்தனை நாட்கள்">Days in Tamil Nadu</label>
+            <div class="combo"><input id="r-days" name="days" value="5" required inputmode="numeric" maxlength="2"></div><small data-ta="1 முதல் 30 நாட்கள்">1 to 30 days</small></div>
+          <div class="field"><label for="r-from" data-ta="எங்கிருந்து வருகிறீர்கள்">Travelling from</label>
+            <div class="combo"><input id="r-from" name="from" maxlength="60" placeholder="Type or choose a country" data-ta-ph="நாட்டை எழுதுங்கள் அல்லது தேர்வு செய்யுங்கள்"></div></div>
+          <label class="field"><span data-ta="குடும்பப் பெயர் (விருப்பம்)">Family name (optional)</span><input id="r-family" name="family" maxlength="60" autocomplete="family-name"></label>
         </div>
         <div class="join-checks">
-          <label><input type="checkbox" name="kids" id="r-kids" checked> Children are coming, so add things for them</label>
-          <label><input type="checkbox" name="tamil" id="r-tamil"> We would like a Tamil-English speaking guide</label>
+          <label><input type="checkbox" name="kids" id="r-kids" checked> <span data-ta="குழந்தைகள் வருகிறார்கள்; அவர்களுக்கானவற்றையும் சேர்க்கவும்">Children are coming, so add things for them</span></label>
+          <label><input type="checkbox" name="tamil" id="r-tamil"> <span data-ta="தமிழ்-ஆங்கிலம் பேசும் வழிகாட்டி வேண்டும்">We would like a Tamil-English speaking guide</span></label>
         </div>
-        <button class="btn" type="submit">Plan my homecoming</button>
+        <button class="btn" type="submit" data-ta="என் பயணத்தைத் திட்டமிடு">Plan my homecoming</button>
       </form>
 
       <aside class="join-side">
         <div class="panel">
-          <h3>Why families come home</h3>
+          <h3 data-ta="குடும்பங்கள் ஏன் ஊருக்கு வருகின்றன">Why families come home</h3>
           <ul class="tips">
-            <li>To show children the village, the house and the temple</li>
-            <li>To offer pongal or an abhishekam at the kuladeivam</li>
-            <li>To meet elders who still remember the family</li>
-            <li>To see 2,600-year-old Tamil history at Keeladi</li>
+            <li data-ta="குழந்தைகளுக்கு ஊரையும் வீட்டையும் கோயிலையும் காட்ட">To show children the village, the house and the temple</li>
+            <li data-ta="குலதெய்வத்துக்குப் பொங்கல் அல்லது அபிஷேகம் செய்ய">To offer pongal or an abhishekam at the kuladeivam</li>
+            <li data-ta="குடும்பத்தை நினைவில் வைத்திருக்கும் பெரியவர்களைச் சந்திக்க">To meet elders who still remember the family</li>
+            <li data-ta="கீழடியில் 2,600 ஆண்டு தமிழ் வரலாற்றைக் காண">To see 2,600-year-old Tamil history at Keeladi</li>
           </ul>
         </div>
         <div class="panel">
-          <h3>Live in your village?</h3>
-          <p>Become an Ooru Nanbar: welcome families coming home, show them the village and earn from every visit.</p>
-          <a class="btn btn--ghost" href="{{base}}join.html?type=ooru-nanbar">Become an Ooru Nanbar</a>
+          <h3 data-ta="உங்கள் ஊரிலேயே வசிக்கிறீர்களா?">Live in your village?</h3>
+          <p data-ta="ஊர் நண்பர் ஆகுங்கள்: ஊருக்கு வரும் குடும்பங்களை வரவேற்று, ஊரைக் காட்டி, ஒவ்வொரு வருகையிலும் வருமானம் பெறுங்கள்.">Become an Ooru Nanbar: welcome families coming home, show them the village and earn from every visit.</p>
+          <a class="btn btn--ghost" href="{{base}}join.html?type=ooru-nanbar" data-ta="ஊர் நண்பர் ஆகுங்கள்">Become an Ooru Nanbar</a>
         </div>
       </aside>
     </div>
@@ -73,8 +73,8 @@
     <section class="nanbars" id="ooru-nanbar" aria-labelledby="nanbars-title">
       <div class="section-head">
         <p class="eyebrow">The heart of Roots · <span lang="ta">ஊர் நண்பர்</span></p>
-        <h2 id="nanbars-title">Meet the Ooru Nanbar</h2>
-        <p class="lead">A verified friend in your own village. They find the old house and the family temple, introduce the elders, and earn from every homecoming. These are sample profiles; real hosts join as each district opens.</p>
+        <h2 id="nanbars-title" data-ta="ஊர் நண்பரைச் சந்தியுங்கள்">Meet the Ooru Nanbar</h2>
+        <p class="lead" data-ta="உங்கள் சொந்த ஊரிலேயே ஒரு சரிபார்க்கப்பட்ட நண்பர். பழைய வீட்டையும் குலதெய்வக் கோயிலையும் கண்டுபிடித்து, பெரியவர்களை அறிமுகப்படுத்துவார்; ஒவ்வொரு வருகையிலும் வருமானம் பெறுவார். இவை மாதிரி விவரங்கள்; ஒவ்வொரு மாவட்டமும் தொடங்கும்போது உண்மையான நண்பர்கள் சேர்வார்கள்.">A verified friend in your own village. They find the old house and the family temple, introduce the elders, and earn from every homecoming. These are sample profiles; real hosts join as each district opens.</p>
       </div>
       <ul class="nanbar-list" id="nanbar-list"></ul>
     </section>
