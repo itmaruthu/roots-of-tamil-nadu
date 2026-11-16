@@ -3,7 +3,7 @@
 // prices, and (with permission) the visitor's own location. Simple English and a few Tamil keywords.
 // It does not go to the internet: what Roots does not know, it says so. In production the same
 // answers are served on WhatsApp, with a language model for free-form questions.
-import { el, $ } from './dom.js';
+import { el, $, store } from './dom.js';
 import { isOpen, status, formatHour, hoursFor, is24h } from './hours.js';
 import { darshanWait } from './livewait.js';
 import { distanceKm, formatKm, MEENAKSHI } from './geo.js';
@@ -61,7 +61,7 @@ export function initConcierge(ctx) {
   const log = $('#cc-log');
   const form = $('#cc-form');
   const input = $('#cc-input');
-  if (!log || !form) return;
+  if (!log || !form) return null;
 
   const all = ctx.allPlaces || ctx.places;
   const regions = [{ id: 'madurai', name: 'Madurai', district: 'madurai', lat: MEENAKSHI.lat, lng: MEENAKSHI.lng }, ...(ctx.cities || [])];
@@ -83,7 +83,7 @@ export function initConcierge(ctx) {
     input.value = '';
   });
 
-  say('bot', ['Vanakkam! I\'m Aatruppadai, your guide, like the Sangam bards who showed travellers the way. Ask me where to eat, what a town is famous for, what to see near you, how long the queue is, or how to plan a homecoming. I answer from what Roots knows, for the time on the clock above.']);
+  say('bot', ['Vanakkam! I\'m Aatruppadai, your guide, like the Sangam bards who showed travellers the way. Ask me where to eat, what a town is famous for, what to see near you, how long the queue is, or how to plan a homecoming. I answer from what Roots knows, for this hour in Madurai.']);
 
   const NEAR = ['near me', 'nearby', 'near by', 'around me', 'close to me', 'my location', 'where am i', 'from here', 'around here', 'அருகில்', 'பக்கத்தில்', 'பக்கத்துல'];
   async function ask(q) {
@@ -194,7 +194,7 @@ export function initConcierge(ctx) {
       if (named && named.type !== 'temple') {
         const live = openNow(named) ? ctx.liveWait?.queue(named.id) : null;
         return [live
-          ? `${named.name}: ${live.waiting} parties waiting, about ${live.minutes} min. Take a token above and walk around; your phone tells you when you are next.`
+          ? `${named.name}: ${live.waiting} parties waiting, about ${live.minutes} min. Take a token in Live wait and walk around; your phone tells you when you are next.`
           : `${named.name}: ${status(named, day, hour).text}. Busy eateries use Roots tokens: take one in the Live wait section and get an alert when you're next.`];
       }
       const temples = ctx.places.filter((p) => p.type === 'temple');
@@ -215,7 +215,7 @@ export function initConcierge(ctx) {
     }
     if (has('cab', 'taxi', 'rental', 'rent a car', 'self drive', 'auto', 'bus', 'transport', 'டாக்ஸி', 'வாடகை', 'பேருந்து')) {
       return ['Use government-approved rides: the prepaid taxi counter in the airport arrivals hall (fixed fare, receipt names the driver), TTDC tours and coaches (toll-free 1800 425 31111), or TNSTC city buses (every Madurai place page has a "Bus route from my location" button). For self-drive, rent only a car with a black plate and yellow letters; never a white-plate private car.',
-        el('p', {}, el('a', { href: '#cabs' }, 'How to check a cab is legal →'))];
+        more(PAGE('index.html#cabs'), 'How to check a cab is legal')];
     }
 
     // ---- Roots itself: homecoming, cost, hosts ----
@@ -234,12 +234,12 @@ export function initConcierge(ctx) {
 
     // ---- festivals ----
     if (has('festival', 'chithirai', 'chitirai', 'pongal', 'jallikattu', 'thiruvizha', 'when to come', 'best time', 'season', 'திருவிழா', 'பொங்கல்')) {
-      if (has('chithirai', 'chitirai', 'azhagar', 'alagar')) return ['Chithirai Thiruvizha fills about two weeks of April–May in Madurai: Meenakshi is crowned and married at her temple, the great chariots are pulled round the Masi streets, and on the full moon Kallazhagar rides a golden horse into the Vaigai before lakhs of people. Dates are announced by the temple each year.', el('p', {}, el('a', { href: '#chithirai' }, 'The festival, day by day →'))];
-      if (has('pongal', 'jallikattu', 'பொங்கல்')) return ['Pongal is the harvest festival, around 13–16 January: Bhogi, Thai Pongal, Mattu Pongal and Kaanum Pongal. Jallikattu follows at Avaniyapuram, Palamedu and Alanganallur, all near Madurai. Roots matches visitors with village families for Pongal.', el('p', {}, el('a', { href: '#pongal' }, 'Pongal in the villages →'))];
+      if (has('chithirai', 'chitirai', 'azhagar', 'alagar')) return ['Chithirai Thiruvizha fills about two weeks of April–May in Madurai: Meenakshi is crowned and married at her temple, the great chariots are pulled round the Masi streets, and on the full moon Kallazhagar rides a golden horse into the Vaigai before lakhs of people. Dates are announced by the temple each year.', more(PAGE('index.html#chithirai'), 'The festival, day by day')];
+      if (has('pongal', 'jallikattu', 'பொங்கல்')) return ['Pongal is the harvest festival, around 13–16 January: Bhogi, Thai Pongal, Mattu Pongal and Kaanum Pongal. Jallikattu follows at Avaniyapuram, Palamedu and Alanganallur, all near Madurai. Roots matches visitors with village families for Pongal.', more(PAGE('index.html#pongal'), 'Pongal in the villages')];
       const m = new Date().getMonth() + 1;
       const s = kb.festivals.seasons.find((x) => x.months.includes(m)) || kb.festivals.seasons[0];
       if (s) return [`This season in Madurai (${s.name}, ${s.range}): ${s.weather}`, el('ul', { class: 'cc-list' }, ...s.festivals.slice(0, 5).map((f) => el('li', {}, el('b', {}, f.name), ` · ${f.month} · ${f.where}`, el('small', {}, f.text)))),
-        el('p', {}, el('a', { href: '#festivals' }, 'Festivals in every season →'))];
+        more(PAGE('index.html#festivals'), 'Festivals in every season')];
     }
 
     // ---- a dish by name ----
@@ -301,6 +301,8 @@ export function initConcierge(ctx) {
       const g = kb.guide[named.id];
       return [`${named.name} (${named.area}): ${status(named, day, hour).text}. Hours: ${named.hours}.`, g ? g.why : named.story,
         g?.see ? `Don't miss: ${g.see.slice(0, 3).join('; ')}.` : '', g?.best ? `Best time: ${g.best}. Time needed: ${g.spend}.` : '',
+        // Tips that travellers left for this place (on this device in the prototype): the guide passes them on.
+        ...store.get('roots-waypoints', []).filter((t) => t.place === named.id).slice(0, 2).map((t) => `A traveller's tip${t.by ? ` (${String(t.by).slice(0, 40)})` : ''}: "${String(t.text).slice(0, 200)}"`),
         more(ctx.placeUrl(named.id), 'Photos, hours and directions')].filter(Boolean);
     }
 
@@ -358,4 +360,5 @@ export function initConcierge(ctx) {
     }
     return ['I don\'t have that in what Roots knows yet, and I would rather say so than guess. I can tell you where to eat, what a town is famous for, what to see near you, what is open now, the queue and darshan wait, safe cabs, festivals, and how to plan a homecoming. Try a suggestion below.'];
   }
+  return { ask };
 }

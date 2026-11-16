@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en-IN" data-sprite="{{base}}assets/img/icons.svg">
+<head>
+{{head}}
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+{{header}}
+
+<main id="main" class="aat-page">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="{{base}}index.html">Roots of Tamil Nadu</a> › <span aria-current="page">Aatruppadai</span></nav>
+
+    <header class="aat-hero">
+      <img class="aat-poster" src="{{base}}assets/img/aatruppadai.webp" srcset="{{base}}assets/img/aatruppadai-768.webp 768w, {{base}}assets/img/aatruppadai.webp 1536w" sizes="(max-width: 1240px) 100vw, 1200px" width="1536" height="1024" fetchpriority="high" decoding="async"
+        alt="A Sangam bard with a yazh on his shoulder points a traveller down a road towards a town at sunrise. The poster reads: Aatruppadai, ask the way, the Sangam way. A guiding hand for a better tomorrow. Show the way, tell where you'll be welcomed, share what you know, help others reach their goal, make someone's journey better. Together, let's guide, support and uplift.">
+      <div class="aat-intro">
+        <p class="eyebrow">The Roots guide</p>
+        <h1><span lang="ta">ஆற்றுப்படை</span> Aatruppadai</h1>
+        <p class="lead">Ask the way, the Sangam way. One place to ask where to eat, what a town is famous for, what is open near you, how long the queue is and how to come home.</p>
+        <a class="btn" href="#ask">Ask Aatruppadai</a>
+      </div>
+    </header>
+
+    <section class="aat-ask" id="ask" aria-labelledby="ask-title">
+      <div class="section-head">
+        <p class="eyebrow">Ask</p>
+        <h2 id="ask-title">What do you need?</h2>
+        <p class="lead">Tap a need or type your own question. "Near me" uses your location only on this device.</p>
+      </div>
+      <div class="aat-ask-grid">
+        <div class="aat-needs" id="aat-needs" role="group" aria-label="Common needs"></div>
+        <div class="panel concierge">
+          <div class="cc-log" id="cc-log" aria-live="polite"></div>
+          <div class="chips" id="cc-chips"></div>
+          <form class="cc-form" id="cc-form" autocomplete="off">
+            <label class="sr-only" for="cc-input">Ask Aatruppadai</label>
+            <input id="cc-input" name="q" type="text" maxlength="200" placeholder="Ask in English or Tamil…">
+            <button class="btn btn--sm" type="submit">Ask</button>
+          </form>
+          <p class="note">Answers come from Roots data, in your browser. What Roots does not know yet, it says so. In production it answers on WhatsApp and Telegram.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="aat-meaning" aria-labelledby="meaning-title">
+      <div class="section-head">
+        <p class="eyebrow">The idea</p>
+        <h2 id="meaning-title">More than giving directions</h2>
+        <p class="lead">In ancient Tamil Sangam literature, <span lang="ta">ஆற்றுப்படை</span> was an act of guiding someone towards a better destination: sharing knowledge, pointing out opportunities, naming generous people and making sure no traveller felt lost. In poems such as the <span lang="ta">பெரும்பாணாற்றுப்படை</span> (<i>Perumpanatruppadai</i>), a bard who has been well received tells a fellow traveller the road, where to eat and who will welcome him.</p>
+      </div>
+      <ul class="aat-five">
+        <li><p class="aat-ta" lang="ta">வழிகாட்டுதல்</p><h3>Show someone the way</h3><p>Directions, city buses, safe cabs and what is open at this hour.</p><button class="linkbtn" type="button" data-ask="Places to visit near me">Show me the way</button></li>
+        <li><p class="aat-ta" lang="ta">விருந்தோம்பல்</p><h3>Tell them where they will be welcomed</h3><p>An Ooru Nanbar in the village, a home kitchen, a mess that has fed travellers for decades.</p><a href="{{base}}roots.html#ooru-nanbar">Meet the Ooru Nanbar</a></li>
+        <li><p class="aat-ta" lang="ta">பகிர்தல்</p><h3>Share what you know</h3><p>Leave a tip for the traveller who comes after you. The guide passes it on.</p><a href="#waypoints">Leave a tip</a></li>
+        <li><p class="aat-ta" lang="ta">உதவுதல்</p><h3>Help them reach their destination</h3><p>Emergency numbers, 24-hour hospitals, queue tokens and the darshan wait.</p><a href="{{base}}health.html">Health &amp; safety</a></li>
+        <li><p class="aat-ta" lang="ta">வாழ்வளித்தல்</p><h3>Make someone else's journey better</h3><p>Every visit pays a villager, a cook and a driver. Become a host and welcome a family.</p><a href="{{base}}join.html">Become a host</a></li>
+      </ul>
+      <figure class="aat-quote">
+        <blockquote>
+          <p lang="ta">நாம் சென்ற வழியைச் சொல்வது மட்டும் ஆற்றுப்படை அல்ல; நாம் அடைந்த நன்மையைப் பிறரும் அடைய வழிகாட்டுவதே ஆற்றுப்படை.</p>
+          <p>Aatruppadai is not merely showing the road we travelled; it is helping others reach the good fortune we found.</p>
+        </blockquote>
+      </figure>
+    </section>
+
+    <section class="aat-verse" id="for-a-friend" aria-labelledby="verse-title">
+      <div class="section-head">
+        <p class="eyebrow">Pass it on</p>
+        <h2 id="verse-title">Send an Aatruppadai to a friend</h2>
+        <p class="lead">The bard did not keep the road to himself. Choose a town and Roots writes the way there in five lines, one for each part of the idea, ready to send to someone who is going.</p>
+      </div>
+      <div class="aat-verse-grid">
+        <div class="panel">
+          <div class="field"><label for="aat-town">Town</label>
+            <div class="combo"><input id="aat-town" maxlength="40" placeholder="Type or choose a town"></div></div>
+          <div class="field"><label for="aat-friend">Your friend's name (optional)</label><input id="aat-friend" maxlength="40" autocomplete="off"></div>
+          <button class="btn" id="aat-compose" type="button">Write the way</button>
+        </div>
+        <div class="panel aat-card" id="aat-card" aria-live="polite" hidden></div>
+      </div>
+    </section>
+
+    <section class="aat-waypoints" id="waypoints" aria-labelledby="way-title">
+      <div class="section-head">
+        <p class="eyebrow"><span lang="ta">பகிர்தல்</span> · Share what you know</p>
+        <h2 id="way-title">Leave a tip for the next traveller</h2>
+        <p class="lead">Where were you welcomed? What should nobody miss? Add a line to a place, and Aatruppadai tells it to whoever asks about that place next.</p>
+      </div>
+      <div class="aat-verse-grid">
+        <form class="panel" id="aat-tip-form" autocomplete="off">
+          <div class="field"><label for="aat-tip-place">Place</label>
+            <div class="combo"><input id="aat-tip-place" required maxlength="80" placeholder="Type or choose a place"></div></div>
+          <label class="field" for="aat-tip-text">Your tip<textarea id="aat-tip-text" required rows="3" maxlength="200" placeholder="e.g. Go before 7 am; ask for the ghee podi."></textarea><small>Up to 200 characters</small></label>
+          <label class="field" for="aat-tip-by">Your name or town (optional)<input id="aat-tip-by" maxlength="40"></label>
+          <button class="btn" type="submit">Add my tip</button>
+          <p class="note" id="aat-tip-msg" role="status" aria-live="polite"></p>
+        </form>
+        <div class="panel">
+          <h3>Your tips</h3>
+          <ul class="aat-tips" id="aat-tips"></ul>
+          <p class="note" id="aat-tips-empty">No tips yet. Add the first one.</p>
+          <p class="note">In this prototype your tips stay on this device, and the guide repeats them only here. In the pilot each tip is checked by an Ooru Nanbar before other travellers see it.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+{{footer}}
+<script type="module" src="{{base}}assets/js/aatruppadai.js"></script>
+</body>
+</html>

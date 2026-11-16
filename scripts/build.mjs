@@ -114,7 +114,7 @@ ${extra}`;
 }
 
 const NAV = [
-  ['roots.html', 'Find your roots'], ['index.html#clock', '24 hours'], ['index.html#explore', 'Map'],
+  ['roots.html', 'Find your roots'], ['aatruppadai.html', 'Aatruppadai'], ['index.html#clock', '24 hours'], ['index.html#explore', 'Map'],
   ['index.html#live', 'Live wait'], ['index.html#festivals', 'Festivals'], ['index.html#cabs', 'Cabs'],
   ['join.html', 'List your place']
 ];
@@ -563,6 +563,12 @@ ${footer('')}
     email: esc(config.contactEmail),
     districtOptions: districtData.districts.map((d) => `<option value="${esc(d.id)}">${esc(d.name)} · ${esc(d.ta)}</option>`).join('')
   }));
+  const aatTpl = await readFile(join(SRC, 'templates/aatruppadai.html'), 'utf8');
+  await writeFile(join(DIST, 'aatruppadai.html'), fill(aatTpl, {
+    base: '',
+    head: head({ title: 'Aatruppadai: ask the way, the Sangam way | Roots of Tamil Nadu', description: 'The Roots guide, named after the Sangam poems in which a bard shows a traveller the road: ask where to eat, what a town is famous for, what is open near you and how to come home.', path: '/aatruppadai.html', base: '', image: `${SITE}/assets/img/aatruppadai.webp`, imageAlt: 'A Sangam bard pointing a traveller towards a town at sunrise' }),
+    header: header(''), footer: footer('')
+  }));
   await writeFile(join(DIST, 'health.html'), `<!doctype html>
 <html lang="en-IN" data-sprite="assets/img/icons.svg">
 <head>
@@ -591,7 +597,7 @@ ${footer('')}
   }));
   for (const p of allPlaces) await writeFile(join(DIST, 'places', `${p.id}.html`), await renderPlace(p));
 
-  const urls = [{ loc: `${SITE}/`, pri: '1.0' }, { loc: `${SITE}/roots.html`, pri: '0.9' }, { loc: `${SITE}/health.html`, pri: '0.6' }, { loc: `${SITE}/join.html`, pri: '0.8' }, ...allPlaces.map((p) => ({ loc: placeUrl(p), pri: p.featured ? '0.9' : '0.7', img: p.image && absImage(p) }))];
+  const urls = [{ loc: `${SITE}/`, pri: '1.0' }, { loc: `${SITE}/roots.html`, pri: '0.9' }, { loc: `${SITE}/aatruppadai.html`, pri: '0.8' }, { loc: `${SITE}/health.html`, pri: '0.6' }, { loc: `${SITE}/join.html`, pri: '0.8' }, ...allPlaces.map((p) => ({ loc: placeUrl(p), pri: p.featured ? '0.9' : '0.7', img: p.image && absImage(p) }))];
   await writeFile(join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${urls.map((u) => `  <url><loc>${esc(u.loc)}</loc><lastmod>${BUILD_DATE}</lastmod><priority>${u.pri}</priority>${u.img ? `<image:image><image:loc>${esc(u.img)}</image:loc></image:image>` : ''}</url>`).join('\n')}
@@ -649,7 +655,7 @@ ${urls.map((u) => `  <url><loc>${esc(u.loc)}</loc><lastmod>${BUILD_DATE}</lastmo
   const v = hash.digest('hex').slice(0, 10);
   await rename(join(DIST, 'assets/js'), join(DIST, `assets/js-${v}`));
   await rename(join(DIST, 'assets/css'), join(DIST, `assets/css-${v}`));
-  const htmlFiles = ['index.html', 'join.html', 'roots.html', 'health.html', 'credits.html', '404.html', ...(await readdir(join(DIST, 'places'))).map((f) => `places/${f}`)].map((f) => join(DIST, f));
+  const htmlFiles = ['index.html', 'join.html', 'roots.html', 'aatruppadai.html', 'health.html', 'credits.html', '404.html', ...(await readdir(join(DIST, 'places'))).map((f) => `places/${f}`)].map((f) => join(DIST, f));
   htmlFiles.push(join(ROOT, '.preview', 'index.html'));
   for (const f of htmlFiles) {
     if (!existsSync(f)) continue;

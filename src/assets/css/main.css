@@ -739,6 +739,51 @@ section[id] { scroll-margin-top: 84px; }
 .lw-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; }
 .lw-dot--short { background: var(--leaf); } .lw-dot--mid { background: var(--gold); } .lw-dot--long { background: var(--accent); }
 .lw-best { margin: 0; font-weight: 700; }
+/* Aatruppadai page */
+.aat-page { padding-bottom: 72px; }
+.aat-page section { padding-top: clamp(40px, 6vw, 72px); scroll-margin-top: 80px; }
+.aat-hero { display: flex; flex-direction: column; gap: 24px; }
+.aat-poster { display: block; width: 100%; height: auto; border-radius: var(--radius-lg); border: 1px solid var(--line); background: var(--surface-2); }
+.aat-intro { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; max-width: 780px; }
+.aat-intro h1 { font-size: clamp(36px, 6vw, 64px); line-height: 1.05; margin: 0; }
+.aat-intro h1 [lang="ta"] { font-family: var(--font-tamil); color: var(--accent); font-size: .8em; margin-right: .2em; }
+.aat-ask-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 20px; align-items: start; }
+@media (max-width: 900px) { .aat-ask-grid { grid-template-columns: minmax(0, 1fr); } }
+.aat-needs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 900px) { .aat-needs { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .aat-needs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.aat-need { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 10px 14px; text-align: left; border: 1px solid var(--line-strong); border-radius: var(--radius-lg); background: var(--surface); color: var(--ink); font: 600 15px/1.25 var(--font-text); cursor: pointer; }
+.aat-need .i { flex: none; font-size: 20px; color: var(--accent); }
+.aat-need:hover { border-color: var(--accent); }
+.aat-need:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.aat-page .cc-log { height: 440px; }
+.aat-five { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 0 28px; }
+.aat-five li { border-top: 1px solid var(--line-strong); padding: 16px 0 20px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.aat-five p { margin: 0; color: var(--muted); font-size: 15px; }
+.aat-five .aat-ta { font: 600 20px/1.3 var(--font-tamil); color: var(--accent); }
+.aat-five h3 { margin: 0; font: 500 21px/1.2 var(--font-display); }
+.aat-five a, .aat-five .linkbtn { margin-top: auto; font-weight: 600; font-size: 15px; }
+.aat-quote { margin: clamp(28px, 4vw, 48px) 0 0; padding: clamp(20px, 3vw, 32px); background: var(--surface-2); border-radius: var(--radius-lg); }
+.aat-quote blockquote { margin: 0; display: flex; flex-direction: column; gap: 12px; max-width: 900px; }
+.aat-quote p { margin: 0; }
+.aat-quote [lang="ta"] { font: 600 clamp(19px, 2.4vw, 26px)/1.6 var(--font-tamil); color: var(--ink); }
+.aat-quote p:not([lang]) { font: italic 500 clamp(18px, 2.2vw, 24px)/1.4 var(--font-display); color: var(--muted); }
+.aat-verse-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 20px; align-items: start; }
+@media (max-width: 900px) { .aat-verse-grid { grid-template-columns: minmax(0, 1fr); } }
+.aat-card { border-top: 4px solid var(--accent); }
+.aat-card h3 { font: 500 clamp(24px, 3vw, 32px)/1.15 var(--font-display); font-style: normal; margin: 0; }
+.aat-lines { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.aat-lines li { border-top: 1px dashed var(--line); padding-top: 10px; }
+.aat-lines p { margin: 0; }
+.aat-line-h { font-weight: 600; font-size: 14px; color: var(--muted); }
+.aat-line-h [lang="ta"] { font-family: var(--font-tamil); color: var(--accent); }
+.aat-tips { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.aat-tips li { border-top: 1px dashed var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.aat-tips p { margin: 0; }
+.aat-tip-place { font-weight: 600; font-size: 14px; color: var(--muted); }
+.aat-teaser img { display: block; width: 100%; height: auto; border-radius: var(--radius); }
+.aat-teaser .btn { align-self: flex-start; }
+
 /* Guide answers */
 .cc-log { position: relative; height: 360px; }
 .cc-list li small { display: block; color: var(--muted); font-size: 13px; line-height: 1.4; }

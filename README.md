@@ -26,6 +26,7 @@ Ideas borrowed from around the world and made Tamil: Ireland's diaspora welcome 
 | Find your roots: homecoming planner for all 38 districts | `roots.html` |
 | District, taluk and village as type-and-select fields (2011 Census village directory), and a country list for "Travelling from" | `roots.html` |
 | Family roots card to share on WhatsApp, and a trip price estimate in rupees and 16 home currencies | `roots.html`, after planning |
+| Aatruppadai, the guide, on its own page: quick needs, the Sangam idea in five parts, a five-line "way" to send to a friend, and tips left for the next traveller | `aatruppadai.html` |
 | Become an Ooru Nanbar / list your place, with district, taluk and town as type-and-select fields | `join.html` |
 | 73 places with live hours, 24-hour clock, 3D map, 100 km day trips | home page |
 | Beyond Madurai: 45 places in Trichy, Thanjavur, Kumbakonam, Thoothukudi and Chennai, each with its own page | home page, `places/` |
