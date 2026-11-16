@@ -743,6 +743,11 @@ section[id] { scroll-margin-top: 84px; }
 .lw-report-q { margin: 0; font-weight: 600; font-size: 15px; }
 @media (prefers-reduced-motion: reduce) { .lw-progress span { transition: none; } }
 
+/* Festival days that are not consecutive carry their own label */
+.pongal-days.fest-days li::before { content: attr(data-when); }
+@media (min-width: 900px) { .pongal-days.fest-days { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.chithirai .pongal-cta p { flex: 1 1 100%; }
+
 /* Beyond Madurai: city cards */
 .city h3 span { font: 600 16px var(--font-tamil); color: var(--muted); }
 .city-kind { margin: 8px 0 0; font: italic 500 15px var(--font-display); color: var(--muted); }

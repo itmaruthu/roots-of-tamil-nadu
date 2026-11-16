@@ -42,6 +42,8 @@ export function initLiveWait(ctx) {
   // ----- darshan -----
   const festivalBtn = $('#lw-festival');
   festivalBtn.addEventListener('click', () => { festival = !festival; festivalBtn.setAttribute('aria-pressed', String(festival)); update(); });
+  // Links elsewhere on the page (the Chithirai section) open this panel with the festival crowd switched on.
+  for (const a of document.querySelectorAll('[data-lw-festival]')) a.addEventListener('click', () => { festival = true; festivalBtn.setAttribute('aria-pressed', 'true'); update(); });
   $('#lw-report').addEventListener('click', (e) => {
     const b = e.target.closest('button[data-wait]'); if (!b) return;
     const { day, hour } = ctx.state, msg = $('#lw-report-msg');

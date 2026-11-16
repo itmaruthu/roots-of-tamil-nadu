@@ -30,7 +30,7 @@ Ideas borrowed from around the world and made Tamil: Ireland's diaspora welcome 
 | 73 places with live hours, 24-hour clock, 3D map, 100 km day trips | home page |
 | Beyond Madurai: 45 places in Trichy, Thanjavur, Kumbakonam, Thoothukudi and Chennai, each with its own page | home page, `places/` |
 | City bus routes from Periyar, MGR (Mattuthavani) and Arappalayam stands | each place page |
-| Aatruppadai guide, Live wait tokens, festivals for every season, approved cabs | home page |
+| Aatruppadai guide, Live wait tokens, the Chithirai festival day by day, festivals for every season, approved cabs | home page |
 
 The submitted version is preserved in the private repository `roots-of-tamil-nadu-submission`.
 
