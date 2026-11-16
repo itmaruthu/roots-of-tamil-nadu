@@ -28,6 +28,7 @@ Ideas borrowed from around the world and made Tamil: Ireland's diaspora welcome 
 | Family roots card to share on WhatsApp, and a trip price estimate in rupees and 16 home currencies | `roots.html`, after planning |
 | Become an Ooru Nanbar / list your place, with district, taluk and town as type-and-select fields | `join.html` |
 | 73 places with live hours, 24-hour clock, 3D map, 100 km day trips | home page |
+| Beyond Madurai: 45 places in Trichy, Thanjavur, Kumbakonam, Thoothukudi and Chennai, each with its own page | home page, `places/` |
 | City bus routes from Periyar, MGR (Mattuthavani) and Arappalayam stands | each place page |
 | Aatruppadai guide, Live wait tokens, festivals for every season, approved cabs | home page |
 
@@ -138,6 +139,10 @@ The darshan wait figures and the token queue are simulated in this prototype and
 ## Bus routes (src/data/bus.json)
 
 City bus numbers and stops come from the MaduraiOne community transit map (maduraione.in). Fares are not shown. The file holds the best route from 20 main stops to each place's nearest stop. Place pages show the route from the main bus stand, and "Buses from my location" picks the visitor's nearest main stop in the browser (location never leaves the device). Refresh the file from MaduraiOne's API before launch and every few months; it is community data, so spot-check a few routes.
+
+## Other cities
+
+A place with a `"city"` (one of the ids in `cities` in `places.json`) is outside the Madurai region. It gets its own page and appears in "Beyond Madurai" and in homecoming plans, but not on the Madurai clock or map. These places were compiled from public listings and guides in November 2026: hours and coordinates are approximate, each page says so, and Directions searches by name and address rather than by coordinates. They have no photos yet. Confirm each with the host and replace the coordinates before launch.
 
 ## Updating places
 

@@ -9,7 +9,7 @@
 
 <main id="main" data-place-id="{{id}}" data-group="{{group}}">
   <div class="wrap">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="{{base}}index.html">Madurai</a> › <a href="{{base}}index.html#explore">{{groupLabel}}</a> › <span aria-current="page">{{name}}</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="{{base}}index.html{{cityHash}}">{{cityName}}</a> › <a href="{{base}}index.html{{groupHash}}">{{groupLabel}}</a> › <span aria-current="page">{{name}}</span></nav>
 
     <article>
       <header class="place-hero">
@@ -22,7 +22,7 @@
           <div class="chips">{{diet}}</div>
           <div class="hero-actions">
             <a class="btn" href="{{directions}}" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#route"/></svg>Directions</a>
-            <a class="btn btn--ghost" href="{{base}}index.html#explore"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#pin"/></svg>See it on the live map</a>
+            <a class="btn btn--ghost" href="{{base}}index.html{{mapHash}}"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#pin"/></svg>{{mapLabel}}</a>
           </div>
         </div>
         <figure class="place-photo">

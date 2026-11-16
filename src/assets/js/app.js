@@ -35,7 +35,7 @@ async function init() {
   const res = await fetch(DATA_URL, { credentials: 'same-origin' });
   if (!res.ok) throw new Error(`places.json ${res.status}`);
   const data = await res.json();
-  state.places = data.places;
+  state.places = data.places.filter((p) => !p.city); // the clock and map are Madurai's; other cities have their own pages
   state.moments = data.moments;
   buildControls();
   const ctx = { state, places: state.places, placeUrl: PLACE_URL };

@@ -43,12 +43,14 @@ export function imageSrc(place, width = 960, base = '') {
   return commonsImage(place.image.file, width);
 }
 
+// Places outside the Madurai region have approximate coordinates, so Google is asked for them by name and address.
+const destination = (place) => (place.city ? encodeURIComponent(`${place.name}, ${place.address}`) : `${place.lat},${place.lng}`);
 export function directionsUrl(place) {
-  return `https://www.google.com/maps/dir/?api=1&destination=${place.lat},${place.lng}`;
+  return `https://www.google.com/maps/dir/?api=1&destination=${destination(place)}`;
 }
 // Public-transport directions; Google Maps starts from the visitor's current location.
 export function busUrl(place) {
-  return `https://www.google.com/maps/dir/?api=1&destination=${place.lat},${place.lng}&travelmode=transit`;
+  return `https://www.google.com/maps/dir/?api=1&destination=${destination(place)}&travelmode=transit`;
 }
 
 export function osmUrl(place) {

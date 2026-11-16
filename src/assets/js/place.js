@@ -40,16 +40,17 @@ for (const img of document.querySelectorAll('img')) {
 async function init() {
   const res = await fetch(DATA_URL, { credentials: 'same-origin' });
   if (!res.ok) return;
-  const { places } = await res.json();
+  const { places, cities = [] } = await res.json();
   const place = places.find((p) => p.id === id);
   if (!place) return;
+  const cityName = cities.find((c) => c.id === place.city)?.name || 'Madurai';
 
   const tick = () => {
     const { day, hour } = nowInMadurai();
     const st = status(place, day, hour);
     const live = $('#live');
     live.className = `live status--${st.state}`;
-    live.textContent = `Now in Madurai: ${st.text}`;
+    live.textContent = `Now in ${cityName}: ${st.text}`;
     document.querySelector(`#hours tr[data-day="${day}"]`)?.classList.add('is-today');
   };
   tick();
@@ -75,7 +76,7 @@ async function init() {
 
   // All places by distance: from this place, or from the visitor ("Near me").
   const list = $('#nearby'), more = $('#nearby-more'), note = $('#nearby-note'), modes = $('#nearby-modes');
-  const others = places.filter((o) => o.id !== id);
+  const others = places.filter((o) => o.id !== id && (o.city || '') === (place.city || '')); // the same city only
   const nd = { from: 'here', me: null, all: false };
   const SHORT = 8;
   const drawNearby = () => {

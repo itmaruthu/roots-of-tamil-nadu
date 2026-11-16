@@ -17,9 +17,9 @@ const EMAIL = document.querySelector('script[data-email]')?.dataset.email || '';
 // Murugan's six abodes (Arupadai Veedu): a stamp-passport circuit any family can follow.
 const ARUPADAI = [
   { name: 'Thiruparankundram', lat: 9.879, lng: 78.071, id: 'thiruparankundram-murugan-temple' },
-  { name: 'Tiruchendur', lat: 8.496, lng: 78.125 },
+  { name: 'Tiruchendur', lat: 8.496, lng: 78.125, id: 'tiruchendur-murugan-temple' },
   { name: 'Palani', lat: 10.449, lng: 77.520, id: 'palani-murugan-temple' },
-  { name: 'Swamimalai', lat: 10.957, lng: 79.326 },
+  { name: 'Swamimalai', lat: 10.957, lng: 79.326, id: 'swamimalai-murugan-temple' },
   { name: 'Tiruttani', lat: 13.176, lng: 79.611 },
   { name: 'Pazhamudircholai', lat: 10.099, lng: 78.221, id: 'pazhamudircholai-murugan-temple' }
 ];

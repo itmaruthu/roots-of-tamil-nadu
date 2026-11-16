@@ -32,7 +32,13 @@ const festivals = JSON.parse(await readFile(join(SRC, 'data/festivals.json'), 'u
 const guide = JSON.parse(await readFile(join(SRC, 'data/guide.json'), 'utf8'));
 const districtData = JSON.parse(await readFile(join(SRC, 'data/districts.json'), 'utf8'));
 const credits = existsSync(join(SRC, 'data/credits.json')) ? JSON.parse(await readFile(join(SRC, 'data/credits.json'), 'utf8')) : {};
-const places = data.places;
+// The home page (clock, map, lists) is Madurai's. Places in other cities carry a `city` and get their own pages.
+const allPlaces = data.places;
+const places = allPlaces.filter((p) => !p.city);
+const cities = data.cities || [];
+const cityOf = (p) => cities.find((c) => c.id === p.city);
+const cityName = (p) => cityOf(p)?.name || 'Madurai';
+const sameCity = (p) => allPlaces.filter((o) => (o.city || '') === (p.city || ''));
 const BUILD_DATE = new Date().toISOString().slice(0, 10);
 
 /* ---------- helpers ---------- */
@@ -204,24 +210,38 @@ function openingSpec(p) {
 }
 function address(p) {
   const pin = (p.address.match(/\b(6\d{5})\b/) || [])[1];
-  return { '@type': 'PostalAddress', streetAddress: p.address.replace(/,?\s*(Madurai\s*)?6\d{5}$/, '').trim(), addressLocality: 'Madurai', addressRegion: 'Tamil Nadu', postalCode: pin, addressCountry: 'IN' };
+  return { '@type': 'PostalAddress', streetAddress: p.address.replace(/,?\s*(Madurai\s*)?6\d{5}$/, '').trim(), addressLocality: cityName(p), addressRegion: 'Tamil Nadu', postalCode: pin, addressCountry: 'IN' };
 }
 function placeSchema(p) {
   const schemaType = TYPES[p.type].schema;
   const obj = {
     '@context': 'https://schema.org', '@type': schemaType, '@id': `${placeUrl(p)}#place`, name: p.name, description: p.story,
     url: placeUrl(p), address: address(p), geo: { '@type': 'GeoCoordinates', latitude: p.lat, longitude: p.lng },
-    hasMap: directionsUrl(p), containedInPlace: { '@type': 'City', name: 'Madurai' }
+    hasMap: directionsUrl(p), containedInPlace: { '@type': 'City', name: cityName(p) }
   };
   if (p.image) obj.image = absImage(p);
   if (!['TouristAttraction'].includes(schemaType)) obj.openingHoursSpecification = openingSpec(p);
-  if (TYPES[p.type].group === 'eat') { obj.servesCuisine = 'South Indian, Madurai'; if (p.since) obj.foundingDate = p.since; }
+  if (TYPES[p.type].group === 'eat') { obj.servesCuisine = p.city ? 'South Indian' : 'South Indian, Madurai'; if (p.since) obj.foundingDate = p.since; }
   if (schemaType === 'TouristAttraction') obj.touristType = ['Cultural tourism', 'Heritage tourism'];
   return obj;
 }
 
 /* ---------- static locator map (build-time SVG) ---------- */
+// Other cities: a simple plan of that city's places, scaled to fit them all, north up.
+function cityLocator(p) {
+  const pool = sameCity(p), c = cityOf(p);
+  const kx = 111.32 * Math.cos((c.lat * Math.PI) / 180);
+  const pts = pool.map((o) => ({ o, x: (o.lng - c.lng) * kx, y: -(o.lat - c.lat) * 110.6 }));
+  const half = Math.max(1.5, ...pts.map((q) => Math.max(Math.abs(q.x), Math.abs(q.y)))) * 1.15;
+  const at = (v) => (200 + (v / half) * 180).toFixed(1);
+  const me = pts.find((q) => q.o.id === p.id);
+  const dots = pts.filter((q) => q !== me).map((q) => `<circle cx="${at(q.x)}" cy="${at(q.y)}" r="4" fill="currentColor" opacity=".25"/>`).join('');
+  const barKm = half > 30 ? 20 : half > 12 ? 10 : half > 5 ? 5 : 1;
+  return `<svg class="locator" viewBox="0 0 400 400" role="img" aria-label="${esc(`Location of ${p.name} among the Roots places in ${c.name}`)}">${dots}<rect x="194" y="194" width="12" height="12" rx="2" class="ref"/><text x="210" y="192" class="map-label">${esc(c.name)} centre</text><circle cx="${at(me.x)}" cy="${at(me.y)}" r="11" class="here"/><line x1="20" y1="380" x2="${(20 + (barKm / half) * 180).toFixed(1)}" y2="380" class="map-scale"/><text x="20" y="372" class="map-label">${barKm} km</text><text x="380" y="30" class="map-label" text-anchor="end">N ↑</text></svg>`;
+}
+
 function locator(p) {
+  if (p.city) return cityLocator(p);
   const fromCentre = distanceKm(p, MEENAKSHI);
   const view = fromCentre < 1.1 ? 'old' : fromCentre < 4.5 ? 'city' : 'region';
   const project = projector(view, 400);
@@ -353,6 +373,20 @@ function tripsHtml(base) {
     </article>`).join('\n');
 }
 
+// Beyond Madurai: the other cities on Roots, each with its places grouped by kind.
+function beyondHtml(base) {
+  const KINDS = [['temple', 'Temples'], ['heritage', 'Heritage'], ['eat', 'Eat and drink'], ['market', 'Shops and crafts'], ['stay', 'Stay'], ['trips', 'Outdoors']];
+  return cities.map((c) => {
+    const here = allPlaces.filter((p) => p.city === c.id);
+    const groups = KINDS.map(([key, label]) => [label, here.filter((p) => groupOf(p) === key)]).filter(([, list]) => list.length);
+    return `<article class="circuit city" id="beyond-${esc(c.id)}">
+      <h3>${esc(c.name)} <span lang="ta">${esc(c.ta)}</span></h3><p class="circuit-note">${esc(c.line)} · ${Math.round(distanceKm(c, MEENAKSHI) / 5) * 5} km from Madurai</p>
+      ${groups.map(([label, list]) => `<p class="city-kind">${esc(label)}</p><ul>${list.map((p) => `<li><a href="${base}places/${esc(p.id)}.html"><span class="c-name">${esc(p.short || p.name)}</span><span class="c-meta">${esc(p.area)}</span></a></li>`).join('')}</ul>`).join('\n      ')}
+      <a class="btn btn--sm btn--ghost" href="${base}roots.html?district=${esc(c.district)}">Plan a homecoming here</a>
+    </article>`;
+  }).join('\n');
+}
+
 function festivalsHtml(base) {
   return festivals.seasons.map((s) => `<article class="season" data-months="${s.months.join(',')}">
       <header><p class="season-range">${esc(s.range)}</p><h3>${esc(s.name)} <span lang="ta">${esc(s.ta)}</span></h3><p class="season-weather">${esc(s.weather)}</p><span class="season-now" hidden>Now</span></header>
@@ -378,6 +412,7 @@ async function renderHome(base, path) {
     heroAlt: esc(hero.alt),
     heroCredit: '',
     count: String(places.length),
+    beyond: beyondHtml(base), beyondCount: String(allPlaces.length - places.length), cityCount: String(cities.length),
     templeCount: String(places.filter((p) => p.type === 'temple').length),
     postcards: postcards(base),
     featured: featured(base),
@@ -415,21 +450,21 @@ async function renderPlace(p) {
     const text = !h.length ? 'Closed' : is24h(h) ? 'Open 24 hours' : h.map(([o, c]) => `${formatHour(o)}–${formatHour(c)}`).join(', ');
     return `<tr data-day="${d}"><th scope="row">${DAYS[d]}</th><td>${esc(text)}</td></tr>`;
   }).join('');
-  const near = nearest(p, places, 6).map(({ place: o, km }) =>
+  const near = nearest(p, sameCity(p), 6).map(({ place: o, km }) =>
     `<li><a href="${o.id}.html" data-group="${groupOf(o)}"><span class="tile">${iconSvg(base, o.type)}</span><span><b>${esc(o.name)}</b><small>${esc(TYPES[o.type].label)} · ${formatKm(km)} away</small></span></a></li>`).join('');
   const crumbs = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Madurai', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 1, name: cityName(p), item: `${SITE}/${p.city ? '#beyond' : ''}` },
     { '@type': 'ListItem', position: 2, name: GROUPS[t.group].label, item: `${SITE}/#explore` },
     { '@type': 'ListItem', position: 3, name: p.name, item: placeUrl(p) }] };
   const kind = { meal: 'Restaurant', sweet: 'Sweets & snacks', drink: 'Drinks', temple: 'Temple', heritage: 'Heritage site', market: 'Market', stay: 'Hotel', nature: 'Nature & falls' }[p.type] || `Shopping · ${TYPES[p.type].label}`;
   const gd = guide[p.id];
-  const description = (gd ? `${gd.hook}. ${gd.why}` : `${p.name}, ${p.area}, Madurai: ${p.story} Hours: ${p.hours}.`).slice(0, 300);
+  const description = (gd ? `${gd.hook}. ${gd.why}` : `${p.name}, ${p.area}, ${cityName(p)}: ${p.story} Hours: ${p.hours}.`).slice(0, 300);
   return fill(tpl, {
     why: whyHtml(p, base),
     hook: guide[p.id] ? `<p class="hook">${esc(guide[p.id].hook)}</p>` : '',
     base,
     head: head({
-      title: `${p.name}, Madurai — hours, location & story | Roots of Tamil Nadu`,
+      title: `${p.name}${p.name.includes(cityName(p)) ? '' : `, ${cityName(p)}`} — hours, location & story | Roots of Tamil Nadu`,
       description, path: `/places/${p.id}.html`, base, type: 'place',
       image: p.image ? absImage(p) : null, imageAlt: p.image?.alt,
       extra: [jsonld(placeSchema(p)), jsonld(crumbs),
@@ -440,7 +475,9 @@ async function renderPlace(p) {
     id: esc(p.id),
     group: groupOf(p),
     name: esc(p.name),
-    groupLabel: esc(GROUPS[t.group].label),
+    groupLabel: esc(p.city && t.group === 'trips' ? 'Nature' : GROUPS[t.group].label),
+    mapHash: p.city ? `#beyond-${p.city}` : '#explore', mapLabel: p.city ? `More places in ${esc(cityName(p))}` : 'See it on the live map',
+    cityName: esc(cityName(p)), cityHash: p.city ? '#beyond' : '', groupHash: p.city ? `#beyond-${p.city}` : '#explore',
     kind: esc(kind.charAt(0).toUpperCase() + kind.slice(1)),
     area: esc(p.area),
     since: p.since ? ` · since ${esc(p.since)}` : '',
@@ -471,7 +508,8 @@ async function renderPlace(p) {
     health: healthHtml('../', { lat: p.lat, lng: p.lng, label: p.short || p.name }),
     busFetched: esc(new Date(bus.fetched).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })),
     osm: esc(osmUrl(p)),
-    fromTemple: p.id === 'meenakshi-amman-temple' ? 'The centre of the old city' : `${formatKm(distanceKm(p, MEENAKSHI))} from Meenakshi Amman Temple`,
+    fromTemple: p.city ? `${formatKm(distanceKm(p, cityOf(p)))} from the centre of ${cityName(p)} · ${formatKm(distanceKm(p, MEENAKSHI))} from Madurai. The pin is approximate; use Directions for the exact spot.`
+      : p.id === 'meenakshi-amman-temple' ? 'The centre of the old city' : `${formatKm(distanceKm(p, MEENAKSHI))} from Meenakshi Amman Temple`,
     locator: locator(p),
     nearby: near
   });
@@ -551,9 +589,9 @@ ${footer('')}
     header: header(''), footer: footer(''),
     whatsapp: esc(config.joinWhatsApp || ''), email: esc(config.contactEmail), phone: esc(config.contactPhone), tel: esc(config.contactPhone.replace(/\s/g, '')), forms: esc(FORMS)
   }));
-  for (const p of places) await writeFile(join(DIST, 'places', `${p.id}.html`), await renderPlace(p));
+  for (const p of allPlaces) await writeFile(join(DIST, 'places', `${p.id}.html`), await renderPlace(p));
 
-  const urls = [{ loc: `${SITE}/`, pri: '1.0' }, { loc: `${SITE}/roots.html`, pri: '0.9' }, { loc: `${SITE}/health.html`, pri: '0.6' }, { loc: `${SITE}/join.html`, pri: '0.8' }, ...places.map((p) => ({ loc: placeUrl(p), pri: p.featured ? '0.9' : '0.7', img: p.image && absImage(p) }))];
+  const urls = [{ loc: `${SITE}/`, pri: '1.0' }, { loc: `${SITE}/roots.html`, pri: '0.9' }, { loc: `${SITE}/health.html`, pri: '0.6' }, { loc: `${SITE}/join.html`, pri: '0.8' }, ...allPlaces.map((p) => ({ loc: placeUrl(p), pri: p.featured ? '0.9' : '0.7', img: p.image && absImage(p) }))];
   await writeFile(join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${urls.map((u) => `  <url><loc>${esc(u.loc)}</loc><lastmod>${BUILD_DATE}</lastmod><priority>${u.pri}</priority>${u.img ? `<image:image><image:loc>${esc(u.img)}</image:loc></image:image>` : ''}</url>`).join('\n')}

@@ -8,6 +8,8 @@ const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const REQUIRED = ['id', 'name', 'type', 'lat', 'lng', 'area', 'address', 'h', 'hours', 'story'];
 // Madurai and day trips within ~100 km — catches swapped or mistyped coordinates.
 const BOUNDS = { lat: [9.0, 10.9], lng: [77.2, 79.1] };
+// Places in other cities (they carry a `city`) only have to fall inside Tamil Nadu.
+const STATE = { lat: [8.0, 13.6], lng: [76.2, 80.4] };
 
 export function validate(data) {
   const errors = [];
@@ -21,7 +23,9 @@ export function validate(data) {
     ids.add(p.id);
     if (!TYPES[p.type]) errors.push(`${at}: unknown type "${p.type}"`);
     if (p.diet && !['veg', 'nonveg'].includes(p.diet)) errors.push(`${at}: diet must be veg or nonveg`);
-    if (!(p.lat >= BOUNDS.lat[0] && p.lat <= BOUNDS.lat[1] && p.lng >= BOUNDS.lng[0] && p.lng <= BOUNDS.lng[1])) errors.push(`${at}: coordinates outside the Madurai region`);
+    const box = p.city ? STATE : BOUNDS;
+    if (!(p.lat >= box.lat[0] && p.lat <= box.lat[1] && p.lng >= box.lng[0] && p.lng <= box.lng[1])) errors.push(`${at}: coordinates outside ${p.city ? 'Tamil Nadu' : 'the Madurai region'}`);
+    if (p.city && !(data.cities || []).some((c) => c.id === p.city)) errors.push(`${at}: unknown city "${p.city}"`);
     const checkRanges = (ranges, label) => {
       if (!Array.isArray(ranges)) { errors.push(`${at}: ${label} must be an array`); return; }
       for (const r of ranges) {

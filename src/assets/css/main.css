@@ -695,6 +695,13 @@ section[id] { scroll-margin-top: 84px; }
 .roots-part--stay .roots-part-l { color: var(--leaf); }
 .roots-go { margin: 0; font-weight: 600; font-size: 15px; color: var(--accent); border-top: 1px dashed var(--line); padding-top: 8px; }
 
+/* Beyond Madurai: city cards */
+.city h3 span { font: 600 16px var(--font-tamil); color: var(--muted); }
+.city-kind { margin: 8px 0 0; font: italic 500 15px var(--font-display); color: var(--muted); }
+.city ul { margin-top: 0; }
+.city .btn { align-self: flex-start; margin-top: 8px; }
+#beyond .circuits { margin-bottom: 14px; }
+
 /* Real 3D map (WebGL) with HTML markers laid over it */
 .map3d { position: relative; aspect-ratio: 16 / 8; border-radius: var(--radius-lg); overflow: hidden; background: var(--surface-2); min-width: 0; }
 @media (max-width: 900px) { .map3d { aspect-ratio: 4 / 5; } }

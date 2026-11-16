@@ -1,5 +1,5 @@
 {
-  "$comment": "Hours: decimal hours in IST (21.5 = 9:30 pm). A range past 24 runs after midnight. 'days' overrides 'h' for a weekday (0 = Sunday); [] means closed. Sources: Google Maps listings checked 14-15 Oct 2026, shop signboards and press. Verify with each host before launch.",
+  "$comment": "Hours: decimal hours in IST (21.5 = 9:30 pm). A range past 24 runs after midnight. 'days' overrides 'h' for a weekday (0 = Sunday); [] means closed. Sources: Google Maps listings checked 14-15 Oct 2026, shop signboards and press. Verify with each host before launch. Places with a 'city' are outside the Madurai region: their hours and coordinates were compiled from public listings and guides in November 2026, are approximate, and each carries a tip saying so.",
   "moments": [
     {
       "s": 1,
@@ -1973,6 +1973,1102 @@
         "local": "assets/img/places/sittanavasal-cave.webp",
         "thumb": "assets/img/places/sittanavasal-cave-480.webp"
       }
+    },
+    {
+      "id": "srirangam-ranganathaswamy-temple",
+      "name": "Sri Ranganathaswamy Temple, Srirangam",
+      "type": "temple",
+      "city": "trichy",
+      "lat": 10.8625,
+      "lng": 78.69,
+      "area": "Srirangam island",
+      "address": "Srirangam, Tiruchirappalli 620006",
+      "h": [
+        [
+          6,
+          12
+        ],
+        [
+          13.25,
+          18
+        ],
+        [
+          18.75,
+          21
+        ]
+      ],
+      "hours": "About 6 am–9 pm, with breaks for worship",
+      "story": "A temple town on an island between the Kaveri and the Kollidam: seven walled enclosures, 21 gopurams and a 72-metre tower, one of the largest working temples in the world.",
+      "short": "Srirangam",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "rockfort-ucchi-pillayar-temple",
+      "name": "Rockfort and Ucchi Pillayar Temple",
+      "type": "temple",
+      "city": "trichy",
+      "lat": 10.8284,
+      "lng": 78.6973,
+      "area": "Rockfort, old Trichy",
+      "address": "Rockfort, Tiruchirappalli 620002",
+      "h": [
+        [
+          6,
+          20
+        ]
+      ],
+      "hours": "About 6 am–8 pm",
+      "story": "An 83-metre rock rising straight out of the old town. More than 400 steps cut into the stone climb past Pallava cave temples to the Ganesha shrine and a view over the Kaveri.",
+      "short": "Rockfort",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "jambukeswarar-temple-thiruvanaikaval",
+      "name": "Jambukeswarar Temple, Thiruvanaikaval",
+      "type": "temple",
+      "city": "trichy",
+      "lat": 10.8531,
+      "lng": 78.7057,
+      "area": "Thiruvanaikaval",
+      "address": "Thiruvanaikaval, Tiruchirappalli 620005",
+      "h": [
+        [
+          6,
+          13
+        ],
+        [
+          16,
+          20.5
+        ]
+      ],
+      "hours": "About 6 am–1 pm and 4–8:30 pm",
+      "story": "One of the five temples of the elements: here Shiva is water, and a spring keeps the sanctum wet all year.",
+      "short": "Thiruvanaikaval",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "kallanai-grand-anicut",
+      "name": "Kallanai (Grand Anicut)",
+      "type": "heritage",
+      "city": "trichy",
+      "lat": 10.8305,
+      "lng": 78.8185,
+      "area": "Kallanai, 20 km east of Trichy",
+      "address": "Kallanai, Thanjavur district 613102",
+      "h": [
+        [
+          6,
+          18
+        ]
+      ],
+      "hours": "Open ground · best in daylight",
+      "story": "A stone dam across the Kaveri built by the Chola king Karikalan about 2,000 years ago, and still watering the delta today.",
+      "short": "Kallanai",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "our-lady-of-lourdes-church-trichy",
+      "name": "Our Lady of Lourdes Church",
+      "type": "heritage",
+      "city": "trichy",
+      "lat": 10.8297,
+      "lng": 78.6935,
+      "area": "Teppakulam, beside St Joseph's College",
+      "address": "Teppakulam, Tiruchirappalli 620002",
+      "h": [
+        [
+          6,
+          19
+        ]
+      ],
+      "hours": "About 6 am–7 pm",
+      "story": "A late 19th-century Gothic church with a tall spire and stained glass, modelled on the basilica at Lourdes, facing the Rockfort tank.",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "parthasarathy-vilas-thiruvanaikaval",
+      "name": "Parthasarathy Vilas",
+      "type": "meal",
+      "city": "trichy",
+      "lat": 10.8537,
+      "lng": 78.7046,
+      "area": "Thiruvanaikaval, near the temple",
+      "address": "19 Kondayampettai Agraharam, Thiruvanaikoil, Tiruchirappalli 620005",
+      "h": [
+        [
+          6.5,
+          11
+        ],
+        [
+          15.5,
+          21
+        ]
+      ],
+      "hours": "Morning and evening tiffin",
+      "story": "An old tiffin house by the Thiruvanaikaval temple, known across Trichy for its ghee-roast butter dosa.",
+      "diet": "veg",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "michaels-ice-cream-trichy",
+      "name": "Michael's Ice Cream",
+      "type": "sweet",
+      "city": "trichy",
+      "lat": 10.8262,
+      "lng": 78.6945,
+      "area": "Main Guard Gate",
+      "address": "Near Main Guard Gate, Tiruchirappalli 620002",
+      "h": [
+        [
+          10,
+          22
+        ]
+      ],
+      "hours": "About 10 am–10 pm",
+      "story": "A Trichy landmark by Main Guard Gate where generations have queued for plain, cheap, old-style ice cream.",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "nsb-road-bazaar-trichy",
+      "name": "NSB Road and Teppakulam bazaar",
+      "type": "dress",
+      "city": "trichy",
+      "lat": 10.8272,
+      "lng": 78.6952,
+      "area": "Under the Rockfort",
+      "address": "NSB Road, Teppakulam, Tiruchirappalli 620002",
+      "h": [
+        [
+          10,
+          21.5
+        ]
+      ],
+      "hours": "About 10 am–9:30 pm",
+      "story": "The shopping streets under the Rockfort: sarees and textiles, brass, jewellery and the Chinna Kadai lanes.",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "sangam-hotel-trichy",
+      "name": "Sangam Hotel, Trichy",
+      "type": "stay",
+      "city": "trichy",
+      "lat": 10.805,
+      "lng": 78.686,
+      "area": "Collector's Office Road",
+      "address": "Collector's Office Road, Tiruchirappalli 620001",
+      "h": [
+        [
+          0,
+          24
+        ]
+      ],
+      "hours": "Hotel · 24-hour reception",
+      "story": "A long-established full-service hotel with a pool, central for the railway junction, the Rockfort and Srirangam.",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "brihadeeswarar-temple-thanjavur",
+      "name": "Brihadeeswarar Temple (Big Temple)",
+      "type": "temple",
+      "city": "thanjavur",
+      "lat": 10.7828,
+      "lng": 79.1318,
+      "area": "Thanjavur fort",
+      "address": "Membalam Road, Balaganapathy Nagar, Thanjavur 613007",
+      "h": [
+        [
+          6,
+          12.5
+        ],
+        [
+          16,
+          20.5
+        ]
+      ],
+      "hours": "About 6 am–12:30 pm and 4–8:30 pm",
+      "story": "Raja Raja Chola's granite temple, finished in 1010: a 66-metre tower, a giant Nandi carved from one stone, and a place on UNESCO's list of Great Living Chola Temples.",
+      "short": "Big Temple",
+      "tips": [
+        "Come at sunrise or late afternoon, when the granite turns gold.",
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "thanjavur-palace-saraswathi-mahal",
+      "name": "Thanjavur Palace and Saraswathi Mahal Library",
+      "type": "heritage",
+      "city": "thanjavur",
+      "lat": 10.7917,
+      "lng": 79.1372,
+      "area": "East Main Street",
+      "address": "East Main Street, Thanjavur 613001",
+      "h": [
+        [
+          9,
+          13
+        ],
+        [
+          13.5,
+          17.5
+        ]
+      ],
+      "hours": "About 9 am–1 pm and 1:30–5:30 pm",
+      "story": "The palace of the Nayak and Maratha kings: a gallery of Chola bronzes, a bell tower, and one of Asia's oldest libraries with thousands of palm-leaf manuscripts.",
+      "short": "Thanjavur Palace",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "schwartz-church-thanjavur",
+      "name": "Schwartz Church",
+      "type": "heritage",
+      "city": "thanjavur",
+      "lat": 10.7872,
+      "lng": 79.133,
+      "area": "Sivaganga Park, by the Big Temple",
+      "address": "Sivaganga Park, Thanjavur 613009",
+      "h": [
+        [
+          9,
+          17
+        ]
+      ],
+      "hours": "About 9 am–5 pm",
+      "story": "Built in 1779 by Raja Serfoji for his teacher, the missionary Christian Friedrich Schwartz, with a marble relief of the king at the old man's bedside.",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "thyagaraja-samadhi-thiruvaiyaru",
+      "name": "Saint Thyagaraja's Samadhi, Thiruvaiyaru",
+      "type": "heritage",
+      "city": "thanjavur",
+      "lat": 10.883,
+      "lng": 79.104,
+      "area": "Thiruvaiyaru, 13 km north",
+      "address": "Thiruvaiyaru, Thanjavur district 613204",
+      "h": [
+        [
+          6,
+          12
+        ],
+        [
+          16,
+          20
+        ]
+      ],
+      "hours": "About 6 am–12 pm and 4–8 pm",
+      "story": "The resting place of the composer Thyagaraja on the bank of the Kaveri. Each January, hundreds of musicians gather here to sing his Pancharatna kritis together.",
+      "short": "Thiruvaiyaru",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "bombay-sweets-thanjavur",
+      "name": "Bombay Sweets",
+      "type": "sweet",
+      "city": "thanjavur",
+      "lat": 10.779,
+      "lng": 79.137,
+      "area": "Opposite the railway station",
+      "address": "Opposite Thanjavur Junction, Thanjavur 613001",
+      "h": [
+        [
+          8,
+          22
+        ]
+      ],
+      "hours": "About 8 am–10 pm",
+      "story": "Started in 1949 by Guru Dayal Sharma of Mathura, and famous for chandrakala: a crisp, syrup-soaked half-moon filled with khoa.",
+      "since": "1949",
+      "diet": "veg",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "poompuhar-thanjavur",
+      "name": "Poompuhar handicrafts showroom",
+      "type": "homeware",
+      "city": "thanjavur",
+      "lat": 10.7865,
+      "lng": 79.1385,
+      "area": "Gandhiji Road",
+      "address": "Gandhiji Road, Thanjavur 613001",
+      "h": [
+        [
+          10,
+          20
+        ]
+      ],
+      "hours": "About 10 am–8 pm",
+      "story": "The state's own crafts showroom: Thanjavur paintings in gold leaf, art plates, bronzes and the nodding Thanjavur dolls.",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "veena-makers-south-main-street",
+      "name": "Veena makers of South Main Street",
+      "type": "homeware",
+      "city": "thanjavur",
+      "lat": 10.7862,
+      "lng": 79.1392,
+      "area": "South Main Street",
+      "address": "South Main Street, Thanjavur 613009",
+      "h": [
+        [
+          10,
+          18
+        ]
+      ],
+      "hours": "Workshops, about 10 am–6 pm",
+      "story": "Family workshops that carve the Thanjavur veena from a single block of jackwood, a craft with its own GI tag.",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "svatma-thanjavur",
+      "name": "Svatma, Thanjavur",
+      "type": "stay",
+      "city": "thanjavur",
+      "lat": 10.7765,
+      "lng": 79.1478,
+      "area": "Maharnonbu Chavadi",
+      "address": "4/1116 Blake Higher Secondary School Road, Maharnonbu Chavadi, Thanjavur 613001",
+      "h": [
+        [
+          0,
+          24
+        ]
+      ],
+      "hours": "Hotel · 24-hour reception",
+      "story": "A heritage hotel in a restored old mansion, with vegetarian Thanjavur food and evenings of music and dance.",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "adi-kumbeswarar-temple",
+      "name": "Adi Kumbeswarar Temple",
+      "type": "temple",
+      "city": "kumbakonam",
+      "lat": 10.9585,
+      "lng": 79.3716,
+      "area": "Kumbakonam town centre",
+      "address": "Thanjavur Main Road, Kumbakonam 612001",
+      "h": [
+        [
+          6,
+          12.5
+        ],
+        [
+          16,
+          21
+        ]
+      ],
+      "hours": "About 6 am–12:30 pm and 4–9 pm",
+      "story": "The Shiva temple that gives Kumbakonam its name: the lingam is said to be shaped from the pot of nectar that came to rest here.",
+      "short": "Kumbeswarar",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "sarangapani-temple",
+      "name": "Sarangapani Temple",
+      "type": "temple",
+      "city": "kumbakonam",
+      "lat": 10.9595,
+      "lng": 79.3752,
+      "area": "Kumbakonam town centre",
+      "address": "Sarangapani Sannadhi Street, Kumbakonam 612001",
+      "h": [
+        [
+          7,
+          12
+        ],
+        [
+          16.5,
+          21
+        ]
+      ],
+      "hours": "About 7 am–12 pm and 4:30–9 pm",
+      "story": "One of the 108 Divya Desams, with a towering gateway and a sanctum built as a stone chariot drawn by horses and elephants.",
+      "short": "Sarangapani",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "mahamaham-tank",
+      "name": "Mahamaham Tank",
+      "type": "heritage",
+      "city": "kumbakonam",
+      "lat": 10.9555,
+      "lng": 79.3817,
+      "area": "Kumbakonam",
+      "address": "Mahamaham Tank, Kumbakonam 612001",
+      "h": [
+        [
+          5,
+          21
+        ]
+      ],
+      "hours": "Open tank · about 5 am–9 pm",
+      "story": "A six-acre temple tank ringed by sixteen small pavilions. Once every twelve years, lakhs of pilgrims bathe here for the Mahamaham festival; the next is due in 2028.",
+      "short": "Mahamaham",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "airavatesvara-temple-darasuram",
+      "name": "Airavatesvara Temple, Darasuram",
+      "type": "temple",
+      "city": "kumbakonam",
+      "lat": 10.9484,
+      "lng": 79.3565,
+      "area": "Darasuram, 4 km west",
+      "address": "Darasuram, Kumbakonam 612702",
+      "h": [
+        [
+          6.5,
+          12.5
+        ],
+        [
+          16,
+          20
+        ]
+      ],
+      "hours": "About 6:30 am–12:30 pm and 4–8 pm",
+      "story": "A 12th-century Chola temple on UNESCO's list: a hall built as a chariot with stone wheels, friezes of dancers, and steps that ring like musical notes.",
+      "short": "Darasuram",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "swamimalai-murugan-temple",
+      "name": "Swamimalai Murugan Temple",
+      "type": "temple",
+      "city": "kumbakonam",
+      "lat": 10.957,
+      "lng": 79.3263,
+      "area": "Swamimalai, 8 km west",
+      "address": "Swamimalai, Thanjavur district 612302",
+      "h": [
+        [
+          5,
+          12
+        ],
+        [
+          16,
+          21
+        ]
+      ],
+      "hours": "About 5 am–12 pm and 4–9 pm",
+      "story": "One of Murugan's six abodes, on a small hill reached by sixty steps, one for each year of the Tamil cycle. Here the son taught his father the meaning of Om.",
+      "short": "Swamimalai",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "sri-mangalambika-vilas-kumbakonam",
+      "name": "Sri Mangalambika Vilas Coffee Hotel",
+      "type": "drink",
+      "city": "kumbakonam",
+      "lat": 10.9581,
+      "lng": 79.3722,
+      "area": "In the lane to Kumbeswarar temple",
+      "address": "Kumbeswarar Sannadhi, Kumbakonam 612001",
+      "h": [
+        [
+          6,
+          11
+        ],
+        [
+          16,
+          21
+        ]
+      ],
+      "hours": "Morning and evening",
+      "story": "A small vegetarian coffee hotel with a board that says \"Since 1914\", serving tiffin on plantain leaves and Kumbakonam degree coffee in brass tumblers.",
+      "since": "1914",
+      "diet": "veg",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "nachiarkoil-brass-lamps",
+      "name": "Nachiarkoil brass lamp makers",
+      "type": "homeware",
+      "city": "kumbakonam",
+      "lat": 10.917,
+      "lng": 79.444,
+      "area": "Nachiarkoil, 10 km south-east",
+      "address": "Nachiarkoil, Thanjavur district 612602",
+      "h": [
+        [
+          9,
+          18
+        ]
+      ],
+      "hours": "Workshops, about 9 am–6 pm",
+      "story": "The village that casts the tall brass kuthuvilakku lamps lit in Tamil homes and temples, a craft with a GI tag.",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "thirubuvanam-silk",
+      "name": "Thirubuvanam silk weavers' society",
+      "type": "dress",
+      "city": "kumbakonam",
+      "lat": 10.987,
+      "lng": 79.433,
+      "area": "Thirubuvanam, 8 km north-east",
+      "address": "Thirubuvanam, Thanjavur district 612103",
+      "h": [
+        [
+          9,
+          20
+        ]
+      ],
+      "hours": "About 9 am–8 pm",
+      "story": "Heavy, bright silk sarees woven in Thirubuvanam and sold through the weavers' own co-operative.",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "mantra-koodam-veppathur",
+      "name": "Mantra Koodam",
+      "type": "stay",
+      "city": "kumbakonam",
+      "lat": 11.013,
+      "lng": 79.413,
+      "area": "Veppathur, 10 km north-east",
+      "address": "Veppathur, Thanjavur district 612103",
+      "h": [
+        [
+          0,
+          24
+        ]
+      ],
+      "hours": "Resort · 24-hour reception",
+      "story": "Cottages built like the houses of a Tamil agraharam, among paddy fields by the Kaveri, a short drive from the temples.",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "our-lady-of-snows-basilica",
+      "name": "Basilica of Our Lady of Snows",
+      "type": "heritage",
+      "city": "thoothukudi",
+      "lat": 8.8003,
+      "lng": 78.1583,
+      "area": "Beach Road",
+      "address": "Beach Road, Thoothukudi 628001",
+      "h": [
+        [
+          5.5,
+          20
+        ]
+      ],
+      "hours": "About 5:30 am–8 pm · Mass at 5:30 am, 6:30 am and 5:30 pm",
+      "story": "A church founded by the Portuguese, with the present building dating from 1713. Its feast on 5 August fills the town, and in special years a golden car is drawn through the streets.",
+      "short": "Our Lady of Snows",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "tiruchendur-murugan-temple",
+      "name": "Tiruchendur Murugan Temple",
+      "type": "temple",
+      "city": "thoothukudi",
+      "lat": 8.496,
+      "lng": 78.129,
+      "area": "Tiruchendur, 40 km south",
+      "address": "Tiruchendur, Thoothukudi district 628215",
+      "h": [
+        [
+          5,
+          21
+        ]
+      ],
+      "hours": "About 5 am–9 pm",
+      "story": "The only one of Murugan's six abodes on the seashore. Waves break below the temple walls, and on Skanda Sashti the god's victory is acted out on the sand.",
+      "short": "Tiruchendur",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "manapad-holy-cross-church",
+      "name": "Manapad: Holy Cross Church and St Xavier's cave",
+      "type": "heritage",
+      "city": "thoothukudi",
+      "lat": 8.3775,
+      "lng": 78.059,
+      "area": "Manapad, 60 km south",
+      "address": "Manapad, Thoothukudi district 628209",
+      "h": [
+        [
+          6,
+          19
+        ]
+      ],
+      "hours": "About 6 am–7 pm",
+      "story": "A fishing village on a headland, with a 16th-century church on the cliff and the cave where St Francis Xavier lived in 1542.",
+      "short": "Manapad",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "kulasekarapattinam-mutharamman-temple",
+      "name": "Mutharamman Temple, Kulasekarapattinam",
+      "type": "temple",
+      "city": "thoothukudi",
+      "lat": 8.4,
+      "lng": 78.056,
+      "area": "Kulasekarapattinam, 55 km south",
+      "address": "Kulasekarapattinam, Thoothukudi district 628206",
+      "h": [
+        [
+          6,
+          12.5
+        ],
+        [
+          16,
+          20.5
+        ]
+      ],
+      "hours": "About 6 am–12:30 pm and 4–8:30 pm",
+      "story": "A seaside goddess temple famous for its Dasara: for ten days, devotees dressed as gods and demons fill the village.",
+      "short": "Kulasekarapattinam",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "adichanallur-archaeological-site",
+      "name": "Adichanallur archaeological site",
+      "type": "heritage",
+      "city": "thoothukudi",
+      "lat": 8.629,
+      "lng": 77.876,
+      "area": "Adichanallur, 25 km west",
+      "address": "Adichanallur, Thoothukudi district 628151",
+      "h": [
+        [
+          10,
+          17
+        ]
+      ],
+      "hours": "About 10 am–5 pm",
+      "story": "An Iron Age burial ground on the Thamirabarani, dug since the 1870s: hundreds of urns with bronze, iron and gold, now shown where they were found.",
+      "short": "Adichanallur",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "bharathi-memorial-ettayapuram",
+      "name": "Bharathiyar's house, Ettayapuram",
+      "type": "heritage",
+      "city": "thoothukudi",
+      "lat": 9.148,
+      "lng": 77.993,
+      "area": "Ettayapuram, 45 km north",
+      "address": "Ettayapuram, Thoothukudi district 628902",
+      "h": [
+        [
+          9.5,
+          17.5
+        ]
+      ],
+      "hours": "About 9:30 am–5:30 pm",
+      "story": "The birthplace of the poet Subramania Bharati, born here in 1882, kept as a memorial with his manuscripts and photographs.",
+      "short": "Ettayapuram",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "ganesh-bakery-thoothukudi",
+      "name": "Ganesh Bakery",
+      "type": "sweet",
+      "city": "thoothukudi",
+      "lat": 8.805,
+      "lng": 78.145,
+      "area": "VOC Road",
+      "address": "VOC Road, Thoothukudi 628002",
+      "h": [
+        [
+          9,
+          21
+        ]
+      ],
+      "hours": "About 9 am–9 pm",
+      "story": "The best-known place for the Thoothukudi macaroon: a crisp cone of cashew and egg white, a recipe that came with the Portuguese.",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "roche-park-beach-thoothukudi",
+      "name": "Roche Park and the beach road",
+      "type": "nature",
+      "city": "thoothukudi",
+      "lat": 8.789,
+      "lng": 78.162,
+      "area": "Beach Road",
+      "address": "South Beach Road, Thoothukudi 628001",
+      "h": [
+        [
+          9,
+          18
+        ]
+      ],
+      "hours": "About 9 am–6 pm",
+      "story": "A seafront park on the bay, with the harbour, the salt pans and the fishing boats of the pearl city close by.",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "kapaleeshwarar-temple-mylapore",
+      "name": "Kapaleeshwarar Temple, Mylapore",
+      "type": "temple",
+      "city": "chennai",
+      "lat": 13.0337,
+      "lng": 80.2698,
+      "area": "Mylapore",
+      "address": "Kapaleeswarar Sannadhi Street, Mylapore, Chennai 600004",
+      "h": [
+        [
+          5,
+          12
+        ],
+        [
+          16,
+          21
+        ]
+      ],
+      "hours": "About 5 am–12 pm and 4–9 pm",
+      "story": "The Shiva temple at the heart of old Mylapore, with a painted gopuram over the tank. In Panguni the sixty-three saints are carried round the streets.",
+      "short": "Kapaleeshwarar",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "parthasarathy-temple-triplicane",
+      "name": "Parthasarathy Temple, Triplicane",
+      "type": "temple",
+      "city": "chennai",
+      "lat": 13.0539,
+      "lng": 80.277,
+      "area": "Triplicane",
+      "address": "Triplicane, Chennai 600005",
+      "h": [
+        [
+          6,
+          12
+        ],
+        [
+          16,
+          21
+        ]
+      ],
+      "hours": "About 6 am–12 pm and 4–9 pm",
+      "story": "An 8th-century Pallava temple and one of the 108 Divya Desams, where Krishna stands as Arjuna's charioteer, with a moustache.",
+      "short": "Parthasarathy",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "fort-st-george-museum",
+      "name": "Fort St George and the Fort Museum",
+      "type": "heritage",
+      "city": "chennai",
+      "lat": 13.0797,
+      "lng": 80.2875,
+      "area": "George Town",
+      "address": "Rajaji Salai, Chennai 600009",
+      "h": [
+        [
+          9,
+          17
+        ]
+      ],
+      "hours": "About 9 am–5 pm · museum closed on Fridays",
+      "story": "The East India Company's first fort in India, begun in 1644 and the seed of the city. Inside are the Fort Museum and St Mary's, consecrated in 1680.",
+      "short": "Fort St George",
+      "days": {
+        "5": []
+      },
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "government-museum-egmore",
+      "name": "Government Museum, Egmore",
+      "type": "heritage",
+      "city": "chennai",
+      "lat": 13.0705,
+      "lng": 80.257,
+      "area": "Egmore",
+      "address": "Pantheon Road, Egmore, Chennai 600008",
+      "h": [
+        [
+          9.5,
+          17
+        ]
+      ],
+      "hours": "About 9:30 am–5 pm · closed on Fridays",
+      "story": "Founded in 1851, with one of the world's great collections of Chola bronzes and the Amaravati sculptures, in red-brick Indo-Saracenic halls.",
+      "short": "Egmore Museum",
+      "days": {
+        "5": []
+      },
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "san-thome-basilica",
+      "name": "San Thome Basilica",
+      "type": "heritage",
+      "city": "chennai",
+      "lat": 13.0335,
+      "lng": 80.2778,
+      "area": "Santhome",
+      "address": "38 Santhome High Road, Chennai 600004",
+      "h": [
+        [
+          6,
+          20
+        ]
+      ],
+      "hours": "About 6 am–8 pm",
+      "story": "A white neo-Gothic church of 1896 built over the tomb of St Thomas the Apostle, a short walk from the sea.",
+      "short": "San Thome",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "marina-beach",
+      "name": "Marina Beach",
+      "type": "nature",
+      "city": "chennai",
+      "lat": 13.05,
+      "lng": 80.2824,
+      "area": "Kamarajar Salai",
+      "address": "Kamarajar Salai, Chennai 600005",
+      "h": [
+        [
+          5,
+          22
+        ]
+      ],
+      "hours": "Best at dawn and after 5 pm",
+      "story": "Kilometres of sand along the Bay of Bengal, with the lighthouse, statues and evening stalls selling sundal and bajji.",
+      "short": "Marina",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "ratna-cafe-triplicane",
+      "name": "Ratna Cafe",
+      "type": "meal",
+      "city": "chennai",
+      "lat": 13.0565,
+      "lng": 80.2745,
+      "area": "Triplicane High Road",
+      "address": "255 Triplicane High Road, Chennai 600005",
+      "h": [
+        [
+          7,
+          22.5
+        ]
+      ],
+      "hours": "About 7 am–10:30 pm",
+      "story": "Since 1948: idlis that arrive swimming in sambar, poured from a jug until you say stop.",
+      "since": "1948",
+      "diet": "veg",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "rayars-mess-mylapore",
+      "name": "Rayar's Mess",
+      "type": "meal",
+      "city": "chennai",
+      "lat": 13.0355,
+      "lng": 80.27,
+      "area": "Mylapore",
+      "address": "31 Arundale Street, Mylapore, Chennai 600004",
+      "h": [
+        [
+          7,
+          10
+        ],
+        [
+          15,
+          20
+        ]
+      ],
+      "hours": "Breakfast about 7–10 am; evenings 3–8 pm",
+      "story": "A tiny Mylapore mess in a back lane, loved for soft idli, pongal and vadai with ghee. Go early: it sells out.",
+      "diet": "veg",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "nalli-silks-t-nagar",
+      "name": "Nalli Silks, T. Nagar",
+      "type": "dress",
+      "city": "chennai",
+      "lat": 13.0405,
+      "lng": 80.2335,
+      "area": "Panagal Park, T. Nagar",
+      "address": "9 Nageswaran Road, T. Nagar, Chennai 600017",
+      "h": [
+        [
+          9.5,
+          21
+        ]
+      ],
+      "hours": "About 9:30 am–9 pm",
+      "story": "The Kanchipuram silk house that opened in T. Nagar in 1928 and still dresses the city's weddings.",
+      "since": "1928",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "higginbothams-anna-salai",
+      "name": "Higginbothams",
+      "type": "heritage",
+      "city": "chennai",
+      "lat": 13.064,
+      "lng": 80.268,
+      "area": "Anna Salai",
+      "address": "116 Anna Salai, Chennai 600002",
+      "h": [
+        [
+          9.5,
+          19.5
+        ]
+      ],
+      "hours": "About 9:30 am–7:30 pm",
+      "story": "India's oldest surviving bookshop, trading since 1844, in a white colonial building on Mount Road.",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    },
+    {
+      "id": "taj-connemara-chennai",
+      "name": "Taj Connemara",
+      "type": "stay",
+      "city": "chennai",
+      "lat": 13.062,
+      "lng": 80.264,
+      "area": "Binny Road, off Anna Salai",
+      "address": "Binny Road, Chennai 600002",
+      "h": [
+        [
+          0,
+          24
+        ]
+      ],
+      "hours": "Hotel · 24-hour reception",
+      "story": "Chennai's oldest hotel, which began in 1854, restored with its art deco and colonial rooms.",
+      "tips": [
+        "Hours and the map pin come from public listings and guides, which differ. Please confirm before you go."
+      ]
+    }
+  ],
+  "cities": [
+    {
+      "id": "trichy",
+      "name": "Trichy",
+      "ta": "திருச்சி",
+      "district": "tiruchirappalli",
+      "lat": 10.828,
+      "lng": 78.697,
+      "line": "The rock fort, the island temple of Srirangam and a 2,000-year-old dam"
+    },
+    {
+      "id": "thanjavur",
+      "name": "Thanjavur",
+      "ta": "தஞ்சாவூர்",
+      "district": "thanjavur",
+      "lat": 10.787,
+      "lng": 79.138,
+      "line": "The Chola capital: the Big Temple, the palace library, veenas and chandrakala"
+    },
+    {
+      "id": "kumbakonam",
+      "name": "Kumbakonam",
+      "ta": "கும்பகோணம்",
+      "district": "thanjavur",
+      "lat": 10.959,
+      "lng": 79.377,
+      "line": "Temple town of the Kaveri delta, degree coffee and brass lamps"
+    },
+    {
+      "id": "thoothukudi",
+      "name": "Thoothukudi",
+      "ta": "தூத்துக்குடி",
+      "district": "thoothukudi",
+      "lat": 8.8,
+      "lng": 78.15,
+      "line": "The pearl city: Murugan's seashore abode, old churches and macaroons"
+    },
+    {
+      "id": "chennai",
+      "name": "Chennai",
+      "ta": "சென்னை",
+      "district": "chennai",
+      "lat": 13.06,
+      "lng": 80.27,
+      "line": "Mylapore and Triplicane, the fort, the museum and the Marina"
     }
   ]
 }
