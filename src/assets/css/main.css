@@ -723,6 +723,7 @@ section[id] { scroll-margin-top: 84px; }
 .lw-status { font: 600 clamp(30px, 4vw, 40px)/1.1 var(--font-display); color: var(--lv); }
 .lw-book { display: flex; flex-direction: column; gap: 10px; border-top: 1px dashed var(--line); padding-top: 12px; margin-top: 4px; }
 .lw-book--yes { border: 1px solid var(--leaf); border-radius: var(--radius-lg); padding: 12px; }
+.lw-msg { margin: 0; padding: 10px 12px; border-radius: var(--radius-lg); background: color-mix(in srgb, var(--leaf) 10%, var(--bg)); border: 1px solid var(--line); font: 14px/1.45 var(--font-text); white-space: pre-wrap; overflow-wrap: anywhere; }
 .lw-code { font: 600 34px/1 var(--font-display); letter-spacing: 0.04em; font-variant-numeric: tabular-nums; }
 .lw-taps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .lw-tap { min-height: 64px; padding: 8px; border: 2px solid var(--line-strong); border-radius: var(--radius-lg); background: var(--bg); color: var(--ink); font: 700 15px/1.2 var(--font-text); cursor: pointer; }

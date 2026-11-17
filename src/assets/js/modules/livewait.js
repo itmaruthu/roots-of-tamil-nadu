@@ -14,6 +14,13 @@ const STATUS = {
   full: { name: 'House full', line: '40 min or more for a table', minutes: 45, level: 'long' }
 };
 const ORDER = ['free', 'filling', 'full'];
+// Where a table request is sent. One demo number stands in for every owner until the pilot;
+// after that each eatery carries its own number as "wa" in places.json.
+const DEMO_OWNER = '916380465605';
+const ownerPhone = (p) => p.wa || DEMO_OWNER;
+const showPhone = (n) => n.replace(/^91(\d{5})(\d{5})$/, '$1 $2');
+const requestText = (p, b, ref) => [`Roots of Tamil Nadu: table request for ${p.name}`, `Family of ${b.people}, today at ${formatHour(b.at)}`,
+  'Please reply YES to hold the table, NO if you are full, or send another time.', `Request ${ref}`].join('\n');
 const rush = (h) => (h >= 12.5 && h < 14.5) || (h >= 19.5 && h < 21.5);
 const nearRush = (h) => (h >= 12 && h < 15) || (h >= 19 && h < 22);
 const LEVEL = (m) => (m < 20 ? 'short' : m <= 45 ? 'mid' : 'long');
@@ -135,8 +142,13 @@ export function initLiveWait(ctx) {
     // A table for the family at a chosen time: a request the owner answers, never an automatic promise.
     const b = q.book;
     if (b && b.state === 'asked') {
+      const text = encodeURIComponent(requestText(p, b, code(p, b.at))), phone = ownerPhone(p);
       out.push(el('div', { class: 'lw-book' }, el('p', { class: 'lw-ask' }, `Asked: table for ${b.people} at ${formatHour(b.at)}`),
-        el('p', { class: 'note' }, 'Waiting for the owner to say yes. Answer it on the owner\'s phone.'),
+        el('p', { class: 'note' }, `Your request opened in WhatsApp, addressed to the owner on ${showPhone(phone)}. Press send there. The owner answers in the same chat.`),
+        el('div', { class: 'chips' },
+          el('a', { class: 'chip', href: `https://wa.me/${phone}?text=${text}`, target: '_blank', rel: 'noopener noreferrer' }, 'Open WhatsApp again'),
+          el('a', { class: 'chip', href: `sms:+${phone}?body=${text}` }, 'Send as SMS'),
+          el('a', { class: 'chip', href: `tel:+${phone}` }, 'Call the owner')),
         el('button', { class: 'btn btn--ghost btn--sm', type: 'button', on: { click: () => { q.book = null; update(); } } }, 'Cancel the request')));
     } else if (b && b.state === 'yes') {
       out.push(el('div', { class: 'lw-book lw-book--yes' }, el('p', { class: 'lw-ask' }, `Confirmed: table for ${b.people} at ${formatHour(b.at)}`),
@@ -151,12 +163,16 @@ export function initLiveWait(ctx) {
       if (!times.length) out.push(el('p', { class: 'note' }, 'Too close to closing time to hold a table today.'));
       else {
         if (!times.includes(q.slot)) q.slot = times[0];
-        const people = el('select', { class: 'select', id: 'lw-people', 'aria-label': 'People', on: { change: (e) => { q.people = Number(e.target.value); } } },
+        const people = el('select', { class: 'select', id: 'lw-people', 'aria-label': 'People', on: { change: (e) => { q.people = Number(e.target.value); update(); } } },
           ...Array.from({ length: 19 }, (_, n) => el('option', { value: String(n + 2), selected: q.people === n + 2 }, `${n + 2} people`)));
         out.push(el('div', { class: 'lw-book' }, el('p', { class: 'lw-ask' }, 'Coming with family? Ask for a table'), people,
           el('div', { class: 'chips', role: 'group', 'aria-label': 'Time' }, ...times.map((h) => el('button', { type: 'button', class: 'chip', 'aria-pressed': String(q.slot === h),
             on: { click: () => { q.slot = h; update(); } } }, formatHour(h)))),
-          el('button', { class: 'btn lw-main', type: 'button', id: 'lw-ask-table', on: { click: () => { q.book = { people: q.people, at: q.slot, state: 'asked' }; update(); } } }, 'Ask for this table')));
+          // The request leaves this page as a WhatsApp message to the owner's own phone: no server and no app in between.
+          el('a', { class: 'btn lw-main', id: 'lw-ask-table', target: '_blank', rel: 'noopener noreferrer',
+            href: `https://wa.me/${ownerPhone(p)}?text=${encodeURIComponent(requestText(p, { people: q.people, at: q.slot }, code(p, q.slot)))}`,
+            on: { click: () => { const book = { people: q.people, at: q.slot, state: 'asked' }; setTimeout(() => { q.book = book; update(); }, 0); } } }, 'Ask the owner on WhatsApp'),
+          el('p', { class: 'note' }, `Goes to the owner's WhatsApp on ${showPhone(ownerPhone(p))}.`)));
       }
     }
     return out;
@@ -169,15 +185,16 @@ export function initLiveWait(ctx) {
         'aria-pressed': String(open && key === k), disabled: !open, on: { click: () => { q.manual = { status: k, hour: Math.floor(hour) }; update(); } } }, STATUS[k].name)))];
     if (b && b.state === 'asked') {
       const next = slots(p, b.at).find((h) => h > b.at && !rush(h)) ?? null;
-      out.push(el('div', { class: 'lw-book' }, el('p', { class: 'lw-label2' }, 'Table request'),
+      out.push(el('div', { class: 'lw-book' }, el('p', { class: 'lw-label2' }, `Table request · arrives on WhatsApp, ${showPhone(ownerPhone(p))}`),
+        el('pre', { class: 'lw-msg' }, requestText(p, b, code(p, b.at))),
         el('p', { class: 'lw-ask' }, `Family of ${b.people} at ${formatHour(b.at)}`),
         el('button', { class: 'btn btn--sm', type: 'button', id: 'lw-yes', on: { click: () => { b.state = 'yes'; update(); } } }, 'Yes, hold the table'),
         next === null ? '' : el('button', { class: 'btn btn--ghost btn--sm', type: 'button', id: 'lw-offer', on: { click: () => { b.state = 'offer'; b.offer = next; update(); } } }, `Offer ${formatHour(next)} instead`),
         el('button', { class: 'btn btn--ghost btn--sm', type: 'button', id: 'lw-no', on: { click: () => { b.state = 'no'; update(); } } }, 'Sorry, full')));
     } else if (b && b.state === 'yes') {
       out.push(el('div', { class: 'lw-book lw-book--yes' }, el('p', { class: 'lw-label2' }, 'Tables held today'), el('p', { class: 'lw-ask' }, `${formatHour(b.at)} · family of ${b.people} · ${code(p, b.at)}`)));
-    } else out.push(el('p', { class: 'note' }, 'No table requests yet. Ask for one on the guest\'s phone.'));
-    out.push(el('p', { class: 'note' }, 'No app to install. An owner who prefers WhatsApp replies 1, 2 or 3 to set the crowd, and YES or NO to a table request.'));
+    } else out.push(el('p', { class: 'note' }, `No table requests yet. They arrive as a WhatsApp message on ${showPhone(ownerPhone(p))}.`));
+    out.push(el('p', { class: 'note' }, 'No new app: the owner answers in WhatsApp with YES, NO or another time. The buttons above show the same answers for this demo.'));
     return out;
   }
 
