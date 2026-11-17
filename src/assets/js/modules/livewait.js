@@ -42,7 +42,8 @@ export function initLiveWait(ctx) {
   let temple = temples.find((p) => p.id === MEENAKSHI_ID) || temples[0];
   const tName = (p) => p.short || p.name;
   const shops = TOKEN_SHOPS.map((id) => ctx.places.find((p) => p.id === id)).filter(Boolean);
-  const queues = Object.fromEntries(shops.map((p, i) => [p.id, { serving: 30 + i * 7, issued: 36 + i * 9, mine: null, party: 0, walkIn: null }]));
+  const fresh = (i) => ({ serving: 30 + i * 7, issued: 36 + i * 9, mine: null, party: 0, walkIn: null, paused: false });
+  const queues = Object.fromEntries(shops.map((p, i) => [p.id, fresh(i)]));
   let shopId = shops[0].id;
   let timer = null, voice = false;
 
@@ -85,6 +86,9 @@ export function initLiveWait(ctx) {
   const select = $('#lw-shop');
   for (const p of shops) select.append(el('option', { value: p.id }, p.name));
   select.addEventListener('change', () => { shopId = select.value; stopSim(); update(); });
+  // What happens when a place floods: the line grows past what a token can honestly promise.
+  $('#lw-rush')?.addEventListener('click', () => { queues[shopId].issued += 14; update(); });
+  $('#lw-calm')?.addEventListener('click', () => { stopSim(); shops.forEach((p, i) => { queues[p.id] = fresh(i); }); update(); });
   const voiceBtn = $('#lw-voice');
   if (!('speechSynthesis' in window)) voiceBtn.hidden = true;
   voiceBtn.addEventListener('click', () => {
@@ -122,9 +126,25 @@ export function initLiveWait(ctx) {
           : el('p', { class: 'note' }, 'None of the token eateries is open at this hour. Move the clock above.')];
     }
     if (!q.mine) {
+      const mins = waiting(q) * per, level = LEVEL(mins);
+      const head = [el('p', { class: 'lw-count' }, el('b', {}, String(waiting(q))), ' parties waiting'),
+        el('p', { class: `lw-line lw-verdict lw-level--${level}` }, el('b', {}, LEVEL_NAME[level]), ` · about ${mins} min at ${p.name}`)];
+      if (level === 'long' || q.paused) {
+        // The honest answer to a flooded place: say so, then offer a quieter hour and a shorter line nearby.
+        const alts = shops.filter((o) => o.id !== p.id && isOpen(o, ctx.state.day, hour) && !queues[o.id].paused)
+          .map((o) => ({ o, m: waiting(queues[o.id]) * MIN_PER_PARTY[o.id], km: distanceKm(p, o) })).filter((x) => x.m < mins).sort((a, b) => a.m - b.m).slice(0, 2);
+        const later = quietHour(p, hour);
+        return [...head,
+          el('p', { class: 'lw-warn' }, q.paused ? 'The house is full, so the owner has paused new tokens. Nobody is kept waiting on a false promise.' : 'A long line right now. You do not have to stand in it:'),
+          later === null ? '' : el('p', { class: 'lw-line' }, el('b', {}, 'Go later: '), `it usually eases around ${formatHour(later)}.`),
+          alts.length ? el('p', { class: 'lw-ask' }, 'Go nearby, shorter line now:') : '',
+          alts.length ? el('ul', { class: 'lw-quiet-list' }, ...alts.map(({ o, m, km }) => el('li', {}, el('button', { type: 'button', class: 'lw-quiet-btn',
+            on: { click: () => { shopId = o.id; select.value = o.id; stopSim(); update(); } } }, el('b', {}, o.short || o.name),
+            el('span', { class: `lw-level--${LEVEL(m)}` }, `~${m} min`), el('small', {}, `${formatKm(km)} away`))))) : '',
+          q.paused ? '' : el('button', { class: 'btn btn--ghost lw-main', type: 'button', id: 'lw-take', on: { click: () => { q.issued += 1; q.mine = q.issued; startSim(); update(); } } }, `Wait here anyway: take a token`)];
+      }
       return [
-        el('p', { class: 'lw-count' }, el('b', {}, String(waiting(q))), ' parties waiting'),
-        el('p', { class: 'lw-line' }, `About ${waiting(q) * per} min at ${p.name}`),
+        ...head,
         el('p', { class: 'lw-ask' }, 'How many are you?'),
         el('div', { class: 'chips', role: 'group', 'aria-label': 'Party size' }, ...PARTY.map((label, i) => el('button', { type: 'button', class: 'chip', 'aria-pressed': String(q.party === i),
           on: { click: () => { q.party = i; update(); } } }, label))),
@@ -149,6 +169,13 @@ export function initLiveWait(ctx) {
       el('button', { class: 'btn btn--ghost btn--sm', type: 'button', on: { click: () => { q.mine = null; stopSim(); update(); } } }, 'Leave the queue')];
   }
 
+  // The next hour today, within opening hours, outside the lunch and dinner rush. Illustrative, like the darshan pattern.
+  function quietHour(p, hour) {
+    const rush = (h) => (h >= 12.5 && h < 14.5) || (h >= 19.5 && h < 21.5);
+    for (let h = Math.ceil(hour * 2) / 2 + 0.5; h < 24; h += 0.5) if (!rush(h) && isOpen(p, ctx.state.day, h) && (rush(hour) || h >= hour + 1.5)) return h;
+    return null;
+  }
+
   function vendorView(q, open) {
     return [
       el('p', { class: 'lw-label2' }, 'Now serving'),
@@ -156,6 +183,7 @@ export function initLiveWait(ctx) {
       el('p', { class: 'lw-line' }, el('b', {}, `${waiting(q)} waiting`), q.mine && q.serving < q.mine ? ` · the guest holds ${q.mine}` : ''),
       el('button', { class: 'btn lw-main', type: 'button', id: 'lw-next', disabled: !open || waiting(q) === 0, on: { click: advance } }, 'Call next'),
       el('button', { class: 'btn btn--ghost btn--sm', type: 'button', id: 'lw-walkin', disabled: !open, on: { click: () => { q.issued += 1; q.walkIn = q.issued; update(); } } }, 'Add a walk-in'),
+      el('button', { class: 'btn btn--ghost btn--sm', type: 'button', id: 'lw-pause', 'aria-pressed': String(q.paused), disabled: !open, on: { click: () => { q.paused = !q.paused; update(); } } }, q.paused ? 'Resume tokens' : 'House full: pause tokens'),
       el('p', { class: 'note' }, q.walkIn ? `Paper token ${q.walkIn} given at the counter. It joins the same line.` : 'One button runs the queue. Walk-ins without a phone get a paper token.')
     ];
   }
