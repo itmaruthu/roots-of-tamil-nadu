@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en-IN" data-langs="en ta" data-sprite="{{base}}assets/img/icons.svg">
+<head>
+{{head}}
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+{{header}}
+
+<main id="main" class="nb-page">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="{{base}}index.html">Roots of Tamil Nadu</a> › <span aria-current="page">Ooru Nanbar</span></nav>
+
+    <header class="join-hero">
+      <div>
+        <p class="eyebrow" data-ta="Roots-இன் இதயம்">The heart of Roots</p>
+        <h1><span lang="ta">ஊர் நண்பர்</span> Ooru Nanbar</h1>
+        <p class="lead" data-ta="உங்கள் சொந்த ஊரிலேயே ஒரு நண்பர். கோயிலையும் பழைய தெருக்களையும் பெரியவர்களையும் அறிந்தவர்; உங்கள் குடும்பம் விட்டுச் சென்றதைக் கண்டுபிடித்து, நீங்கள் ஊருக்கு வரும்போது வரவேற்பவர்.">A friend in your own village. Someone who knows the temple, the old streets and the elders, who finds what your family left behind and welcomes you when you come home.</p>
+        <div class="chips">
+          <a class="btn" href="#report" data-ta="என் ஊரைக் கண்டுபிடி">Find my village</a>
+          <a class="btn btn--ghost" href="{{base}}join.html?type=ooru-nanbar" data-ta="ஊர் நண்பர் ஆகுங்கள்">Become an Ooru Nanbar</a>
+        </div>
+        <p class="note" data-ta="Roots இப்போது ஒரு முன்மாதிரி. ஊர் நண்பர் வலையமைப்பு மதுரை முன்னோட்டத் திட்டத்தில் தொடங்கும்; அது எப்படிச் செயல்படும் என்பதை இந்தப் பக்கம் காட்டுகிறது.">Roots is a prototype. The Ooru Nanbar network begins with the Madurai pilot, and this page shows how it will work.</p>
+      </div>
+      <ul class="nb-does">
+        <li><b data-ta="நீங்கள் வருவதற்கு முன்">Before you come</b><span data-ta="உங்கள் ஊரையும் குலதெய்வக் கோயிலையும் பழைய வீட்டையும் கண்டுபிடித்து, புகைப்படங்களையும் ஒரு பெரியவரின் குரலையும் அனுப்புவார்.">Finds your village, the family temple and the old house, and sends you photos and an elder's voice.</span></li>
+        <li><b data-ta="நீங்கள் வரும்போது">When you come</b><span data-ta="ஊரில் உங்களைச் சந்தித்து, பொங்கல் அல்லது அபிஷேகத்தை ஏற்பாடு செய்து, பெரியவர்களை அறிமுகப்படுத்தி, நாள் முழுவதும் உடன் இருப்பார்.">Meets you in the village, arranges the pongal or abhishekam, introduces the elders and stays with you for the day.</span></li>
+        <li><b data-ta="வருகைகளுக்கு இடையில்">Between visits</b><span data-ta="உங்கள் பெயரில் பூஜை செய்து வீடியோ அனுப்புவார்; வயதான உறவினர்களைப் பார்த்துக்கொள்வார்; பழைய வீட்டைக் கவனிப்பார்.">Offers a pooja in your name with a video, looks in on elderly relatives and keeps an eye on the old house.</span></li>
+      </ul>
+    </header>
+
+    <section id="report" aria-labelledby="report-title">
+      <div class="section-head">
+        <p class="eyebrow" data-ta="பயணத்துக்கு முன்">Before any trip</p>
+        <h2 id="report-title" data-ta="உங்கள் ஊரைக் கண்டுபிடித்தோம்">We found your village</h2>
+        <p class="lead" data-ta="பல குடும்பங்களுக்குத் தெரிந்தது ஊரின் பெயரும் தாத்தாவின் பெயரும் மட்டுமே. உங்களுக்கு நினைவில் உள்ளதைச் சொல்லுங்கள். ஓர் ஊர் நண்பர் அங்கே சென்று கண்டதை அனுப்புவார்; நீங்கள் பயணம் செய்தாலும் செய்யாவிட்டாலும்.">Many families know only a village name and a grandfather's name. Tell us what you remember. An Ooru Nanbar goes there and sends back what they find, whether or not you ever travel.</p>
+      </div>
+      <div class="join-grid">
+        <form class="panel join-form" id="nb-form" autocomplete="on">
+          <div class="join-fields">
+            <div class="field"><label for="nb-district" data-ta="சொந்த மாவட்டம்">Native district</label>
+              <div class="combo"><input id="nb-district" name="district" required maxlength="40" placeholder="Type or choose a district" data-ta-ph="மாவட்டத்தை எழுதுங்கள் அல்லது தேர்வு செய்யுங்கள்"></div></div>
+            <div class="field"><label for="nb-taluk" data-ta="வட்டம் (தாலுகா)">Taluk</label>
+              <div class="combo"><input id="nb-taluk" name="taluk" maxlength="60" disabled></div></div>
+            <div class="field"><label for="nb-village" data-ta="ஊர் / கிராமம்">Village or town</label>
+              <div class="combo"><input id="nb-village" name="village" required maxlength="80" disabled></div></div>
+            <label class="field" for="nb-family"><span data-ta="குடும்பப் பெயர்">Family name</span><input id="nb-family" name="family" required maxlength="60" autocomplete="family-name"></label>
+            <label class="field" for="nb-elder"><span data-ta="தாத்தா, பாட்டி அல்லது பெரியவரின் பெயர்">Grandparent's or elder's name</span><input id="nb-elder" name="elder" maxlength="60"></label>
+            <label class="field" for="nb-temple"><span data-ta="குலதெய்வம்">Kuladeivam (family temple)</span><input id="nb-temple" name="temple" maxlength="80" placeholder="e.g. Ayyanar, Karuppasamy, Mariamman" data-ta-ph="எ.கா. அய்யனார், கருப்பசாமி, மாரியம்மன்"></label>
+          </div>
+          <label class="field" for="nb-more"><span data-ta="நினைவில் உள்ள வேறு எதுவும்">Anything else you remember</span><textarea id="nb-more" name="more" rows="3" maxlength="400" placeholder="A street, a tank, a school, a relative's name…" data-ta-ph="ஒரு தெரு, குளம், பள்ளி, உறவினர் பெயர்…"></textarea></label>
+          <button class="btn" type="submit" data-ta="என் ஊர் அறிக்கையைக் கேள்">Ask for my village report</button>
+          <div class="nb-sent" id="nb-sent" hidden aria-live="polite"></div>
+        </form>
+        <aside class="join-side">
+          <div class="panel">
+            <h3 data-ta="அறிக்கையில் என்ன இருக்கும்">What the report holds</h3>
+            <ul class="tips">
+              <li data-ta="குலதெய்வக் கோயில், தெரு, பழைய வீடு (இன்னும் இருந்தால்) ஆகியவற்றின் புகைப்படங்கள்">Photos of the family temple, the street and the old house, if it still stands</li>
+              <li data-ta="குடும்பத்தை நினைவில் வைத்திருக்கும் ஒரு பெரியவரின் குரல் செய்தி">A voice note from an elder who remembers the family</li>
+              <li data-ta="வரைபடத்தில் சரியான இடம்">The exact spot on a map</li>
+              <li data-ta="கோயில் திருவிழா நாட்கள், வருவதற்கு ஏற்ற நாட்கள்">The temple's festival days, and the best dates to come</li>
+              <li data-ta="எதுவும் கிடைக்கவில்லை என்றால் அதை நேரடியாகச் சொல்வோம்">A plain answer if nothing could be found</li>
+            </ul>
+            <p class="note" data-ta="முன்னோட்டத் திட்டத்தில் சுமார் ₹999 எனத் திட்டமிடப்பட்டுள்ளது. இன்னும் விற்பனைக்கு இல்லை.">Planned for the pilot at about ₹999. Not on sale yet.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="checks" aria-labelledby="checks-title">
+      <div class="section-head">
+        <p class="eyebrow" data-ta="நம்பிக்கை">Trust</p>
+        <h2 id="checks-title" data-ta="ஊர் நண்பர் ஆவதற்கு முன் ஐந்து சரிபார்ப்புகள்">Five checks before anyone becomes an Ooru Nanbar</h2>
+      </div>
+      <ol class="join-steps nb-checks">
+        <li><b data-ta="அடையாளமும் முகவரியும்">Identity and address</b><span data-ta="அரசு புகைப்பட அடையாள அட்டை, ஊரில் வசிப்பதற்கான சான்று.">A government photo ID, and proof of living in the village.</span></li>
+        <li><b data-ta="ஒருவர் உறுதியளிக்கிறார்">Someone vouches</b><span data-ta="ஊராட்சித் தலைவர், கோயில் அறங்காவலர் அல்லது பள்ளித் தலைமையாசிரியர் தம் பெயரில் உறுதியளிப்பார்.">The panchayat president, the temple trustee or the school head puts their name to it.</span></li>
+        <li><b data-ta="காவல் சரிபார்ப்பு">Police verification</b><span data-ta="சரிபார்ப்புச் சான்றிதழ்; குறிப்பிட்ட காலத்துக்கு ஒருமுறை புதுப்பிக்கப்படும்.">A verification certificate, renewed regularly.</span></li>
+        <li><b data-ta="நேரில் சந்திப்பு">A visit in person</b><span data-ta="Roots ஒருங்கிணைப்பாளர் அவரை வீட்டில் சந்தித்து, ஊரை உடன் நடந்து பார்ப்பார்.">A Roots coordinator meets them at home and walks the village with them.</span></li>
+        <li><b data-ta="வங்கிப் பெயர் பொருத்தமும் பயிற்சியும்">Bank name match and training</b><span data-ta="பணம் அவர் பெயரிலுள்ள கணக்குக்கு மட்டுமே; வரவேற்பு, பாதுகாப்பு குறித்த சிறு தமிழ்ப் பயிற்சிக்குப் பிறகு.">Payment goes only to an account in their own name, after a short course in Tamil on welcome and safety.</span></li>
+      </ol>
+    </section>
+
+    <section id="safety" aria-labelledby="safety-title">
+      <div class="section-head">
+        <p class="eyebrow" data-ta="பாதுகாப்பும் பணமும்">Safety and money</p>
+        <h2 id="safety-title" data-ta="குடும்பத்துக்குப் பாதுகாப்பு, ஊருக்கு நியாயம்">Safe for the family, fair to the village</h2>
+      </div>
+      <ul class="aat-five nb-safe">
+        <li><h3 data-ta="பணம் Roots வழியாக; கையில் ரொக்கம் அல்ல">You pay Roots, not cash in hand</h3><p data-ta="நீங்கள் வருகையை உறுதி செய்த பின் ஊர் நண்பருக்கு UPI மூலம் பணம் செல்லும்.">The Ooru Nanbar is paid by UPI after you confirm the visit.</p></li>
+        <li><h3 data-ta="நீங்கள் எங்கே இருக்கிறீர்கள் என்பது ஒருவருக்கு எப்போதும் தெரியும்">Someone always knows where you are</h3><p data-ta="உங்கள் திட்டம் ஓர் உறவினருடன் பகிரப்படும்; நாள் முழுவதும் தகவல் தரப்படும்.">Your plan is shared with a relative, with check-ins through the day.</p></li>
+        <li><h3 data-ta="உங்கள் சாதியை நாங்கள் கேட்பதில்லை">We never ask your caste</h3><p data-ta="நீங்கள் ஊரையும் கோயிலையும் சொல்கிறீர்கள். பொருத்தம் இடத்தைப் பொறுத்தது.">You name your village and your temple. The match follows the place.</p></li>
+        <li><h3 data-ta="ஆங்கிலம் பேசும் ஒருங்கிணைப்பாளர்">A coordinator who speaks English</h3><p data-ta="ஒவ்வொரு மாவட்டத்திலும் பயிற்சி பெற்ற Roots ஒருங்கிணைப்பாளர் சுமார் இருபது ஊர்களைக் கவனித்து, குழந்தைகளுக்கு மொழிபெயர்ப்பார்.">Each district has a trained Roots coordinator who looks after about twenty villages and translates for the children.</p></li>
+      </ul>
+    </section>
+
+    <section id="earn" aria-labelledby="earn-title">
+      <div class="section-head">
+        <p class="eyebrow" data-ta="ஊர் மக்களுக்கு">For villagers</p>
+        <h2 id="earn-title" data-ta="ஊர் நண்பர் எவ்வளவு சம்பாதிக்கலாம்">What an Ooru Nanbar can earn</h2>
+        <p class="lead" data-ta="இது உங்கள் சொந்த வேலையுடன் கூடுதல் வருமானம்; முழுநேர வேலை அல்ல. ஓர் ஆண்டைப் பார்க்க அளவுகளை நகர்த்துங்கள்.">It is extra income beside your own work, not a full-time job. Move the sliders to see a year.</p>
+      </div>
+      <div class="join-grid">
+        <div class="panel nb-calc">
+          <label class="field" for="nb-visits"><span data-ta="ஓர் ஆண்டில் வரவேற்ற குடும்பங்கள்">Families welcomed in a year</span><input id="nb-visits" type="range" min="0" max="24" step="1" value="6"><output id="nb-visits-out" for="nb-visits"></output></label>
+          <label class="field" for="nb-reports"><span data-ta="ஓர் ஆண்டில் ஊர் அறிக்கைகள்">Village reports in a year</span><input id="nb-reports" type="range" min="0" max="40" step="1" value="10"><output id="nb-reports-out" for="nb-reports"></output></label>
+          <label class="field" for="nb-tasks"><span data-ta="மாதந்தோறும் சிறு பணிகள்">Small tasks each month</span><input id="nb-tasks" type="range" min="0" max="12" step="1" value="2"><output id="nb-tasks-out" for="nb-tasks"></output></label>
+          <p class="nb-total" aria-live="polite"><span data-ta="ஓர் ஆண்டில்">In a year</span> <b id="nb-total"></b></p>
+          <p class="note" id="nb-split"></p>
+          <p class="note" data-ta="முன்னோட்டத் திட்டக் கட்டணங்கள் (உறுதி செய்யப்படவில்லை): ஒரு குடும்பத்துடன் ஒரு நாள் ₹2,200, ஓர் ஊர் அறிக்கை ₹700, ஒரு பூஜை அல்லது பெரியவரைப் பார்த்தல் ₹400.">Planned pilot rates, still to be confirmed: ₹2,200 for a day with a family, ₹700 for a village report, ₹400 for a pooja or a visit to an elder.</p>
+        </div>
+        <aside class="join-side">
+          <div class="panel">
+            <h3 data-ta="யார் நல்ல ஊர் நண்பர் ஆவார்">Who makes a good Ooru Nanbar</h3>
+            <ul class="tips">
+              <li data-ta="ஊர்க் கோயில் பூசாரி அல்லது அறங்காவலர்">The priest or trustee of a village temple</li>
+              <li data-ta="ஓய்வு பெற்ற ஆசிரியர்">A retired teacher</li>
+              <li data-ta="மகளிர் சுய உதவிக் குழுத் தலைவி">A leader of a women's self-help group</li>
+              <li data-ta="ஊர் நம்பும், குடும்பங்களை அறிந்த எவரும்">Anyone the village trusts and who knows its families</li>
+            </ul>
+            <a class="btn" href="{{base}}join.html?type=ooru-nanbar" data-ta="ஊர் நண்பர் ஆகுங்கள்">Become an Ooru Nanbar</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="profiles" aria-labelledby="profiles-title">
+      <div class="section-head">
+        <h2 id="profiles-title" data-ta="மாதிரி விவரங்கள்">Sample profiles</h2>
+        <p class="lead" data-ta="இம்மூவரும் எடுத்துக்காட்டுகள்; உண்மையான நபர்கள் அல்ல. ஒவ்வொரு மாவட்டமும் தொடங்கும்போது உண்மையான ஊர் நண்பர்கள் இங்கே தோன்றுவார்கள்.">These three are examples, not real people. Real Ooru Nanbar hosts appear here as each district opens.</p>
+      </div>
+      <ul class="nanbar-list" id="nb-profiles"></ul>
+    </section>
+
+    <section id="questions" aria-labelledby="q-title">
+      <div class="section-head">
+        <h2 id="q-title" data-ta="மக்கள் கேட்கும் கேள்விகள்">Questions people ask</h2>
+      </div>
+      <div class="nb-faq">
+        <details><summary data-ta="உறவினர்களையே அழைக்கலாமே?">Why not just call our relatives?</summary><p data-ta="ஊரில் உறவினர்கள் இருந்தால் அழையுங்கள். தொடர்பு இழந்த குடும்பங்களுக்கும், உறவினர்களால் தொலைவிலிருந்து செய்ய முடியாத ஏற்பாடுகளுக்கும் Roots.">If you have relatives in the village, do. Roots is for families who have lost touch, and for the planning relatives cannot do from afar.</p></details>
+        <details><summary data-ta="எங்கள் ஊரைக் கண்டுபிடிக்க முடியவில்லை என்றால்?">What if you cannot find our village?</summary><p data-ta="என்ன தேடினோம், என்ன கிடைத்தது என்பதை நேரடியாகச் சொல்வோம். ஊகத்தின் பேரில் யாரையும் ஓர் ஊருக்கு அனுப்புவதில்லை.">We tell you plainly what we looked for and what we found. Nobody is sent to a village on a guess.</p></details>
+        <details><summary data-ta="ஊர் நண்பர் சுற்றுலா வழிகாட்டியா?">Is the Ooru Nanbar a tourist guide?</summary><p data-ta="இல்லை. ஊரையும் மக்களையும் அறிந்த ஊர் விருந்தோம்புபவர். நினைவுச் சின்னங்களுக்கு உரிமம் பெற்ற வழிகாட்டிகளே.">No. A village host who knows the place and its people. Monuments stay with licensed guides.</p></details>
+        <details><summary data-ta="முதல் வருகைக்குப் பிறகு என்ன?">What happens after the first visit?</summary><p data-ta="உங்கள் குடும்பத்தின் ஊர்ப் பதிவை Roots பாதுகாக்கும்; வருகைகளுக்கு இடையில் ஊர் நண்பர் பூஜை செய்யலாம், உறவினர்களைப் பார்க்கலாம்.">Roots keeps your family's village record, and your Ooru Nanbar can offer a pooja or look in on relatives between visits.</p></details>
+        <details><summary data-ta="ஏதாவது தவறு நடந்தால் யாரிடம் சொல்வது?">Who do we turn to if something goes wrong?</summary><p data-ta="Roots-இடம். ஒவ்வொரு ஊர் நண்பரும் சரிபார்க்கப்பட்டவர்; ஒவ்வொரு வருகையும் பதிவாகும்; ஒருங்கிணைப்பாளர் ஓர் அழைப்பு தூரத்தில்.">To Roots. Every Ooru Nanbar is checked, every visit is recorded, and a coordinator is a phone call away.</p></details>
+        <details><summary data-ta="என் குடும்பத் தகவல் எப்படிப் பாதுகாக்கப்படும்?">How is my family's information kept?</summary><p data-ta="நீங்கள், உங்கள் ஊர் நண்பர், Roots ஒருங்கிணைப்பாளர் மட்டுமே பார்க்க முடியும். பெரியவரின் சம்மதத்துடன் மட்டுமே குரல் பதிவு செய்யப்படும்.">Only you, your Ooru Nanbar and the Roots coordinator see it. An elder's voice is recorded only with their consent.</p></details>
+      </div>
+      <div class="chips nb-end">
+        <a class="btn" href="{{base}}roots.html" data-ta="என் பயணத்தைத் திட்டமிடு">Plan my homecoming</a>
+        <a class="btn btn--ghost" href="{{base}}aatruppadai.html" data-ta="ஆற்றுப்படையிடம் கேளுங்கள்">Ask Aatruppadai</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+{{footer}}
+<script type="module" src="{{base}}assets/js/nanbar.js" data-email="{{email}}"></script>
+</body>
+</html>

@@ -115,7 +115,7 @@ ${extra}`;
 
 // [link, English label, Tamil label]. The Tamil label shows on pages that offer the language switch.
 const NAV = [
-  ['roots.html', 'Find your roots', 'வேர்களைத் தேடி'], ['aatruppadai.html', 'Aatruppadai', 'ஆற்றுப்படை'], ['index.html#clock', '24 hours', '24 மணி நேரம்'], ['index.html#explore', 'Map', 'வரைபடம்'],
+  ['roots.html', 'Find your roots', 'வேர்களைத் தேடி'], ['nanbar.html', 'Ooru Nanbar', 'ஊர் நண்பர்'], ['aatruppadai.html', 'Aatruppadai', 'ஆற்றுப்படை'], ['index.html#clock', '24 hours', '24 மணி நேரம்'], ['index.html#explore', 'Map', 'வரைபடம்'],
   ['index.html#live', 'Live wait', 'காத்திருப்பு'], ['index.html#festivals', 'Festivals', 'திருவிழாக்கள்'], ['index.html#cabs', 'Cabs', 'வாடகை வண்டி'],
   ['join.html', 'List your place', 'இடத்தைச் சேர்க்க']
 ];
@@ -565,6 +565,12 @@ ${footer('')}
     email: esc(config.contactEmail),
     districtOptions: districtData.districts.map((d) => `<option value="${esc(d.id)}">${esc(d.name)} · ${esc(d.ta)}</option>`).join('')
   }));
+  const nbTpl = await readFile(join(SRC, 'templates/nanbar.html'), 'utf8');
+  await writeFile(join(DIST, 'nanbar.html'), fill(nbTpl, {
+    base: '',
+    head: head({ title: 'Ooru Nanbar: a friend in your own village | Roots of Tamil Nadu', description: 'An Ooru Nanbar is a verified friend in your native village who finds the family temple and the old house, welcomes you home and looks after things between visits. How it works, the five checks, and how villagers can join.', path: '/nanbar.html', base: '' }),
+    header: header(''), footer: footer(''), email: esc(config.contactEmail)
+  }));
   const aatTpl = await readFile(join(SRC, 'templates/aatruppadai.html'), 'utf8');
   await writeFile(join(DIST, 'aatruppadai.html'), fill(aatTpl, {
     base: '',
@@ -599,7 +605,7 @@ ${footer('')}
   }));
   for (const p of allPlaces) await writeFile(join(DIST, 'places', `${p.id}.html`), await renderPlace(p));
 
-  const urls = [{ loc: `${SITE}/`, pri: '1.0' }, { loc: `${SITE}/roots.html`, pri: '0.9' }, { loc: `${SITE}/aatruppadai.html`, pri: '0.8' }, { loc: `${SITE}/health.html`, pri: '0.6' }, { loc: `${SITE}/join.html`, pri: '0.8' }, ...allPlaces.map((p) => ({ loc: placeUrl(p), pri: p.featured ? '0.9' : '0.7', img: p.image && absImage(p) }))];
+  const urls = [{ loc: `${SITE}/`, pri: '1.0' }, { loc: `${SITE}/roots.html`, pri: '0.9' }, { loc: `${SITE}/aatruppadai.html`, pri: '0.8' }, { loc: `${SITE}/nanbar.html`, pri: '0.9' }, { loc: `${SITE}/health.html`, pri: '0.6' }, { loc: `${SITE}/join.html`, pri: '0.8' }, ...allPlaces.map((p) => ({ loc: placeUrl(p), pri: p.featured ? '0.9' : '0.7', img: p.image && absImage(p) }))];
   await writeFile(join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${urls.map((u) => `  <url><loc>${esc(u.loc)}</loc><lastmod>${BUILD_DATE}</lastmod><priority>${u.pri}</priority>${u.img ? `<image:image><image:loc>${esc(u.img)}</image:loc></image:image>` : ''}</url>`).join('\n')}
@@ -657,7 +663,7 @@ ${urls.map((u) => `  <url><loc>${esc(u.loc)}</loc><lastmod>${BUILD_DATE}</lastmo
   const v = hash.digest('hex').slice(0, 10);
   await rename(join(DIST, 'assets/js'), join(DIST, `assets/js-${v}`));
   await rename(join(DIST, 'assets/css'), join(DIST, `assets/css-${v}`));
-  const htmlFiles = ['index.html', 'join.html', 'roots.html', 'aatruppadai.html', 'health.html', 'credits.html', '404.html', ...(await readdir(join(DIST, 'places'))).map((f) => `places/${f}`)].map((f) => join(DIST, f));
+  const htmlFiles = ['index.html', 'join.html', 'roots.html', 'aatruppadai.html', 'nanbar.html', 'health.html', 'credits.html', '404.html', ...(await readdir(join(DIST, 'places'))).map((f) => `places/${f}`)].map((f) => join(DIST, f));
   htmlFiles.push(join(ROOT, '.preview', 'index.html'));
   for (const f of htmlFiles) {
     if (!existsSync(f)) continue;
