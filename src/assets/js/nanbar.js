@@ -29,8 +29,8 @@ form.addEventListener('submit', (e) => {
   const box = $('#nb-sent');
   box.replaceChildren(
     el('p', { class: 'nb-sent-h' }, t(`Your request for ${f.village} is ready.`, `${f.village} ஊருக்கான உங்கள் கோரிக்கை தயார்.`)),
-    el('p', { class: 'note' }, t(`One last step: send it to ${EMAIL}. A Roots coordinator replies within two working days. The pilot begins in Madurai, so other districts may take longer.`,
-      `கடைசி படி: இதை ${EMAIL} முகவரிக்கு அனுப்புங்கள். Roots ஒருங்கிணைப்பாளர் இரண்டு வேலை நாட்களுக்குள் பதிலளிப்பார். முன்னோட்டத் திட்டம் மதுரையில் தொடங்குவதால், பிற மாவட்டங்களுக்குக் கூடுதல் நேரம் ஆகலாம்.`)),
+    el('p', { class: 'note' }, t(`One last step: send it to ${EMAIL}. A Roots coordinator replies once we have found the village details, or within 10 days.`,
+      `கடைசி படி: இதை ${EMAIL} முகவரிக்கு அனுப்புங்கள். ஊர் விவரங்களைக் கண்டறிந்தவுடன், அல்லது 10 நாட்களுக்குள், Roots ஒருங்கிணைப்பாளர் பதிலளிப்பார்.`)),
     el('pre', { class: 'nb-sent-text' }, text),
     el('div', { class: 'chips' }, el('a', { class: 'btn btn--sm', href: mail }, t('Send by email', 'மின்னஞ்சலில் அனுப்பு')), copy));
   box.hidden = false;
