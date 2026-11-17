@@ -724,6 +724,24 @@ section[id] { scroll-margin-top: 84px; }
 .lw-book { display: flex; flex-direction: column; gap: 10px; border-top: 1px dashed var(--line); padding-top: 12px; margin-top: 4px; }
 .lw-book--yes { border: 1px solid var(--leaf); border-radius: var(--radius-lg); padding: 12px; }
 .lw-msg { margin: 0; padding: 10px 12px; border-radius: var(--radius-lg); background: color-mix(in srgb, var(--leaf) 10%, var(--bg)); border: 1px solid var(--line); font: 14px/1.45 var(--font-text); white-space: pre-wrap; overflow-wrap: anywhere; }
+.lw-how { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; font-size: 14.5px; }
+.lw-paste, #lw-mobile { font: 400 16px var(--font-text); padding: 10px 12px; border-radius: var(--radius-lg); border: 1px solid var(--line); background: var(--surface); color: var(--ink); width: 100%; }
+.lw-paste { resize: vertical; }
+.lw-err:empty { display: none; }
+.lw-err { color: var(--accent); }
+/* The owner's answer page: big targets, one column, made for a phone held in a busy kitchen */
+.tb-wrap { max-width: 560px; padding-block: 24px 48px; display: flex; flex-direction: column; gap: 16px; }
+.tb-wrap h1 { font: 500 clamp(28px, 6vw, 38px)/1.15 var(--font-display); margin: 0; display: flex; flex-wrap: wrap; gap: 0 12px; }
+.tb-wrap h1 span { font-size: 0.7em; color: var(--muted); }
+#tb-body { display: flex; flex-direction: column; gap: 16px; }
+.tb-req { display: flex; flex-direction: column; gap: 6px; }
+.tb-req p { margin: 0; }
+.tb-big { font: 600 clamp(26px, 6vw, 32px)/1.15 var(--font-display); }
+.tb-answers { display: flex; flex-direction: column; gap: 10px; }
+.tb-answer { min-height: 60px; justify-content: center; flex-direction: column; gap: 2px; font-size: 18px; }
+.tb-answer small { font-size: 13px; font-weight: 500; opacity: 0.85; }
+.tb-times { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tb-foot { border-top: 1px solid var(--line); padding-top: 12px; }
 .lw-code { font: 600 34px/1 var(--font-display); letter-spacing: 0.04em; font-variant-numeric: tabular-nums; }
 .lw-taps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .lw-tap { min-height: 64px; padding: 8px; border: 2px solid var(--line-strong); border-radius: var(--radius-lg); background: var(--bg); color: var(--ink); font: 700 15px/1.2 var(--font-text); cursor: pointer; }

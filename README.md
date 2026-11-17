@@ -136,9 +136,9 @@ Use only photos you took or have written permission to use, and get consent from
 | Immersive storytelling, discovery | Stories on every place, street-ring map | Recorded audio stories hosted as static files |
 | Trip planning | Open-now list, "My Madurai day" | Add saved plans to a Supabase free-tier database |
 | AI chatbot | "Ask Roots" concierge (rule-based, in the browser) | Same answers over WhatsApp or Telegram, plus an open-weight language model for free-form questions |
-| Traffic, waiting system, queue display | Live wait: darshan estimate, crowd status set by the owner, family table requests (simulated) | Supabase Realtime free tier for the status and requests; WhatsApp replies for owners who prefer it |
+| Traffic, waiting system, queue display | Live wait: darshan estimate, crowd status set by the owner (simulated), family table requests by WhatsApp with a one-tap owner page (`table.html`) and an answer link back to the guest (working, no server) | Supabase Realtime for the crowd status; WhatsApp Business messages with reply buttons so the guest's page updates by itself |
 
-The darshan wait (for every Madurai temple, on its real opening hours) and the crowd status and table requests are simulated in this prototype and labelled as such on the page.
+The darshan wait (for every Madurai temple, on its real opening hours) and the crowd status are simulated. Table requests are real WhatsApp messages: every eatery uses the demo owner number 63804 65605 until each owner's number is added to `places.json` as `"wa": "91XXXXXXXXXX"`. Links in the messages point to the public site address in `site.config.json` in this prototype and labelled as such on the page.
 
 ## Host sign-up (join.html)
 

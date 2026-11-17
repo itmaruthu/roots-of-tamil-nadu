@@ -401,6 +401,7 @@ async function renderHome(base, path) {
   return fill(tpl, {
     districtOptions: districtData.districts.map((d) => `<option value="${esc(d.id)}">${esc(d.name)} · ${esc(d.ta)}</option>`).join(''),
     base,
+    site: esc(`${SITE}/`),
     head: head({
       title: 'Roots of Tamil Nadu · Come home to your village, temple and food',
       description: `Live opening hours and real locations for ${places.length} temples, heritage sites, eateries and stays in Madurai — from 4 am halwa to 1 am parotta.`,
@@ -571,6 +572,13 @@ ${footer('')}
     head: head({ title: 'Ooru Nanbar: a friend in your own village | Roots of Tamil Nadu', description: 'An Ooru Nanbar is a verified friend in your native village who finds the family temple and the old house, welcomes you home and looks after things between visits. How it works, the five checks, and how villagers can join.', path: '/nanbar.html', base: '' }),
     header: header(''), footer: footer(''), email: esc(config.contactEmail)
   }));
+  // The owner's answer page for a family table request. Opened from a WhatsApp link; not listed in the menu or sitemap.
+  const tbTpl = await readFile(join(SRC, 'templates/table.html'), 'utf8');
+  await writeFile(join(DIST, 'table.html'), fill(tbTpl, {
+    base: '', site: esc(`${SITE}/`),
+    head: head({ title: 'Table request | Roots of Tamil Nadu', description: 'Answer a family table request with one tap. The answer goes to the guest on WhatsApp.', path: '/table.html', base: '' }),
+    header: header(''), footer: footer('')
+  }));
   const aatTpl = await readFile(join(SRC, 'templates/aatruppadai.html'), 'utf8');
   await writeFile(join(DIST, 'aatruppadai.html'), fill(aatTpl, {
     base: '',
@@ -663,7 +671,7 @@ ${urls.map((u) => `  <url><loc>${esc(u.loc)}</loc><lastmod>${BUILD_DATE}</lastmo
   const v = hash.digest('hex').slice(0, 10);
   await rename(join(DIST, 'assets/js'), join(DIST, `assets/js-${v}`));
   await rename(join(DIST, 'assets/css'), join(DIST, `assets/css-${v}`));
-  const htmlFiles = ['index.html', 'join.html', 'roots.html', 'aatruppadai.html', 'nanbar.html', 'health.html', 'credits.html', '404.html', ...(await readdir(join(DIST, 'places'))).map((f) => `places/${f}`)].map((f) => join(DIST, f));
+  const htmlFiles = ['index.html', 'join.html', 'roots.html', 'aatruppadai.html', 'nanbar.html', 'table.html', 'health.html', 'credits.html', '404.html', ...(await readdir(join(DIST, 'places'))).map((f) => `places/${f}`)].map((f) => join(DIST, f));
   htmlFiles.push(join(ROOT, '.preview', 'index.html'));
   for (const f of htmlFiles) {
     if (!existsSync(f)) continue;
