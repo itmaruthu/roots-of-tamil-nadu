@@ -18,6 +18,8 @@ const ORDER = ['free', 'filling', 'full'];
 // after that each eatery carries its own number as "wa" in places.json.
 const DEMO_OWNER = '916380465605';
 const ownerPhone = (p) => p.wa || DEMO_OWNER;
+// Phones and tablets: a touch screen without a mouse. Desktops have no SMS app to hand the message to.
+const onPhone = typeof matchMedia === 'function' && matchMedia('(pointer: coarse)').matches;
 const showPhone = (n) => n.replace(/^91(\d{5})(\d{5})$/, '$1 $2');
 const requestText = (p, b, ref) => [`Roots of Tamil Nadu: table request for ${p.name}`, `Family of ${b.people}, today at ${formatHour(b.at)}`,
   'Please reply YES to hold the table, NO if you are full, or send another time.', `Request ${ref}`].join('\n');
@@ -147,8 +149,16 @@ export function initLiveWait(ctx) {
         el('p', { class: 'note' }, `Your request opened in WhatsApp, addressed to the owner on ${showPhone(phone)}. Press send there. The owner answers in the same chat.`),
         el('div', { class: 'chips' },
           el('a', { class: 'chip', href: `https://wa.me/${phone}?text=${text}`, target: '_blank', rel: 'noopener noreferrer' }, 'Open WhatsApp again'),
-          el('a', { class: 'chip', href: `sms:+${phone}?body=${text}` }, 'Send as SMS'),
-          el('a', { class: 'chip', href: `tel:+${phone}` }, 'Call the owner')),
+          // SMS and call open in a new window so this page stays put; they only appear on phones, where an SMS app exists.
+          // "?&body=" is the form both Android and iPhone read.
+          onPhone ? el('a', { class: 'chip', href: `sms:+${phone}?&body=${text}`, target: '_blank', rel: 'noopener noreferrer' }, 'Send as SMS') : '',
+          onPhone ? el('a', { class: 'chip', href: `tel:+${phone}`, target: '_blank', rel: 'noopener noreferrer' }, 'Call the owner') : '',
+          el('button', { class: 'chip', type: 'button', on: { click: async (ev) => {
+            const btn = ev.currentTarget;
+            try { await navigator.clipboard.writeText(requestText(p, b, code(p, b.at))); btn.textContent = 'Message copied'; }
+            catch { btn.textContent = 'Copy not available'; }
+          } } }, 'Copy the message')),
+        el('p', { class: 'note' }, `No WhatsApp? Copy the message and send it by SMS to ${showPhone(phone)}, or call.`),
         el('button', { class: 'btn btn--ghost btn--sm', type: 'button', on: { click: () => { q.book = null; update(); } } }, 'Cancel the request')));
     } else if (b && b.state === 'yes') {
       out.push(el('div', { class: 'lw-book lw-book--yes' }, el('p', { class: 'lw-ask' }, `Confirmed: table for ${b.people} at ${formatHour(b.at)}`),
