@@ -1,15 +1,21 @@
-// Live wait: one token queue seen on three screens (the guest's phone, the owner's phone, the shop's TV),
-// and a darshan-wait estimate for the Meenakshi temple.
-// Prototype: the queue lives in this browser and the darshan figure is an illustrative pattern.
-// In the pilot the same three pages read one row per shop from a realtime database.
-import { el, $, prefersReducedMotion } from './dom.js';
+// Live wait: the crowd at an eatery, set by the owner with one tap and seen on the guest's phone,
+// a table request for a family at a chosen time, and a darshan-wait estimate for each temple.
+// Prototype: both phones live in this browser and the figures follow an illustrative pattern.
+// In the pilot the two pages read one row per shop from a realtime database, or the owner replies on WhatsApp.
+import { el, $ } from './dom.js';
 import { formatHour, isOpen } from './hours.js';
 import { distanceKm, formatKm } from './geo.js';
 import { combo } from './combo.js';
 
 const TOKEN_SHOPS = ['konar-kadai', 'new-janani-mess', 'murugan-idli-shop', 'muthukumar-bun-parotta', 'jaya-vilas'];
-const MIN_PER_PARTY = { 'konar-kadai': 5, 'new-janani-mess': 4, 'murugan-idli-shop': 3, 'muthukumar-bun-parotta': 4, 'jaya-vilas': 6 };
-const PARTY = ['1–2', '3–4', '5 or more'];
+const STATUS = {
+  free: { name: 'Seats free', line: 'Walk in now', minutes: 5, level: 'short' },
+  filling: { name: 'Filling up', line: 'About 15 to 20 min for a table', minutes: 20, level: 'mid' },
+  full: { name: 'House full', line: '40 min or more for a table', minutes: 45, level: 'long' }
+};
+const ORDER = ['free', 'filling', 'full'];
+const rush = (h) => (h >= 12.5 && h < 14.5) || (h >= 19.5 && h < 21.5);
+const nearRush = (h) => (h >= 12 && h < 15) || (h >= 19 && h < 22);
 const LEVEL = (m) => (m < 20 ? 'short' : m <= 45 ? 'mid' : 'long');
 const LEVEL_NAME = { short: 'Short', mid: 'Moderate', long: 'Long' };
 
@@ -42,12 +48,16 @@ export function initLiveWait(ctx) {
   let temple = temples.find((p) => p.id === MEENAKSHI_ID) || temples[0];
   const tName = (p) => p.short || p.name;
   const shops = TOKEN_SHOPS.map((id) => ctx.places.find((p) => p.id === id)).filter(Boolean);
-  const fresh = (i) => ({ serving: 30 + i * 7, issued: 36 + i * 9, mine: null, party: 0, walkIn: null, paused: false });
-  const queues = Object.fromEntries(shops.map((p, i) => [p.id, fresh(i)]));
+  // manual: the owner's last tap, kept for the hour it was made in. book: one table request and its answer.
+  const fresh = () => ({ manual: null, book: null, people: 4, slot: null });
+  const queues = Object.fromEntries(shops.map((p) => [p.id, fresh()]));
   let shopId = shops[0].id;
-  let timer = null, voice = false;
-
-  const waiting = (q) => q.issued - q.serving;
+  // Without an owner's tap, the status follows the usual lunch and dinner rush. Illustrative.
+  const statusOf = (id, hour) => {
+    const m = queues[id].manual;
+    if (m && m.hour === Math.floor(hour)) return m.status;
+    return rush(hour) ? (id === shops[0].id ? 'full' : 'filling') : nearRush(hour) ? 'filling' : 'free';
+  };
   const wait = (hour, day, t = temple) => {
     const w = darshanWait(hour, day, festival, t);
     return w === null ? null : Math.max(5, Math.round((w * (reports.temple === t.id && reports.hour === Math.floor(hour) ? reports.factor : 1)) / 5) * 5);
@@ -82,110 +92,93 @@ export function initLiveWait(ctx) {
     update();
   });
 
-  // ----- token queue -----
+  // ----- crowd status and table requests -----
   const select = $('#lw-shop');
   for (const p of shops) select.append(el('option', { value: p.id }, p.name));
-  select.addEventListener('change', () => { shopId = select.value; stopSim(); update(); });
-  // What happens when a place floods: the line grows past what a token can honestly promise.
-  $('#lw-rush')?.addEventListener('click', () => { queues[shopId].issued += 14; update(); });
-  $('#lw-calm')?.addEventListener('click', () => { stopSim(); shops.forEach((p, i) => { queues[p.id] = fresh(i); }); update(); });
-  const voiceBtn = $('#lw-voice');
-  if (!('speechSynthesis' in window)) voiceBtn.hidden = true;
-  voiceBtn.addEventListener('click', () => {
-    voice = !voice; voiceBtn.setAttribute('aria-pressed', String(voice));
-    if (voice) announce(queues[shopId].serving);
-  });
-  $('#lw-full').addEventListener('click', () => {
-    const screen = $('#lw-screen');
-    if (screen.requestFullscreen) screen.requestFullscreen().catch(() => {});
-  });
+  select.addEventListener('change', () => { shopId = select.value; update(); });
+  const go = (id) => { shopId = id; select.value = id; update(); };
 
-  function announce(n) {
-    if (!voice || !('speechSynthesis' in window)) return;
-    try {
-      const u = new SpeechSynthesisUtterance(`Token number ${n}`);
-      u.lang = 'en-IN'; u.rate = 0.9;
-      speechSynthesis.cancel(); speechSynthesis.speak(u);
-    } catch { /* speech is a convenience */ }
-  }
-  function advance() {
-    const q = queues[shopId];
-    if (q.serving < q.issued) { q.serving += 1; announce(q.serving); }
-    if (q.mine && q.serving >= q.mine) { stopSim(); if (q.serving === q.mine) navigator.vibrate?.(200); }
-    update();
-  }
-  function startSim() { stopSim(); timer = setInterval(advance, prefersReducedMotion() ? 4000 : 2500); }
-  function stopSim() { if (timer) { clearInterval(timer); timer = null; } }
-
-  function guestView(p, q, open, hour) {
-    const per = MIN_PER_PARTY[shopId];
-    if (!open) {
-      const other = shops.find((o) => isOpen(o, ctx.state.day, hour));
-      return [el('p', { class: 'lw-line' }, `${p.name} is closed at ${formatHour(hour)}.`),
-        other ? el('button', { class: 'btn btn--ghost btn--sm', type: 'button', on: { click: () => { shopId = other.id; select.value = other.id; stopSim(); update(); } } }, `See ${other.short || other.name}, open now`)
-          : el('p', { class: 'note' }, 'None of the token eateries is open at this hour. Move the clock above.')];
-    }
-    if (!q.mine) {
-      const mins = waiting(q) * per, level = LEVEL(mins);
-      const head = [el('p', { class: 'lw-count' }, el('b', {}, String(waiting(q))), ' parties waiting'),
-        el('p', { class: `lw-line lw-verdict lw-level--${level}` }, el('b', {}, LEVEL_NAME[level]), ` · about ${mins} min at ${p.name}`)];
-      if (level === 'long' || q.paused) {
-        // The honest answer to a flooded place: say so, then offer a quieter hour and a shorter line nearby.
-        const alts = shops.filter((o) => o.id !== p.id && isOpen(o, ctx.state.day, hour) && !queues[o.id].paused)
-          .map((o) => ({ o, m: waiting(queues[o.id]) * MIN_PER_PARTY[o.id], km: distanceKm(p, o) })).filter((x) => x.m < mins).sort((a, b) => a.m - b.m).slice(0, 2);
-        const later = quietHour(p, hour);
-        return [...head,
-          el('p', { class: 'lw-warn' }, q.paused ? 'The house is full, so the owner has paused new tokens. Nobody is kept waiting on a false promise.' : 'A long line right now. You do not have to stand in it:'),
-          later === null ? '' : el('p', { class: 'lw-line' }, el('b', {}, 'Go later: '), `it usually eases around ${formatHour(later)}.`),
-          alts.length ? el('p', { class: 'lw-ask' }, 'Go nearby, shorter line now:') : '',
-          alts.length ? el('ul', { class: 'lw-quiet-list' }, ...alts.map(({ o, m, km }) => el('li', {}, el('button', { type: 'button', class: 'lw-quiet-btn',
-            on: { click: () => { shopId = o.id; select.value = o.id; stopSim(); update(); } } }, el('b', {}, o.short || o.name),
-            el('span', { class: `lw-level--${LEVEL(m)}` }, `~${m} min`), el('small', {}, `${formatKm(km)} away`))))) : '',
-          q.paused ? '' : el('button', { class: 'btn btn--ghost lw-main', type: 'button', id: 'lw-take', on: { click: () => { q.issued += 1; q.mine = q.issued; startSim(); update(); } } }, `Wait here anyway: take a token`)];
-      }
-      return [
-        ...head,
-        el('p', { class: 'lw-ask' }, 'How many are you?'),
-        el('div', { class: 'chips', role: 'group', 'aria-label': 'Party size' }, ...PARTY.map((label, i) => el('button', { type: 'button', class: 'chip', 'aria-pressed': String(q.party === i),
-          on: { click: () => { q.party = i; update(); } } }, label))),
-        el('button', { class: 'btn lw-main', type: 'button', id: 'lw-take', on: { click: () => { q.issued += 1; q.mine = q.issued; startSim(); update(); } } }, 'Take a token')
-      ];
-    }
-    const ahead = Math.max(0, q.mine - q.serving - 1), turn = q.serving >= q.mine;
-    if (turn) {
-      return [el('p', { class: 'lw-label2' }, 'Your token'), el('p', { class: 'lw-token is-turn' }, String(q.mine)),
-        el('p', { class: 'lw-line lw-turn' }, 'It is your turn. Please go to the counter.'),
-        el('button', { class: 'btn btn--ghost lw-main', type: 'button', on: { click: () => { q.mine = null; update(); } } }, 'Done')];
-    }
-    // While waiting: what is open within a short walk. This is where the waiting time becomes spending.
-    const near = ctx.places.filter((o) => o.id !== p.id && o.type !== 'stay' && isOpen(o, ctx.state.day, hour))
-      .map((o) => ({ o, km: distanceKm(p, o) })).filter((x) => x.km < 0.7).sort((a, b) => a.km - b.km).slice(0, 2);
-    const span = Math.max(1, q.mine - q.startedAt - 1), done = Math.min(1, Math.max(0.06, (span - ahead) / span)); // share of the line already served
-    return [el('p', { class: 'lw-label2' }, `Your token · table for ${PARTY[q.party]}`), el('p', { class: 'lw-token' }, String(q.mine)),
-      el('p', { class: 'lw-line' }, el('b', {}, `${ahead} ahead of you`), ` · about ${ahead * per} min`),
-      el('div', { class: 'lw-progress', role: 'img', 'aria-label': `${ahead} parties ahead` }, el('span', { style: { width: `${Math.round(done * 100)}%` } })),
-      near.length ? el('p', { class: 'lw-ask' }, 'While you wait, a short walk away:') : '',
-      near.length ? el('ul', { class: 'lw-near' }, ...near.map(({ o, km }) => el('li', {}, el('a', { href: ctx.placeUrl(o.id) }, o.short || o.name), ` · ${formatKm(km)}`))) : '',
-      el('button', { class: 'btn btn--ghost btn--sm', type: 'button', on: { click: () => { q.mine = null; stopSim(); update(); } } }, 'Leave the queue')];
-  }
-
-  // The next hour today, within opening hours, outside the lunch and dinner rush. Illustrative, like the darshan pattern.
+  // The next hour today, within opening hours, outside the lunch and dinner rush.
   function quietHour(p, hour) {
-    const rush = (h) => (h >= 12.5 && h < 14.5) || (h >= 19.5 && h < 21.5);
     for (let h = Math.ceil(hour * 2) / 2 + 0.5; h < 24; h += 0.5) if (!rush(h) && isOpen(p, ctx.state.day, h) && (rush(hour) || h >= hour + 1.5)) return h;
     return null;
   }
+  // Table times a family can ask for: half-hour steps from 30 minutes ahead, while the shop is open.
+  function slots(p, hour) {
+    const out = [];
+    for (let h = Math.ceil(hour * 2) / 2 + 0.5; h < 24 && out.length < 5; h += 0.5) if (isOpen(p, ctx.state.day, h) && isOpen(p, ctx.state.day, h + 0.5)) out.push(h);
+    return out;
+  }
+  const code = (p, h) => `R-${(p.id.length * 37 + Math.round(h * 2) * 13) % 900 + 100}`;
 
-  function vendorView(q, open) {
-    return [
-      el('p', { class: 'lw-label2' }, 'Now serving'),
-      el('p', { class: 'lw-token' }, String(q.serving)),
-      el('p', { class: 'lw-line' }, el('b', {}, `${waiting(q)} waiting`), q.mine && q.serving < q.mine ? ` · the guest holds ${q.mine}` : ''),
-      el('button', { class: 'btn lw-main', type: 'button', id: 'lw-next', disabled: !open || waiting(q) === 0, on: { click: advance } }, 'Call next'),
-      el('button', { class: 'btn btn--ghost btn--sm', type: 'button', id: 'lw-walkin', disabled: !open, on: { click: () => { q.issued += 1; q.walkIn = q.issued; update(); } } }, 'Add a walk-in'),
-      el('button', { class: 'btn btn--ghost btn--sm', type: 'button', id: 'lw-pause', 'aria-pressed': String(q.paused), disabled: !open, on: { click: () => { q.paused = !q.paused; update(); } } }, q.paused ? 'Resume tokens' : 'House full: pause tokens'),
-      el('p', { class: 'note' }, q.walkIn ? `Paper token ${q.walkIn} given at the counter. It joins the same line.` : 'One button runs the queue. Walk-ins without a phone get a paper token.')
-    ];
+  function guestView(p, q, open, hour) {
+    if (!open) {
+      const other = shops.find((o) => isOpen(o, ctx.state.day, hour));
+      return [el('p', { class: 'lw-line' }, `${p.name} is closed at ${formatHour(hour)}.`),
+        other ? el('button', { class: 'btn btn--ghost btn--sm', type: 'button', on: { click: () => go(other.id) } }, `See ${other.short || other.name}, open now`)
+          : el('p', { class: 'note' }, 'None of these eateries is open at this hour. Move the clock above.')];
+    }
+    const key = statusOf(p.id, hour), st = STATUS[key];
+    const out = [el('p', { class: 'lw-label2' }, `${p.name} · right now`),
+      el('p', { class: `lw-status lw-level--${st.level}` }, st.name),
+      el('p', { class: 'lw-line' }, st.line),
+      el('p', { class: 'note' }, q.manual && q.manual.hour === Math.floor(hour) ? 'Set by the owner just now.' : 'From the usual pattern at this hour. The owner updates it with one tap.')];
+    if (key === 'full') {
+      const alts = shops.filter((o) => o.id !== p.id && isOpen(o, ctx.state.day, hour)).map((o) => ({ o, k: statusOf(o.id, hour), km: distanceKm(p, o) }))
+        .filter((x) => x.k !== 'full').sort((a, b) => ORDER.indexOf(a.k) - ORDER.indexOf(b.k) || a.km - b.km).slice(0, 2);
+      const later = quietHour(p, hour);
+      if (later !== null) out.push(el('p', { class: 'lw-line' }, el('b', {}, 'Go later: '), `it usually eases around ${formatHour(later)}.`));
+      if (alts.length) out.push(el('p', { class: 'lw-ask' }, 'Go nearby, easier now:'), el('ul', { class: 'lw-quiet-list' }, ...alts.map(({ o, k, km }) => el('li', {},
+        el('button', { type: 'button', class: 'lw-quiet-btn', on: { click: () => go(o.id) } }, el('b', {}, o.short || o.name),
+          el('span', { class: `lw-level--${STATUS[k].level}` }, STATUS[k].name), el('small', {}, `${formatKm(km)} away`))))));
+    }
+    // A table for the family at a chosen time: a request the owner answers, never an automatic promise.
+    const b = q.book;
+    if (b && b.state === 'asked') {
+      out.push(el('div', { class: 'lw-book' }, el('p', { class: 'lw-ask' }, `Asked: table for ${b.people} at ${formatHour(b.at)}`),
+        el('p', { class: 'note' }, 'Waiting for the owner to say yes. Answer it on the owner\'s phone.'),
+        el('button', { class: 'btn btn--ghost btn--sm', type: 'button', on: { click: () => { q.book = null; update(); } } }, 'Cancel the request')));
+    } else if (b && b.state === 'yes') {
+      out.push(el('div', { class: 'lw-book lw-book--yes' }, el('p', { class: 'lw-ask' }, `Confirmed: table for ${b.people} at ${formatHour(b.at)}`),
+        el('p', { class: 'lw-code' }, code(p, b.at)),
+        el('p', { class: 'note' }, 'Show this code at the counter. The table is held for 10 minutes after the time, then given to the next family.'),
+        el('button', { class: 'btn btn--ghost btn--sm', type: 'button', on: { click: () => { q.book = null; update(); } } }, 'Cancel my table')));
+    } else {
+      const times = slots(p, hour);
+      if (b && b.state === 'no') out.push(el('p', { class: 'lw-warn' }, `Sorry, no table at ${formatHour(b.at)}. Please pick another time.`));
+      if (b && b.state === 'offer') out.push(el('p', { class: 'lw-warn' }, `No table at ${formatHour(b.at)}, but the owner can seat you at ${formatHour(b.offer)}.`),
+        el('button', { class: 'btn btn--sm', type: 'button', id: 'lw-accept-offer', on: { click: () => { q.book = { ...b, at: b.offer, state: 'yes' }; update(); } } }, `Take ${formatHour(b.offer)}`));
+      if (!times.length) out.push(el('p', { class: 'note' }, 'Too close to closing time to hold a table today.'));
+      else {
+        if (!times.includes(q.slot)) q.slot = times[0];
+        const people = el('select', { class: 'select', id: 'lw-people', 'aria-label': 'People', on: { change: (e) => { q.people = Number(e.target.value); } } },
+          ...Array.from({ length: 19 }, (_, n) => el('option', { value: String(n + 2), selected: q.people === n + 2 }, `${n + 2} people`)));
+        out.push(el('div', { class: 'lw-book' }, el('p', { class: 'lw-ask' }, 'Coming with family? Ask for a table'), people,
+          el('div', { class: 'chips', role: 'group', 'aria-label': 'Time' }, ...times.map((h) => el('button', { type: 'button', class: 'chip', 'aria-pressed': String(q.slot === h),
+            on: { click: () => { q.slot = h; update(); } } }, formatHour(h)))),
+          el('button', { class: 'btn lw-main', type: 'button', id: 'lw-ask-table', on: { click: () => { q.book = { people: q.people, at: q.slot, state: 'asked' }; update(); } } }, 'Ask for this table')));
+      }
+    }
+    return out;
+  }
+
+  function vendorView(p, q, open, hour) {
+    const key = statusOf(p.id, hour), b = q.book;
+    const out = [el('p', { class: 'lw-ask' }, 'How is it now? One tap.'),
+      el('div', { class: 'lw-taps', role: 'group', 'aria-label': 'Crowd now' }, ...ORDER.map((k) => el('button', { type: 'button', class: `lw-tap lw-level--${STATUS[k].level}`, dataset: { status: k },
+        'aria-pressed': String(open && key === k), disabled: !open, on: { click: () => { q.manual = { status: k, hour: Math.floor(hour) }; update(); } } }, STATUS[k].name)))];
+    if (b && b.state === 'asked') {
+      const next = slots(p, b.at).find((h) => h > b.at && !rush(h)) ?? null;
+      out.push(el('div', { class: 'lw-book' }, el('p', { class: 'lw-label2' }, 'Table request'),
+        el('p', { class: 'lw-ask' }, `Family of ${b.people} at ${formatHour(b.at)}`),
+        el('button', { class: 'btn btn--sm', type: 'button', id: 'lw-yes', on: { click: () => { b.state = 'yes'; update(); } } }, 'Yes, hold the table'),
+        next === null ? '' : el('button', { class: 'btn btn--ghost btn--sm', type: 'button', id: 'lw-offer', on: { click: () => { b.state = 'offer'; b.offer = next; update(); } } }, `Offer ${formatHour(next)} instead`),
+        el('button', { class: 'btn btn--ghost btn--sm', type: 'button', id: 'lw-no', on: { click: () => { b.state = 'no'; update(); } } }, 'Sorry, full')));
+    } else if (b && b.state === 'yes') {
+      out.push(el('div', { class: 'lw-book lw-book--yes' }, el('p', { class: 'lw-label2' }, 'Tables held today'), el('p', { class: 'lw-ask' }, `${formatHour(b.at)} · family of ${b.people} · ${code(p, b.at)}`)));
+    } else out.push(el('p', { class: 'note' }, 'No table requests yet. Ask for one on the guest\'s phone.'));
+    out.push(el('p', { class: 'note' }, 'No app to install. An owner who prefers WhatsApp replies 1, 2 or 3 to set the crowd, and YES or NO to a table request.'));
+    return out;
   }
 
   function update() {
@@ -218,17 +211,12 @@ export function initLiveWait(ctx) {
       el('button', { type: 'button', class: 'lw-quiet-btn', dataset: { id: t.id } }, el('b', {}, tName(t)),
         el('span', { class: `lw-level--${LEVEL(ow)}` }, `${LEVEL_NAME[LEVEL(ow)]} · ~${ow} min`), el('small', {}, `${formatKm(km)} away`)))));
 
-    // Token queue on its three screens
+    // Crowd status and table request on the two phones
     const p = ctx.places.find((x) => x.id === shopId);
     const q = queues[shopId];
-    if (q.mine && q.startedAt === undefined) q.startedAt = q.serving;
-    if (!q.mine) q.startedAt = undefined;
     const open = isOpen(p, day, hour);
     $('#lw-guest').replaceChildren(...guestView(p, q, open, hour).filter(Boolean));
-    $('#lw-vendor').replaceChildren(...vendorView(q, open));
-    $('#lw-serving').textContent = open ? String(q.serving) : '—';
-    $('#lw-screen-name').textContent = p.name;
-    $('#lw-upnext').textContent = open ? `Next: ${[1, 2, 3].map((k) => q.serving + k).filter((n) => n <= q.issued).join(' · ') || '—'}` : `Closed at ${formatHour(hour)}`;
+    $('#lw-vendor').replaceChildren(...vendorView(p, q, open, hour).filter(Boolean));
   }
 
   update();
@@ -238,8 +226,9 @@ export function initLiveWait(ctx) {
     /** Darshan wait for a temple at the clock's hour, for the guide. */
     darshan(t) { const { day, hour } = ctx.state; return wait(hour, day, t); },
     queue(id) {
-      const q = queues[id];
-      return q ? { waiting: waiting(q), minutes: waiting(q) * MIN_PER_PARTY[id] } : null;
+      if (!queues[id]) return null;
+      const st = STATUS[statusOf(id, ctx.state.hour)];
+      return { status: st.name, line: st.line, minutes: st.minutes };
     }
   };
 }

@@ -199,8 +199,8 @@ export function initConcierge(ctx) {
       if (named && named.type !== 'temple') {
         const live = openNow(named) ? ctx.liveWait?.queue(named.id) : null;
         return [live
-          ? `${named.name}: ${live.waiting} parties waiting, about ${live.minutes} min. Take a token in Live wait and walk around; your phone tells you when you are next.`
-          : `${named.name}: ${status(named, day, hour).text}. Busy eateries use Roots tokens: take one in the Live wait section and get an alert when you're next.`];
+          ? `${named.name} right now: ${live.status}. ${live.line}. Coming as a family? Ask for a table at a set time in the Live wait section.`
+          : `${named.name}: ${status(named, day, hour).text}. The Live wait section shows how full busy eateries are, and lets a family ask for a table.`];
       }
       const temples = ctx.places.filter((p) => p.type === 'temple');
       const t = named && named.type === 'temple' && !named.city ? named : temples.find((p) => p.id === 'meenakshi-amman-temple');

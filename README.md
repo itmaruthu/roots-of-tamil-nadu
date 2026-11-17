@@ -136,9 +136,9 @@ Use only photos you took or have written permission to use, and get consent from
 | Immersive storytelling, discovery | Stories on every place, street-ring map | Recorded audio stories hosted as static files |
 | Trip planning | Open-now list, "My Madurai day" | Add saved plans to a Supabase free-tier database |
 | AI chatbot | "Ask Roots" concierge (rule-based, in the browser) | Same answers over WhatsApp or Telegram, plus an open-weight language model for free-form questions |
-| Traffic, waiting system, queue display | Live wait: darshan estimate, token queue, TV "Now serving" screen (simulated) | Supabase Realtime free tier for live tokens; web push alerts; the display is a web page on any phone or TV |
+| Traffic, waiting system, queue display | Live wait: darshan estimate, crowd status set by the owner, family table requests (simulated) | Supabase Realtime free tier for the status and requests; WhatsApp replies for owners who prefer it |
 
-The darshan wait (for every Madurai temple, on its real opening hours) and the token queue are simulated in this prototype and labelled as such on the page.
+The darshan wait (for every Madurai temple, on its real opening hours) and the crowd status and table requests are simulated in this prototype and labelled as such on the page.
 
 ## Host sign-up (join.html)
 

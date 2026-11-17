@@ -174,22 +174,21 @@
       <div class="section-head">
         <p class="eyebrow">Live wait · Aatruppadai</p>
         <h2 id="live-title">Know the crowd before you go</h2>
-        <p class="lead">No app can make a famous temple or mess less crowded, and nobody should jump the line. What Roots can do is tell you the wait before you leave your room, and give you three honest choices: go now, go at a quieter hour, or go to a place nearby with a shorter line. Where you do wait, a token holds your place so you wait walking, not standing.</p>
+        <p class="lead">No app can make a famous temple or mess less crowded, and nobody should jump the line. What Roots can do is tell you how full a place is before you leave your room, and let a family ask for a table at a set time. It needs no TV, no machine and no app: only the owner's own phone.</p>
       </div>
 
       <ol class="join-steps lw-steps">
-        <li><b>See the wait before you go</b><span>Every eatery and temple shows Short, Moderate or Long with the minutes, from anywhere in the city. A long line is said plainly, never hidden.</span></li>
-        <li><b>Pick a quieter hour or a nearby place</b><span>When the line is long, Roots shows when it eases today and which place close by serves the same kind of food, or which temple is quiet, right now.</span></li>
-        <li><b>If you stay, wait walking</b><span>Scan the QR at the door for a token: no app, no sign-up, and paper tokens for those without a phone. Everyone is served in the order they came.</span></li>
+        <li><b>See the crowd before you go</b><span>Every eatery shows Seats free, Filling up or House full. The owner sets it with one tap, or a WhatsApp reply; visitors' reports fill the gaps.</span></li>
+        <li><b>House full? Go later or go nearby</b><span>Roots shows when the rush usually eases today and which place close by has seats right now.</span></li>
+        <li><b>Coming as a family? Ask for a table</b><span>Pick the time and the number of people. The owner says yes, offers another time or says no. A yes is held for 10 minutes.</span></li>
       </ol>
 
       <div class="lw-demo" id="live-wait">
         <div class="lw-demo-head">
-          <div><h3>Try it: three screens, one queue</h3><p class="note">Take a token as a guest, then call the next number as the owner. Press "A crowd arrives" to see what a guest is told when the place floods.</p>
-            <div class="chips"><button class="chip" id="lw-rush" type="button">A crowd arrives</button><button class="chip" id="lw-calm" type="button">Reset the line</button></div></div>
+          <div><h3>Try it: two phones, nothing else</h3><p class="note">Set the crowd as the owner and watch the guest's phone change. Then ask for a family table as the guest and answer it as the owner.</p></div>
           <label class="field lw-pick" for="lw-shop">Eatery<select id="lw-shop" class="select"></select></label>
         </div>
-        <div class="lw-screens">
+        <div class="lw-screens lw-screens--two">
           <article class="lw-dev">
             <p class="lw-role"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#phone"/></svg>Guest's phone</p>
             <div class="lw-dev-body" id="lw-guest" aria-live="polite"></div>
@@ -198,30 +197,15 @@
             <p class="lw-role"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#meal"/></svg>Owner's phone</p>
             <div class="lw-dev-body" id="lw-vendor"></div>
           </article>
-          <article class="lw-dev">
-            <p class="lw-role"><svg class="i" aria-hidden="true"><use href="{{base}}assets/img/icons.svg#star"/></svg>Any TV in the shop</p>
-            <div class="lw-dev-body">
-              <div class="lw-screen" id="lw-screen">
-                <p class="lw-screen-name" id="lw-screen-name"></p>
-                <p class="lw-label">Now serving · <span lang="ta">இப்போதைய எண்</span></p>
-                <p class="lw-number" id="lw-serving">—</p>
-                <p class="lw-next" id="lw-upnext"></p>
-              </div>
-              <div class="chips">
-                <button class="chip" id="lw-voice" type="button" aria-pressed="false">Read numbers aloud</button>
-                <button class="chip" id="lw-full" type="button">Full screen</button>
-              </div>
-            </div>
-          </article>
         </div>
-        <p class="note">A working model in your browser: the three screens share one queue here, and the kitchen serves a party every few seconds once you hold a token. In the pilot the same three pages run on real phones and a TV, joined by a free realtime database.</p>
+        <p class="note">A working model in your browser: both phones share one eatery here, and the crowd follows the clock above until the owner taps. In the pilot the same two pages run on real phones, joined by a free realtime database.</p>
       </div>
 
       <ul class="lw-facts">
-        <li><b>What the owner needs</b><span>A printed QR, their own phone and any TV or spare phone. Nothing to install.</span></li>
-        <li><b>What it costs</b><span>Free to join. About ₹500 a month if the shop wants the TV display and weekly reports.</span></li>
-        <li><b>What the city gains</b><span>The crowd spreads: guests move to quieter hours and nearby places, and spend their waiting time in the shops next door, not on the pavement.</span></li>
-        <li><b>What it will not do</b><span>It never moves anyone ahead of the line, and it does not promise a short wait on a festival day. When the house is full, the owner pauses tokens and guests are told so.</span></li>
+        <li><b>What the owner needs</b><span>Only the phone already in their pocket. No TV, no printer, nothing to install.</span></li>
+        <li><b>What it costs</b><span>Free to show the crowd. Table requests are free in the pilot; later a small fee per confirmed family table.</span></li>
+        <li><b>What the city gains</b><span>The crowd spreads: guests move to quieter hours and nearby places instead of standing on the pavement.</span></li>
+        <li><b>What it will not do</b><span>It never moves anyone ahead of the line, and no table is promised until the owner says yes. At rush hour the owner may offer another time.</span></li>
       </ul>
 
       <div class="live-grid live-grid--two">
